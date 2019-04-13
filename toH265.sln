@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{7AFF4930-20B1-4852-BFCA-09EEB783C254}") = "toH265", "toH265\toH265.vcxproj", "{91D72104-485C-45DA-AE4B-1BFBFA67EFE1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91D72104-485C-45DA-AE4B-1BFBFA67EFE1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{91D72104-485C-45DA-AE4B-1BFBFA67EFE1}.Debug|Win32.Build.0 = Debug|Win32
+		{91D72104-485C-45DA-AE4B-1BFBFA67EFE1}.Release|Win32.ActiveCfg = Release|Win32
+		{91D72104-485C-45DA-AE4B-1BFBFA67EFE1}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
