@@ -30,7 +30,7 @@ namespace Ambiesoft {
 				//TODO: Add the constructor code here
 				//
 			}
-
+			property int ReturnValue;
 		protected:
 			/// <summary>
 			/// Clean up any resources being used.
@@ -42,6 +42,10 @@ namespace Ambiesoft {
 					delete components;
 				}
 			}
+		private: System::Windows::Forms::Label^  lblMovie;
+		protected:
+		private: System::Windows::Forms::TextBox^  txtMovie;
+		private: System::Windows::Forms::Button^  btnBrowseMovie;
 
 		private:
 			/// <summary>
@@ -56,6 +60,14 @@ namespace Ambiesoft {
 			/// </summary>
 			void InitializeComponent(void);
 #pragma endregion
+
+		private:
+			bool CheckMovieAndSet(String^ file);
+
+		
+			System::Void FormMain_Load(System::Object^  sender, System::EventArgs^  e);
+			System::Void btnBrowseMovie_Click(System::Object^  sender, System::EventArgs^  e);
+
 		};
 	}
 

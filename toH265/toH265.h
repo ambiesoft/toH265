@@ -10,7 +10,17 @@ namespace Ambiesoft {
 		{
 			static String^ movieFile_;
 
+			[STAThreadAttribute]
 			static int main(array<System::String ^> ^args);
+
+		public:
+			static property String^ MovieFile
+			{
+				String^ get()
+				{
+					return movieFile_;
+				}
+			}
 		};
 
 	}
