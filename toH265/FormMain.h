@@ -40,6 +40,8 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::Panel^  panelMain;
 		private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFProbe;
 		private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFMpeg;
+		private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
+		private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
 
 				 literal String^ BUTTONTEXT_RESUME = L"Res&ume";
 		public:
@@ -82,7 +84,7 @@ namespace Ambiesoft {
 #pragma endregion
 
 		private:
-			bool hasVideoStream(String^ file, String^% codecname);
+			bool hasVideoStream(String^ file, String^% codecname, TimeSpan% ts);
 			bool CheckMovieAndSet(String^ file);
 
 			property String^ IniFile
@@ -118,10 +120,17 @@ namespace Ambiesoft {
 				Pausing,
 				Unknown,
 			};
+			System::Text::RegularExpressions::Regex^ regFFMpeg_;
+			TimeSpan tsOrigMovie_;
 			property TaskState FFMpegState
 			{
 				TaskState get();
 			}
+			void UpdateTitleTS(TimeSpan ts);
+			void UpdateTitleComplete();
+			void UpdateTitle();
+			void UpdateTitle(int percent);
+
 			void StartOfThread(Object^ obj);
 			delegate void VVDelegate();
 			delegate void VIDelegate(int value);
@@ -133,7 +142,7 @@ namespace Ambiesoft {
 			System::Void btnStart_Click(System::Object^  sender, System::EventArgs^  e);
 			void outputHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
 			void errHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
-		
+
 			System::Void FormMain_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
 
 			System::Void txtMovie_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
@@ -149,7 +158,9 @@ namespace Ambiesoft {
 
 			System::Void tsmiOption_DropDownOpening(System::Object^  sender, System::EventArgs^  e);
 
-};
+			System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+
+		};
 
 		public ref class WaitCursor
 		{

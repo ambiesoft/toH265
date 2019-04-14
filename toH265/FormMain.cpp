@@ -22,8 +22,17 @@ namespace Ambiesoft {
 				Path::GetFileNameWithoutExtension(Application::ExecutablePath) + L".ini");
 		}
 
+		System::Void FormMain::aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			StringBuilder sbMessage;
+			sbMessage.Append(Application::ProductName);
+			sbMessage.Append(" ver");
+			sbMessage.Append(AmbLib::getAssemblyVersion(System::Reflection::Assembly::GetExecutingAssembly(), 3));
 
-		bool FormMain::hasVideoStream(String^ file, String^% codecname)
+			CppUtils::Info(this, sbMessage.ToString());
+		}
+
+		bool FormMain::hasVideoStream(String^ file, String^% codecname, TimeSpan% ts)
 		{
 			String^ ffprobe = FFProbe;
 			if (String::IsNullOrEmpty(ffprobe) || !File::Exists(ffprobe))
@@ -68,6 +77,12 @@ namespace Ambiesoft {
 				{
 					videofound = true;
 					codecname = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
+
+					String^ duration = (String^)joutput->SelectToken(String::Format("streams[{0}].duration", i));
+					double d = System::Double::Parse(duration);
+					// to 100nanosec 
+					d *= 10 * 1000 * 1000;
+					ts = TimeSpan((Int64)d);
 					return true;
 				}
 			}
@@ -92,7 +107,7 @@ namespace Ambiesoft {
 				}
 
 				String^ codecname;
-				if (!hasVideoStream(file, codecname))
+				if (!hasVideoStream(file, codecname, tsOrigMovie_))
 				{
 					CppUtils::Alert(this, String::Format(I18N(L"'{0}' does not have video stream."), file));
 					ReturnValue = RETURN_STREAMNOTFOUND;
@@ -151,10 +166,30 @@ namespace Ambiesoft {
 				gcnew AddToLog(this, &FormMain::AddToOutput), e->Data);
 		}
 
-		//String^ mmm(RegularExpressions::Match^ match)
-		//{
+		void FormMain::UpdateTitle()
+		{
+			Text = Application::ProductName;
+		}
+		void FormMain::UpdateTitle(int percent)
+		{
+			StringBuilder sbTitle;
+			sbTitle.Append(percent);
+			sbTitle.Append("% - ");
+			sbTitle.Append(Application::ProductName);
 
-		//}
+			if (Text != sbTitle.ToString())
+				Text = sbTitle.ToString();
+		}
+		void FormMain::UpdateTitleComplete()
+		{
+			UpdateTitle(100);
+		}
+		void FormMain::UpdateTitleTS(TimeSpan ts)
+		{
+			double percent = (ts.TotalMilliseconds / tsOrigMovie_.TotalMilliseconds) * 100;
+			UpdateTitle((int)percent);
+		}
+		
 		void FormMain::AddToErr(String^ text)
 		{
 			/*
@@ -163,8 +198,9 @@ frame=   69 fps= 17 q=-0.0 size=       0kB time=00:00:02.34 bitrate=   0.2kbits/
 frame=   76 fps= 17 q=-0.0 size=       0kB time=00:00:02.57 bitrate=   0.1kbits/s dup=1 drop=0 speed=0.566x
 frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/s dup=1 drop=0 speed=0.566x
 */
-			RegularExpressions::Regex reg("frame=\\s+(\\d+).*time=(\\d\\d:\\d\\d:\\d\\d\\.\\d\\d)");
-			if (reg.IsMatch(text))
+			if (!regFFMpeg_)
+				regFFMpeg_ = gcnew RegularExpressions::Regex("frame=\\s+\\d+.*time=(\\d\\d:\\d\\d:\\d\\d)\\.\\d\\d");
+			if (regFFMpeg_->IsMatch(text))
 			{
 				//StringBuilder sb;
 				//RegularExpressions::Match^ match = reg.Match(text);
@@ -172,6 +208,13 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 				//{
 				//	match->Value
 				//}
+				RegularExpressions::Match^ match = regFFMpeg_->Match(text);
+				String^ timeValue = match->Groups[1]->Value;
+				
+				DateTime dt = DateTime::ParseExact(timeValue, L"hh:mm:ss", 
+					System::Globalization::CultureInfo::InvariantCulture);
+				TimeSpan ts = dt - dt.Date;
+				UpdateTitleTS(ts);
 				txtLogOut->Text = text;
 			}
 			else
@@ -251,6 +294,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 				else
 				{
 					// Succeeded
+					UpdateTitleComplete();
 					CppUtils::Info(this, I18N(L"Encoding Succeeded."));
 				}
 			}
@@ -342,7 +386,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			}
 			sbFilter.Append("All File(*.*)|*.*");
 			dlg.Filter = sbFilter.ToString();
-
+			dlg.InitialDirectory = Path::GetDirectoryName(inputmovie);
 			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
 				return;
 
