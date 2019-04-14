@@ -26,11 +26,22 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::TextBox^  txtLogErr;
 		private: System::Windows::Forms::TextBox^  txtLogOut;
 		private: System::Windows::Forms::Button^  btnStart;
-		private: System::Windows::Forms::Button^  btnStop;
+
 				 literal String^ KEY_FFPROBE = L"ffprobe";
 		private: System::Windows::Forms::TextBox^  txtFFMpegArg;
 				 literal String^ KEY_FFMPEG = L"ffmpeg";
+				 literal String^ BUTTONTEXT_PAUSE = L"&Pause";
+				 literal String^ BUTTONTEXT_START = L"&Start";
+		private: System::Windows::Forms::MenuStrip^  menuMain;
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiFile;
+		private: System::Windows::Forms::ToolStripMenuItem^  exitToolStripMenuItem;
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiOption;
 
+		private: System::Windows::Forms::Panel^  panelMain;
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFProbe;
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFMpeg;
+
+				 literal String^ BUTTONTEXT_RESUME = L"Res&ume";
 		public:
 			FormMain(void)
 			{
@@ -51,7 +62,7 @@ namespace Ambiesoft {
 					delete components;
 				}
 			}
-		private: System::Windows::Forms::Label^  lblMovie;
+
 		protected:
 		private: System::Windows::Forms::TextBox^  txtMovie;
 		private: System::Windows::Forms::Button^  btnBrowseMovie;
@@ -89,20 +100,64 @@ namespace Ambiesoft {
 			{
 				String^ get();
 			}
-
-			System::Text::StringBuilder sbFFMpegOut_;
-			System::Text::StringBuilder sbFFMpegErr_;
+			String^ getCommon(System::Windows::Forms::IWin32Window^ parent,
+				bool bFFMpeg, String^ regApp, String^ regKey, String^ inifile, String^% target, bool bReset);
 
 			delegate void AddToLog(String^ text);
 			void AddToOutput(String^ text);
 			void AddToErr(String^ text);
 
+			System::Threading::Thread^ thFFMpeg_;
+			System::Diagnostics::Process^ processFFMpeg_;
+			bool processSuspeded_;
+			bool processTerminated_;
+			enum class TaskState {
+				None,
+				ProcessLaunching,
+				Running,
+				Pausing,
+				Unknown,
+			};
+			property TaskState FFMpegState
+			{
+				TaskState get();
+			}
+			void StartOfThread(Object^ obj);
+			delegate void VVDelegate();
+			delegate void VIDelegate(int value);
+			void ThreadStarted();
+			void ThreadEnded(int retval);
+			void FormMain::StopEncoding();
 			System::Void FormMain_Load(System::Object^  sender, System::EventArgs^  e);
 			System::Void btnBrowseMovie_Click(System::Object^  sender, System::EventArgs^  e);
 			System::Void btnStart_Click(System::Object^  sender, System::EventArgs^  e);
-			System::Void btnStop_Click(System::Object^  sender, System::EventArgs^  e);
 			void outputHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
 			void errHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
+		
+			System::Void FormMain_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
+
+			System::Void txtMovie_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+			System::Void txtMovie_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+			System::Void txtMovie_DragLeave(System::Object^  sender, System::EventArgs^  e);
+			System::Void txtMovie_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+
+			System::Void tsmiSetFFProbe_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiSetFFMpeg_Click(System::Object^  sender, System::EventArgs^  e);
+
+			String^ baseSetFFProbeMenuString_;
+			String^ baseSetFFMpegMenuString_;
+
+			System::Void tsmiOption_DropDownOpening(System::Object^  sender, System::EventArgs^  e);
+
+};
+
+		public ref class WaitCursor
+		{
+			static int counter_;
+			static System::Windows::Forms::Cursor^ cur_;
+		public:
+			WaitCursor();
+			~WaitCursor();
 		};
 	}
 

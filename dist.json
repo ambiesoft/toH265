@@ -1,0 +1,59 @@
+{
+    "name": "toH265",
+    "solution": "toH265.sln",
+    "targetproject": "zzzDist",
+    "configuration": "Release",
+    "targets": [
+        {
+            "setoutdirforbuild": false,
+            "outdir": "Release\\v120\\toH265",
+            "platform": "Win32"
+        },
+        {
+            "setoutdirforbuild": false,
+            "outdir": "Release\\v120\\toH265",
+            "platform": "x64"
+        }
+    ],
+    "ShouldBeFiles": [
+        "32\\Ambiesoft.AmbLib.dll",
+        "32\\Ambiesoft.AmbLib.pdb",
+        "32\\Ambiesoft.AmbLibcpp.dll",
+        "32\\Ambiesoft.AmbLibcpp.pdb",
+        "32\\Ambiesoft.Profile.dll",
+        "32\\Ambiesoft.Profile.pdb",
+        "32\\Copying.txt",
+        "32\\history.txt",
+        "32\\Newtonsoft.Json.dll",
+        "32\\Newtonsoft.Json.pdb",
+        "32\\Newtonsoft.Json.xml",
+        "32\\README.md",
+        "32\\toH265.exe",
+        "32\\toH265.pdb",
+        "64\\Ambiesoft.AmbLib.dll",
+        "64\\Ambiesoft.AmbLib.pdb",
+        "64\\Ambiesoft.AmbLibcpp.dll",
+        "64\\Ambiesoft.AmbLibcpp.pdb",
+        "64\\Ambiesoft.Profile.dll",
+        "64\\Ambiesoft.Profile.pdb",
+        "64\\Copying.txt",
+        "64\\history.txt",
+        "64\\Newtonsoft.Json.dll",
+        "64\\Newtonsoft.Json.pdb",
+        "64\\Newtonsoft.Json.xml",
+        "64\\README.md",
+        "64\\toH265.exe",
+        "64\\toH265.pdb"
+    ],
+    "TotalFileCount": "exact",
+    "archivedir": "C:\\Linkout",
+    "remotedir": "http://ambiesoft.fam.cx/ffdav/uploads/toH265/",
+    "remotesha1": "http://ambiesoft.fam.cx/ffdav/uploads/getSha1.php?file=toH265/{}",
+    "ShouldNotBeFiles": [
+    	"32\\toH265.ini",
+    	"64\\toH265.ini"
+    ],
+    "ShouldBeOneOfThem": [],
+    "obtainverfrom": "32\\history.txt",
+    "obtainverregex": "\\d+\\.\\d+\\.\\d+"
+}

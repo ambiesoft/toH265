@@ -1,6 +1,8 @@
 #include "stdafx.h"
 
 #include "toH265.h"
+#include "helper.h"
+
 #include "FormMain.h"
 
 
@@ -11,6 +13,8 @@ namespace Ambiesoft {
 		using namespace System::Diagnostics;
 		using namespace System::IO;
 		using namespace System::Text;
+		using namespace System::Threading;
+
 		using namespace Newtonsoft::Json::Linq;
 		String^ FormMain::IniFile::get()
 		{
@@ -18,13 +22,13 @@ namespace Ambiesoft {
 				Path::GetFileNameWithoutExtension(Application::ExecutablePath) + L".ini");
 		}
 
-	
+
 		bool FormMain::hasVideoStream(String^ file, String^% codecname)
 		{
 			String^ ffprobe = FFProbe;
 			if (String::IsNullOrEmpty(ffprobe) || !File::Exists(ffprobe))
 			{
-				CppUtils::Alert(I18N(L"ffprobe not found"));
+				CppUtils::Alert(this, I18N(L"ffprobe not found"));
 				return false;
 			}
 
@@ -46,7 +50,7 @@ namespace Ambiesoft {
 			}
 			catch (Exception^ ex)
 			{
-				CppUtils::Alert(ex);
+				CppUtils::Alert(this, ex);
 				return false;
 			}
 
@@ -55,7 +59,7 @@ namespace Ambiesoft {
 			JObject^ joutput = JObject::Parse(output);
 
 			bool videofound = false;
-			for (int i=0 ; i < 32; ++i)
+			for (int i = 0; i < 32; ++i)
 			{
 				String^ codec_type = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_type", i));
 				if (!codec_type)
@@ -66,13 +70,14 @@ namespace Ambiesoft {
 					codecname = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
 					return true;
 				}
-			} 
+			}
 
 			return false;
 		}
 
 		bool FormMain::CheckMovieAndSet(String^ file)
 		{
+			WaitCursor wc;
 			if (String::IsNullOrEmpty(file))
 			{
 				txtMovie->Text = String::Empty;
@@ -81,7 +86,7 @@ namespace Ambiesoft {
 			{
 				if (!File::Exists(file))
 				{
-					CppUtils::Alert(String::Format(I18N(L"Not found '{0}'."), file));
+					CppUtils::Alert(this, String::Format(I18N(L"Not found '{0}'."), file));
 					ReturnValue = RETURN_FILENOTFOUND;
 					return false;
 				}
@@ -89,14 +94,14 @@ namespace Ambiesoft {
 				String^ codecname;
 				if (!hasVideoStream(file, codecname))
 				{
-					CppUtils::Alert(String::Format(I18N(L"'{0}' does not have video stream."), file));
+					CppUtils::Alert(this, String::Format(I18N(L"'{0}' does not have video stream."), file));
 					ReturnValue = RETURN_STREAMNOTFOUND;
 					return false;
 				}
 				// Check if the encoding is already h265
-				if (String::Compare(codecname, "hevc", true)==0)
+				if (String::Compare(codecname, "hevc", true) == 0)
 				{
-					CppUtils::Alert(String::Format(I18N(L"'{0}' already has a stream of h265."), file));
+					CppUtils::Alert(this, String::Format(I18N(L"'{0}' already has a stream of h265."), file));
 					ReturnValue = RETURN_STREAMISH265;
 					return false;
 				}
@@ -106,131 +111,358 @@ namespace Ambiesoft {
 		}
 		System::Void FormMain::FormMain_Load(System::Object^  sender, System::EventArgs^  e)
 		{
-			Text = Application::ProductName;
+			baseSetFFProbeMenuString_ = tsmiSetFFProbe->Text;
+			baseSetFFMpegMenuString_ = tsmiSetFFMpeg->Text;
 
+			Text = Application::ProductName;
+			btnStart->Text = I18N(BUTTONTEXT_START);
 			CheckMovieAndSet(Program::MovieFile);
 		}
 
-		 System::Void FormMain::btnBrowseMovie_Click(System::Object^  sender, System::EventArgs^  e)
-		 {
-			 OpenFileDialog dlg;
-			 if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
-				 return;
-			 
-			 CheckMovieAndSet(dlg.FileName);
-		 }
+		System::Void FormMain::btnBrowseMovie_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			OpenFileDialog dlg;
+			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
+				return;
 
-		 Object^ safeEndInvoke(System::Windows::Forms::Control^ c, IAsyncResult^ r, Object^ defRet)
-		 {
-			 try
-			 {
-				 return c->EndInvoke(r);
-			 }
-			 catch (Exception^) {}
-			 return defRet;
-		 }
+			CheckMovieAndSet(dlg.FileName);
+		}
 
-		 void FormMain::AddToOutput(String^ text)
-		 {
-			 txtLogOut->AppendText(text);
-		 }
-		 void FormMain::outputHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e)
-		 {
-			 if (!e->Data)
-				 return;
+		Object^ safeEndInvoke(System::Windows::Forms::Control^ c, IAsyncResult^ r, Object^ defRet)
+		{
+			try
+			{
+				return c->EndInvoke(r);
+			}
+			catch (Exception^) {}
+			return defRet;
+		}
 
-			 IAsyncResult^ r = this->BeginInvoke(
-				 gcnew AddToLog(this, &FormMain::AddToOutput), e->Data);
-		 }
-		 
-		 void FormMain::AddToErr(String^ text)
-		 {
-			 txtLogErr->AppendText(text);
-			 txtLogErr->AppendText(L"\r\n");
-		 }
+		void FormMain::AddToOutput(String^ text)
+		{
+			txtLogOut->Text = text;
+		}
+		void FormMain::outputHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e)
+		{
+			if (!e->Data)
+				return;
 
-		 void FormMain::errHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e)
-		 {
-			 if (!e->Data)
-				 return;
+			IAsyncResult^ r = this->BeginInvoke(
+				gcnew AddToLog(this, &FormMain::AddToOutput), e->Data);
+		}
 
-			 IAsyncResult^ r = this->BeginInvoke(
-				 gcnew AddToLog(this, &FormMain::AddToErr), e->Data);
-		 }
+		//String^ mmm(RegularExpressions::Match^ match)
+		//{
 
-		 System::Void FormMain::btnStart_Click(System::Object^  sender, System::EventArgs^  e)
-		 {
-			 String^ ffmpeg = FFMpeg;
-			 if (String::IsNullOrEmpty(ffmpeg) || !File::Exists(ffmpeg))
-			 {
-				 CppUtils::Alert(I18N(L"ffmpeg not found"));
-				 return;
-			 }
+		//}
+		void FormMain::AddToErr(String^ text)
+		{
+			/*
+frame=   61 fps= 18 q=-0.0 size=       0kB time=00:00:02.08 bitrate=   0.2kbits/s dup=1 drop=0 speed=0.619x
+frame=   69 fps= 17 q=-0.0 size=       0kB time=00:00:02.34 bitrate=   0.2kbits/s dup=1 drop=0 speed=0.591x
+frame=   76 fps= 17 q=-0.0 size=       0kB time=00:00:02.57 bitrate=   0.1kbits/s dup=1 drop=0 speed=0.566x
+frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/s dup=1 drop=0 speed=0.566x
+*/
+			RegularExpressions::Regex reg("frame=\\s+(\\d+).*time=(\\d\\d:\\d\\d:\\d\\d\\.\\d\\d)");
+			if (reg.IsMatch(text))
+			{
+				//StringBuilder sb;
+				//RegularExpressions::Match^ match = reg.Match(text);
+				//do
+				//{
+				//	match->Value
+				//}
+				txtLogOut->Text = text;
+			}
+			else
+			{
+				txtLogErr->AppendText(text);
+				txtLogErr->AppendText(L"\r\n");
+			}
+		}
 
-			 String^ inputmovie = txtMovie->Text;
-			 if (String::IsNullOrEmpty(inputmovie) || !File::Exists(inputmovie))
-			 {
-				 CppUtils::Alert(I18N(L"inputmovie not found"));
-				 return;
-			 }
+		void FormMain::errHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e)
+		{
+			if (!e->Data)
+				return;
 
-			 SaveFileDialog dlg;
-			 List<String^> availableext;
-			 availableext.Add(Path::GetExtension(inputmovie));
-			 
-			 StringBuilder sbFilter;
-			 for each(String^ ae in availableext)
-			 {
-				 sbFilter.Append(ae);
-				 sbFilter.Append("File ");
-				 sbFilter.Append("(*");
-				 sbFilter.Append(ae);
+			IAsyncResult^ r = this->BeginInvoke(
+				gcnew AddToLog(this, &FormMain::AddToErr), e->Data);
+		}
 
-				 sbFilter.Append(")|*");
-				 sbFilter.Append(ae);
-				 sbFilter.Append("|");
-			 }
-			 sbFilter.Append("All File(*.*)|*.*");
-			 dlg.Filter = sbFilter.ToString();
+		FormMain::TaskState FormMain::FFMpegState::get()
+		{
+			if (!thFFMpeg_ && !processFFMpeg_)
+			{
+				return TaskState::None;
+			}
+			else if (thFFMpeg_ && !processFFMpeg_)
+			{
+				return TaskState::ProcessLaunching;
+			}
+			else if (!thFFMpeg_ && processFFMpeg_)
+			{
+				DASSERT(false);
+				return TaskState::Unknown;
+			}
+			else if (thFFMpeg_ && processFFMpeg_)
+			{
+				if (processSuspeded_)
+					return TaskState::Pausing;
+				else
+					return TaskState::Running;
+			}
 
-			 if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
-				 return;
+			return TaskState::Unknown;
+		}
+		void FormMain::ThreadStarted()
+		{
+			processSuspeded_ = false;
+			processTerminated_ = false;
 
-			 String^ outputmovie = dlg.FileName;
+			btnStart->Text = I18N(BUTTONTEXT_PAUSE);
 
-			 String^ arg = String::Format(L"-i \"{0}\" -c:v libx265 -c:a copy \"{1}\"",
-				 inputmovie, outputmovie);
+			txtMovie->Enabled = false;
+			txtMovie->AllowDrop = false;
+			btnBrowseMovie->Enabled = false;
+		}
+		void FormMain::ThreadEnded(int retval)
+		{
+			processSuspeded_ = false;
+			SafeJoin(thFFMpeg_);
+			delete thFFMpeg_;
+			thFFMpeg_ = nullptr;
 
-			 int retval;
-			 sbFFMpegOut_.Clear();
-			 sbFFMpegErr_.Clear();
+			processFFMpeg_ = nullptr;
 
-			 txtLogOut->Clear();
-			 txtLogErr->Clear();
+			btnStart->Text = I18N(BUTTONTEXT_START);
 
-			 txtFFMpegArg->Text = arg;
+			txtMovie->Enabled = true;
+			txtMovie->AllowDrop = true;
+			btnBrowseMovie->Enabled = true;
 
-			 // TODO: must run in a thread
-			 try
-			 {
-				 AmbLib::OpenCommandGetResultCallback(ffmpeg,
-					 arg,
-					 Encoding::Default,
-					 retval,
-					 gcnew DataReceivedEventHandler(this, &FormMain::outputHandler),
-					 gcnew DataReceivedEventHandler(this, &FormMain::errHandler)
-					 );
-			 }
-			 catch (Exception^ ex)
-			 {
-				 CppUtils::Alert(ex);
-				 return;
-			 }
+			if (!processTerminated_)
+			{
+				// Process ended normally
+				if (retval != 0)
+				{
+					CppUtils::Alert(this, String::Format(L"Process exited with {0}.", retval));
+				}
+				else
+				{
+					// Succeeded
+					CppUtils::Info(this, I18N(L"Encoding Succeeded."));
+				}
+			}
+		}
 
-		 }
-		 System::Void FormMain::btnStop_Click(System::Object^  sender, System::EventArgs^  e)
-		 {}
+		void FormMain::StartOfThread(Object^ obj)
+		{
+			EndInvoke(BeginInvoke(gcnew VVDelegate(this, &FormMain::ThreadStarted)));
+			Dictionary<String^, String^>^ hash = (Dictionary<String^, String^>^)obj;
+			String^ ffmpeg = hash["ffmpeg"];
+			String^ arg = hash["arg"];
+			int retval;
+			try
+			{
+				AmbLib::OpenCommandGetResultCallback(ffmpeg,
+					arg,
+					Encoding::Default,
+					retval,
+					gcnew DataReceivedEventHandler(this, &FormMain::outputHandler),
+					gcnew DataReceivedEventHandler(this, &FormMain::errHandler),
+					processFFMpeg_
+					);
+			}
+			catch (Exception^ ex)
+			{
+				CppUtils::Alert(ex);
+				return;
+			}
 
+			BeginInvoke(gcnew VIDelegate(this, &FormMain::ThreadEnded), retval);
+		}
+		System::Void FormMain::btnStart_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			switch (FFMpegState)
+			{
+			case TaskState::None:
+				break;
+			case TaskState::Pausing:
+				if (!ResumeProcess(processFFMpeg_))
+				{
+					CppUtils::Alert(this, I18N(L"Failed to resume process."));
+					return;
+				}
+				btnStart->Text = I18N(BUTTONTEXT_PAUSE);
+				processSuspeded_ = false;
+				return;
+			case TaskState::ProcessLaunching:
+				CppUtils::Alert(this, I18N(L"Intermidiate state. Wait a while and do it again."));
+				return;
+			case TaskState::Running:
+				if (!SuspendProcess(processFFMpeg_))
+				{
+					CppUtils::Alert(this, I18N(L"Failed to suspend process."));
+					return;
+				}
+				btnStart->Text = I18N(BUTTONTEXT_RESUME);
+				processSuspeded_ = true;
+				return;
+			case TaskState::Unknown:
+				CppUtils::Alert(this, I18N(L"Unknow Error."));
+				return;
+			}
+			String^ ffmpeg = FFMpeg;
+			if (String::IsNullOrEmpty(ffmpeg) || !File::Exists(ffmpeg))
+			{
+				CppUtils::Alert(this, I18N(L"ffmpeg not found"));
+				return;
+			}
+
+			String^ inputmovie = txtMovie->Text;
+			if (!CheckMovieAndSet(inputmovie))
+				return;
+
+			SaveFileDialog dlg;
+			List<String^> availableext;
+			availableext.Add(Path::GetExtension(inputmovie));
+
+			StringBuilder sbFilter;
+			for each(String^ ae in availableext)
+			{
+				sbFilter.Append(ae);
+				sbFilter.Append("File ");
+				sbFilter.Append("(*");
+				sbFilter.Append(ae);
+
+				sbFilter.Append(")|*");
+				sbFilter.Append(ae);
+				sbFilter.Append("|");
+			}
+			sbFilter.Append("All File(*.*)|*.*");
+			dlg.Filter = sbFilter.ToString();
+
+			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
+				return;
+
+			String^ outputmovie = dlg.FileName;
+
+			String^ arg = String::Format(L"-y -i \"{0}\" -c:v libx265 -c:a copy \"{1}\"",
+				inputmovie, outputmovie);
+
+			txtLogOut->Clear();
+			txtLogErr->Clear();
+
+			txtFFMpegArg->Text = arg;
+
+			Dictionary<String^, String^> param;
+			param["ffmpeg"] = ffmpeg;
+			param["arg"] = arg;
+			thFFMpeg_ = gcnew System::Threading::Thread(gcnew ParameterizedThreadStart(this, &FormMain::StartOfThread));
+			thFFMpeg_->Start(%param);
+		}
+		void FormMain::StopEncoding()
+		{
+			switch (FFMpegState)
+			{
+			case TaskState::None:
+				break;
+			case TaskState::Pausing:
+			case TaskState::ProcessLaunching:
+			case TaskState::Running:
+				processTerminated_ = true;
+				if (!KillProcess(processFFMpeg_))
+				{
+					processTerminated_ = false;
+					CppUtils::Alert(this, I18N(L"Failed to kill process."));
+				}
+				processFFMpeg_ = nullptr;
+				//if (!KillThread(thFFMpeg_))
+				//{
+				//	CppUtils::Alert(I18N(L"Failed to kill thread."));
+				//}
+				SafeJoin(thFFMpeg_);
+				thFFMpeg_ = nullptr;
+
+				btnStart->Text = I18N(BUTTONTEXT_RESUME);
+				processSuspeded_ = true;
+				return;
+			case TaskState::Unknown:
+				return;
+			}
+
+			return;
+		}
+
+		
+
+		System::Void FormMain::txtMovie_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
+		{
+			if (e->Data->GetDataPresent(DataFormats::FileDrop, true))
+				e->Effect = DragDropEffects::Copy;
+		}
+		System::Void FormMain::txtMovie_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
+		{
+			if (e->Data->GetDataPresent(DataFormats::FileDrop, true))
+				e->Effect = DragDropEffects::Copy;
+		}
+		System::Void FormMain::txtMovie_DragLeave(System::Object^  sender, System::EventArgs^  e)
+		{}
+		System::Void FormMain::txtMovie_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
+		{
+			if (e->Data->GetDataPresent(DataFormats::FileDrop, true))
+			{
+				cli::array<String^>^ ss = (cli::array<String^>^)e->Data->GetData(DataFormats::FileDrop, true);
+				for each(String^ s in ss)
+				{
+					txtMovie->Text = s;
+					break;
+				}
+			}
+		}
+
+		System::Void FormMain::tsmiOption_DropDownOpening(System::Object^  sender, System::EventArgs^  e)
+		{
+			if (!String::IsNullOrEmpty(ffprobe_))
+				tsmiSetFFProbe->Text = baseSetFFProbeMenuString_ + L" (" + ffprobe_ + L")";
+			else
+				tsmiSetFFProbe->Text = baseSetFFProbeMenuString_;
+
+
+			if (!String::IsNullOrEmpty(ffmpeg_))
+				tsmiSetFFMpeg->Text = baseSetFFMpegMenuString_ + L" (" + ffmpeg_ + L")";
+			else
+				tsmiSetFFMpeg->Text = baseSetFFMpegMenuString_;
+		}
+
+		System::Void FormMain::tsmiSetFFProbe_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			ffprobe_ = nullptr;
+			getCommon(this, false, SECTION_OPTION, KEY_FFPROBE, IniFile, ffprobe_, true);
+		}
+		System::Void FormMain::tsmiSetFFMpeg_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			ffmpeg_ = nullptr;
+			getCommon(this, true, SECTION_OPTION, KEY_FFMPEG, IniFile, ffmpeg_, true);
+		}
+
+		WaitCursor::WaitCursor()
+		{
+			if (1 == System::Threading::Interlocked::Increment(counter_))
+			{
+				cur_ = System::Windows::Forms::Cursor::Current;
+				System::Windows::Forms::Cursor::Current = System::Windows::Forms::Cursors::WaitCursor;
+			}
+		}
+
+		WaitCursor::~WaitCursor()
+		{
+			if (0 == System::Threading::Interlocked::Decrement(counter_))
+			{
+				System::Windows::Forms::Cursor::Current = cur_;
+			}
+		}
 	}
 
 }
