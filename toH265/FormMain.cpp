@@ -16,6 +16,20 @@ namespace Ambiesoft {
 		using namespace System::Threading;
 
 		using namespace Newtonsoft::Json::Linq;
+
+		FormMain::FormMain()
+		{
+			InitializeComponent();
+
+			bool boolval;
+			Profile::GetBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, false, boolval, IniFile);
+			if (boolval)
+			{
+				tsmiPriorityNormal->Checked = false;
+				tsmiPriorityBackground->Checked = true;
+			}
+		}
+
 		String^ FormMain::IniFile::get()
 		{
 			return Path::Combine(Path::GetDirectoryName(Application::ExecutablePath),
@@ -198,8 +212,9 @@ frame=   69 fps= 17 q=-0.0 size=       0kB time=00:00:02.34 bitrate=   0.2kbits/
 frame=   76 fps= 17 q=-0.0 size=       0kB time=00:00:02.57 bitrate=   0.1kbits/s dup=1 drop=0 speed=0.566x
 frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/s dup=1 drop=0 speed=0.566x
 */
+		
 			if (!regFFMpeg_)
-				regFFMpeg_ = gcnew RegularExpressions::Regex("frame=\\s+\\d+.*time=(\\d\\d:\\d\\d:\\d\\d)\\.\\d\\d");
+				regFFMpeg_ = gcnew RegularExpressions::Regex("frame=.*fps=.*size=.*time=(\\d\\d:\\d\\d:\\d\\d)\\.\\d\\d");
 			if (regFFMpeg_->IsMatch(text))
 			{
 				//StringBuilder sb;
@@ -268,6 +283,11 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			txtMovie->Enabled = false;
 			txtMovie->AllowDrop = false;
 			btnBrowseMovie->Enabled = false;
+
+			dwBackPriority_ = GetPriorityClass(GetCurrentProcess());
+			if (tsmiPriorityBackground->Checked)
+				SetPriorityClass(GetCurrentProcess(), PROCESS_MODE_BACKGROUND_BEGIN);
+
 		}
 		void FormMain::ThreadEnded(int retval)
 		{
@@ -300,6 +320,19 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			}
 		}
 
+		void FormMain::OnProcessStarted(Object^ sender, EventArgs^ e)
+		{
+			if (InvokeRequired)
+			{
+				this->BeginInvoke(gcnew EventHandler(this, &FormMain::OnProcessStarted), sender, e);
+				return;
+			}
+
+			if (tsmiPriorityBackground->Checked)
+			{
+				SetPriorityClass(GetCurrentProcess(), PROCESS_MODE_BACKGROUND_END);
+			}
+		}
 		void FormMain::StartOfThread(Object^ obj)
 		{
 			EndInvoke(BeginInvoke(gcnew VVDelegate(this, &FormMain::ThreadStarted)));
@@ -307,6 +340,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			String^ ffmpeg = hash["ffmpeg"];
 			String^ arg = hash["arg"];
 			int retval;
+			
 			try
 			{
 				AmbLib::OpenCommandGetResultCallback(ffmpeg,
@@ -315,6 +349,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 					retval,
 					gcnew DataReceivedEventHandler(this, &FormMain::outputHandler),
 					gcnew DataReceivedEventHandler(this, &FormMain::errHandler),
+					gcnew EventHandler(this, &FormMain::OnProcessStarted),
 					processFFMpeg_
 					);
 			}
@@ -387,6 +422,12 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			sbFilter.Append("All File(*.*)|*.*");
 			dlg.Filter = sbFilter.ToString();
 			dlg.InitialDirectory = Path::GetDirectoryName(inputmovie);
+			{
+				String^ name = Path::GetFileNameWithoutExtension(inputmovie);
+				String^ ext = Path::GetExtension(inputmovie);
+				dlg.FileName = name + " [h265]" + ext;
+			}
+			
 			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
 				return;
 
@@ -490,6 +531,35 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			ffmpeg_ = nullptr;
 			getCommon(this, true, SECTION_OPTION, KEY_FFMPEG, IniFile, ffmpeg_, true);
 		}
+
+		void FormMain::OnMenuPriorityCommon(bool bBackground)
+		{
+			if (bBackground)
+			{
+				tsmiPriorityNormal->Checked = false;
+				tsmiPriorityBackground->Checked = true;
+			}
+			else
+			{
+				tsmiPriorityNormal->Checked = true;
+				tsmiPriorityBackground->Checked = false;
+			}
+
+			if (!Profile::WriteBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, bBackground, IniFile))
+			{
+				CppUtils::Alert(I18N(STR_FAILED_TO_SAVE_SETTING));
+			}
+		}
+		System::Void FormMain::tsmiPriorityNormal_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			OnMenuPriorityCommon(false);
+		}
+		System::Void FormMain::tsmiPriorityBackground_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			OnMenuPriorityCommon(true);
+		}
+		System::Void FormMain::tsmiPriority_DropDownOpening(System::Object^  sender, System::EventArgs^  e)
+		{}
 
 		WaitCursor::WaitCursor()
 		{

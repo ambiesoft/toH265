@@ -46,7 +46,7 @@ namespace Ambiesoft {
 			target = dlg.FileName;
 			if (!Profile::WriteString(regApp, regKey, target, inifile))
 			{
-				CppUtils::Alert(I18N(L"Failed to save settings."));
+				CppUtils::Alert(I18N(STR_FAILED_TO_SAVE_SETTING));
 			}
 			return target;
 		}

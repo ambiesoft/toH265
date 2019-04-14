@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include <Windows.h>
+
 
 typedef LONG(NTAPI *NtSuspendProcess)(HANDLE ProcessHandle);
 typedef LONG(NTAPI *NtResumeProcess)(HANDLE ProcessHandle);

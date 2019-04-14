@@ -22,36 +22,39 @@ namespace Ambiesoft {
 		/// </summary>
 		public ref class FormMain : public System::Windows::Forms::Form
 		{
+			private: System::Windows::Forms::TextBox^  txtLogErr;
+			private: System::Windows::Forms::TextBox^  txtLogOut;
+			private: System::Windows::Forms::Button^  btnStart;
+
+
+			private: System::Windows::Forms::TextBox^  txtFFMpegArg;
+			private: System::Windows::Forms::MenuStrip^  menuMain;
+			private: System::Windows::Forms::ToolStripMenuItem^  tsmiFile;
+			private: System::Windows::Forms::ToolStripMenuItem^  exitToolStripMenuItem;
+			private: System::Windows::Forms::ToolStripMenuItem^  tsmiOption;
+
+			private: System::Windows::Forms::Panel^  panelMain;
+			private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFProbe;
+			private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFMpeg;
+			private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
+			private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
+			private: System::Windows::Forms::ToolStripSeparator^  toolStripMenuItem1;
+			private: System::Windows::Forms::ToolStripMenuItem^  tsmiPriority;
+			private: System::Windows::Forms::ToolStripMenuItem^  tsmiPriorityNormal;
+			private: System::Windows::Forms::ToolStripMenuItem^  tsmiPriorityBackground;
+
 			literal String^ SECTION_OPTION = L"Option";
-		private: System::Windows::Forms::TextBox^  txtLogErr;
-		private: System::Windows::Forms::TextBox^  txtLogOut;
-		private: System::Windows::Forms::Button^  btnStart;
+			literal String^ KEY_FFPROBE = L"ffprobe";
+			literal String^ KEY_FFMPEG = L"ffmpeg";
+			literal String^ KEY_PROCESS_BACKGROUND = L"processbackground";
+			literal String^ BUTTONTEXT_PAUSE = L"&Pause";
+			literal String^ BUTTONTEXT_START = L"&Start";
 
-				 literal String^ KEY_FFPROBE = L"ffprobe";
-		private: System::Windows::Forms::TextBox^  txtFFMpegArg;
-				 literal String^ KEY_FFMPEG = L"ffmpeg";
-				 literal String^ BUTTONTEXT_PAUSE = L"&Pause";
-				 literal String^ BUTTONTEXT_START = L"&Start";
-		private: System::Windows::Forms::MenuStrip^  menuMain;
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiFile;
-		private: System::Windows::Forms::ToolStripMenuItem^  exitToolStripMenuItem;
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiOption;
-
-		private: System::Windows::Forms::Panel^  panelMain;
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFProbe;
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFMpeg;
-		private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
-		private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
-
-				 literal String^ BUTTONTEXT_RESUME = L"Res&ume";
+			literal String^ BUTTONTEXT_RESUME = L"Res&ume";
+			literal String^ STR_FAILED_TO_SAVE_SETTING = L"Failed to save settings.";
 		public:
-			FormMain(void)
-			{
-				InitializeComponent();
-				//
-				//TODO: Add the constructor code here
-				//
-			}
+			FormMain(void);
+
 			property int ReturnValue;
 		protected:
 			/// <summary>
@@ -126,6 +129,7 @@ namespace Ambiesoft {
 			{
 				TaskState get();
 			}
+			DWORD dwBackPriority_;
 			void UpdateTitleTS(TimeSpan ts);
 			void UpdateTitleComplete();
 			void UpdateTitle();
@@ -136,7 +140,9 @@ namespace Ambiesoft {
 			delegate void VIDelegate(int value);
 			void ThreadStarted();
 			void ThreadEnded(int retval);
-			void FormMain::StopEncoding();
+			void StopEncoding();
+			void OnProcessStarted(Object^ sender, EventArgs^ e);
+
 			System::Void FormMain_Load(System::Object^  sender, System::EventArgs^  e);
 			System::Void btnBrowseMovie_Click(System::Object^  sender, System::EventArgs^  e);
 			System::Void btnStart_Click(System::Object^  sender, System::EventArgs^  e);
@@ -159,6 +165,11 @@ namespace Ambiesoft {
 			System::Void tsmiOption_DropDownOpening(System::Object^  sender, System::EventArgs^  e);
 
 			System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+
+			void OnMenuPriorityCommon(bool bBackground);
+			System::Void tsmiPriorityNormal_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiPriorityBackground_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiPriority_DropDownOpening(System::Object^  sender, System::EventArgs^  e);
 
 		};
 

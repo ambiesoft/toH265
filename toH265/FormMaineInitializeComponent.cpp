@@ -20,9 +20,13 @@ namespace Ambiesoft {
 			this->tsmiOption = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiSetFFProbe = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiSetFFMpeg = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->panelMain = (gcnew System::Windows::Forms::Panel());
+			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->tsmiPriority = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiPriorityNormal = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiPriorityBackground = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->panelMain = (gcnew System::Windows::Forms::Panel());
 			this->menuMain->SuspendLayout();
 			this->panelMain->SuspendLayout();
 			this->SuspendLayout();
@@ -120,9 +124,9 @@ namespace Ambiesoft {
 			// 
 			// tsmiOption
 			// 
-			this->tsmiOption->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->tsmiOption->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
 				this->tsmiSetFFProbe,
-					this->tsmiSetFFMpeg
+					this->tsmiSetFFMpeg, this->toolStripMenuItem1, this->tsmiPriority
 			});
 			this->tsmiOption->Name = L"tsmiOption";
 			this->tsmiOption->Size = System::Drawing::Size(56, 20);
@@ -132,16 +136,62 @@ namespace Ambiesoft {
 			// tsmiSetFFProbe
 			// 
 			this->tsmiSetFFProbe->Name = L"tsmiSetFFProbe";
-			this->tsmiSetFFProbe->Size = System::Drawing::Size(145, 22);
+			this->tsmiSetFFProbe->Size = System::Drawing::Size(152, 22);
 			this->tsmiSetFFProbe->Text = L"&Set FFProbe...";
 			this->tsmiSetFFProbe->Click += gcnew System::EventHandler(this, &FormMain::tsmiSetFFProbe_Click);
 			// 
 			// tsmiSetFFMpeg
 			// 
 			this->tsmiSetFFMpeg->Name = L"tsmiSetFFMpeg";
-			this->tsmiSetFFMpeg->Size = System::Drawing::Size(145, 22);
+			this->tsmiSetFFMpeg->Size = System::Drawing::Size(152, 22);
 			this->tsmiSetFFMpeg->Text = L"Set FF&Mpeg...";
 			this->tsmiSetFFMpeg->Click += gcnew System::EventHandler(this, &FormMain::tsmiSetFFMpeg_Click);
+			// 
+			// toolStripMenuItem1
+			// 
+			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
+			this->toolStripMenuItem1->Size = System::Drawing::Size(149, 6);
+			// 
+			// tsmiPriority
+			// 
+			this->tsmiPriority->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->tsmiPriorityNormal,
+					this->tsmiPriorityBackground
+			});
+			this->tsmiPriority->Name = L"tsmiPriority";
+			this->tsmiPriority->Size = System::Drawing::Size(152, 22);
+			this->tsmiPriority->Text = L"&Priority";
+			this->tsmiPriority->DropDownOpening += gcnew System::EventHandler(this, &FormMain::tsmiPriority_DropDownOpening);
+			// 
+			// tsmiPriorityNormal
+			// 
+			this->tsmiPriorityNormal->Checked = true;
+			this->tsmiPriorityNormal->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->tsmiPriorityNormal->Name = L"tsmiPriorityNormal";
+			this->tsmiPriorityNormal->Size = System::Drawing::Size(152, 22);
+			this->tsmiPriorityNormal->Text = L"&Normal";
+			this->tsmiPriorityNormal->Click += gcnew System::EventHandler(this, &FormMain::tsmiPriorityNormal_Click);
+			// 
+			// tsmiPriorityBackground
+			// 
+			this->tsmiPriorityBackground->Name = L"tsmiPriorityBackground";
+			this->tsmiPriorityBackground->Size = System::Drawing::Size(152, 22);
+			this->tsmiPriorityBackground->Text = L"&Background";
+			this->tsmiPriorityBackground->Click += gcnew System::EventHandler(this, &FormMain::tsmiPriorityBackground_Click);
+			// 
+			// helpToolStripMenuItem
+			// 
+			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->aboutToolStripMenuItem });
+			this->helpToolStripMenuItem->Name = L"helpToolStripMenuItem";
+			this->helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
+			this->helpToolStripMenuItem->Text = L"&Help";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(116, 22);
+			this->aboutToolStripMenuItem->Text = L"&About...";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::aboutToolStripMenuItem_Click);
 			// 
 			// panelMain
 			// 
@@ -158,20 +208,6 @@ namespace Ambiesoft {
 			this->panelMain->Name = L"panelMain";
 			this->panelMain->Size = System::Drawing::Size(561, 271);
 			this->panelMain->TabIndex = 100;
-			// 
-			// helpToolStripMenuItem
-			// 
-			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->aboutToolStripMenuItem });
-			this->helpToolStripMenuItem->Name = L"helpToolStripMenuItem";
-			this->helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
-			this->helpToolStripMenuItem->Text = L"&Help";
-			// 
-			// aboutToolStripMenuItem
-			// 
-			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
-			this->aboutToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->aboutToolStripMenuItem->Text = L"&About...";
-			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::aboutToolStripMenuItem_Click);
 			// 
 			// FormMain
 			// 
