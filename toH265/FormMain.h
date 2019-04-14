@@ -22,6 +22,15 @@ namespace Ambiesoft {
 		/// </summary>
 		public ref class FormMain : public System::Windows::Forms::Form
 		{
+			literal String^ SECTION_OPTION = L"Option";
+		private: System::Windows::Forms::TextBox^  txtLogErr;
+		private: System::Windows::Forms::TextBox^  txtLogOut;
+		private: System::Windows::Forms::Button^  btnStart;
+		private: System::Windows::Forms::Button^  btnStop;
+				 literal String^ KEY_FFPROBE = L"ffprobe";
+		private: System::Windows::Forms::TextBox^  txtFFMpegArg;
+				 literal String^ KEY_FFMPEG = L"ffmpeg";
+
 		public:
 			FormMain(void)
 			{
@@ -62,12 +71,38 @@ namespace Ambiesoft {
 #pragma endregion
 
 		private:
+			bool hasVideoStream(String^ file, String^% codecname);
 			bool CheckMovieAndSet(String^ file);
 
-		
+			property String^ IniFile
+			{
+				String^ get();
+			}
+
+			String^ ffprobe_;
+			property String^ FFProbe
+			{
+				String^ get();
+			}
+			String^ ffmpeg_;
+			property String^ FFMpeg
+			{
+				String^ get();
+			}
+
+			System::Text::StringBuilder sbFFMpegOut_;
+			System::Text::StringBuilder sbFFMpegErr_;
+
+			delegate void AddToLog(String^ text);
+			void AddToOutput(String^ text);
+			void AddToErr(String^ text);
+
 			System::Void FormMain_Load(System::Object^  sender, System::EventArgs^  e);
 			System::Void btnBrowseMovie_Click(System::Object^  sender, System::EventArgs^  e);
-
+			System::Void btnStart_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void btnStop_Click(System::Object^  sender, System::EventArgs^  e);
+			void outputHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
+			void errHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
 		};
 	}
 

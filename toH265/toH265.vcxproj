@@ -90,6 +90,12 @@
     <Reference Include="Ambiesoft.AmbLibcpp">
       <HintPath>C:\Linkout\DNAssembly.NET4\Ambiesoft.AmbLibcpp.dll</HintPath>
     </Reference>
+    <Reference Include="Ambiesoft.Profile">
+      <HintPath>..\..\..\..\..\..\..\Linkout\DNAssembly.NET4\Ambiesoft.Profile.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\..\..\Linkout\DNAssembly.NET4\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
       <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
@@ -115,6 +121,7 @@
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="FormMain.cpp" />
     <ClCompile Include="FormMaineInitializeComponent.cpp" />
+    <ClCompile Include="FormMainFFMpeg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
