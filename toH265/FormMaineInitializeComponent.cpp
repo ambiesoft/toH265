@@ -8,6 +8,8 @@ namespace Ambiesoft {
 
 		void FormMain::InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(FormMain::typeid));
 			this->txtMovie = (gcnew System::Windows::Forms::TextBox());
 			this->btnBrowseMovie = (gcnew System::Windows::Forms::Button());
 			this->txtLogErr = (gcnew System::Windows::Forms::TextBox());
@@ -16,6 +18,7 @@ namespace Ambiesoft {
 			this->txtFFMpegArg = (gcnew System::Windows::Forms::TextBox());
 			this->menuMain = (gcnew System::Windows::Forms::MenuStrip());
 			this->tsmiFile = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiStop = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiOption = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiSetFFProbe = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -24,11 +27,19 @@ namespace Ambiesoft {
 			this->tsmiPriority = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiPriorityNormal = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiPriorityBackground = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItem2 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->tsmiMinimizeToTray = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiAbout = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiFFMpegHelp = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->panelMain = (gcnew System::Windows::Forms::Panel());
+			this->notifyIconMain = (gcnew System::Windows::Forms::NotifyIcon(this->components));
+			this->cmNotify = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->tsmiNotifyShow = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiNotifyStart = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuMain->SuspendLayout();
 			this->panelMain->SuspendLayout();
+			this->cmNotify->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// txtMovie
@@ -111,22 +122,30 @@ namespace Ambiesoft {
 			// 
 			// tsmiFile
 			// 
-			this->tsmiFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->exitToolStripMenuItem });
+			this->tsmiFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->tsmiStop, this->exitToolStripMenuItem });
 			this->tsmiFile->Name = L"tsmiFile";
 			this->tsmiFile->Size = System::Drawing::Size(37, 20);
 			this->tsmiFile->Text = L"&File";
 			// 
+			// tsmiStop
+			// 
+			this->tsmiStop->Name = L"tsmiStop";
+			this->tsmiStop->Size = System::Drawing::Size(98, 22);
+			this->tsmiStop->Text = L"&Stop";
+			this->tsmiStop->Click += gcnew System::EventHandler(this, &FormMain::tsmiStop_Click);
+			// 
 			// exitToolStripMenuItem
 			// 
 			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
-			this->exitToolStripMenuItem->Size = System::Drawing::Size(92, 22);
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(98, 22);
 			this->exitToolStripMenuItem->Text = L"&Exit";
+			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::exitToolStripMenuItem_Click);
 			// 
 			// tsmiOption
 			// 
-			this->tsmiOption->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+			this->tsmiOption->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
 				this->tsmiSetFFProbe,
-					this->tsmiSetFFMpeg, this->toolStripMenuItem1, this->tsmiPriority
+					this->tsmiSetFFMpeg, this->toolStripMenuItem1, this->tsmiPriority, this->toolStripMenuItem2, this->tsmiMinimizeToTray
 			});
 			this->tsmiOption->Name = L"tsmiOption";
 			this->tsmiOption->Size = System::Drawing::Size(56, 20);
@@ -136,21 +155,21 @@ namespace Ambiesoft {
 			// tsmiSetFFProbe
 			// 
 			this->tsmiSetFFProbe->Name = L"tsmiSetFFProbe";
-			this->tsmiSetFFProbe->Size = System::Drawing::Size(152, 22);
+			this->tsmiSetFFProbe->Size = System::Drawing::Size(162, 22);
 			this->tsmiSetFFProbe->Text = L"&Set FFProbe...";
 			this->tsmiSetFFProbe->Click += gcnew System::EventHandler(this, &FormMain::tsmiSetFFProbe_Click);
 			// 
 			// tsmiSetFFMpeg
 			// 
 			this->tsmiSetFFMpeg->Name = L"tsmiSetFFMpeg";
-			this->tsmiSetFFMpeg->Size = System::Drawing::Size(152, 22);
+			this->tsmiSetFFMpeg->Size = System::Drawing::Size(162, 22);
 			this->tsmiSetFFMpeg->Text = L"Set FF&Mpeg...";
 			this->tsmiSetFFMpeg->Click += gcnew System::EventHandler(this, &FormMain::tsmiSetFFMpeg_Click);
 			// 
 			// toolStripMenuItem1
 			// 
 			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
-			this->toolStripMenuItem1->Size = System::Drawing::Size(149, 6);
+			this->toolStripMenuItem1->Size = System::Drawing::Size(159, 6);
 			// 
 			// tsmiPriority
 			// 
@@ -159,39 +178,60 @@ namespace Ambiesoft {
 					this->tsmiPriorityBackground
 			});
 			this->tsmiPriority->Name = L"tsmiPriority";
-			this->tsmiPriority->Size = System::Drawing::Size(152, 22);
+			this->tsmiPriority->Size = System::Drawing::Size(162, 22);
 			this->tsmiPriority->Text = L"&Priority";
-			this->tsmiPriority->DropDownOpening += gcnew System::EventHandler(this, &FormMain::tsmiPriority_DropDownOpening);
 			// 
 			// tsmiPriorityNormal
 			// 
 			this->tsmiPriorityNormal->Checked = true;
 			this->tsmiPriorityNormal->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->tsmiPriorityNormal->Name = L"tsmiPriorityNormal";
-			this->tsmiPriorityNormal->Size = System::Drawing::Size(152, 22);
+			this->tsmiPriorityNormal->Size = System::Drawing::Size(138, 22);
 			this->tsmiPriorityNormal->Text = L"&Normal";
 			this->tsmiPriorityNormal->Click += gcnew System::EventHandler(this, &FormMain::tsmiPriorityNormal_Click);
 			// 
 			// tsmiPriorityBackground
 			// 
 			this->tsmiPriorityBackground->Name = L"tsmiPriorityBackground";
-			this->tsmiPriorityBackground->Size = System::Drawing::Size(152, 22);
+			this->tsmiPriorityBackground->Size = System::Drawing::Size(138, 22);
 			this->tsmiPriorityBackground->Text = L"&Background";
 			this->tsmiPriorityBackground->Click += gcnew System::EventHandler(this, &FormMain::tsmiPriorityBackground_Click);
 			// 
+			// toolStripMenuItem2
+			// 
+			this->toolStripMenuItem2->Name = L"toolStripMenuItem2";
+			this->toolStripMenuItem2->Size = System::Drawing::Size(159, 6);
+			// 
+			// tsmiMinimizeToTray
+			// 
+			this->tsmiMinimizeToTray->Name = L"tsmiMinimizeToTray";
+			this->tsmiMinimizeToTray->Size = System::Drawing::Size(162, 22);
+			this->tsmiMinimizeToTray->Text = L"&Minimize to Tray";
+			this->tsmiMinimizeToTray->Click += gcnew System::EventHandler(this, &FormMain::tsmiMinimizeToTray_Click);
+			// 
 			// helpToolStripMenuItem
 			// 
-			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->aboutToolStripMenuItem });
+			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->tsmiAbout,
+					this->tsmiFFMpegHelp
+			});
 			this->helpToolStripMenuItem->Name = L"helpToolStripMenuItem";
 			this->helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
 			this->helpToolStripMenuItem->Text = L"&Help";
 			// 
-			// aboutToolStripMenuItem
+			// tsmiAbout
 			// 
-			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
-			this->aboutToolStripMenuItem->Size = System::Drawing::Size(116, 22);
-			this->aboutToolStripMenuItem->Text = L"&About...";
-			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::aboutToolStripMenuItem_Click);
+			this->tsmiAbout->Name = L"tsmiAbout";
+			this->tsmiAbout->Size = System::Drawing::Size(162, 22);
+			this->tsmiAbout->Text = L"&About...";
+			this->tsmiAbout->Click += gcnew System::EventHandler(this, &FormMain::tsmiAbout_Click);
+			// 
+			// tsmiFFMpegHelp
+			// 
+			this->tsmiFFMpegHelp->Name = L"tsmiFFMpegHelp";
+			this->tsmiFFMpegHelp->Size = System::Drawing::Size(162, 22);
+			this->tsmiFFMpegHelp->Text = L"FFMpeg\'s Help...";
+			this->tsmiFFMpegHelp->Click += gcnew System::EventHandler(this, &FormMain::tsmiFFMpegHelp_Click);
 			// 
 			// panelMain
 			// 
@@ -209,6 +249,32 @@ namespace Ambiesoft {
 			this->panelMain->Size = System::Drawing::Size(561, 271);
 			this->panelMain->TabIndex = 100;
 			// 
+			// notifyIconMain
+			// 
+			this->notifyIconMain->ContextMenuStrip = this->cmNotify;
+			this->notifyIconMain->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"notifyIconMain.Icon")));
+			this->notifyIconMain->MouseDoubleClick += gcnew System::Windows::Forms::MouseEventHandler(this, &FormMain::notifyIconMain_MouseDoubleClick);
+			// 
+			// cmNotify
+			// 
+			this->cmNotify->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->tsmiNotifyShow, this->tsmiNotifyStart });
+			this->cmNotify->Name = L"cmNotify";
+			this->cmNotify->Size = System::Drawing::Size(153, 70);
+			// 
+			// tsmiNotifyShow
+			// 
+			this->tsmiNotifyShow->Name = L"tsmiNotifyShow";
+			this->tsmiNotifyShow->Size = System::Drawing::Size(152, 22);
+			this->tsmiNotifyShow->Text = L"&Show";
+			this->tsmiNotifyShow->Click += gcnew System::EventHandler(this, &FormMain::tsmiNotifyShow_Click);
+			// 
+			// tsmiNotifyStart
+			// 
+			this->tsmiNotifyStart->Name = L"tsmiNotifyStart";
+			this->tsmiNotifyStart->Size = System::Drawing::Size(152, 22);
+			this->tsmiNotifyStart->Text = L"StartDummy";
+			this->tsmiNotifyStart->Click += gcnew System::EventHandler(this, &FormMain::tsmiNotifyStart_Click);
+			// 
 			// FormMain
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -216,15 +282,18 @@ namespace Ambiesoft {
 			this->ClientSize = System::Drawing::Size(585, 297);
 			this->Controls->Add(this->menuMain);
 			this->Controls->Add(this->panelMain);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuMain;
 			this->Name = L"FormMain";
 			this->Text = L"FormMain";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &FormMain::FormMain_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &FormMain::FormMain_Load);
+			this->Resize += gcnew System::EventHandler(this, &FormMain::FormMain_Resize);
 			this->menuMain->ResumeLayout(false);
 			this->menuMain->PerformLayout();
 			this->panelMain->ResumeLayout(false);
 			this->panelMain->PerformLayout();
+			this->cmNotify->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

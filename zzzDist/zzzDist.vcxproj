@@ -98,6 +98,19 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)README.md" "$(TargetDir)"
+copy "$(SolutionDir)Copying.txt" "$(TargetDir)"
+copy "$(SolutionDir)toH265\history.txt" "$(TargetDir)"
+
+mkdir "$(TargetDir)images"
+copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
+
+del "$(TargetDir)zzzDist.exe"
+del "$(TargetDir)zzzDist.pdb"
+
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -111,6 +124,19 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy "$(SolutionDir)README.md" "$(TargetDir)"
+copy "$(SolutionDir)Copying.txt" "$(TargetDir)"
+copy "$(SolutionDir)toH265\history.txt" "$(TargetDir)"
+
+mkdir "$(TargetDir)images"
+copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
+
+del "$(TargetDir)zzzDist.exe"
+del "$(TargetDir)zzzDist.pdb"
+
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -132,6 +158,9 @@
       <Command>copy "$(SolutionDir)README.md" "$(TargetDir)"
 copy "$(SolutionDir)Copying.txt" "$(TargetDir)"
 copy "$(SolutionDir)toH265\history.txt" "$(TargetDir)"
+
+mkdir "$(TargetDir)images"
+copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
 
 del "$(TargetDir)zzzDist.exe"
 del "$(TargetDir)zzzDist.pdb"
@@ -159,6 +188,9 @@ del "$(TargetDir)zzzDist.pdb"
       <Command>copy "$(SolutionDir)README.md" "$(TargetDir)"
 copy "$(SolutionDir)Copying.txt" "$(TargetDir)"
 copy "$(SolutionDir)toH265\history.txt" "$(TargetDir)"
+
+mkdir "$(TargetDir)images"
+copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
 
 del "$(TargetDir)zzzDist.exe"
 del "$(TargetDir)zzzDist.pdb"

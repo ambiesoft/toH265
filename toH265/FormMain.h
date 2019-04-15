@@ -37,7 +37,8 @@ namespace Ambiesoft {
 			private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFProbe;
 			private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFMpeg;
 			private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
-			private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiAbout;
+
 			private: System::Windows::Forms::ToolStripSeparator^  toolStripMenuItem1;
 			private: System::Windows::Forms::ToolStripMenuItem^  tsmiPriority;
 			private: System::Windows::Forms::ToolStripMenuItem^  tsmiPriorityNormal;
@@ -47,11 +48,23 @@ namespace Ambiesoft {
 			literal String^ KEY_FFPROBE = L"ffprobe";
 			literal String^ KEY_FFMPEG = L"ffmpeg";
 			literal String^ KEY_PROCESS_BACKGROUND = L"processbackground";
+			literal String^ KEY_MINIMIZETOTRAY = L"minimizetotray";
+
+
 			literal String^ BUTTONTEXT_PAUSE = L"&Pause";
 			literal String^ BUTTONTEXT_START = L"&Start";
 
 			literal String^ BUTTONTEXT_RESUME = L"Res&ume";
-			literal String^ STR_FAILED_TO_SAVE_SETTING = L"Failed to save settings.";
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiFFMpegHelp;
+		private: System::Windows::Forms::NotifyIcon^  notifyIconMain;
+		private: System::Windows::Forms::ToolStripSeparator^  toolStripMenuItem2;
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiMinimizeToTray;
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiStop;
+		private: System::Windows::Forms::ContextMenuStrip^  cmNotify;
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiNotifyShow;
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiNotifyStart;
+
+				 literal String^ STR_FAILED_TO_SAVE_SETTING = L"Failed to save settings.";
 		public:
 			FormMain(void);
 
@@ -71,12 +84,13 @@ namespace Ambiesoft {
 		protected:
 		private: System::Windows::Forms::TextBox^  txtMovie;
 		private: System::Windows::Forms::Button^  btnBrowseMovie;
+		private: System::ComponentModel::IContainer^  components;
 
 		private:
 			/// <summary>
 			/// Required designer variable.
 			/// </summary>
-			System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 			/// <summary>
@@ -125,6 +139,10 @@ namespace Ambiesoft {
 			};
 			System::Text::RegularExpressions::Regex^ regFFMpeg_;
 			TimeSpan tsOrigMovie_;
+			System::Drawing::Icon^ iconBlue_;
+			System::Drawing::Icon^ iconYellow_;
+			System::Drawing::Icon^ iconRed_;
+
 			property TaskState FFMpegState
 			{
 				TaskState get();
@@ -141,9 +159,15 @@ namespace Ambiesoft {
 			void ThreadStarted();
 			void ThreadEnded(int retval);
 			void StopEncoding();
+			bool ConfirmEncodeStop();
+			void ChangeStartButtonText(String^ text);
 			void OnProcessStarted(Object^ sender, EventArgs^ e);
 
 			System::Void FormMain_Load(System::Object^  sender, System::EventArgs^  e);
+			System::Void exitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+				Close();
+			}
+
 			System::Void btnBrowseMovie_Click(System::Object^  sender, System::EventArgs^  e);
 			System::Void btnStart_Click(System::Object^  sender, System::EventArgs^  e);
 			void outputHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
@@ -164,14 +188,27 @@ namespace Ambiesoft {
 
 			System::Void tsmiOption_DropDownOpening(System::Object^  sender, System::EventArgs^  e);
 
-			System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+			
 
 			void OnMenuPriorityCommon(bool bBackground);
 			System::Void tsmiPriorityNormal_Click(System::Object^  sender, System::EventArgs^  e);
 			System::Void tsmiPriorityBackground_Click(System::Object^  sender, System::EventArgs^  e);
-			System::Void tsmiPriority_DropDownOpening(System::Object^  sender, System::EventArgs^  e);
 
-		};
+			System::Void tsmiAbout_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiFFMpegHelp_Click(System::Object^  sender, System::EventArgs^  e);
+
+			
+
+			System::Void FormMain_Resize(System::Object^  sender, System::EventArgs^  e);
+			System::Void notifyIconMain_MouseDoubleClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+			System::Void tsmiMinimizeToTray_Click(System::Object^  sender, System::EventArgs^  e);
+
+			System::Void tsmiStop_Click(System::Object^  sender, System::EventArgs^  e);
+
+			System::Void tsmiNotifyShow_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiNotifyStart_Click(System::Object^  sender, System::EventArgs^  e);
+
+};
 
 		public ref class WaitCursor
 		{

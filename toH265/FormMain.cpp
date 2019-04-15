@@ -9,6 +9,7 @@
 namespace Ambiesoft {
 	namespace toH265 {
 
+		using namespace System::Drawing;
 		using namespace System::Collections::Generic;
 		using namespace System::Diagnostics;
 		using namespace System::IO;
@@ -21,12 +22,37 @@ namespace Ambiesoft {
 		{
 			InitializeComponent();
 
-			bool boolval;
-			Profile::GetBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, false, boolval, IniFile);
-			if (boolval)
+			try
 			{
-				tsmiPriorityNormal->Checked = false;
-				tsmiPriorityBackground->Checked = true;
+				HashIni^ ini = Profile::ReadAll(IniFile, true);
+				bool boolval;
+				Profile::GetBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, false, boolval, ini);
+				if (boolval)
+				{
+					tsmiPriorityNormal->Checked = false;
+					tsmiPriorityBackground->Checked = true;
+				}
+
+				Profile::GetBool(SECTION_OPTION, KEY_MINIMIZETOTRAY, false, boolval, ini);
+				tsmiMinimizeToTray->Checked = boolval;
+			}
+			catch (Exception^ ex)
+			{
+				CppUtils::Alert(this, ex);
+				Environment::Exit(-1);
+				return;
+			}
+
+			try
+			{
+				String^ imagePath = Path::Combine(Path::GetDirectoryName(Application::ExecutablePath), L"images");
+				iconBlue_ = System::Drawing::Icon::FromHandle((gcnew Bitmap(Path::Combine(imagePath, L"icon.png")))->GetHicon());
+				iconYellow_ = System::Drawing::Icon::FromHandle((gcnew Bitmap(Path::Combine(imagePath, L"pause.png")))->GetHicon());
+				iconRed_ = System::Drawing::Icon::FromHandle((gcnew Bitmap(Path::Combine(imagePath, L"busy.png")))->GetHicon());
+			}
+			catch (Exception^ ex)
+			{
+				CppUtils::Alert(this, ex);
 			}
 		}
 
@@ -36,7 +62,7 @@ namespace Ambiesoft {
 				Path::GetFileNameWithoutExtension(Application::ExecutablePath) + L".ini");
 		}
 
-		System::Void FormMain::aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e)
+		System::Void FormMain::tsmiAbout_Click(System::Object^  sender, System::EventArgs^  e)
 		{
 			StringBuilder sbMessage;
 			sbMessage.Append(Application::ProductName);
@@ -93,6 +119,17 @@ namespace Ambiesoft {
 					codecname = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
 
 					String^ duration = (String^)joutput->SelectToken(String::Format("streams[{0}].duration", i));
+					if (!duration)
+					{
+						ts = TimeSpan();
+						DASSERT(ts.TotalMilliseconds == 0);
+						duration = (String^)joutput->SelectToken("format.duration");
+					}
+					if (!duration)
+					{
+						return true;
+					}
+
 					double d = System::Double::Parse(duration);
 					// to 100nanosec 
 					d *= 10 * 1000 * 1000;
@@ -121,12 +158,20 @@ namespace Ambiesoft {
 				}
 
 				String^ codecname;
-				if (!hasVideoStream(file, codecname, tsOrigMovie_))
+				TimeSpan span;
+				if (!hasVideoStream(file, codecname, span))
 				{
-					CppUtils::Alert(this, String::Format(I18N(L"'{0}' does not have video stream."), file));
+					CppUtils::Alert(this, String::Format(I18N(L"'{0}' does not have a video stream."), file));
 					ReturnValue = RETURN_STREAMNOTFOUND;
 					return false;
 				}
+				if (span.TotalMilliseconds==0)
+				{
+					CppUtils::Alert(this, String::Format(I18N(L"'{0}' does not have duration."), file));
+					ReturnValue = RETURN_DURATIONNOTFOUND;
+					return false;
+				}
+				tsOrigMovie_ = span;
 				// Check if the encoding is already h265
 				if (String::Compare(codecname, "hevc", true) == 0)
 				{
@@ -143,8 +188,13 @@ namespace Ambiesoft {
 			baseSetFFProbeMenuString_ = tsmiSetFFProbe->Text;
 			baseSetFFMpegMenuString_ = tsmiSetFFMpeg->Text;
 
+			AmbLib::MakeTripleClickTextBox(txtMovie, GetDoubleClickTime());
+			AmbLib::MakeTripleClickTextBox(txtFFMpegArg, GetDoubleClickTime());
+
+			notifyIconMain->Text = Application::ProductName;
+
 			Text = Application::ProductName;
-			btnStart->Text = I18N(BUTTONTEXT_START);
+			ChangeStartButtonText(I18N(BUTTONTEXT_START));
 			CheckMovieAndSet(Program::MovieFile);
 		}
 
@@ -182,6 +232,7 @@ namespace Ambiesoft {
 
 		void FormMain::UpdateTitle()
 		{
+			notifyIconMain->Text = Application::ProductName;
 			Text = Application::ProductName;
 		}
 		void FormMain::UpdateTitle(int percent)
@@ -193,6 +244,8 @@ namespace Ambiesoft {
 
 			if (Text != sbTitle.ToString())
 				Text = sbTitle.ToString();
+			if (notifyIconMain->Text != sbTitle.ToString())
+				notifyIconMain->Text = sbTitle.ToString();
 		}
 		void FormMain::UpdateTitleComplete()
 		{
@@ -273,16 +326,25 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 
 			return TaskState::Unknown;
 		}
+
+		void FormMain::ChangeStartButtonText(String^ text)
+		{
+			btnStart->Text = text;
+			tsmiNotifyStart->Text = text;
+		}
 		void FormMain::ThreadStarted()
 		{
 			processSuspeded_ = false;
 			processTerminated_ = false;
 
-			btnStart->Text = I18N(BUTTONTEXT_PAUSE);
+			ChangeStartButtonText(I18N(BUTTONTEXT_PAUSE));
 
 			txtMovie->Enabled = false;
 			txtMovie->AllowDrop = false;
 			btnBrowseMovie->Enabled = false;
+
+			this->Icon = iconRed_;
+			notifyIconMain->Icon = iconRed_;
 
 			dwBackPriority_ = GetPriorityClass(GetCurrentProcess());
 			if (tsmiPriorityBackground->Checked)
@@ -298,11 +360,14 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 
 			processFFMpeg_ = nullptr;
 
-			btnStart->Text = I18N(BUTTONTEXT_START);
+			ChangeStartButtonText(I18N(BUTTONTEXT_START));
 
 			txtMovie->Enabled = true;
 			txtMovie->AllowDrop = true;
 			btnBrowseMovie->Enabled = true;
+
+			this->Icon = iconBlue_;
+			notifyIconMain->Icon = iconBlue_;
 
 			if (!processTerminated_)
 			{
@@ -373,8 +438,10 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 					CppUtils::Alert(this, I18N(L"Failed to resume process."));
 					return;
 				}
-				btnStart->Text = I18N(BUTTONTEXT_PAUSE);
+				ChangeStartButtonText(I18N(BUTTONTEXT_PAUSE));
 				processSuspeded_ = false;
+				this->Icon = iconRed_;
+				notifyIconMain->Icon = iconRed_;
 				return;
 			case TaskState::ProcessLaunching:
 				CppUtils::Alert(this, I18N(L"Intermidiate state. Wait a while and do it again."));
@@ -385,8 +452,10 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 					CppUtils::Alert(this, I18N(L"Failed to suspend process."));
 					return;
 				}
-				btnStart->Text = I18N(BUTTONTEXT_RESUME);
+				ChangeStartButtonText(I18N(BUTTONTEXT_RESUME));
 				processSuspeded_ = true;
+				this->Icon = iconYellow_;
+				notifyIconMain->Icon = iconYellow_;
 				return;
 			case TaskState::Unknown:
 				CppUtils::Alert(this, I18N(L"Unknow Error."));
@@ -395,7 +464,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			String^ ffmpeg = FFMpeg;
 			if (String::IsNullOrEmpty(ffmpeg) || !File::Exists(ffmpeg))
 			{
-				CppUtils::Alert(this, I18N(L"ffmpeg not found"));
+				CppUtils::Alert(this, I18N(L"ffmpeg not found."));
 				return;
 			}
 
@@ -403,6 +472,11 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			if (!CheckMovieAndSet(inputmovie))
 				return;
 
+			if (String::IsNullOrEmpty(inputmovie))
+			{
+				CppUtils::Alert(this, I18N(L"input movie is empty."));
+				return;
+			}
 			SaveFileDialog dlg;
 			List<String^> availableext;
 			availableext.Add(Path::GetExtension(inputmovie));
@@ -447,6 +521,16 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			thFFMpeg_ = gcnew System::Threading::Thread(gcnew ParameterizedThreadStart(this, &FormMain::StartOfThread));
 			thFFMpeg_->Start(%param);
 		}
+
+		System::Void FormMain::tsmiNotifyShow_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			notifyIconMain_MouseDoubleClick(sender, nullptr);
+		}
+		System::Void FormMain::tsmiNotifyStart_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			btnStart_Click(sender, e);
+		}
+
 		void FormMain::StopEncoding()
 		{
 			switch (FFMpegState)
@@ -470,7 +554,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 				SafeJoin(thFFMpeg_);
 				thFFMpeg_ = nullptr;
 
-				btnStart->Text = I18N(BUTTONTEXT_RESUME);
+				ChangeStartButtonText(I18N(BUTTONTEXT_RESUME));
 				processSuspeded_ = true;
 				return;
 			case TaskState::Unknown:
@@ -558,8 +642,69 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 		{
 			OnMenuPriorityCommon(true);
 		}
-		System::Void FormMain::tsmiPriority_DropDownOpening(System::Object^  sender, System::EventArgs^  e)
-		{}
+
+		System::Void FormMain::tsmiFFMpegHelp_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			int retval;
+			String^ output;
+			String^ err;
+
+			try
+			{
+				AmbLib::OpenCommandGetResult(FFMpeg,
+					"--help",
+					System::Text::Encoding::Default,
+					retval,
+					output,
+					err);
+				if (retval != 0)
+				{
+
+				}
+				AmbLib::ShowTextDialog(this,
+					Application::ProductName,
+					I18N(L"FFMpeg help"),
+					output,
+					true);
+			}
+			catch (Exception^ ex)
+			{
+				CppUtils::Alert(this, ex);
+			}
+		}
+
+		System::Void FormMain::FormMain_Resize(System::Object^  sender, System::EventArgs^  e)
+		{
+			if (tsmiMinimizeToTray->Checked && this->WindowState == FormWindowState::Minimized)
+			{
+				Hide();
+				notifyIconMain->Visible = true;
+			}
+		}
+		System::Void FormMain::notifyIconMain_MouseDoubleClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
+		{
+			Show();
+			this->WindowState = FormWindowState::Normal;
+			notifyIconMain->Visible = false;
+		}
+		System::Void FormMain::tsmiMinimizeToTray_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			bool newval = !tsmiMinimizeToTray->Checked;
+			tsmiMinimizeToTray->Checked = newval;
+
+			if (!Profile::WriteBool(SECTION_OPTION, KEY_MINIMIZETOTRAY, newval, IniFile))
+			{
+				CppUtils::Alert(this, I18N(STR_FAILED_TO_SAVE_SETTING));
+			}
+		}
+
+		System::Void FormMain::tsmiStop_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			if (!ConfirmEncodeStop())
+				return;
+
+			StopEncoding();
+		}
 
 		WaitCursor::WaitCursor()
 		{
