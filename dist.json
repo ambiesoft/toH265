@@ -30,6 +30,9 @@
         "32\\README.md",
         "32\\toH265.exe",
         "32\\toH265.pdb",
+        "32\\images\\busy.png",
+        "32\\images\\icon.png",
+        "32\\images\\pause.png",
         "64\\Ambiesoft.AmbLib.dll",
         "64\\Ambiesoft.AmbLib.pdb",
         "64\\Ambiesoft.AmbLibcpp.dll",
@@ -43,7 +46,10 @@
         "64\\Newtonsoft.Json.xml",
         "64\\README.md",
         "64\\toH265.exe",
-        "64\\toH265.pdb"
+        "64\\toH265.pdb",
+        "64\\images\\busy.png",
+        "64\\images\\icon.png",
+        "64\\images\\pause.png"
     ],
     "TotalFileCount": "exact",
     "archivedir": "C:\\Linkout",
