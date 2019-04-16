@@ -52,7 +52,10 @@ namespace Ambiesoft {
 			}
 			catch (Exception^ ex)
 			{
-				CppUtils::Alert(this, ex);
+				StringBuilder sbMessage;
+				sbMessage.AppendLine(I18N(L"Failed to load images."));
+				sbMessage.AppendLine(ex->Message);
+				CppUtils::Alert(this, sbMessage.ToString());
 			}
 		}
 
@@ -381,8 +384,12 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 					// Succeeded
 					UpdateTitleComplete();
 					CppUtils::Info(this, I18N(L"Encoding Succeeded."));
+
+					// Show outputmovie in Explorer
+					CppUtils::OpenFolder(this, outputMovie_);
 				}
 			}
+			outputMovie_ = String::Empty;
 		}
 
 		void FormMain::OnProcessStarted(Object^ sender, EventArgs^ e)
@@ -479,22 +486,26 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			}
 			SaveFileDialog dlg;
 			List<String^> availableext;
-			availableext.Add(Path::GetExtension(inputmovie));
-
-			StringBuilder sbFilter;
-			for each(String^ ae in availableext)
 			{
-				sbFilter.Append(ae);
-				sbFilter.Append("File ");
-				sbFilter.Append("(*");
-				sbFilter.Append(ae);
+				// libx265 must has mp4 foramt
+				availableext.Add(Path::GetExtension(L".mp4"));
 
-				sbFilter.Append(")|*");
-				sbFilter.Append(ae);
-				sbFilter.Append("|");
+				StringBuilder sbFilter;
+				for each(String^ ae in availableext)
+				{
+					sbFilter.Append(ae);
+					sbFilter.Append("File ");
+					sbFilter.Append("(*");
+					sbFilter.Append(ae);
+
+					sbFilter.Append(")|*");
+					sbFilter.Append(ae);
+					sbFilter.Append("|");
+				}
+				sbFilter.Append("All File(*.*)|*.*");
+				dlg.Filter = sbFilter.ToString();
 			}
-			sbFilter.Append("All File(*.*)|*.*");
-			dlg.Filter = sbFilter.ToString();
+
 			dlg.InitialDirectory = Path::GetDirectoryName(inputmovie);
 			{
 				String^ name = Path::GetFileNameWithoutExtension(inputmovie);
@@ -505,10 +516,10 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
 				return;
 
-			String^ outputmovie = dlg.FileName;
+			outputMovie_ = dlg.FileName;
 
 			String^ arg = String::Format(L"-y -i \"{0}\" -c:v libx265 -c:a copy \"{1}\"",
-				inputmovie, outputmovie);
+				inputmovie, outputMovie_);
 
 			txtLogOut->Clear();
 			txtLogErr->Clear();

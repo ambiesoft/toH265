@@ -143,6 +143,8 @@ namespace Ambiesoft {
 			System::Drawing::Icon^ iconYellow_;
 			System::Drawing::Icon^ iconRed_;
 
+			String^ outputMovie_;
+
 			property TaskState FFMpegState
 			{
 				TaskState get();
