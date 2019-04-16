@@ -154,7 +154,8 @@ namespace Ambiesoft {
 			void UpdateTitleComplete();
 			void UpdateTitle();
 			void UpdateTitle(int percent);
-
+			
+			String^ GetFFMpegHelp(String^ subHelpOption);
 			void StartOfThread(Object^ obj);
 			delegate void VVDelegate();
 			delegate void VIDelegate(int value);

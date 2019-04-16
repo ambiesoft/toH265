@@ -654,7 +654,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			OnMenuPriorityCommon(true);
 		}
 
-		System::Void FormMain::tsmiFFMpegHelp_Click(System::Object^  sender, System::EventArgs^  e)
+		String^ FormMain::GetFFMpegHelp(String^ subHelpOption)
 		{
 			int retval;
 			String^ output;
@@ -662,8 +662,14 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 
 			try
 			{
+				String^ arg = L"--help";
+				if (!String::IsNullOrEmpty(subHelpOption))
+				{
+					arg += L" ";
+					arg += subHelpOption;
+				}
 				AmbLib::OpenCommandGetResult(FFMpeg,
-					"--help",
+					arg,	
 					System::Text::Encoding::Default,
 					retval,
 					output,
@@ -672,16 +678,32 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 				{
 
 				}
-				AmbLib::ShowTextDialog(this,
-					Application::ProductName,
-					I18N(L"FFMpeg help"),
-					output,
-					true);
 			}
 			catch (Exception^ ex)
 			{
 				CppUtils::Alert(this, ex);
 			}
+
+			// DASSERT(String::IsNullOrEmpty(err));
+			DASSERT(!String::IsNullOrEmpty(output));
+			return output;
+		}
+		System::Void FormMain::tsmiFFMpegHelp_Click(System::Object^  sender, System::EventArgs^  e)
+		{
+			String^ normalHelp = GetFFMpegHelp(String::Empty);
+			String^ longHelp = GetFFMpegHelp(L"long");
+			String^ fullHelp = GetFFMpegHelp(L"full");
+			
+			List<KeyValuePair<String^, String^>> labelsAndText;
+
+			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"Help"), normalHelp));
+			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"Long Help"), longHelp));
+			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"Full Help"), fullHelp));
+			
+			AmbLib::ShowTextDialog(this,
+				I18N(L"FFMpeg Help") + L" - " + Application::ProductName,
+				%labelsAndText,
+				true);
 		}
 
 		System::Void FormMain::FormMain_Resize(System::Object^  sender, System::EventArgs^  e)
