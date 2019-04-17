@@ -203,13 +203,15 @@ namespace Ambiesoft {
 			
 
 			System::Void FormMain_Resize(System::Object^  sender, System::EventArgs^  e);
-			System::Void notifyIconMain_MouseDoubleClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
+			System::Void notifyIconMain_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
 			System::Void tsmiMinimizeToTray_Click(System::Object^  sender, System::EventArgs^  e);
 
 			System::Void tsmiStop_Click(System::Object^  sender, System::EventArgs^  e);
 
 			System::Void tsmiNotifyShow_Click(System::Object^  sender, System::EventArgs^  e);
 			System::Void tsmiNotifyStart_Click(System::Object^  sender, System::EventArgs^  e);
+
+			
 
 };
 

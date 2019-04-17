@@ -485,10 +485,11 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 				return;
 			}
 			SaveFileDialog dlg;
+			String^ mp4ext = L".mp4";
 			List<String^> availableext;
 			{
 				// libx265 must has mp4 foramt
-				availableext.Add(Path::GetExtension(L".mp4"));
+				availableext.Add(Path::GetExtension(mp4ext));
 
 				StringBuilder sbFilter;
 				for each(String^ ae in availableext)
@@ -509,8 +510,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			dlg.InitialDirectory = Path::GetDirectoryName(inputmovie);
 			{
 				String^ name = Path::GetFileNameWithoutExtension(inputmovie);
-				String^ ext = Path::GetExtension(inputmovie);
-				dlg.FileName = name + " [h265]" + ext;
+				dlg.FileName = name + " [h265]" + mp4ext;
 			}
 			
 			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
@@ -535,7 +535,9 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 
 		System::Void FormMain::tsmiNotifyShow_Click(System::Object^  sender, System::EventArgs^  e)
 		{
-			notifyIconMain_MouseDoubleClick(sender, nullptr);
+			Show();
+			this->WindowState = FormWindowState::Normal;
+			notifyIconMain->Visible = false;
 		}
 		System::Void FormMain::tsmiNotifyStart_Click(System::Object^  sender, System::EventArgs^  e)
 		{
@@ -714,11 +716,12 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 				notifyIconMain->Visible = true;
 			}
 		}
-		System::Void FormMain::notifyIconMain_MouseDoubleClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
+		System::Void FormMain::notifyIconMain_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
 		{
-			Show();
-			this->WindowState = FormWindowState::Normal;
-			notifyIconMain->Visible = false;
+			if (e->Button != System::Windows::Forms::MouseButtons::Left)
+				return;
+
+			tsmiNotifyShow_Click(sender, nullptr);
 		}
 		System::Void FormMain::tsmiMinimizeToTray_Click(System::Object^  sender, System::EventArgs^  e)
 		{

@@ -1,3 +1,6 @@
+2019/04/17 ver1.0.7
+mp4 filename, single-click on trayicon
+
 2019/04/16 ver1.0.6
 mp4 only for output
 

@@ -253,25 +253,25 @@ namespace Ambiesoft {
 			// 
 			this->notifyIconMain->ContextMenuStrip = this->cmNotify;
 			this->notifyIconMain->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"notifyIconMain.Icon")));
-			this->notifyIconMain->MouseDoubleClick += gcnew System::Windows::Forms::MouseEventHandler(this, &FormMain::notifyIconMain_MouseDoubleClick);
+			this->notifyIconMain->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &FormMain::notifyIconMain_MouseClick);
 			// 
 			// cmNotify
 			// 
 			this->cmNotify->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->tsmiNotifyShow, this->tsmiNotifyStart });
 			this->cmNotify->Name = L"cmNotify";
-			this->cmNotify->Size = System::Drawing::Size(153, 70);
+			this->cmNotify->Size = System::Drawing::Size(142, 48);
 			// 
 			// tsmiNotifyShow
 			// 
 			this->tsmiNotifyShow->Name = L"tsmiNotifyShow";
-			this->tsmiNotifyShow->Size = System::Drawing::Size(152, 22);
+			this->tsmiNotifyShow->Size = System::Drawing::Size(141, 22);
 			this->tsmiNotifyShow->Text = L"&Show";
 			this->tsmiNotifyShow->Click += gcnew System::EventHandler(this, &FormMain::tsmiNotifyShow_Click);
 			// 
 			// tsmiNotifyStart
 			// 
 			this->tsmiNotifyStart->Name = L"tsmiNotifyStart";
-			this->tsmiNotifyStart->Size = System::Drawing::Size(152, 22);
+			this->tsmiNotifyStart->Size = System::Drawing::Size(141, 22);
 			this->tsmiNotifyStart->Text = L"StartDummy";
 			this->tsmiNotifyStart->Click += gcnew System::EventHandler(this, &FormMain::tsmiNotifyStart_Click);
 			// 
