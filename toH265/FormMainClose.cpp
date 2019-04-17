@@ -46,5 +46,23 @@ namespace Ambiesoft {
 
 			StopEncoding();
 		}
+
+		System::Void FormMain::FormMain_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e)
+		{
+			DTRACE(L"INI=" + IniFile);
+			HashIni^ ini = Profile::ReadAll(IniFile);
+
+			bool success = true;
+			success &= AmbLib::SaveFormXYWH(this, SECTION_LOCATION, ini);
+
+			if (success)
+			{
+				success = Profile::WriteAll(ini, IniFile);
+			}
+			if (!success)
+			{
+				CppUtils::Alert(this, I18N(STR_FAILED_TO_SAVE_SETTING));
+			}
+		}
 	}
 }

@@ -44,8 +44,9 @@ namespace Ambiesoft {
 			private: System::Windows::Forms::ToolStripMenuItem^  tsmiPriorityNormal;
 			private: System::Windows::Forms::ToolStripMenuItem^  tsmiPriorityBackground;
 
-			literal String^ SECTION_OPTION = L"Option";
-			literal String^ KEY_FFPROBE = L"ffprobe";
+					 literal String^ SECTION_OPTION = L"Option";
+					 literal String^ SECTION_LOCATION = L"Location";
+					 literal String^ KEY_FFPROBE = L"ffprobe";
 			literal String^ KEY_FFMPEG = L"ffmpeg";
 			literal String^ KEY_PROCESS_BACKGROUND = L"processbackground";
 			literal String^ KEY_MINIMIZETOTRAY = L"minimizetotray";
@@ -177,6 +178,7 @@ namespace Ambiesoft {
 			void errHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
 
 			System::Void FormMain_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
+			System::Void FormMain_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e);
 
 			System::Void txtMovie_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
 			System::Void txtMovie_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
@@ -210,6 +212,8 @@ namespace Ambiesoft {
 
 			System::Void tsmiNotifyShow_Click(System::Object^  sender, System::EventArgs^  e);
 			System::Void tsmiNotifyStart_Click(System::Object^  sender, System::EventArgs^  e);
+
+			
 
 			
 

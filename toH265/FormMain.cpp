@@ -22,19 +22,16 @@ namespace Ambiesoft {
 		{
 			InitializeComponent();
 
+			HashIni^ ini;
 			try
 			{
-				HashIni^ ini = Profile::ReadAll(IniFile, true);
-				bool boolval;
-				Profile::GetBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, false, boolval, ini);
-				if (boolval)
-				{
-					tsmiPriorityNormal->Checked = false;
-					tsmiPriorityBackground->Checked = true;
-				}
-
-				Profile::GetBool(SECTION_OPTION, KEY_MINIMIZETOTRAY, false, boolval, ini);
-				tsmiMinimizeToTray->Checked = boolval;
+				DTRACE(L"INI=" + IniFile);
+				ini = Profile::ReadAll(IniFile, true);
+			}
+			catch (FileNotFoundException^)
+			{ 
+				DASSERT(!ini);
+				ini = HashIni::CreateEmptyInstanceForSpecialUse();
 			}
 			catch (Exception^ ex)
 			{
@@ -42,6 +39,21 @@ namespace Ambiesoft {
 				Environment::Exit(-1);
 				return;
 			}
+
+			DASSERT(ini);
+			bool boolval;
+			Profile::GetBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, false, boolval, ini);
+			if (boolval)
+			{
+				tsmiPriorityNormal->Checked = false;
+				tsmiPriorityBackground->Checked = true;
+			}
+
+			Profile::GetBool(SECTION_OPTION, KEY_MINIMIZETOTRAY, false, boolval, ini);
+			tsmiMinimizeToTray->Checked = boolval;
+
+
+			AmbLib::LoadFormXYWH(this, SECTION_LOCATION, ini);
 
 			try
 			{

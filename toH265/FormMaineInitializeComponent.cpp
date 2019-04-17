@@ -49,7 +49,7 @@ namespace Ambiesoft {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->txtMovie->Location = System::Drawing::Point(0, 0);
 			this->txtMovie->Name = L"txtMovie";
-			this->txtMovie->Size = System::Drawing::Size(527, 20);
+			this->txtMovie->Size = System::Drawing::Size(441, 20);
 			this->txtMovie->TabIndex = 1;
 			this->txtMovie->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::txtMovie_DragDrop);
 			this->txtMovie->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::txtMovie_DragEnter);
@@ -59,7 +59,7 @@ namespace Ambiesoft {
 			// btnBrowseMovie
 			// 
 			this->btnBrowseMovie->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->btnBrowseMovie->Location = System::Drawing::Point(533, 0);
+			this->btnBrowseMovie->Location = System::Drawing::Point(447, 0);
 			this->btnBrowseMovie->Name = L"btnBrowseMovie";
 			this->btnBrowseMovie->Size = System::Drawing::Size(28, 23);
 			this->btnBrowseMovie->TabIndex = 2;
@@ -76,25 +76,25 @@ namespace Ambiesoft {
 			this->txtLogErr->Multiline = true;
 			this->txtLogErr->Name = L"txtLogErr";
 			this->txtLogErr->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->txtLogErr->Size = System::Drawing::Size(561, 148);
+			this->txtLogErr->Size = System::Drawing::Size(475, 157);
 			this->txtLogErr->TabIndex = 3;
 			// 
 			// txtLogOut
 			// 
 			this->txtLogOut->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->txtLogOut->Location = System::Drawing::Point(0, 209);
+			this->txtLogOut->Location = System::Drawing::Point(0, 218);
 			this->txtLogOut->Name = L"txtLogOut";
-			this->txtLogOut->Size = System::Drawing::Size(561, 20);
+			this->txtLogOut->Size = System::Drawing::Size(475, 20);
 			this->txtLogOut->TabIndex = 4;
 			// 
 			// btnStart
 			// 
 			this->btnStart->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
-			this->btnStart->Location = System::Drawing::Point(0, 235);
+			this->btnStart->Location = System::Drawing::Point(0, 244);
 			this->btnStart->Name = L"btnStart";
-			this->btnStart->Size = System::Drawing::Size(561, 23);
+			this->btnStart->Size = System::Drawing::Size(475, 23);
 			this->btnStart->TabIndex = 5;
 			this->btnStart->Text = L"&Start";
 			this->btnStart->UseVisualStyleBackColor = true;
@@ -106,7 +106,7 @@ namespace Ambiesoft {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->txtFFMpegArg->Location = System::Drawing::Point(0, 29);
 			this->txtFFMpegArg->Name = L"txtFFMpegArg";
-			this->txtFFMpegArg->Size = System::Drawing::Size(561, 20);
+			this->txtFFMpegArg->Size = System::Drawing::Size(475, 20);
 			this->txtFFMpegArg->TabIndex = 7;
 			// 
 			// menuMain
@@ -117,7 +117,7 @@ namespace Ambiesoft {
 			});
 			this->menuMain->Location = System::Drawing::Point(0, 0);
 			this->menuMain->Name = L"menuMain";
-			this->menuMain->Size = System::Drawing::Size(585, 24);
+			this->menuMain->Size = System::Drawing::Size(499, 24);
 			this->menuMain->TabIndex = 0;
 			// 
 			// tsmiFile
@@ -246,7 +246,7 @@ namespace Ambiesoft {
 			this->panelMain->Controls->Add(this->txtLogErr);
 			this->panelMain->Location = System::Drawing::Point(12, 27);
 			this->panelMain->Name = L"panelMain";
-			this->panelMain->Size = System::Drawing::Size(561, 271);
+			this->panelMain->Size = System::Drawing::Size(475, 280);
 			this->panelMain->TabIndex = 100;
 			// 
 			// notifyIconMain
@@ -279,14 +279,16 @@ namespace Ambiesoft {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(585, 297);
+			this->ClientSize = System::Drawing::Size(499, 306);
 			this->Controls->Add(this->menuMain);
 			this->Controls->Add(this->panelMain);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuMain;
+			this->MinimumSize = System::Drawing::Size(160, 220);
 			this->Name = L"FormMain";
 			this->Text = L"FormMain";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &FormMain::FormMain_FormClosing);
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &FormMain::FormMain_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &FormMain::FormMain_Load);
 			this->Resize += gcnew System::EventHandler(this, &FormMain::FormMain_Resize);
 			this->menuMain->ResumeLayout(false);

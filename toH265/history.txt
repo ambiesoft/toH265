@@ -1,3 +1,6 @@
+2019/04/18 ver1.0.8
+Save location
+
 2019/04/17 ver1.0.7
 mp4 filename, single-click on trayicon
 
