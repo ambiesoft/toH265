@@ -33,6 +33,10 @@
         "32\\images\\busy.png",
         "32\\images\\icon.png",
         "32\\images\\pause.png",
+        "32\\winnice.history.txt",
+        "32\\winnice.README.md",
+        "32\\libwinnice.dll",
+        "32\\winnicew.exe",
         "64\\Ambiesoft.AmbLib.dll",
         "64\\Ambiesoft.AmbLib.pdb",
         "64\\Ambiesoft.AmbLibcpp.dll",
@@ -49,7 +53,11 @@
         "64\\toH265.pdb",
         "64\\images\\busy.png",
         "64\\images\\icon.png",
-        "64\\images\\pause.png"
+        "64\\images\\pause.png",
+        "64\\winnice.history.txt",
+        "64\\winnice.README.md",
+        "64\\libwinnice.dll",
+        "64\\winnicew.exe"
     ],
     "TotalFileCount": "exact",
     "archivedir": "C:\\Linkout",
