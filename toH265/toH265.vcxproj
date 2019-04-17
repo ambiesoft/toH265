@@ -196,6 +196,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\lsMisc\HighDPI.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="FormMain.cpp" />
     <ClCompile Include="FormMainClose.cpp" />
@@ -211,6 +212,7 @@
     <ClCompile Include="toH265.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\lsMisc\HighDPI.h" />
     <ClInclude Include="FormMain.h">
       <FileType>CppForm</FileType>
     </ClInclude>

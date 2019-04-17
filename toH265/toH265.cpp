@@ -4,6 +4,7 @@
 //#using "C:/Linkout/DNAssembly.NET4/Ambiesoft.AmbLib.dll"
 //#using "C:/Linkout/DNAssembly.NET4/Ambiesoft.AmbLibcpp.dll"
 
+#include "../../lsMisc/HighDPI.h"
 #include "FormMain.h"
 #include "toH265.h"
 
@@ -19,6 +20,8 @@ namespace Ambiesoft {
 	
 		int Program::main(array<System::String ^> ^args)
 		{
+			InitHighDPISupport();
+
 			//if (args->Length == 0)
 			//{
 			//	CppUtils::Alert(I18N(L"No input files"));
