@@ -109,6 +109,10 @@ copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
 
 del "$(TargetDir)zzzDist.*"
 
+copy "C:\Linkout\winnice\x86\README.md" "$(TargetDir)winnice.README.md"
+copy "C:\Linkout\winnice\x86\history.txt" "$(TargetDir)winnice.history.txt"
+copy "C:\Linkout\winnice\x86\libwinnice.dll" "$(TargetDir)"
+copy "C:\Linkout\winnice\x86\winnicew.exe" "$(TargetDir)"
 
 </Command>
     </PostBuildEvent>
@@ -135,6 +139,10 @@ copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
 
 del "$(TargetDir)zzzDist.*"
 
+copy "C:\Linkout\winnice\x86\README.md" "$(TargetDir)winnice.README.md"
+copy "C:\Linkout\winnice\x86\history.txt" "$(TargetDir)winnice.history.txt"
+copy "C:\Linkout\winnice\x86\libwinnice.dll" "$(TargetDir)"
+copy "C:\Linkout\winnice\x86\winnicew.exe" "$(TargetDir)"
 
 </Command>
     </PostBuildEvent>
@@ -165,6 +173,10 @@ copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
 
 del "$(TargetDir)zzzDist.*"
 
+copy "C:\Linkout\winnice\x86\README.md" "$(TargetDir)winnice.README.md"
+copy "C:\Linkout\winnice\x86\history.txt" "$(TargetDir)winnice.history.txt"
+copy "C:\Linkout\winnice\x86\libwinnice.dll" "$(TargetDir)"
+copy "C:\Linkout\winnice\x86\winnicew.exe" "$(TargetDir)"
 
 </Command>
     </PostBuildEvent>
@@ -195,6 +207,10 @@ copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
 
 del "$(TargetDir)zzzDist.*"
 
+copy "C:\Linkout\winnice\x86\README.md" "$(TargetDir)winnice.README.md"
+copy "C:\Linkout\winnice\x86\history.txt" "$(TargetDir)winnice.history.txt"
+copy "C:\Linkout\winnice\x86\libwinnice.dll" "$(TargetDir)"
+copy "C:\Linkout\winnice\x86\winnicew.exe" "$(TargetDir)"
 
 </Command>
     </PostBuildEvent>

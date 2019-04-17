@@ -1,4 +1,7 @@
+2019/04/18 ver1.0.10
 HighDPI
+Show filename on the title
+Change priorty even running process
 
 2019/04/18 ver1.0.9
 VS2019

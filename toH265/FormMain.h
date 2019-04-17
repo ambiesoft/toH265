@@ -151,8 +151,11 @@ namespace Ambiesoft {
 				TaskState get();
 			}
 			DWORD dwBackPriority_;
+			int pidFFMpeg_;
+
 			void UpdateTitleTS(TimeSpan ts);
 			void UpdateTitleComplete();
+			String^ buildTitleText(int percent, bool bFilenameOnly);
 			void UpdateTitle();
 			void UpdateTitle(int percent);
 			

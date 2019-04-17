@@ -22,6 +22,9 @@ namespace Ambiesoft {
 		{
 			InitializeComponent();
 
+			txtLogErr->Font = gcnew System::Drawing::Font(FontFamily::GenericMonospace, txtLogErr->Font->Size + 1);
+			txtLogOut->Font = gcnew System::Drawing::Font(FontFamily::GenericMonospace, txtLogOut->Font->Size + 1);
+
 			HashIni^ ini;
 			try
 			{
@@ -250,17 +253,42 @@ namespace Ambiesoft {
 			notifyIconMain->Text = Application::ProductName;
 			Text = Application::ProductName;
 		}
-		void FormMain::UpdateTitle(int percent)
+		String^ FormMain::buildTitleText(int percent, bool bFilenameOnly)
 		{
 			StringBuilder sbTitle;
 			sbTitle.Append(percent);
 			sbTitle.Append("% - ");
+
+			if (!String::IsNullOrEmpty(outputMovie_))
+			{
+				if (bFilenameOnly)
+					sbTitle.Append(Path::GetFileName(outputMovie_));
+				else
+					sbTitle.Append(outputMovie_);
+				sbTitle.Append(" - ");
+			}
+
 			sbTitle.Append(Application::ProductName);
 
-			if (Text != sbTitle.ToString())
-				Text = sbTitle.ToString();
-			if (notifyIconMain->Text != sbTitle.ToString())
-				notifyIconMain->Text = sbTitle.ToString();
+			return sbTitle.ToString();
+		}
+		void FormMain::UpdateTitle(int percent)
+		{
+			String^ titleToSet = buildTitleText(percent, false);
+			if (Text != titleToSet)
+				Text = titleToSet;
+
+			if (notifyIconMain->Visible)
+			{
+				// notifyIconMain->Text must be less than 64
+				if (titleToSet->Length >= 64)
+					titleToSet = buildTitleText(percent, true);
+				if (titleToSet->Length >= 64)
+					titleToSet = titleToSet->Substring(0, 63);
+
+				if (notifyIconMain->Text != titleToSet)
+					notifyIconMain->Text = titleToSet;
+			}
 		}
 		void FormMain::UpdateTitleComplete()
 		{
@@ -368,6 +396,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 		}
 		void FormMain::ThreadEnded(int retval)
 		{
+			pidFFMpeg_ = 0;
 			processSuspeded_ = false;
 			SafeJoin(thFFMpeg_);
 			delete thFFMpeg_;
@@ -411,6 +440,12 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 				this->BeginInvoke(gcnew EventHandler(this, &FormMain::OnProcessStarted), sender, e);
 				return;
 			}
+
+			DASSERT_IS_CLASS_OR_NULL(sender, Process);
+			if (!sender)
+				pidFFMpeg_ = 0;
+			else
+				pidFFMpeg_ = ((Process^)sender)->Id;
 
 			if (tsmiPriorityBackground->Checked)
 			{
@@ -643,6 +678,41 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 
 		void FormMain::OnMenuPriorityCommon(bool bBackground)
 		{
+			switch (FFMpegState)
+			{
+			case TaskState::None:
+				break;
+			case TaskState::ProcessLaunching:
+				break;
+			case TaskState::Pausing:
+			case TaskState::Running:
+			{
+				DASSERT(pidFFMpeg_ != 0);
+				if (pidFFMpeg_ == 0)
+				{
+					CppUtils::Alert(I18N(L"FFMpeg process not found"));
+					break;
+				}
+
+				String^ arg = String::Format(L"{0} --pid {1}",
+					(bBackground ? L" --all-idle" : L" --all-normal"),
+					pidFFMpeg_);
+
+				try
+				{
+					String^ fileName = Path::Combine(Path::GetDirectoryName(Application::ExecutablePath),
+						L"winnicew.exe");
+					Process::Start(fileName, arg);
+				}
+				catch (Exception ^ ex)
+				{
+					CppUtils::Alert(this, ex);
+				}
+			}
+			break;
+			case TaskState::Unknown:
+				break;
+			}
 			if (bBackground)
 			{
 				tsmiPriorityNormal->Checked = false;
