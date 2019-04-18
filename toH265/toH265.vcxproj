@@ -236,6 +236,9 @@
     <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormMain.ja-JP.resx">
+      <DependentUpon>FormMain.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resX">
       <DependentUpon>FormMain.h</DependentUpon>
       <SubType>Designer</SubType>

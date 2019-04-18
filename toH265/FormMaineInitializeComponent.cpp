@@ -44,13 +44,9 @@ namespace Ambiesoft {
 			// 
 			// txtMovie
 			// 
+			resources->ApplyResources(this->txtMovie, L"txtMovie");
 			this->txtMovie->AllowDrop = true;
-			this->txtMovie->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->txtMovie->Location = System::Drawing::Point(0, 0);
 			this->txtMovie->Name = L"txtMovie";
-			this->txtMovie->Size = System::Drawing::Size(441, 20);
-			this->txtMovie->TabIndex = 100;
 			this->txtMovie->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::txtMovie_DragDrop);
 			this->txtMovie->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::txtMovie_DragEnter);
 			this->txtMovie->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::txtMovie_DragOver);
@@ -58,235 +54,185 @@ namespace Ambiesoft {
 			// 
 			// btnBrowseMovie
 			// 
-			this->btnBrowseMovie->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->btnBrowseMovie->Location = System::Drawing::Point(447, 0);
+			resources->ApplyResources(this->btnBrowseMovie, L"btnBrowseMovie");
 			this->btnBrowseMovie->Name = L"btnBrowseMovie";
-			this->btnBrowseMovie->Size = System::Drawing::Size(28, 23);
-			this->btnBrowseMovie->TabIndex = 200;
-			this->btnBrowseMovie->Text = L"&...";
 			this->btnBrowseMovie->UseVisualStyleBackColor = true;
 			this->btnBrowseMovie->Click += gcnew System::EventHandler(this, &FormMain::btnBrowseMovie_Click);
 			// 
 			// txtLogErr
 			// 
-			this->txtLogErr->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->txtLogErr->Location = System::Drawing::Point(0, 55);
-			this->txtLogErr->Multiline = true;
+			resources->ApplyResources(this->txtLogErr, L"txtLogErr");
 			this->txtLogErr->Name = L"txtLogErr";
-			this->txtLogErr->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->txtLogErr->Size = System::Drawing::Size(475, 157);
-			this->txtLogErr->TabIndex = 400;
 			// 
 			// txtLogOut
 			// 
-			this->txtLogOut->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->txtLogOut->Location = System::Drawing::Point(0, 218);
+			resources->ApplyResources(this->txtLogOut, L"txtLogOut");
 			this->txtLogOut->Name = L"txtLogOut";
-			this->txtLogOut->Size = System::Drawing::Size(475, 20);
-			this->txtLogOut->TabIndex = 500;
 			// 
 			// btnStart
 			// 
-			this->btnStart->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->btnStart->Location = System::Drawing::Point(0, 244);
+			resources->ApplyResources(this->btnStart, L"btnStart");
 			this->btnStart->Name = L"btnStart";
-			this->btnStart->Size = System::Drawing::Size(475, 23);
-			this->btnStart->TabIndex = 600;
-			this->btnStart->Text = L"&Start";
 			this->btnStart->UseVisualStyleBackColor = true;
 			this->btnStart->Click += gcnew System::EventHandler(this, &FormMain::btnStart_Click);
 			// 
 			// txtFFMpegArg
 			// 
-			this->txtFFMpegArg->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
-			this->txtFFMpegArg->Location = System::Drawing::Point(0, 29);
+			resources->ApplyResources(this->txtFFMpegArg, L"txtFFMpegArg");
 			this->txtFFMpegArg->Name = L"txtFFMpegArg";
-			this->txtFFMpegArg->Size = System::Drawing::Size(475, 20);
-			this->txtFFMpegArg->TabIndex = 300;
 			// 
 			// menuMain
 			// 
+			resources->ApplyResources(this->menuMain, L"menuMain");
 			this->menuMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->tsmiFile, this->tsmiOption,
 					this->helpToolStripMenuItem
 			});
-			this->menuMain->Location = System::Drawing::Point(0, 0);
 			this->menuMain->Name = L"menuMain";
-			this->menuMain->Size = System::Drawing::Size(499, 24);
-			this->menuMain->TabIndex = 0;
 			// 
 			// tsmiFile
 			// 
+			resources->ApplyResources(this->tsmiFile, L"tsmiFile");
 			this->tsmiFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->tsmiStop, this->exitToolStripMenuItem });
 			this->tsmiFile->Name = L"tsmiFile";
-			this->tsmiFile->Size = System::Drawing::Size(37, 20);
-			this->tsmiFile->Text = L"&File";
 			// 
 			// tsmiStop
 			// 
+			resources->ApplyResources(this->tsmiStop, L"tsmiStop");
 			this->tsmiStop->Name = L"tsmiStop";
-			this->tsmiStop->Size = System::Drawing::Size(98, 22);
-			this->tsmiStop->Text = L"&Stop";
 			this->tsmiStop->Click += gcnew System::EventHandler(this, &FormMain::tsmiStop_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
+			resources->ApplyResources(this->exitToolStripMenuItem, L"exitToolStripMenuItem");
 			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
-			this->exitToolStripMenuItem->Size = System::Drawing::Size(98, 22);
-			this->exitToolStripMenuItem->Text = L"&Exit";
 			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::exitToolStripMenuItem_Click);
 			// 
 			// tsmiOption
 			// 
+			resources->ApplyResources(this->tsmiOption, L"tsmiOption");
 			this->tsmiOption->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
 				this->tsmiSetFFProbe,
 					this->tsmiSetFFMpeg, this->toolStripMenuItem1, this->tsmiPriority, this->toolStripMenuItem2, this->tsmiMinimizeToTray
 			});
 			this->tsmiOption->Name = L"tsmiOption";
-			this->tsmiOption->Size = System::Drawing::Size(56, 20);
-			this->tsmiOption->Text = L"&Option";
 			this->tsmiOption->DropDownOpening += gcnew System::EventHandler(this, &FormMain::tsmiOption_DropDownOpening);
 			// 
 			// tsmiSetFFProbe
 			// 
+			resources->ApplyResources(this->tsmiSetFFProbe, L"tsmiSetFFProbe");
 			this->tsmiSetFFProbe->Name = L"tsmiSetFFProbe";
-			this->tsmiSetFFProbe->Size = System::Drawing::Size(162, 22);
-			this->tsmiSetFFProbe->Text = L"&Set FFProbe...";
 			this->tsmiSetFFProbe->Click += gcnew System::EventHandler(this, &FormMain::tsmiSetFFProbe_Click);
 			// 
 			// tsmiSetFFMpeg
 			// 
+			resources->ApplyResources(this->tsmiSetFFMpeg, L"tsmiSetFFMpeg");
 			this->tsmiSetFFMpeg->Name = L"tsmiSetFFMpeg";
-			this->tsmiSetFFMpeg->Size = System::Drawing::Size(162, 22);
-			this->tsmiSetFFMpeg->Text = L"Set FF&Mpeg...";
 			this->tsmiSetFFMpeg->Click += gcnew System::EventHandler(this, &FormMain::tsmiSetFFMpeg_Click);
 			// 
 			// toolStripMenuItem1
 			// 
+			resources->ApplyResources(this->toolStripMenuItem1, L"toolStripMenuItem1");
 			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
-			this->toolStripMenuItem1->Size = System::Drawing::Size(159, 6);
 			// 
 			// tsmiPriority
 			// 
+			resources->ApplyResources(this->tsmiPriority, L"tsmiPriority");
 			this->tsmiPriority->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->tsmiPriorityNormal,
 					this->tsmiPriorityBackground
 			});
 			this->tsmiPriority->Name = L"tsmiPriority";
-			this->tsmiPriority->Size = System::Drawing::Size(162, 22);
-			this->tsmiPriority->Text = L"&Priority";
 			// 
 			// tsmiPriorityNormal
 			// 
+			resources->ApplyResources(this->tsmiPriorityNormal, L"tsmiPriorityNormal");
 			this->tsmiPriorityNormal->Checked = true;
 			this->tsmiPriorityNormal->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->tsmiPriorityNormal->Name = L"tsmiPriorityNormal";
-			this->tsmiPriorityNormal->Size = System::Drawing::Size(138, 22);
-			this->tsmiPriorityNormal->Text = L"&Normal";
 			this->tsmiPriorityNormal->Click += gcnew System::EventHandler(this, &FormMain::tsmiPriorityNormal_Click);
 			// 
 			// tsmiPriorityBackground
 			// 
+			resources->ApplyResources(this->tsmiPriorityBackground, L"tsmiPriorityBackground");
 			this->tsmiPriorityBackground->Name = L"tsmiPriorityBackground";
-			this->tsmiPriorityBackground->Size = System::Drawing::Size(138, 22);
-			this->tsmiPriorityBackground->Text = L"&Background";
 			this->tsmiPriorityBackground->Click += gcnew System::EventHandler(this, &FormMain::tsmiPriorityBackground_Click);
 			// 
 			// toolStripMenuItem2
 			// 
+			resources->ApplyResources(this->toolStripMenuItem2, L"toolStripMenuItem2");
 			this->toolStripMenuItem2->Name = L"toolStripMenuItem2";
-			this->toolStripMenuItem2->Size = System::Drawing::Size(159, 6);
 			// 
 			// tsmiMinimizeToTray
 			// 
+			resources->ApplyResources(this->tsmiMinimizeToTray, L"tsmiMinimizeToTray");
 			this->tsmiMinimizeToTray->Name = L"tsmiMinimizeToTray";
-			this->tsmiMinimizeToTray->Size = System::Drawing::Size(162, 22);
-			this->tsmiMinimizeToTray->Text = L"&Minimize to Tray";
 			this->tsmiMinimizeToTray->Click += gcnew System::EventHandler(this, &FormMain::tsmiMinimizeToTray_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
+			resources->ApplyResources(this->helpToolStripMenuItem, L"helpToolStripMenuItem");
 			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->tsmiAbout,
 					this->tsmiFFMpegHelp
 			});
 			this->helpToolStripMenuItem->Name = L"helpToolStripMenuItem";
-			this->helpToolStripMenuItem->Size = System::Drawing::Size(44, 20);
-			this->helpToolStripMenuItem->Text = L"&Help";
 			// 
 			// tsmiAbout
 			// 
+			resources->ApplyResources(this->tsmiAbout, L"tsmiAbout");
 			this->tsmiAbout->Name = L"tsmiAbout";
-			this->tsmiAbout->Size = System::Drawing::Size(162, 22);
-			this->tsmiAbout->Text = L"&About...";
 			this->tsmiAbout->Click += gcnew System::EventHandler(this, &FormMain::tsmiAbout_Click);
 			// 
 			// tsmiFFMpegHelp
 			// 
+			resources->ApplyResources(this->tsmiFFMpegHelp, L"tsmiFFMpegHelp");
 			this->tsmiFFMpegHelp->Name = L"tsmiFFMpegHelp";
-			this->tsmiFFMpegHelp->Size = System::Drawing::Size(162, 22);
-			this->tsmiFFMpegHelp->Text = L"FFMpeg\'s Help...";
 			this->tsmiFFMpegHelp->Click += gcnew System::EventHandler(this, &FormMain::tsmiFFMpegHelp_Click);
 			// 
 			// panelMain
 			// 
-			this->panelMain->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
-				| System::Windows::Forms::AnchorStyles::Left)
-				| System::Windows::Forms::AnchorStyles::Right));
+			resources->ApplyResources(this->panelMain, L"panelMain");
 			this->panelMain->Controls->Add(this->txtMovie);
 			this->panelMain->Controls->Add(this->btnBrowseMovie);
 			this->panelMain->Controls->Add(this->btnStart);
 			this->panelMain->Controls->Add(this->txtFFMpegArg);
 			this->panelMain->Controls->Add(this->txtLogOut);
 			this->panelMain->Controls->Add(this->txtLogErr);
-			this->panelMain->Location = System::Drawing::Point(12, 27);
 			this->panelMain->Name = L"panelMain";
-			this->panelMain->Size = System::Drawing::Size(475, 280);
-			this->panelMain->TabIndex = 100;
 			// 
 			// notifyIconMain
 			// 
+			resources->ApplyResources(this->notifyIconMain, L"notifyIconMain");
 			this->notifyIconMain->ContextMenuStrip = this->cmNotify;
-			this->notifyIconMain->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"notifyIconMain.Icon")));
 			this->notifyIconMain->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &FormMain::notifyIconMain_MouseClick);
 			// 
 			// cmNotify
 			// 
+			resources->ApplyResources(this->cmNotify, L"cmNotify");
 			this->cmNotify->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->tsmiNotifyShow, this->tsmiNotifyStart });
 			this->cmNotify->Name = L"cmNotify";
-			this->cmNotify->Size = System::Drawing::Size(142, 48);
 			// 
 			// tsmiNotifyShow
 			// 
+			resources->ApplyResources(this->tsmiNotifyShow, L"tsmiNotifyShow");
 			this->tsmiNotifyShow->Name = L"tsmiNotifyShow";
-			this->tsmiNotifyShow->Size = System::Drawing::Size(141, 22);
-			this->tsmiNotifyShow->Text = L"&Show";
 			this->tsmiNotifyShow->Click += gcnew System::EventHandler(this, &FormMain::tsmiNotifyShow_Click);
 			// 
 			// tsmiNotifyStart
 			// 
+			resources->ApplyResources(this->tsmiNotifyStart, L"tsmiNotifyStart");
 			this->tsmiNotifyStart->Name = L"tsmiNotifyStart";
-			this->tsmiNotifyStart->Size = System::Drawing::Size(141, 22);
-			this->tsmiNotifyStart->Text = L"StartDummy";
 			this->tsmiNotifyStart->Click += gcnew System::EventHandler(this, &FormMain::tsmiNotifyStart_Click);
 			// 
 			// FormMain
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(499, 306);
 			this->Controls->Add(this->menuMain);
 			this->Controls->Add(this->panelMain);
-			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuMain;
-			this->MinimumSize = System::Drawing::Size(160, 220);
 			this->Name = L"FormMain";
-			this->Text = L"FormMain";
 			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &FormMain::FormMain_FormClosing);
 			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &FormMain::FormMain_FormClosed);
 			this->Load += gcnew System::EventHandler(this, &FormMain::FormMain_Load);
