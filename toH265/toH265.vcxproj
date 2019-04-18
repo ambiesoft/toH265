@@ -199,9 +199,16 @@
     <ClCompile Include="..\..\lsMisc\HighDPI.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="FormMain.cpp" />
+    <ClCompile Include="FormMainAbout.cpp" />
     <ClCompile Include="FormMainClose.cpp" />
+    <ClCompile Include="FormMainCtor.cpp" />
+    <ClCompile Include="FormMainDragDrop.cpp" />
     <ClCompile Include="FormMaineInitializeComponent.cpp" />
+    <ClCompile Include="FormMainEmpty.cpp" />
     <ClCompile Include="FormMainFFMpeg.cpp" />
+    <ClCompile Include="FormMainLoad.cpp" />
+    <ClCompile Include="FormMainPriority.cpp" />
+    <ClCompile Include="FormMainTray.cpp" />
     <ClCompile Include="helper.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

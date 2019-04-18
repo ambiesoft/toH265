@@ -18,77 +18,13 @@ namespace Ambiesoft {
 
 		using namespace Newtonsoft::Json::Linq;
 
-		FormMain::FormMain()
-		{
-			InitializeComponent();
-
-			txtLogErr->Font = gcnew System::Drawing::Font(FontFamily::GenericMonospace, txtLogErr->Font->Size + 1);
-			txtLogOut->Font = gcnew System::Drawing::Font(FontFamily::GenericMonospace, txtLogOut->Font->Size + 1);
-
-			HashIni^ ini;
-			try
-			{
-				DTRACE(L"INI=" + IniFile);
-				ini = Profile::ReadAll(IniFile, true);
-			}
-			catch (FileNotFoundException^)
-			{ 
-				DASSERT(!ini);
-				ini = HashIni::CreateEmptyInstanceForSpecialUse();
-			}
-			catch (Exception^ ex)
-			{
-				CppUtils::Alert(this, ex);
-				Environment::Exit(-1);
-				return;
-			}
-
-			DASSERT(ini);
-			bool boolval;
-			Profile::GetBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, false, boolval, ini);
-			if (boolval)
-			{
-				tsmiPriorityNormal->Checked = false;
-				tsmiPriorityBackground->Checked = true;
-			}
-
-			Profile::GetBool(SECTION_OPTION, KEY_MINIMIZETOTRAY, false, boolval, ini);
-			tsmiMinimizeToTray->Checked = boolval;
-
-
-			AmbLib::LoadFormXYWH(this, SECTION_LOCATION, ini);
-
-			try
-			{
-				String^ imagePath = Path::Combine(Path::GetDirectoryName(Application::ExecutablePath), L"images");
-				iconBlue_ = System::Drawing::Icon::FromHandle((gcnew Bitmap(Path::Combine(imagePath, L"icon.png")))->GetHicon());
-				iconYellow_ = System::Drawing::Icon::FromHandle((gcnew Bitmap(Path::Combine(imagePath, L"pause.png")))->GetHicon());
-				iconRed_ = System::Drawing::Icon::FromHandle((gcnew Bitmap(Path::Combine(imagePath, L"busy.png")))->GetHicon());
-			}
-			catch (Exception^ ex)
-			{
-				StringBuilder sbMessage;
-				sbMessage.AppendLine(I18N(L"Failed to load images."));
-				sbMessage.AppendLine(ex->Message);
-				CppUtils::Alert(this, sbMessage.ToString());
-			}
-		}
-
 		String^ FormMain::IniFile::get()
 		{
 			return Path::Combine(Path::GetDirectoryName(Application::ExecutablePath),
 				Path::GetFileNameWithoutExtension(Application::ExecutablePath) + L".ini");
 		}
 
-		System::Void FormMain::tsmiAbout_Click(System::Object^  sender, System::EventArgs^  e)
-		{
-			StringBuilder sbMessage;
-			sbMessage.Append(Application::ProductName);
-			sbMessage.Append(" ver");
-			sbMessage.Append(AmbLib::getAssemblyVersion(System::Reflection::Assembly::GetExecutingAssembly(), 3));
-
-			CppUtils::Info(this, sbMessage.ToString());
-		}
+	
 
 		bool FormMain::hasVideoStream(String^ file, String^% codecname, TimeSpan% ts)
 		{
@@ -201,20 +137,7 @@ namespace Ambiesoft {
 			}
 			return true;
 		}
-		System::Void FormMain::FormMain_Load(System::Object^  sender, System::EventArgs^  e)
-		{
-			baseSetFFProbeMenuString_ = tsmiSetFFProbe->Text;
-			baseSetFFMpegMenuString_ = tsmiSetFFMpeg->Text;
-
-			AmbLib::MakeTripleClickTextBox(txtMovie, GetDoubleClickTime());
-			AmbLib::MakeTripleClickTextBox(txtFFMpegArg, GetDoubleClickTime());
-
-			notifyIconMain->Text = Application::ProductName;
-
-			Text = Application::ProductName;
-			ChangeStartButtonText(I18N(BUTTONTEXT_START));
-			CheckMovieAndSet(Program::MovieFile);
-		}
+		
 
 		System::Void FormMain::btnBrowseMovie_Click(System::Object^  sender, System::EventArgs^  e)
 		{
@@ -302,7 +225,7 @@ namespace Ambiesoft {
 		
 		void FormMain::AddToErr(String^ text)
 		{
-			/*
+/*
 frame=   61 fps= 18 q=-0.0 size=       0kB time=00:00:02.08 bitrate=   0.2kbits/s dup=1 drop=0 speed=0.619x
 frame=   69 fps= 17 q=-0.0 size=       0kB time=00:00:02.34 bitrate=   0.2kbits/s dup=1 drop=0 speed=0.591x
 frame=   76 fps= 17 q=-0.0 size=       0kB time=00:00:02.57 bitrate=   0.1kbits/s dup=1 drop=0 speed=0.566x
@@ -313,12 +236,6 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 				regFFMpeg_ = gcnew RegularExpressions::Regex("frame=.*fps=.*size=.*time=(\\d\\d:\\d\\d:\\d\\d)\\.\\d\\d");
 			if (regFFMpeg_->IsMatch(text))
 			{
-				//StringBuilder sb;
-				//RegularExpressions::Match^ match = reg.Match(text);
-				//do
-				//{
-				//	match->Value
-				//}
 				RegularExpressions::Match^ match = regFFMpeg_->Match(text);
 				String^ timeValue = match->Groups[1]->Value;
 				
@@ -625,33 +542,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 		}
 
 		
-
-		System::Void FormMain::txtMovie_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
-		{
-			if (e->Data->GetDataPresent(DataFormats::FileDrop, true))
-				e->Effect = DragDropEffects::Copy;
-		}
-		System::Void FormMain::txtMovie_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
-		{
-			if (e->Data->GetDataPresent(DataFormats::FileDrop, true))
-				e->Effect = DragDropEffects::Copy;
-		}
-		System::Void FormMain::txtMovie_DragLeave(System::Object^  sender, System::EventArgs^  e)
-		{}
-		System::Void FormMain::txtMovie_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e)
-		{
-			if (e->Data->GetDataPresent(DataFormats::FileDrop, true))
-			{
-				cli::array<String^>^ ss = (cli::array<String^>^)e->Data->GetData(DataFormats::FileDrop, true);
-				for each(String^ s in ss)
-				{
-					txtMovie->Text = s;
-					break;
-				}
-			}
-		}
-
-		System::Void FormMain::tsmiOption_DropDownOpening(System::Object^  sender, System::EventArgs^  e)
+		System::Void FormMain::tsmiOption_DropDownOpening(System::Object^ sender, System::EventArgs^ e)
 		{
 			if (!String::IsNullOrEmpty(ffprobe_))
 				tsmiSetFFProbe->Text = baseSetFFProbeMenuString_ + L" (" + ffprobe_ + L")";
@@ -676,145 +567,10 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			getCommon(this, true, SECTION_OPTION, KEY_FFMPEG, IniFile, ffmpeg_, true);
 		}
 
-		void FormMain::OnMenuPriorityCommon(bool bBackground)
-		{
-			switch (FFMpegState)
-			{
-			case TaskState::None:
-				break;
-			case TaskState::ProcessLaunching:
-				break;
-			case TaskState::Pausing:
-			case TaskState::Running:
-			{
-				DASSERT(pidFFMpeg_ != 0);
-				if (pidFFMpeg_ == 0)
-				{
-					CppUtils::Alert(I18N(L"FFMpeg process not found"));
-					break;
-				}
 
-				String^ arg = String::Format(L"{0} --pid {1}",
-					(bBackground ? L" --all-idle" : L" --all-normal"),
-					pidFFMpeg_);
 
-				try
-				{
-					String^ fileName = Path::Combine(Path::GetDirectoryName(Application::ExecutablePath),
-						L"winnicew.exe");
-					Process::Start(fileName, arg);
-				}
-				catch (Exception ^ ex)
-				{
-					CppUtils::Alert(this, ex);
-				}
-			}
-			break;
-			case TaskState::Unknown:
-				break;
-			}
-			if (bBackground)
-			{
-				tsmiPriorityNormal->Checked = false;
-				tsmiPriorityBackground->Checked = true;
-			}
-			else
-			{
-				tsmiPriorityNormal->Checked = true;
-				tsmiPriorityBackground->Checked = false;
-			}
-
-			if (!Profile::WriteBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, bBackground, IniFile))
-			{
-				CppUtils::Alert(I18N(STR_FAILED_TO_SAVE_SETTING));
-			}
-		}
-		System::Void FormMain::tsmiPriorityNormal_Click(System::Object^  sender, System::EventArgs^  e)
-		{
-			OnMenuPriorityCommon(false);
-		}
-		System::Void FormMain::tsmiPriorityBackground_Click(System::Object^  sender, System::EventArgs^  e)
-		{
-			OnMenuPriorityCommon(true);
-		}
-
-		String^ FormMain::GetFFMpegHelp(String^ subHelpOption)
-		{
-			int retval;
-			String^ output;
-			String^ err;
-
-			try
-			{
-				String^ arg = L"--help";
-				if (!String::IsNullOrEmpty(subHelpOption))
-				{
-					arg += L" ";
-					arg += subHelpOption;
-				}
-				AmbLib::OpenCommandGetResult(FFMpeg,
-					arg,	
-					System::Text::Encoding::Default,
-					retval,
-					output,
-					err);
-				if (retval != 0)
-				{
-
-				}
-			}
-			catch (Exception^ ex)
-			{
-				CppUtils::Alert(this, ex);
-			}
-
-			// DASSERT(String::IsNullOrEmpty(err));
-			DASSERT(!String::IsNullOrEmpty(output));
-			return output;
-		}
-		System::Void FormMain::tsmiFFMpegHelp_Click(System::Object^  sender, System::EventArgs^  e)
-		{
-			String^ normalHelp = GetFFMpegHelp(String::Empty);
-			String^ longHelp = GetFFMpegHelp(L"long");
-			String^ fullHelp = GetFFMpegHelp(L"full");
-			
-			List<KeyValuePair<String^, String^>> labelsAndText;
-
-			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"Help"), normalHelp));
-			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"Long Help"), longHelp));
-			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"Full Help"), fullHelp));
-			
-			AmbLib::ShowTextDialog(this,
-				I18N(L"FFMpeg Help") + L" - " + Application::ProductName,
-				%labelsAndText,
-				true);
-		}
-
-		System::Void FormMain::FormMain_Resize(System::Object^  sender, System::EventArgs^  e)
-		{
-			if (tsmiMinimizeToTray->Checked && this->WindowState == FormWindowState::Minimized)
-			{
-				Hide();
-				notifyIconMain->Visible = true;
-			}
-		}
-		System::Void FormMain::notifyIconMain_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e)
-		{
-			if (e->Button != System::Windows::Forms::MouseButtons::Left)
-				return;
-
-			tsmiNotifyShow_Click(sender, nullptr);
-		}
-		System::Void FormMain::tsmiMinimizeToTray_Click(System::Object^  sender, System::EventArgs^  e)
-		{
-			bool newval = !tsmiMinimizeToTray->Checked;
-			tsmiMinimizeToTray->Checked = newval;
-
-			if (!Profile::WriteBool(SECTION_OPTION, KEY_MINIMIZETOTRAY, newval, IniFile))
-			{
-				CppUtils::Alert(this, I18N(STR_FAILED_TO_SAVE_SETTING));
-			}
-		}
+	
+		
 
 		System::Void FormMain::tsmiStop_Click(System::Object^  sender, System::EventArgs^  e)
 		{
