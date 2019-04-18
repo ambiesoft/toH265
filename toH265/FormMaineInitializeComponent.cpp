@@ -9,7 +9,7 @@ namespace Ambiesoft {
 		void FormMain::InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(FormMain::typeid));
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(FormMain::typeid));
 			this->txtMovie = (gcnew System::Windows::Forms::TextBox());
 			this->btnBrowseMovie = (gcnew System::Windows::Forms::Button());
 			this->txtLogErr = (gcnew System::Windows::Forms::TextBox());
@@ -50,7 +50,7 @@ namespace Ambiesoft {
 			this->txtMovie->Location = System::Drawing::Point(0, 0);
 			this->txtMovie->Name = L"txtMovie";
 			this->txtMovie->Size = System::Drawing::Size(441, 20);
-			this->txtMovie->TabIndex = 1;
+			this->txtMovie->TabIndex = 100;
 			this->txtMovie->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::txtMovie_DragDrop);
 			this->txtMovie->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::txtMovie_DragEnter);
 			this->txtMovie->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::txtMovie_DragOver);
@@ -62,7 +62,7 @@ namespace Ambiesoft {
 			this->btnBrowseMovie->Location = System::Drawing::Point(447, 0);
 			this->btnBrowseMovie->Name = L"btnBrowseMovie";
 			this->btnBrowseMovie->Size = System::Drawing::Size(28, 23);
-			this->btnBrowseMovie->TabIndex = 2;
+			this->btnBrowseMovie->TabIndex = 200;
 			this->btnBrowseMovie->Text = L"&...";
 			this->btnBrowseMovie->UseVisualStyleBackColor = true;
 			this->btnBrowseMovie->Click += gcnew System::EventHandler(this, &FormMain::btnBrowseMovie_Click);
@@ -77,7 +77,7 @@ namespace Ambiesoft {
 			this->txtLogErr->Name = L"txtLogErr";
 			this->txtLogErr->ScrollBars = System::Windows::Forms::ScrollBars::Both;
 			this->txtLogErr->Size = System::Drawing::Size(475, 157);
-			this->txtLogErr->TabIndex = 3;
+			this->txtLogErr->TabIndex = 400;
 			// 
 			// txtLogOut
 			// 
@@ -86,7 +86,7 @@ namespace Ambiesoft {
 			this->txtLogOut->Location = System::Drawing::Point(0, 218);
 			this->txtLogOut->Name = L"txtLogOut";
 			this->txtLogOut->Size = System::Drawing::Size(475, 20);
-			this->txtLogOut->TabIndex = 4;
+			this->txtLogOut->TabIndex = 500;
 			// 
 			// btnStart
 			// 
@@ -95,7 +95,7 @@ namespace Ambiesoft {
 			this->btnStart->Location = System::Drawing::Point(0, 244);
 			this->btnStart->Name = L"btnStart";
 			this->btnStart->Size = System::Drawing::Size(475, 23);
-			this->btnStart->TabIndex = 5;
+			this->btnStart->TabIndex = 600;
 			this->btnStart->Text = L"&Start";
 			this->btnStart->UseVisualStyleBackColor = true;
 			this->btnStart->Click += gcnew System::EventHandler(this, &FormMain::btnStart_Click);
@@ -107,7 +107,7 @@ namespace Ambiesoft {
 			this->txtFFMpegArg->Location = System::Drawing::Point(0, 29);
 			this->txtFFMpegArg->Name = L"txtFFMpegArg";
 			this->txtFFMpegArg->Size = System::Drawing::Size(475, 20);
-			this->txtFFMpegArg->TabIndex = 7;
+			this->txtFFMpegArg->TabIndex = 300;
 			// 
 			// menuMain
 			// 
