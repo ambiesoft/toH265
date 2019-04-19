@@ -96,10 +96,7 @@ namespace Ambiesoft {
 						return false;
 
 					double d = System::Double::Parse(duration);
-					
-					// to 100nanosec 
-					d *= 10 * 1000 * 1000;
-					ts = TimeSpan((Int64)d);
+					ts = TimeSpan::FromMilliseconds(d * 1000);
 					return true;
 				}
 			}
@@ -252,7 +249,6 @@ namespace Ambiesoft {
 			double percent = (tsProgress.TotalMilliseconds / tsOrigMovie_.TotalMilliseconds) * 100;
 			UpdateTitle((int)percent);
 
-			// long long llSpeed = (long long)(speed * 100);
 			DTRACE("All:" + tsOrigMovie_.ToString() + " " + tsOrigMovie_.TotalMilliseconds);
 			DTRACE("Cur:" + tsProgress.ToString() + " " + tsProgress.TotalMilliseconds);
 			double mRemaining = tsOrigMovie_.TotalMilliseconds - tsProgress.TotalMilliseconds;
@@ -261,8 +257,14 @@ namespace Ambiesoft {
 			if (speed == 0)
 				speed = 0.00001;
 			
-			TimeSpan tsRemaining = TimeSpan((long long)(10 * 1000 * (mRemaining / speed)));
-			SetStatusText(STATUSTEXT::REMAINING, tsRemaining.ToString("hh\\:mm\\:ss")); 
+			TimeSpan ts = TimeSpan::FromMilliseconds(mRemaining / speed);
+
+			String^ stText;
+			if (ts.Days != 0)
+				stText = ts.ToString(I18N(L"d'd 'h'h 'm'm'"));
+			else
+				stText = ts.ToString(I18N(L"h'h 'm'm'"));
+			SetStatusText(STATUSTEXT::REMAINING, stText);
 		}
 		
 		void FormMain::SetStatusText(STATUSTEXT ss)
@@ -272,15 +274,18 @@ namespace Ambiesoft {
 		}
 		void FormMain::SetStatusText(STATUSTEXT ss, String^ supplement)
 		{
+			String^ text;
 			switch (ss)
 			{
 			case STATUSTEXT::READY:
-				slMain->Text = I18N(L"Ready");
+				text = I18N(L"Ready");
 				break;
 			case STATUSTEXT::REMAINING:
-				slMain->Text = String::Format(I18N(L"{0} remaining"), supplement);
+				text = String::Format(I18N(L"{0} left"), supplement);
 				break;
 			}
+			if (slMain->Text != text)
+				slMain->Text = text;
 		}
 
 		void FormMain::AddToErr(String^ text)
@@ -517,6 +522,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 
 			String^ outaudiocodec;
 			String^ outvideocodec;
+			String^ outFileNameSuffix = String::Empty;
 			String^ outExt = String::Empty;
 			{
 				TargetCodecDialog codecDlg;
@@ -545,12 +551,14 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 
 				if (codecDlg.rbH265->Checked)
 				{
-					outvideocodec = "hevc";
+					outvideocodec = "libx265";
+					outFileNameSuffix = "hevc";
 					outExt = ".mp4";
 				}
 				else if (codecDlg.rbVp9->Checked)
 				{
 					outvideocodec = "vp9";
+					outFileNameSuffix = "vp9";
 					outExt = ".webm";
 				}
 				else
@@ -564,7 +572,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 				else if (codecDlg.rbAac->Checked)
 					outaudiocodec = "aac";
 				else if (codecDlg.rbOpus->Checked)
-					outaudiocodec = "opus";
+					outaudiocodec = "libopus";
 				else
 				{
 					CppUtils::Alert(this, I18N(L"No audio codec selected."));
@@ -598,7 +606,10 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			dlg.InitialDirectory = Path::GetDirectoryName(inputmovie);
 			{
 				String^ name = Path::GetFileNameWithoutExtension(inputmovie);
-				dlg.FileName = String::Format(L"{0} [{1}]{2}", name, outvideocodec, outExt);
+				dlg.FileName = String::Format(L"{0} [{1}]{2}",
+					name, 
+					outFileNameSuffix, 
+					outExt);
 			}
 			
 			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
