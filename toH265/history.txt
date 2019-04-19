@@ -1,3 +1,6 @@
+2019/04/19 ver1.0.14
+Choose ffprobe, ffmpeg properly
+
 2019/04/19 ver1.0.13
 UI
 

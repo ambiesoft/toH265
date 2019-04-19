@@ -8,7 +8,7 @@ namespace Ambiesoft {
 	namespace toH265 {
 
 		using namespace System::IO;
-
+		using namespace System::Text;
 		String^ FormMain::getCommon(System::Windows::Forms::IWin32Window^ parent,
 			bool bFFMpeg, String^ regApp, String^ regKey, String^ inifile, String^% target, bool bReset)
 		{
@@ -42,6 +42,52 @@ namespace Ambiesoft {
 			dlg.Filter = sbFilter.ToString();
 			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog(parent))
 				return nullptr;
+
+			// check if file is ffprobe or ffmpeg
+			int retval;
+			String^ output;
+			String^ err;
+			try
+			{
+				String^ arg = L"-version";
+				AmbLib::OpenCommandGetResult(dlg.FileName,
+					arg,
+					System::Text::Encoding::UTF8,
+					retval,
+					output,
+					err);
+				if (retval != 0)
+				{
+					StringBuilder sbMessage;
+					sbMessage.AppendFormat(I18N(L"Command '{0} {1}' exited with {2}."),
+						dlg.FileName,
+						arg,
+						retval);
+					CppUtils::Alert(this, sbMessage.ToString());
+					return nullptr;
+				}
+			}
+			catch (Exception ^ ex)
+			{
+				CppUtils::Alert(this, ex);
+				return nullptr;
+			}
+
+			if (String::IsNullOrEmpty(output))
+			{
+				CppUtils::Alert(I18N(L"No outputs found."));
+				return nullptr;
+			}
+
+			String^ findInOutput = bFFMpeg ? "ffmpeg" : "ffprobe";
+			bool bCorrectOutput = (output->ToLower()->IndexOf(findInOutput) == 0);
+			if (!bCorrectOutput)
+			{
+				StringBuilder sbMessage;
+				sbMessage.AppendFormat(I18N(L"This file does not look like '{0}'."), findInOutput);
+				CppUtils::Alert(this, sbMessage.ToString());
+				return nullptr;
+			}
 
 			target = dlg.FileName;
 			if (!Profile::WriteString(regApp, regKey, target, inifile))
