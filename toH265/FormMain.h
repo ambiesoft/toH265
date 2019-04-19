@@ -110,7 +110,6 @@ namespace Ambiesoft {
 #pragma endregion
 
 		private:
-			bool hasVideoStream(String^ file, String^% audiocodec, String^% videocodec, TimeSpan% ts);
 			bool CheckMovieAndSet(String^ file);
 
 			property String^ IniFile
@@ -148,13 +147,54 @@ namespace Ambiesoft {
 			};
 			System::Text::RegularExpressions::Regex^ regFFMpeg_;
 			TimeSpan tsOrigMovie_;
-			String^ origVideoCodec_;
-			String^ origAudioCodec_;
+
 			System::Drawing::Icon^ iconBlue_;
 			System::Drawing::Icon^ iconYellow_;
 			System::Drawing::Icon^ iconRed_;
 
 			String^ outputMovie_;
+			
+			void SetCodecStatusText();
+
+			String^ inputAudioCodec_;
+			property String^ InputAudioCodec
+			{
+				String^ get() { return inputAudioCodec_; }
+				void set(String^ v) {
+					inputAudioCodec_ = v;
+					SetCodecStatusText();
+				}
+			}
+			String^ inputVideoCodec_;
+			property String^ InputVideoCodec
+			{
+				String^ get() { return inputVideoCodec_; }
+				void set(String^ v) {
+					inputVideoCodec_ = v;
+					SetCodecStatusText();
+				}
+			}
+
+
+
+			String^ outputAudioCodec_;
+			property String^ OutputAudioCodec
+			{
+				String^ get() { return outputAudioCodec_; }
+				void set(String^ v) {
+					outputAudioCodec_ = v;
+					SetCodecStatusText();
+				}
+			}
+			String^ outputVideoCodec_;
+			property String^ OutputVideoCodec
+			{
+				String^ get() { return outputVideoCodec_; }
+				void set(String^ v) {
+					outputVideoCodec_ = v;
+					SetCodecStatusText();
+				}
+			}
 
 			property TaskState FFMpegState
 			{

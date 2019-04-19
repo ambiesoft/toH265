@@ -39,7 +39,7 @@ namespace Ambiesoft {
 			
 				AmbLib::OpenCommandGetResult(FFMpeg,
 					option,
-					System::Text::Encoding::Default,
+					System::Text::Encoding::UTF8,
 					retval,
 					output,
 					err);
