@@ -37,6 +37,8 @@
         "32\\winnice.README.md",
         "32\\libwinnice.dll",
         "32\\winnicew.exe",
+        "32\\ja-JP\\toH265.resources.dll",
+        
         "64\\Ambiesoft.AmbLib.dll",
         "64\\Ambiesoft.AmbLib.pdb",
         "64\\Ambiesoft.AmbLibcpp.dll",
@@ -57,7 +59,8 @@
         "64\\winnice.history.txt",
         "64\\winnice.README.md",
         "64\\libwinnice.dll",
-        "64\\winnicew.exe"
+        "64\\winnicew.exe",
+        "64\\ja-JP\\toH265.resources.dll"
     ],
     "TotalFileCount": "exact",
     "archivedir": "C:\\Linkout",
