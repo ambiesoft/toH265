@@ -2,6 +2,7 @@
 
 #include "toH265.h"
 #include "helper.h"
+#include "TargetCodecDialog.h"
 
 #include "FormMain.h"
 
@@ -24,10 +25,18 @@ namespace Ambiesoft {
 				Path::GetFileNameWithoutExtension(Application::ExecutablePath) + L".ini");
 		}
 
-	
-
-		bool FormMain::hasVideoStream(String^ file, String^% codecname, TimeSpan% ts)
+#ifdef _DEBUG
+		System::Void FormMain::FormMain_OnTest(System::Object^ sender, System::EventArgs^ e)
 		{
+			TargetCodecDialog dlg;
+			dlg.ShowDialog();
+		}
+#endif
+
+		bool FormMain::hasVideoStream(String^ file, String^% audiocodec, String^% videocodec, TimeSpan% ts)
+		{
+			audiocodec = videocodec = nullptr;
+
 			String^ ffprobe = FFProbe;
 			if (String::IsNullOrEmpty(ffprobe) || !File::Exists(ffprobe))
 			{
@@ -61,30 +70,33 @@ namespace Ambiesoft {
 			// Parse json
 			JObject^ joutput = JObject::Parse(output);
 
-			bool videofound = false;
+			String^ duration = (String^)joutput->SelectToken("format.duration");
+
 			for (int i = 0; i < 32; ++i)
 			{
 				String^ codec_type = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_type", i));
 				if (!codec_type)
 					break;
-				if (codec_type == "video")
-				{
-					videofound = true;
-					codecname = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
 
-					String^ duration = (String^)joutput->SelectToken(String::Format("streams[{0}].duration", i));
-					if (!duration)
-					{
-						ts = TimeSpan();
-						DASSERT(ts.TotalMilliseconds == 0);
-						duration = (String^)joutput->SelectToken("format.duration");
-					}
-					if (!duration)
-					{
-						return true;
-					}
+				if (codec_type == "audio")
+				{
+					audiocodec = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
+				}
+				else if (codec_type == "video")
+				{
+					videocodec = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
+
+					if(String::IsNullOrEmpty(duration))
+						duration = (String^)joutput->SelectToken(String::Format("streams[{0}].duration", i));
+				}
+
+				if (!String::IsNullOrEmpty(audiocodec) && !String::IsNullOrEmpty(videocodec))
+				{
+					if (String::IsNullOrEmpty(duration))
+						return false;
 
 					double d = System::Double::Parse(duration);
+					
 					// to 100nanosec 
 					d *= 10 * 1000 * 1000;
 					ts = TimeSpan((Int64)d);
@@ -111,9 +123,10 @@ namespace Ambiesoft {
 					return false;
 				}
 
-				String^ codecname;
+				String^ audiocodec;
+				String^ videocodec;
 				TimeSpan span;
-				if (!hasVideoStream(file, codecname, span))
+				if (!hasVideoStream(file, audiocodec, videocodec, span))
 				{
 					CppUtils::Alert(this, String::Format(I18N(L"'{0}' does not have a video stream."), file));
 					ReturnValue = RETURN_STREAMNOTFOUND;
@@ -125,15 +138,32 @@ namespace Ambiesoft {
 					ReturnValue = RETURN_DURATIONNOTFOUND;
 					return false;
 				}
-				tsOrigMovie_ = span;
-				// Check if the encoding is already h265
-				if (String::Compare(codecname, "hevc", true) == 0)
+				
+				// Check if the encoding is already h265 or vp9
+				String^ sformat = I18N(L"'{0}' already has a stream of {1}.");
+				if (String::Compare(videocodec, "hevc", true) == 0)
 				{
-					CppUtils::Alert(this, String::Format(I18N(L"'{0}' already has a stream of h265."), file));
+					CppUtils::Alert(this, String::Format(sformat, file, L"h265"));
 					ReturnValue = RETURN_STREAMISH265;
 					return false;
 				}
+				if (String::Compare(videocodec, "vp9", true) == 0)
+				{
+					CppUtils::Alert(this, String::Format(sformat, file, L"vp9"));
+					ReturnValue = RETURN_STREAMISVP9;
+					return false;
+				}
 				txtMovie->Text = file;
+				DASSERT(FFMpegState == TaskState::None);
+				SetStatusText(STATUSTEXT::READY);
+				slAudioCodec->Text = audiocodec;
+				slVideoCodec->Text = videocodec;
+				slDuration->Text = span.ToString("hh\\:mm\\:ss");
+
+				// succeeded, set values
+				origAudioCodec_ = audiocodec;
+				origVideoCodec_ = videocodec;
+				tsOrigMovie_ = span;
 			}
 			return true;
 		}
@@ -217,12 +247,42 @@ namespace Ambiesoft {
 		{
 			UpdateTitle(100);
 		}
-		void FormMain::UpdateTitleTS(TimeSpan ts)
+		void FormMain::UpdateTitleTS(TimeSpan tsProgress, double speed)
 		{
-			double percent = (ts.TotalMilliseconds / tsOrigMovie_.TotalMilliseconds) * 100;
+			double percent = (tsProgress.TotalMilliseconds / tsOrigMovie_.TotalMilliseconds) * 100;
 			UpdateTitle((int)percent);
+
+			// long long llSpeed = (long long)(speed * 100);
+			DTRACE("All:" + tsOrigMovie_.ToString() + " " + tsOrigMovie_.TotalMilliseconds);
+			DTRACE("Cur:" + tsProgress.ToString() + " " + tsProgress.TotalMilliseconds);
+			double mRemaining = tsOrigMovie_.TotalMilliseconds - tsProgress.TotalMilliseconds;
+			DTRACE("Remain:" + mRemaining);
+
+			if (speed == 0)
+				speed = 0.00001;
+			
+			TimeSpan tsRemaining = TimeSpan((long long)(10 * 1000 * (mRemaining / speed)));
+			SetStatusText(STATUSTEXT::REMAINING, tsRemaining.ToString("hh\\:mm\\:ss")); 
 		}
 		
+		void FormMain::SetStatusText(STATUSTEXT ss)
+		{
+			DASSERT(ss == STATUSTEXT::READY);
+			SetStatusText(ss, String::Empty);
+		}
+		void FormMain::SetStatusText(STATUSTEXT ss, String^ supplement)
+		{
+			switch (ss)
+			{
+			case STATUSTEXT::READY:
+				slMain->Text = I18N(L"Ready");
+				break;
+			case STATUSTEXT::REMAINING:
+				slMain->Text = String::Format(I18N(L"{0} remaining"), supplement);
+				break;
+			}
+		}
+
 		void FormMain::AddToErr(String^ text)
 		{
 /*
@@ -231,18 +291,21 @@ frame=   69 fps= 17 q=-0.0 size=       0kB time=00:00:02.34 bitrate=   0.2kbits/
 frame=   76 fps= 17 q=-0.0 size=       0kB time=00:00:02.57 bitrate=   0.1kbits/s dup=1 drop=0 speed=0.566x
 frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/s dup=1 drop=0 speed=0.566x
 */
-		
-			if (!regFFMpeg_)
-				regFFMpeg_ = gcnew RegularExpressions::Regex("frame=.*fps=.*size=.*time=(\\d\\d:\\d\\d:\\d\\d)\\.\\d\\d");
+			DASSERT(regFFMpeg_);
 			if (regFFMpeg_->IsMatch(text))
 			{
 				RegularExpressions::Match^ match = regFFMpeg_->Match(text);
 				String^ timeValue = match->Groups[1]->Value;
-				
-				DateTime dt = DateTime::ParseExact(timeValue, L"hh:mm:ss", 
+
+				DateTime dtTime = DateTime::ParseExact(timeValue, L"hh:mm:ss",
 					System::Globalization::CultureInfo::InvariantCulture);
-				TimeSpan ts = dt - dt.Date;
-				UpdateTitleTS(ts);
+				TimeSpan tsTime = dtTime - dtTime.Date;
+
+				String^ speedValue = match->Groups[2]->Value;
+				double dblSpeed;
+				double::TryParse(speedValue, dblSpeed);
+
+				UpdateTitleTS(tsTime, dblSpeed);
 				txtLogOut->Text = text;
 			}
 			else
@@ -329,6 +392,8 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 
 			this->Icon = iconBlue_;
 			notifyIconMain->Icon = iconBlue_;
+
+			SetStatusText(STATUSTEXT::READY);
 
 			if (!processTerminated_)
 			{
@@ -448,12 +513,71 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 				CppUtils::Alert(this, I18N(L"input movie is empty."));
 				return;
 			}
+
+
+			String^ outaudiocodec;
+			String^ outvideocodec;
+			String^ outExt = String::Empty;
+			{
+				TargetCodecDialog codecDlg;
+				if (origVideoCodec_ == "h264")
+				{
+					codecDlg.rbH265->Checked = true;
+
+					if (origAudioCodec_ == "aac" ||
+						origAudioCodec_ == "vorbis")
+					{
+						codecDlg.rbCopyAudio->Checked = true;
+					}
+				}
+				else if (origVideoCodec_ == "vp8")
+				{
+					codecDlg.rbVp9->Checked = true;
+
+					if (origAudioCodec_ == "opus")
+					{
+						codecDlg.rbCopyAudio->Checked = true;
+					}
+				}
+				
+				if (System::Windows::Forms::DialogResult::OK != codecDlg.ShowDialog())
+					return;
+
+				if (codecDlg.rbH265->Checked)
+				{
+					outvideocodec = "hevc";
+					outExt = ".mp4";
+				}
+				else if (codecDlg.rbVp9->Checked)
+				{
+					outvideocodec = "vp9";
+					outExt = ".webm";
+				}
+				else
+				{
+					CppUtils::Alert(this, I18N(L"No video codec selected."));
+					return;
+				}
+
+				if (codecDlg.rbCopyAudio->Checked)
+					outaudiocodec = "copy";
+				else if (codecDlg.rbAac->Checked)
+					outaudiocodec = "aac";
+				else if (codecDlg.rbOpus->Checked)
+					outaudiocodec = "opus";
+				else
+				{
+					CppUtils::Alert(this, I18N(L"No audio codec selected."));
+					return;
+				}
+			}
+
 			SaveFileDialog dlg;
-			String^ mp4ext = L".mp4";
+			
 			List<String^> availableext;
 			{
 				// libx265 must has mp4 foramt
-				availableext.Add(Path::GetExtension(mp4ext));
+				availableext.Add(Path::GetExtension(outExt));
 
 				StringBuilder sbFilter;
 				for each(String^ ae in availableext)
@@ -474,7 +598,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			dlg.InitialDirectory = Path::GetDirectoryName(inputmovie);
 			{
 				String^ name = Path::GetFileNameWithoutExtension(inputmovie);
-				dlg.FileName = name + " [h265]" + mp4ext;
+				dlg.FileName = String::Format(L"{0} [{1}]{2}", name, outvideocodec, outExt);
 			}
 			
 			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
@@ -482,8 +606,11 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 
 			outputMovie_ = dlg.FileName;
 
-			String^ arg = String::Format(L"-y -i \"{0}\" -c:v libx265 -c:a copy \"{1}\"",
-				inputmovie, outputMovie_);
+			String^ arg = String::Format(L"-y -i \"{0}\" -c:v {1} -c:a {2} \"{3}\"",
+				inputmovie, 
+				outvideocodec,
+				outaudiocodec,
+				outputMovie_);
 
 			txtLogOut->Clear();
 			txtLogErr->Clear();

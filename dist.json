@@ -6,12 +6,12 @@
     "targets": [
         {
             "setoutdirforbuild": false,
-            "outdir": "Release\\v142\\toH265",
+            "outdir": "Release\\v141\\toH265",
             "platform": "Win32"
         },
         {
             "setoutdirforbuild": false,
-            "outdir": "Release\\v142\\toH265",
+            "outdir": "Release\\v141\\toH265",
             "platform": "x64"
         }
     ],

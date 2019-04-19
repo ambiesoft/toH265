@@ -28,8 +28,7 @@ namespace Ambiesoft {
 			CppUtils::Info(this, sbMessage.ToString());
 		}
 
-
-		String^ FormMain::GetFFMpegHelp(String^ subHelpOption)
+		String^ FormMain::GetFFMpegOutput(String^ option)
 		{
 			int retval;
 			String^ output;
@@ -37,14 +36,9 @@ namespace Ambiesoft {
 
 			try
 			{
-				String^ arg = L"--help";
-				if (!String::IsNullOrEmpty(subHelpOption))
-				{
-					arg += L" ";
-					arg += subHelpOption;
-				}
+			
 				AmbLib::OpenCommandGetResult(FFMpeg,
-					arg,
+					option,
 					System::Text::Encoding::Default,
 					retval,
 					output,
@@ -63,21 +57,30 @@ namespace Ambiesoft {
 			DASSERT(!String::IsNullOrEmpty(output));
 			return output;
 		}
+		String^ FormMain::GetFFMpegHelp(String^ subHelpOption)
+		{
+			String^ arg = L"--help";
+			if (!String::IsNullOrEmpty(subHelpOption))
+			{
+				arg += L" ";
+				arg += subHelpOption;
+			}
+			return GetFFMpegOutput(arg);
+		}
 		System::Void FormMain::tsmiFFMpegHelp_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			String^ normalHelp = GetFFMpegHelp(String::Empty);
-			String^ longHelp = GetFFMpegHelp(L"long");
-			String^ fullHelp = GetFFMpegHelp(L"full");
-
 			List<KeyValuePair<String^, String^>> labelsAndText;
 
-			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"Help"), normalHelp));
-			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"Long Help"), longHelp));
-			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"Full Help"), fullHelp));
+			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"Help"), GetFFMpegHelp(String::Empty)));
+			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"Long Help"), GetFFMpegHelp(L"long")));
+			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"Full Help"), GetFFMpegHelp(L"full")));
+			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"formats"), GetFFMpegOutput(L"-formats")));
+			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"codecs"), GetFFMpegOutput(L"-codecs")));
+			labelsAndText.Add(KeyValuePair<String^, String^>(I18N(L"version"), GetFFMpegOutput(L"-version")));
 
 			AmbLib::ShowTextDialog(this,
 				I18N(L"FFMpeg Help") + L" - " + Application::ProductName,
-				% labelsAndText,
+				%labelsAndText,
 				true);
 		}
 	}

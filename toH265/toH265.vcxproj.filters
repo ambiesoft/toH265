@@ -66,6 +66,9 @@
     <ClCompile Include="FormMainPriority.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TargetCodecDialog.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -89,6 +92,9 @@
     <ClInclude Include="DebugMacro.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TargetCodecDialog.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico">
@@ -102,6 +108,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FormMain.resX">
+      <Filter>3 Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.ja-JP.resx">
+      <Filter>3 Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TargetCodecDialog.resx">
       <Filter>3 Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>

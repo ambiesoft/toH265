@@ -36,7 +36,8 @@ namespace Ambiesoft {
 			private: System::Windows::Forms::Panel^  panelMain;
 			private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFProbe;
 			private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFMpeg;
-			private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiHelp;
+
 		private: System::Windows::Forms::ToolStripMenuItem^  tsmiAbout;
 
 			private: System::Windows::Forms::ToolStripSeparator^  toolStripMenuItem1;
@@ -64,6 +65,13 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::ContextMenuStrip^  cmNotify;
 		private: System::Windows::Forms::ToolStripMenuItem^  tsmiNotifyShow;
 		private: System::Windows::Forms::ToolStripMenuItem^  tsmiNotifyStart;
+		private: System::Windows::Forms::StatusStrip^ statusMain;
+
+		private: System::Windows::Forms::ToolStripStatusLabel^ slMain;
+		private: System::Windows::Forms::ToolStripStatusLabel^ slVideoCodec;
+
+		private: System::Windows::Forms::ToolStripStatusLabel^ slDuration;
+		private: System::Windows::Forms::ToolStripStatusLabel^ slAudioCodec;
 
 				 literal String^ STR_FAILED_TO_SAVE_SETTING = L"Failed to save settings.";
 		public:
@@ -102,7 +110,7 @@ namespace Ambiesoft {
 #pragma endregion
 
 		private:
-			bool hasVideoStream(String^ file, String^% codecname, TimeSpan% ts);
+			bool hasVideoStream(String^ file, String^% audiocodec, String^% videocodec, TimeSpan% ts);
 			bool CheckMovieAndSet(String^ file);
 
 			property String^ IniFile
@@ -140,6 +148,8 @@ namespace Ambiesoft {
 			};
 			System::Text::RegularExpressions::Regex^ regFFMpeg_;
 			TimeSpan tsOrigMovie_;
+			String^ origVideoCodec_;
+			String^ origAudioCodec_;
 			System::Drawing::Icon^ iconBlue_;
 			System::Drawing::Icon^ iconYellow_;
 			System::Drawing::Icon^ iconRed_;
@@ -153,12 +163,20 @@ namespace Ambiesoft {
 			DWORD dwBackPriority_;
 			int pidFFMpeg_;
 
-			void UpdateTitleTS(TimeSpan ts);
+			enum class STATUSTEXT {
+				READY,
+				REMAINING,
+			};
+			void SetStatusText(STATUSTEXT ss);
+			void SetStatusText(STATUSTEXT ss, String^ supplement);
+
+			void UpdateTitleTS(TimeSpan ts, double speed);
 			void UpdateTitleComplete();
 			String^ buildTitleText(int percent, bool bFilenameOnly);
 			void UpdateTitle();
 			void UpdateTitle(int percent);
 			
+			String^ GetFFMpegOutput(String^ option);
 			String^ GetFFMpegHelp(String^ subHelpOption);
 			void StartOfThread(Object^ obj);
 			delegate void VVDelegate();
@@ -214,8 +232,11 @@ namespace Ambiesoft {
 			System::Void tsmiStop_Click(System::Object^  sender, System::EventArgs^  e);
 
 			System::Void tsmiNotifyShow_Click(System::Object^  sender, System::EventArgs^  e);
-			System::Void tsmiNotifyStart_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiNotifyStart_Click(System::Object^ sender, System::EventArgs^ e);
 
+#ifdef _DEBUG
+			System::Void FormMain_OnTest(System::Object^ sender, System::EventArgs^ e);
+#endif
 			
 
 			
