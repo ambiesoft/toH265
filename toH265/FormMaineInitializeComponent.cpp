@@ -9,7 +9,7 @@ namespace Ambiesoft {
 		void FormMain::InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(FormMain::typeid));
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(FormMain::typeid));
 			this->txtMovie = (gcnew System::Windows::Forms::TextBox());
 			this->btnBrowseMovie = (gcnew System::Windows::Forms::Button());
 			this->txtLogErr = (gcnew System::Windows::Forms::TextBox());
@@ -40,8 +40,8 @@ namespace Ambiesoft {
 			this->statusMain = (gcnew System::Windows::Forms::StatusStrip());
 			this->slMain = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->slVideoCodec = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-			this->slDuration = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->slAudioCodec = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->slDuration = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->menuMain->SuspendLayout();
 			this->panelMain->SuspendLayout();
 			this->cmNotify->SuspendLayout();
@@ -251,15 +251,15 @@ namespace Ambiesoft {
 			this->slVideoCodec->Name = L"slVideoCodec";
 			resources->ApplyResources(this->slVideoCodec, L"slVideoCodec");
 			// 
-			// slDuration
-			// 
-			this->slDuration->Name = L"slDuration";
-			resources->ApplyResources(this->slDuration, L"slDuration");
-			// 
 			// slAudioCodec
 			// 
 			this->slAudioCodec->Name = L"slAudioCodec";
 			resources->ApplyResources(this->slAudioCodec, L"slAudioCodec");
+			// 
+			// slDuration
+			// 
+			this->slDuration->Name = L"slDuration";
+			resources->ApplyResources(this->slDuration, L"slDuration");
 			// 
 			// FormMain
 			// 

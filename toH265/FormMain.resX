@@ -148,10 +148,10 @@
     <value>Top, Right</value>
   </data>
   <data name="btnBrowseMovie.Location" type="System.Drawing.Point, System.Drawing">
-    <value>449, -1</value>
+    <value>449, 1</value>
   </data>
   <data name="btnBrowseMovie.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 23</value>
+    <value>28, 20</value>
   </data>
   <data name="btnBrowseMovie.TabIndex" type="System.Int32, mscorlib">
     <value>200</value>
@@ -1018,7 +1018,7 @@
     <value>361, 17</value>
   </metadata>
   <data name="slMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 17</value>
+    <value>344, 17</value>
   </data>
   <data name="slMain.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -1776,16 +1776,16 @@
   <data name="&gt;&gt;slVideoCodec.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;slDuration.Name" xml:space="preserve">
-    <value>slDuration</value>
-  </data>
-  <data name="&gt;&gt;slDuration.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;slAudioCodec.Name" xml:space="preserve">
     <value>slAudioCodec</value>
   </data>
   <data name="&gt;&gt;slAudioCodec.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;slDuration.Name" xml:space="preserve">
+    <value>slDuration</value>
+  </data>
+  <data name="&gt;&gt;slDuration.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

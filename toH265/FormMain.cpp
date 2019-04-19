@@ -728,14 +728,14 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 		
 		System::Void FormMain::tsmiOption_DropDownOpening(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (!String::IsNullOrEmpty(ffprobe_))
-				tsmiSetFFProbe->Text = baseSetFFProbeMenuString_ + L" (" + ffprobe_ + L")";
+			if (!String::IsNullOrEmpty(PeekFFProbe()))
+				tsmiSetFFProbe->Text = baseSetFFProbeMenuString_ + L" (" + PeekFFProbe() + L")";
 			else
 				tsmiSetFFProbe->Text = baseSetFFProbeMenuString_;
 
 
-			if (!String::IsNullOrEmpty(ffmpeg_))
-				tsmiSetFFMpeg->Text = baseSetFFMpegMenuString_ + L" (" + ffmpeg_ + L")";
+			if (!String::IsNullOrEmpty(PeekFFMpeg()))
+				tsmiSetFFMpeg->Text = baseSetFFMpegMenuString_ + L" (" + PeekFFMpeg() + L")";
 			else
 				tsmiSetFFMpeg->Text = baseSetFFMpegMenuString_;
 		}

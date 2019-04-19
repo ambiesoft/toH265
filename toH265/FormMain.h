@@ -122,13 +122,33 @@ namespace Ambiesoft {
 			{
 				String^ get();
 			}
+			String^ PeekFFProbe();
+
 			String^ ffmpeg_;
 			property String^ FFMpeg
 			{
 				String^ get();
 			}
-			String^ getCommon(System::Windows::Forms::IWin32Window^ parent,
-				bool bFFMpeg, String^ regApp, String^ regKey, String^ inifile, String^% target, bool bReset);
+			String^ PeekFFMpeg();
+
+
+			String^ getCommon(
+				System::Windows::Forms::IWin32Window^ parent,
+				bool bFFMpeg,
+				String^ regApp,
+				String^ regKey,
+				String^ inifile,
+				String^% target,
+				bool bReset);
+			String^ getCommon(
+				System::Windows::Forms::IWin32Window^ parent,
+				bool bFFMpeg,
+				String^ regApp,
+				String^ regKey,
+				String^ inifile,
+				String^% target,
+				bool bReset,
+				bool bPeek);
 
 			delegate void AddToLog(String^ text);
 			void AddToOutput(String^ text);

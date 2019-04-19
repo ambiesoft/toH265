@@ -9,8 +9,35 @@ namespace Ambiesoft {
 
 		using namespace System::IO;
 		using namespace System::Text;
-		String^ FormMain::getCommon(System::Windows::Forms::IWin32Window^ parent,
-			bool bFFMpeg, String^ regApp, String^ regKey, String^ inifile, String^% target, bool bReset)
+		String^ FormMain::getCommon(
+			System::Windows::Forms::IWin32Window^ parent,
+			bool bFFMpeg,
+			String^ regApp,
+			String^ regKey,
+			String^ inifile,
+			String^% target,
+			bool bReset)
+		{
+			return getCommon(
+				parent,
+				bFFMpeg,
+				regApp,
+				regKey,
+				inifile,
+				target,
+				bReset,
+				false);
+		}
+
+		String^ FormMain::getCommon(
+			System::Windows::Forms::IWin32Window^ parent,
+			bool bFFMpeg,
+			String^ regApp,
+			String^ regKey,
+			String^ inifile,
+			String^% target,
+			bool bReset,
+			bool bPeek)
 		{
 			if (!String::IsNullOrEmpty(target) && File::Exists(target))
 				return target;
@@ -22,6 +49,9 @@ namespace Ambiesoft {
 				if (!String::IsNullOrEmpty(ret) && File::Exists(ret))
 					return target = ret;
 			}
+
+			if (bPeek)
+				return target;
 
 			String^ title = I18N(String::Format(L"Choose {0}", (bFFMpeg ? L"ffmpeg" : L"ffprobe")));
 			CppUtils::Info(parent, title);
@@ -101,10 +131,18 @@ namespace Ambiesoft {
 		{
 			return getCommon(this, false, SECTION_OPTION, KEY_FFPROBE, IniFile, ffprobe_, false);
 		}
-
 		String^ FormMain::FFMpeg::get()
 		{
 			return getCommon(this, true, SECTION_OPTION, KEY_FFMPEG, IniFile, ffmpeg_, false);
+		}
+
+		String^ FormMain::PeekFFProbe()
+		{
+			return getCommon(this, false, SECTION_OPTION, KEY_FFPROBE, IniFile, ffprobe_, false, true);
+		}
+		String^ FormMain::PeekFFMpeg()
+		{
+			return getCommon(this, true, SECTION_OPTION, KEY_FFMPEG, IniFile, ffmpeg_, false, true);
 		}
 	}
 
