@@ -14,7 +14,7 @@ namespace Ambiesoft {
 			bool newval = !tsmiMinimizeToTray->Checked;
 			tsmiMinimizeToTray->Checked = newval;
 
-			if (!Profile::WriteBool(SECTION_OPTION, KEY_MINIMIZETOTRAY, newval, IniFile))
+			if (!Profile::WriteBool(SECTION_OPTION, KEY_MINIMIZETOTRAY, newval, Program::IniFile))
 			{
 				CppUtils::Alert(this, I18N(STR_FAILED_TO_SAVE_SETTING));
 			}

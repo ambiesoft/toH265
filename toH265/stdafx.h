@@ -21,5 +21,5 @@ enum ERROR_RETURN
 
 
 
-#define I18N(s) s
+#define I18N(s) Program::getString(s)
 

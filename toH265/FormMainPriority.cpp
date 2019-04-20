@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-//#include "toH265.h"
+#include "toH265.h"
 //#include "helper.h"
 
 #include "FormMain.h"
@@ -65,7 +65,7 @@ namespace Ambiesoft {
 				tsmiPriorityBackground->Checked = false;
 			}
 
-			if (!Profile::WriteBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, bBackground, IniFile))
+			if (!Profile::WriteBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, bBackground, Program::IniFile))
 			{
 				CppUtils::Alert(I18N(STR_FAILED_TO_SAVE_SETTING));
 			}

@@ -63,8 +63,8 @@ namespace Ambiesoft {
 			HashIni ^ ini;
 			try
 			{
-				DTRACE(L"INI=" + IniFile);
-				ini = Profile::ReadAll(IniFile, true);
+				DTRACE(L"INI=" + Program::IniFile);
+				ini = Profile::ReadAll(Program::IniFile, true);
 			}
 			catch (FileNotFoundException^)
 			{

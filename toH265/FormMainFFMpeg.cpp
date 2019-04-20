@@ -53,7 +53,7 @@ namespace Ambiesoft {
 			if (bPeek)
 				return target;
 
-			String^ title = I18N(String::Format(L"Choose {0}", (bFFMpeg ? L"ffmpeg" : L"ffprobe")));
+			String^ title = String::Format(I18N(L"Please Choose {0}."), (bFFMpeg ? L"ffmpeg" : L"ffprobe"));
 			CppUtils::Info(parent, title);
 			OpenFileDialog dlg;
 			dlg.Title = title;
@@ -129,20 +129,20 @@ namespace Ambiesoft {
 
 		String^ FormMain::FFProbe::get()
 		{
-			return getCommon(this, false, SECTION_OPTION, KEY_FFPROBE, IniFile, ffprobe_, false);
+			return getCommon(this, false, SECTION_OPTION, KEY_FFPROBE, Program::IniFile, ffprobe_, false);
 		}
 		String^ FormMain::FFMpeg::get()
 		{
-			return getCommon(this, true, SECTION_OPTION, KEY_FFMPEG, IniFile, ffmpeg_, false);
+			return getCommon(this, true, SECTION_OPTION, KEY_FFMPEG, Program::IniFile, ffmpeg_, false);
 		}
 
 		String^ FormMain::PeekFFProbe()
 		{
-			return getCommon(this, false, SECTION_OPTION, KEY_FFPROBE, IniFile, ffprobe_, false, true);
+			return getCommon(this, false, SECTION_OPTION, KEY_FFPROBE, Program::IniFile, ffprobe_, false, true);
 		}
 		String^ FormMain::PeekFFMpeg()
 		{
-			return getCommon(this, true, SECTION_OPTION, KEY_FFMPEG, IniFile, ffmpeg_, false, true);
+			return getCommon(this, true, SECTION_OPTION, KEY_FFMPEG, Program::IniFile, ffmpeg_, false, true);
 		}
 	}
 

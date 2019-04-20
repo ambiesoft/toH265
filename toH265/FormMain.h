@@ -22,58 +22,63 @@ namespace Ambiesoft {
 		/// </summary>
 		public ref class FormMain : public System::Windows::Forms::Form
 		{
-			private: System::Windows::Forms::TextBox^  txtLogErr;
-			private: System::Windows::Forms::TextBox^  txtLogOut;
-			private: System::Windows::Forms::Button^  btnStart;
-
-
-			private: System::Windows::Forms::TextBox^  txtFFMpegArg;
-			private: System::Windows::Forms::MenuStrip^  menuMain;
-			private: System::Windows::Forms::ToolStripMenuItem^  tsmiFile;
-			private: System::Windows::Forms::ToolStripMenuItem^  exitToolStripMenuItem;
-			private: System::Windows::Forms::ToolStripMenuItem^  tsmiOption;
-
-			private: System::Windows::Forms::Panel^  panelMain;
-			private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFProbe;
-			private: System::Windows::Forms::ToolStripMenuItem^  tsmiSetFFMpeg;
+		private: System::Windows::Forms::TextBox^ txtLogErr;
+		private: System::Windows::Forms::TextBox^ txtLogOut;
+		private: System::Windows::Forms::Button^ btnStart;
+		private: System::Windows::Forms::TextBox^ txtFFMpegArg;
+		private: System::Windows::Forms::MenuStrip^ menuMain;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiFile;
+		private: System::Windows::Forms::ToolStripMenuItem^ exitToolStripMenuItem;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiOption;
+		private: System::Windows::Forms::Panel^ panelMain;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiSetFFProbe;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiSetFFMpeg;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiHelp;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiAbout;
+		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem1;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiPriority;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiPriorityNormal;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiPriorityBackground;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiFFMpegHelp;
+		private: System::Windows::Forms::NotifyIcon^ notifyIconMain;
+		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem2;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiMinimizeToTray;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiStop;
+		private: System::Windows::Forms::ContextMenuStrip^ cmNotify;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyShow;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyStart;
+		private: System::Windows::Forms::StatusStrip^ statusMain;
+		private: System::Windows::Forms::ToolStripStatusLabel^ slMain;
+		private: System::Windows::Forms::ToolStripStatusLabel^ slVideoCodec;
+		private: System::Windows::Forms::ToolStripStatusLabel^ slDuration;
+		private: System::Windows::Forms::ToolStripStatusLabel^ slAudioCodec;
 
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiAbout;
+		public:
+			literal String^ SECTION_OPTION = L"Option";
+			literal String^ SECTION_LOCATION = L"Location";
 
-			private: System::Windows::Forms::ToolStripSeparator^  toolStripMenuItem1;
-			private: System::Windows::Forms::ToolStripMenuItem^  tsmiPriority;
-			private: System::Windows::Forms::ToolStripMenuItem^  tsmiPriorityNormal;
-			private: System::Windows::Forms::ToolStripMenuItem^  tsmiPriorityBackground;
-
-					 literal String^ SECTION_OPTION = L"Option";
-					 literal String^ SECTION_LOCATION = L"Location";
-					 literal String^ KEY_FFPROBE = L"ffprobe";
+			literal String^ KEY_FFPROBE = L"ffprobe";
 			literal String^ KEY_FFMPEG = L"ffmpeg";
 			literal String^ KEY_PROCESS_BACKGROUND = L"processbackground";
 			literal String^ KEY_MINIMIZETOTRAY = L"minimizetotray";
+			literal String^ KEY_CULTURE = L"culture";
 
 
 			literal String^ BUTTONTEXT_PAUSE = L"&Pause";
 			literal String^ BUTTONTEXT_START = L"&Start";
-
 			literal String^ BUTTONTEXT_RESUME = L"Res&ume";
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiFFMpegHelp;
-		private: System::Windows::Forms::NotifyIcon^  notifyIconMain;
-		private: System::Windows::Forms::ToolStripSeparator^  toolStripMenuItem2;
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiMinimizeToTray;
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiStop;
-		private: System::Windows::Forms::ContextMenuStrip^  cmNotify;
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiNotifyShow;
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiNotifyStart;
-		private: System::Windows::Forms::StatusStrip^ statusMain;
 
-		private: System::Windows::Forms::ToolStripStatusLabel^ slMain;
-		private: System::Windows::Forms::ToolStripStatusLabel^ slVideoCodec;
+			literal String^ STR_FAILED_TO_SAVE_SETTING = L"Failed to save settings.";
+			literal String^ STR_0_NOT_FOUND = L"'{0}' not found.";
 
-		private: System::Windows::Forms::ToolStripStatusLabel^ slDuration;
-		private: System::Windows::Forms::ToolStripStatusLabel^ slAudioCodec;
+		private: System::Windows::Forms::ToolStripSeparator^  toolStripMenuItem3;
+		public:
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiLanguage;
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiLanguageOSDefault;
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiLanguageEnglish;
+		private: System::Windows::Forms::ToolStripMenuItem^  tsmiLanguageJapanese;
 
-				 literal String^ STR_FAILED_TO_SAVE_SETTING = L"Failed to save settings.";
+			
 		public:
 			FormMain(void);
 
@@ -91,9 +96,9 @@ namespace Ambiesoft {
 			}
 
 		protected:
-		private: System::Windows::Forms::TextBox^  txtMovie;
-		private: System::Windows::Forms::Button^  btnBrowseMovie;
-		private: System::ComponentModel::IContainer^  components;
+		private: System::Windows::Forms::TextBox^ txtMovie;
+		private: System::Windows::Forms::Button^ btnBrowseMovie;
+		private: System::ComponentModel::IContainer^ components;
 
 		private:
 			/// <summary>
@@ -109,13 +114,11 @@ namespace Ambiesoft {
 			void InitializeComponent(void);
 #pragma endregion
 
+
+
 		private:
 			bool CheckMovieAndSet(String^ file);
 
-			property String^ IniFile
-			{
-				String^ get();
-			}
 
 			String^ ffprobe_;
 			property String^ FFProbe
@@ -173,7 +176,7 @@ namespace Ambiesoft {
 			System::Drawing::Icon^ iconRed_;
 
 			String^ outputMovie_;
-			
+
 			void SetCodecStatusText();
 
 			String^ inputAudioCodec_;
@@ -235,7 +238,7 @@ namespace Ambiesoft {
 			String^ buildTitleText(int percent, bool bFilenameOnly);
 			void UpdateTitle();
 			void UpdateTitle(int percent);
-			
+
 			String^ GetFFMpegOutput(String^ option);
 			String^ GetFFMpegHelp(String^ subHelpOption);
 			void StartOfThread(Object^ obj);
@@ -248,58 +251,58 @@ namespace Ambiesoft {
 			void ChangeStartButtonText(String^ text);
 			void OnProcessStarted(Object^ sender, EventArgs^ e);
 
-			System::Void FormMain_Load(System::Object^  sender, System::EventArgs^  e);
-			System::Void exitToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			System::Void FormMain_Load(System::Object^ sender, System::EventArgs^ e);
+			System::Void exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 				Close();
 			}
 
-			System::Void btnBrowseMovie_Click(System::Object^  sender, System::EventArgs^  e);
-			System::Void btnStart_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void btnBrowseMovie_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void btnStart_Click(System::Object^ sender, System::EventArgs^ e);
 			void outputHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
 			void errHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
 
-			System::Void FormMain_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e);
-			System::Void FormMain_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e);
+			System::Void FormMain_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
+			System::Void FormMain_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e);
 
-			System::Void txtMovie_DragOver(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
-			System::Void txtMovie_DragEnter(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
-			System::Void txtMovie_DragLeave(System::Object^  sender, System::EventArgs^  e);
-			System::Void txtMovie_DragDrop(System::Object^  sender, System::Windows::Forms::DragEventArgs^  e);
+			System::Void txtMovie_DragOver(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
+			System::Void txtMovie_DragEnter(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
+			System::Void txtMovie_DragLeave(System::Object^ sender, System::EventArgs^ e);
+			System::Void txtMovie_DragDrop(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
 
-			System::Void tsmiSetFFProbe_Click(System::Object^  sender, System::EventArgs^  e);
-			System::Void tsmiSetFFMpeg_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiSetFFProbe_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiSetFFMpeg_Click(System::Object^ sender, System::EventArgs^ e);
 
 			String^ baseSetFFProbeMenuString_;
 			String^ baseSetFFMpegMenuString_;
 
-			System::Void tsmiOption_DropDownOpening(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiOption_DropDownOpening(System::Object^ sender, System::EventArgs^ e);
 
-			
+
 
 			void OnMenuPriorityCommon(bool bBackground);
-			System::Void tsmiPriorityNormal_Click(System::Object^  sender, System::EventArgs^  e);
-			System::Void tsmiPriorityBackground_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiPriorityNormal_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiPriorityBackground_Click(System::Object^ sender, System::EventArgs^ e);
 
-			System::Void tsmiAbout_Click(System::Object^  sender, System::EventArgs^  e);
-			System::Void tsmiFFMpegHelp_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiAbout_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiFFMpegHelp_Click(System::Object^ sender, System::EventArgs^ e);
 
-			
 
-			System::Void FormMain_Resize(System::Object^  sender, System::EventArgs^  e);
-			System::Void notifyIconMain_MouseClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e);
-			System::Void tsmiMinimizeToTray_Click(System::Object^  sender, System::EventArgs^  e);
 
-			System::Void tsmiStop_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void FormMain_Resize(System::Object^ sender, System::EventArgs^ e);
+			System::Void notifyIconMain_MouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
+			System::Void tsmiMinimizeToTray_Click(System::Object^ sender, System::EventArgs^ e);
 
-			System::Void tsmiNotifyShow_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiStop_Click(System::Object^ sender, System::EventArgs^ e);
+
+			System::Void tsmiNotifyShow_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiNotifyStart_Click(System::Object^ sender, System::EventArgs^ e);
 
 #ifdef _DEBUG
 			System::Void FormMain_OnTest(System::Object^ sender, System::EventArgs^ e);
 #endif
-			
 
-			
+			System::Void tsmiLanguageCommon_Click(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiLanguage_DropDownOpening(System::Object^  sender, System::EventArgs^  e);
 
 };
 

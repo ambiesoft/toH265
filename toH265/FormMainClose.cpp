@@ -48,15 +48,15 @@ namespace Ambiesoft {
 
 		System::Void FormMain::FormMain_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e)
 		{
-			DTRACE(L"INI=" + IniFile);
-			HashIni^ ini = Profile::ReadAll(IniFile);
+			DTRACE(L"INI=" + Program::IniFile);
+			HashIni^ ini = Profile::ReadAll(Program::IniFile);
 
 			bool success = true;
 			success &= AmbLib::SaveFormXYWH(this, SECTION_LOCATION, ini);
 
 			if (success)
 			{
-				success = Profile::WriteAll(ini, IniFile);
+				success = Profile::WriteAll(ini, Program::IniFile);
 			}
 			if (!success)
 			{

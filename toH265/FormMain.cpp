@@ -19,19 +19,9 @@ namespace Ambiesoft {
 
 		using namespace Newtonsoft::Json::Linq;
 
-		String^ FormMain::IniFile::get()
-		{
-			return Path::Combine(Path::GetDirectoryName(Application::ExecutablePath),
-				Path::GetFileNameWithoutExtension(Application::ExecutablePath) + L".ini");
-		}
 
-#ifdef _DEBUG
-		System::Void FormMain::FormMain_OnTest(System::Object^ sender, System::EventArgs^ e)
-		{
-			TargetCodecDialog dlg;
-			dlg.ShowDialog();
-		}
-#endif
+
+
 
 		void GetStreamInfo(String^ ffprobe, String^ moviefile, String^% audiocodec, String^% videocodec, TimeSpan% ts)
 		{
@@ -39,7 +29,7 @@ namespace Ambiesoft {
 
 			if (String::IsNullOrEmpty(ffprobe) || !File::Exists(ffprobe))
 			{
-				CppUtils::Alert(I18N(L"ffprobe not found"));
+				CppUtils::Alert(String::Format(I18N(FormMain::STR_0_NOT_FOUND), L"ffprobe"));
 				return;
 			}
 
@@ -113,7 +103,7 @@ namespace Ambiesoft {
 			{
 				if (!File::Exists(moviefile))
 				{
-					CppUtils::Alert(this, String::Format(I18N(L"Not found '{0}'."), moviefile));
+					CppUtils::Alert(this, String::Format(I18N(STR_0_NOT_FOUND), moviefile));
 					ReturnValue = RETURN_FILENOTFOUND;
 					return false;
 				}
@@ -743,17 +733,17 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 		System::Void FormMain::tsmiSetFFProbe_Click(System::Object^  sender, System::EventArgs^  e)
 		{
 			ffprobe_ = nullptr;
-			getCommon(this, false, SECTION_OPTION, KEY_FFPROBE, IniFile, ffprobe_, true);
+			getCommon(this, false, SECTION_OPTION, KEY_FFPROBE, Program::IniFile, ffprobe_, true);
 		}
 		System::Void FormMain::tsmiSetFFMpeg_Click(System::Object^  sender, System::EventArgs^  e)
 		{
 			ffmpeg_ = nullptr;
-			getCommon(this, true, SECTION_OPTION, KEY_FFMPEG, IniFile, ffmpeg_, true);
+			getCommon(this, true, SECTION_OPTION, KEY_FFMPEG, Program::IniFile, ffmpeg_, true);
 		}
 
 
 
-	
+		
 		
 
 		System::Void FormMain::tsmiStop_Click(System::Object^  sender, System::EventArgs^  e)

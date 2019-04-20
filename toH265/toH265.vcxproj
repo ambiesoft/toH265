@@ -202,12 +202,14 @@
     <ClCompile Include="FormMainAbout.cpp" />
     <ClCompile Include="FormMainClose.cpp" />
     <ClCompile Include="FormMainCtor.cpp" />
+    <ClCompile Include="FormMainCulture.cpp" />
     <ClCompile Include="FormMainDragDrop.cpp" />
     <ClCompile Include="FormMaineInitializeComponent.cpp" />
     <ClCompile Include="FormMainEmpty.cpp" />
     <ClCompile Include="FormMainFFMpeg.cpp" />
     <ClCompile Include="FormMainLoad.cpp" />
     <ClCompile Include="FormMainPriority.cpp" />
+    <ClCompile Include="FormMainTest.cpp" />
     <ClCompile Include="FormMainTray.cpp" />
     <ClCompile Include="helper.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -250,6 +252,8 @@
     <EmbeddedResource Include="TargetCodecDialog.resx">
       <DependentUpon>TargetCodecDialog.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="toH265.ja-JP.resx" />
+    <EmbeddedResource Include="toH265.resx" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="history.txt" />
