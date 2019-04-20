@@ -122,10 +122,10 @@
     <EmbeddedResource Include="TargetCodecDialog.resx">
       <Filter>3 Resource Files</Filter>
     </EmbeddedResource>
-    <EmbeddedResource Include="toH265.resx">
+    <EmbeddedResource Include="toH265Strings.resx">
       <Filter>3 Resource Files</Filter>
     </EmbeddedResource>
-    <EmbeddedResource Include="toH265.ja-JP.resx">
+    <EmbeddedResource Include="toH265Strings.ja-JP.resx">
       <Filter>3 Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>

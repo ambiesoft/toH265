@@ -144,4 +144,100 @@
   <data name="version" xml:space="preserve">
     <value>バージョン</value>
   </data>
+  <data name="&amp;Pause" xml:space="preserve">
+    <value>一時停止(&amp;P)</value>
+  </data>
+  <data name="'{0}' already has a stream of {1}." xml:space="preserve">
+    <value>'{0}'はすでに'{1}'のストリームです。</value>
+  </data>
+  <data name="'{0}' does not have a video stream." xml:space="preserve">
+    <value>'{0}'には動画ストリームが存在しません。</value>
+  </data>
+  <data name="'{0}' does not have duration." xml:space="preserve">
+    <value>'{0}'には再生時間が存在しません。</value>
+  </data>
+  <data name="'{0}' not found." xml:space="preserve">
+    <value>'{0}'が見つかりません。</value>
+  </data>
+  <data name="Audio codec = {0}" xml:space="preserve">
+    <value>音声コーデック＝{0}</value>
+  </data>
+  <data name="Command '{0} {1}' exited with {2}." xml:space="preserve">
+    <value>コマンド '{0} {1}' が {2} で失敗しました。</value>
+  </data>
+  <data name="d'd 'h'h 'm'm'" xml:space="preserve">
+    <value>d'日 'h'時間 'm'分'</value>
+  </data>
+  <data name="Duration = {0}" xml:space="preserve">
+    <value>再生時間＝{0}</value>
+  </data>
+  <data name="Encoding is in progress. Are you sure to quit?" xml:space="preserve">
+    <value>エンコーディングが進行中です。本当に終了しますか？</value>
+  </data>
+  <data name="Encoding Succeeded." xml:space="preserve">
+    <value>エンコードが成功しました。</value>
+  </data>
+  <data name="Failed to get function pointer for suspend or resume processes." xml:space="preserve">
+    <value>プロセスの一時停止、再開のための関数ポインタの取得に失敗しました。</value>
+  </data>
+  <data name="Failed to kill process." xml:space="preserve">
+    <value>プロセスのキルに失敗しました。</value>
+  </data>
+  <data name="Failed to load images." xml:space="preserve">
+    <value>画像の読み込みに失敗しました。</value>
+  </data>
+  <data name="Failed to resume process." xml:space="preserve">
+    <value>プロセスの再開に失敗しました。</value>
+  </data>
+  <data name="Failed to save settings." xml:space="preserve">
+    <value>設定の保存に失敗しました。</value>
+  </data>
+  <data name="Failed to suspend process." xml:space="preserve">
+    <value>プロセスの一時停止に失敗しました。</value>
+  </data>
+  <data name="FFMpeg process not found." xml:space="preserve">
+    <value>FFMpegのプロセスが見つかりません。</value>
+  </data>
+  <data name="h'h 'm'm'" xml:space="preserve">
+    <value>h'時間 'm'分'</value>
+  </data>
+  <data name="input movie is empty." xml:space="preserve">
+    <value>入力映像がありません。</value>
+  </data>
+  <data name="Intermidiate state. Wait a while and do it again." xml:space="preserve">
+    <value>中間状態です。少し待ってから再開してください。</value>
+  </data>
+  <data name="No audio codec selected." xml:space="preserve">
+    <value>音声コーデックが選択されていません。</value>
+  </data>
+  <data name="No outputs found." xml:space="preserve">
+    <value>出力が見つかりません。</value>
+  </data>
+  <data name="No video codec selected." xml:space="preserve">
+    <value>映像コーデックが選択されていません。</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>準備完了</value>
+  </data>
+  <data name="Res&amp;ume" xml:space="preserve">
+    <value>再開(&amp;U)</value>
+  </data>
+  <data name="This file does not look like '{0}'." xml:space="preserve">
+    <value>このファイルは'{0}'ではないようです。</value>
+  </data>
+  <data name="Too many input files" xml:space="preserve">
+    <value>入力ファイルが多すぎます。</value>
+  </data>
+  <data name="Unknow Error." xml:space="preserve">
+    <value>未知のエラーです。</value>
+  </data>
+  <data name="Video codec = {0}" xml:space="preserve">
+    <value>映像コーデック＝{0}</value>
+  </data>
+  <data name="{0} left" xml:space="preserve">
+    <value>残り {0}</value>
+  </data>
+  <data name="The application needs to restart for the change to take effect." xml:space="preserve">
+    <value>変更を有効にするにはアプリケーションを再起動する必要があります。</value>
+  </data>
 </root>

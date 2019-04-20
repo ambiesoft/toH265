@@ -386,7 +386,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			processSuspeded_ = false;
 			processTerminated_ = false;
 
-			ChangeStartButtonText(I18N(BUTTONTEXT_PAUSE));
+			ChangeStartButtonText(I18N(STR_BUTTONTEXT_PAUSE));
 
 			txtMovie->Enabled = false;
 			txtMovie->AllowDrop = false;
@@ -410,7 +410,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 
 			processFFMpeg_ = nullptr;
 
-			ChangeStartButtonText(I18N(BUTTONTEXT_START));
+			ChangeStartButtonText(I18N(STR_BUTTONTEXT_START));
 
 			txtMovie->Enabled = true;
 			txtMovie->AllowDrop = true;
@@ -517,7 +517,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 					CppUtils::Alert(this, I18N(L"Failed to resume process."));
 					return;
 				}
-				ChangeStartButtonText(I18N(BUTTONTEXT_PAUSE));
+				ChangeStartButtonText(I18N(STR_BUTTONTEXT_PAUSE));
 				processSuspeded_ = false;
 				this->Icon = iconRed_;
 				notifyIconMain->Icon = iconRed_;
@@ -531,7 +531,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 					CppUtils::Alert(this, I18N(L"Failed to suspend process."));
 					return;
 				}
-				ChangeStartButtonText(I18N(BUTTONTEXT_RESUME));
+				ChangeStartButtonText(I18N(STR_BUTTONTEXT_RESUME));
 				processSuspeded_ = true;
 				this->Icon = iconYellow_;
 				notifyIconMain->Icon = iconYellow_;
@@ -543,7 +543,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 			String^ ffmpeg = FFMpeg;
 			if (String::IsNullOrEmpty(ffmpeg) || !File::Exists(ffmpeg))
 			{
-				CppUtils::Alert(this, I18N(L"ffmpeg not found."));
+				CppUtils::Alert(this, String::Format(I18N(STR_0_NOT_FOUND), L"ffmpeg"));
 				return;
 			}
 
@@ -705,7 +705,7 @@ frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/
 				SafeJoin(thFFMpeg_);
 				thFFMpeg_ = nullptr;
 
-				ChangeStartButtonText(I18N(BUTTONTEXT_RESUME));
+				ChangeStartButtonText(I18N(STR_BUTTONTEXT_RESUME));
 				processSuspeded_ = true;
 				return;
 			case TaskState::Unknown:

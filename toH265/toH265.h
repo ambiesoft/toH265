@@ -11,7 +11,7 @@ namespace Ambiesoft {
 			static String^ movieFile_;
 			static System::Globalization::CultureInfo^ cultureInfo_;
 			static System::Resources::ResourceManager^ theResource_ = 
-				gcnew System::Resources::ResourceManager(L"Ambiesoft.toH265.toH265", 
+				gcnew System::Resources::ResourceManager(L"Ambiesoft.toH265.toH265Strings", 
 					System::Reflection::Assembly::GetExecutingAssembly());
 			static bool preRun();
 

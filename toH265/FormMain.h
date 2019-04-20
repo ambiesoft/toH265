@@ -22,6 +22,24 @@ namespace Ambiesoft {
 		/// </summary>
 		public ref class FormMain : public System::Windows::Forms::Form
 		{
+		public:
+			literal String^ SECTION_OPTION = L"Option";
+			literal String^ SECTION_LOCATION = L"Location";
+
+			literal String^ KEY_FFPROBE = L"ffprobe";
+			literal String^ KEY_FFMPEG = L"ffmpeg";
+			literal String^ KEY_PROCESS_BACKGROUND = L"processbackground";
+			literal String^ KEY_MINIMIZETOTRAY = L"minimizetotray";
+			literal String^ KEY_CULTURE = L"culture";
+
+
+			literal String^ STR_BUTTONTEXT_PAUSE = L"&Pause";
+			literal String^ STR_BUTTONTEXT_START = L"&Start";
+			literal String^ STR_BUTTONTEXT_RESUME = L"Res&ume";
+
+			literal String^ STR_FAILED_TO_SAVE_SETTING = L"Failed to save settings.";
+			literal String^ STR_0_NOT_FOUND = L"'{0}' not found.";
+
 		private: System::Windows::Forms::TextBox^ txtLogErr;
 		private: System::Windows::Forms::TextBox^ txtLogOut;
 		private: System::Windows::Forms::Button^ btnStart;
@@ -53,23 +71,7 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::ToolStripStatusLabel^ slDuration;
 		private: System::Windows::Forms::ToolStripStatusLabel^ slAudioCodec;
 
-		public:
-			literal String^ SECTION_OPTION = L"Option";
-			literal String^ SECTION_LOCATION = L"Location";
-
-			literal String^ KEY_FFPROBE = L"ffprobe";
-			literal String^ KEY_FFMPEG = L"ffmpeg";
-			literal String^ KEY_PROCESS_BACKGROUND = L"processbackground";
-			literal String^ KEY_MINIMIZETOTRAY = L"minimizetotray";
-			literal String^ KEY_CULTURE = L"culture";
-
-
-			literal String^ BUTTONTEXT_PAUSE = L"&Pause";
-			literal String^ BUTTONTEXT_START = L"&Start";
-			literal String^ BUTTONTEXT_RESUME = L"Res&ume";
-
-			literal String^ STR_FAILED_TO_SAVE_SETTING = L"Failed to save settings.";
-			literal String^ STR_0_NOT_FOUND = L"'{0}' not found.";
+	
 
 		private: System::Windows::Forms::ToolStripSeparator^  toolStripMenuItem3;
 		public:

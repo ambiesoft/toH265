@@ -45,7 +45,16 @@ namespace Ambiesoft {
 
 			String^ lang = item->Tag ? item->Tag->ToString() : String::Empty;
 
-			Program::Culture = lang;
+			try
+			{
+				Program::Culture = lang;
+				CppUtils::Info(I18N("The application needs to restart for the change to take effect."));
+				return;
+			}
+			catch (Exception^ ex)
+			{
+				CppUtils::Fatal(ex);
+			}
 		}
 	}
 }

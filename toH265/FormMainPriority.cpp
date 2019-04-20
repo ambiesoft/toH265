@@ -31,7 +31,7 @@ namespace Ambiesoft {
 				DASSERT(pidFFMpeg_ != 0);
 				if (pidFFMpeg_ == 0)
 				{
-					CppUtils::Alert(I18N(L"FFMpeg process not found"));
+					CppUtils::Alert(I18N(L"FFMpeg process not found."));
 					break;
 				}
 

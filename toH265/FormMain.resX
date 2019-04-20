@@ -125,7 +125,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmNotify.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 48</value>
+    <value>152, 48</value>
   </data>
   <data name="&gt;&gt;btnBrowseMovie.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -152,7 +152,7 @@
     <value>&amp;Show</value>
   </data>
   <data name="tsmiLanguageEnglish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>135, 22</value>
   </data>
   <data name="&gt;&gt;tsmiNotifyStart.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -176,7 +176,7 @@
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsmiOption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
+    <value>57, 20</value>
   </data>
   <data name="&gt;&gt;txtFFMpegArg.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -185,7 +185,7 @@
     <value>501, 316</value>
   </data>
   <data name="tsmiNotifyShow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>151, 22</value>
   </data>
   <data name="&gt;&gt;panelMain.Parent" xml:space="preserve">
     <value>$this</value>
@@ -194,7 +194,7 @@
     <value>0, 241</value>
   </data>
   <data name="tsmiPriority.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="&gt;&gt;txtLogErr.Name" xml:space="preserve">
     <value>txtLogErr</value>
@@ -804,7 +804,7 @@
     <value>4</value>
   </data>
   <data name="slVideoCodec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 17</value>
+    <value>47, 17</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -1404,7 +1404,7 @@
     <value>tsmiHelp</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>168, 6</value>
   </data>
   <data name="panelMain.Size" type="System.Drawing.Size, System.Drawing">
     <value>477, 264</value>
@@ -1444,7 +1444,7 @@
     <value>exitToolStripMenuItem</value>
   </data>
   <data name="slAudioCodec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 17</value>
+    <value>47, 17</value>
   </data>
   <data name="&gt;&gt;tsmiLanguageEnglish.Name" xml:space="preserve">
     <value>tsmiLanguageEnglish</value>
@@ -1462,7 +1462,7 @@
     <value>panelMain</value>
   </data>
   <data name="tsmiLanguageJapanese.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>135, 22</value>
   </data>
   <data name="&gt;&gt;tsmiSetFFMpeg.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1474,7 +1474,7 @@
     <value>477, 20</value>
   </data>
   <data name="tsmiLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
     <value>toolStripMenuItem1</value>
@@ -1489,7 +1489,7 @@
     <value>panelMain</value>
   </data>
   <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>168, 6</value>
   </data>
   <data name="statusMain.Size" type="System.Drawing.Size, System.Drawing">
     <value>501, 22</value>
@@ -1561,7 +1561,7 @@
     <value>&amp;Stop</value>
   </data>
   <data name="tsmiSetFFMpeg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1609,7 +1609,7 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsmiFFMpegHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="&gt;&gt;menuMain.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1618,7 +1618,7 @@
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsmiAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
+    <value>170, 22</value>
   </data>
   <data name="tsmiLanguageJapanese.Text" xml:space="preserve">
     <value>&amp;Japanese</value>
@@ -1630,13 +1630,13 @@
     <value>&amp;About...</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>168, 6</value>
   </data>
   <data name="slMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>344, 17</value>
+    <value>337, 17</value>
   </data>
   <data name="tsmiSetFFProbe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="&gt;&gt;tsmiFFMpegHelp.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1648,7 +1648,7 @@
     <value>&amp;File</value>
   </data>
   <data name="tsmiHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+    <value>45, 20</value>
   </data>
   <data name="tsmiLanguageOSDefault.Text" xml:space="preserve">
     <value>&amp;OS default</value>
@@ -1681,7 +1681,7 @@
     <value>tsmiLanguageOSDefault</value>
   </data>
   <data name="slDuration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 17</value>
+    <value>55, 17</value>
   </data>
   <data name="txtLogErr.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 55</value>
@@ -1720,7 +1720,7 @@
     <value>Bottom, Left, Right</value>
   </data>
   <data name="tsmiMinimizeToTray.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="&gt;&gt;tsmiStop.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1735,7 +1735,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="tsmiNotifyStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 22</value>
+    <value>151, 22</value>
   </data>
   <data name="&gt;&gt;txtMovie.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -1771,34 +1771,34 @@
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsmiStop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 22</value>
+    <value>101, 22</value>
   </data>
   <data name="&gt;&gt;btnStart.Name" xml:space="preserve">
     <value>btnStart</value>
   </data>
   <data name="tsmiLanguageOSDefault.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>135, 22</value>
   </data>
   <data name="&gt;&gt;cmNotify.Name" xml:space="preserve">
     <value>cmNotify</value>
   </data>
   <data name="tsmiPriorityNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 22</value>
+    <value>142, 22</value>
   </data>
   <data name="&gt;&gt;panelMain.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsmiPriorityBackground.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 22</value>
+    <value>142, 22</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 22</value>
+    <value>101, 22</value>
   </data>
   <data name="tsmiNotifyStart.Text" xml:space="preserve">
     <value>StartDummy</value>
   </data>
   <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
+    <value>39, 20</value>
   </data>
   <data name="&gt;&gt;statusMain.Type" xml:space="preserve">
     <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

@@ -20,7 +20,7 @@ namespace Ambiesoft {
 			notifyIconMain->Text = Application::ProductName;
 
 			Text = Application::ProductName;
-			ChangeStartButtonText(I18N(BUTTONTEXT_START));
+			ChangeStartButtonText(I18N(STR_BUTTONTEXT_START));
 			CheckMovieAndSet(Program::MovieFile);
 		}
 	}
