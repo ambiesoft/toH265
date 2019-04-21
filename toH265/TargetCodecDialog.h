@@ -47,6 +47,8 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::Button^  btnOK;
 		internal:
 		private: System::Windows::Forms::Button^  btnCancel;
+		internal: System::Windows::Forms::RadioButton^ rbCopyVideo;
+		private:
 
 
 
@@ -71,6 +73,7 @@ namespace Ambiesoft {
 			{
 				this->groupVideoCodec = (gcnew System::Windows::Forms::GroupBox());
 				this->rbVp9 = (gcnew System::Windows::Forms::RadioButton());
+				this->rbCopyVideo = (gcnew System::Windows::Forms::RadioButton());
 				this->rbH265 = (gcnew System::Windows::Forms::RadioButton());
 				this->groupAudioCodec = (gcnew System::Windows::Forms::GroupBox());
 				this->rbOpus = (gcnew System::Windows::Forms::RadioButton());
@@ -87,10 +90,11 @@ namespace Ambiesoft {
 				this->groupVideoCodec->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 					| System::Windows::Forms::AnchorStyles::Right));
 				this->groupVideoCodec->Controls->Add(this->rbVp9);
+				this->groupVideoCodec->Controls->Add(this->rbCopyVideo);
 				this->groupVideoCodec->Controls->Add(this->rbH265);
 				this->groupVideoCodec->Location = System::Drawing::Point(12, 12);
 				this->groupVideoCodec->Name = L"groupVideoCodec";
-				this->groupVideoCodec->Size = System::Drawing::Size(334, 100);
+				this->groupVideoCodec->Size = System::Drawing::Size(289, 100);
 				this->groupVideoCodec->TabIndex = 1;
 				this->groupVideoCodec->TabStop = false;
 				this->groupVideoCodec->Text = L"Video Codec";
@@ -98,21 +102,33 @@ namespace Ambiesoft {
 				// rbVp9
 				// 
 				this->rbVp9->AutoSize = true;
-				this->rbVp9->Location = System::Drawing::Point(6, 42);
+				this->rbVp9->Location = System::Drawing::Point(6, 65);
 				this->rbVp9->Name = L"rbVp9";
 				this->rbVp9->Size = System::Drawing::Size(43, 17);
-				this->rbVp9->TabIndex = 1;
+				this->rbVp9->TabIndex = 2;
 				this->rbVp9->TabStop = true;
 				this->rbVp9->Text = L"&vp9";
 				this->rbVp9->UseVisualStyleBackColor = true;
 				// 
+				// rbCopyVideo
+				// 
+				this->rbCopyVideo->AutoSize = true;
+				this->rbCopyVideo->Checked = true;
+				this->rbCopyVideo->Location = System::Drawing::Point(6, 19);
+				this->rbCopyVideo->Name = L"rbCopyVideo";
+				this->rbCopyVideo->Size = System::Drawing::Size(48, 17);
+				this->rbCopyVideo->TabIndex = 0;
+				this->rbCopyVideo->TabStop = true;
+				this->rbCopyVideo->Text = L"&copy";
+				this->rbCopyVideo->UseVisualStyleBackColor = true;
+				// 
 				// rbH265
 				// 
 				this->rbH265->AutoSize = true;
-				this->rbH265->Location = System::Drawing::Point(6, 19);
+				this->rbH265->Location = System::Drawing::Point(6, 42);
 				this->rbH265->Name = L"rbH265";
 				this->rbH265->Size = System::Drawing::Size(82, 17);
-				this->rbH265->TabIndex = 0;
+				this->rbH265->TabIndex = 1;
 				this->rbH265->TabStop = true;
 				this->rbH265->Text = L"&hevc (h265)";
 				this->rbH265->UseVisualStyleBackColor = true;
@@ -126,7 +142,7 @@ namespace Ambiesoft {
 				this->groupAudioCodec->Controls->Add(this->rbCopyAudio);
 				this->groupAudioCodec->Location = System::Drawing::Point(12, 118);
 				this->groupAudioCodec->Name = L"groupAudioCodec";
-				this->groupAudioCodec->Size = System::Drawing::Size(334, 100);
+				this->groupAudioCodec->Size = System::Drawing::Size(289, 100);
 				this->groupAudioCodec->TabIndex = 1;
 				this->groupAudioCodec->TabStop = false;
 				this->groupAudioCodec->Text = L"Audio Codec";
@@ -156,19 +172,20 @@ namespace Ambiesoft {
 				// rbCopyAudio
 				// 
 				this->rbCopyAudio->AutoSize = true;
+				this->rbCopyAudio->Checked = true;
 				this->rbCopyAudio->Location = System::Drawing::Point(6, 19);
 				this->rbCopyAudio->Name = L"rbCopyAudio";
 				this->rbCopyAudio->Size = System::Drawing::Size(48, 17);
 				this->rbCopyAudio->TabIndex = 0;
 				this->rbCopyAudio->TabStop = true;
-				this->rbCopyAudio->Text = L"&copy";
+				this->rbCopyAudio->Text = L"c&opy";
 				this->rbCopyAudio->UseVisualStyleBackColor = true;
 				// 
 				// btnOK
 				// 
 				this->btnOK->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 				this->btnOK->DialogResult = System::Windows::Forms::DialogResult::OK;
-				this->btnOK->Location = System::Drawing::Point(190, 241);
+				this->btnOK->Location = System::Drawing::Point(145, 244);
 				this->btnOK->Name = L"btnOK";
 				this->btnOK->Size = System::Drawing::Size(75, 23);
 				this->btnOK->TabIndex = 2;
@@ -179,7 +196,7 @@ namespace Ambiesoft {
 				// 
 				this->btnCancel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 				this->btnCancel->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-				this->btnCancel->Location = System::Drawing::Point(271, 241);
+				this->btnCancel->Location = System::Drawing::Point(226, 244);
 				this->btnCancel->Name = L"btnCancel";
 				this->btnCancel->Size = System::Drawing::Size(75, 23);
 				this->btnCancel->TabIndex = 3;
@@ -192,13 +209,14 @@ namespace Ambiesoft {
 				this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 				this->CancelButton = this->btnCancel;
-				this->ClientSize = System::Drawing::Size(358, 271);
+				this->ClientSize = System::Drawing::Size(313, 274);
 				this->Controls->Add(this->btnCancel);
 				this->Controls->Add(this->btnOK);
 				this->Controls->Add(this->groupAudioCodec);
 				this->Controls->Add(this->groupVideoCodec);
 				this->MaximizeBox = false;
 				this->MinimizeBox = false;
+				this->MinimumSize = System::Drawing::Size(194, 292);
 				this->Name = L"TargetCodecDialog";
 				this->ShowIcon = false;
 				this->ShowInTaskbar = false;

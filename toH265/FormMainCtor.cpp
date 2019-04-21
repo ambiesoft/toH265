@@ -20,33 +20,21 @@ namespace Ambiesoft {
 
 		FormMain::FormMain()
 		{
-			regFFMpeg_ = gcnew RegularExpressions::Regex("frame=.*fps=.*size=.*time=(\\d\\d:\\d\\d:\\d\\d)\\.\\d\\d.*speed=\\s*(-?\\d+(?:\\.\\d+)?)x");
-			/*
-			frame=   61 fps= 18 q=-0.0 size=       0kB time=00:00:02.08 bitrate=   0.2kbits/s dup=1 drop=0 speed=0.619x
-			frame=   69 fps= 17 q=-0.0 size=       0kB time=00:00:02.34 bitrate=   0.2kbits/s dup=1 drop=0 speed=0.591x
-			frame=   76 fps= 17 q=-0.0 size=       0kB time=00:00:02.57 bitrate=   0.1kbits/s dup=1 drop=0 speed=0.566x
-			frame=   85 fps= 17 q=-0.0 size=       0kB time=00:00:02.87 bitrate=   0.1kbits/s dup=1 drop=0 speed=0.566x
-			*/
-			
-		/*	String^ text = "frame=  695 fps= 18 q=0.0 size=     363kB time=00:00:23.20 bitrate= 128.0kbits/s speed= 0.6x";
-			if (regFFMpeg_->IsMatch(text))
+			regFFMpeg_ = gcnew RegularExpressions::Regex(
+"frame=.*fps=.*size=.*time=(?<time>.*)\\.\\d\\d.*speed=\\s*(?<speed>.*)"
+			);
+
+#ifdef _DEBUG
+			List<String^> ls;
+			ls.Add("frame=   61 fps= 18 q=-0.0 size=       0kB time=00:00:02.08 bitrate=   0.2kbits/s dup=1 drop=0 speed=0.619x");
+			ls.Add("frame=    0 fps=0.0 q=0.0 size=       0kB time=-577014:32:22.77 bitrate=  -0.0kbits/s speed=N/A");
+			for each (String ^ text in ls)
 			{
-				RegularExpressions::Match^ match = regFFMpeg_->Match(text);
-				String^ timeValue = match->Groups[1]->Value;
-
-				DateTime dtTime = DateTime::ParseExact(timeValue, L"hh:mm:ss",
-					System::Globalization::CultureInfo::InvariantCulture);
-				TimeSpan tsTime = dtTime - dtTime.Date;
-
-				String^ speedValue = match->Groups[2]->Value;
-				double dblSpeed;
-				double::TryParse(speedValue, dblSpeed);
-
-				UpdateTitleTS(tsTime, dblSpeed);
-				txtLogOut->Text = text;
-			}*/
-		
-
+				TimeSpan ts;
+				double dbSpeed;
+				GetInfoFromFFMpegoutput(text, ts, dbSpeed);
+			}
+#endif // _DEBUG
 
 
 

@@ -75,6 +75,9 @@
     <ClCompile Include="FormMainTest.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AVCodec.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -99,6 +102,9 @@
       <Filter>1 Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TargetCodecDialog.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AVCodec.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
   </ItemGroup>

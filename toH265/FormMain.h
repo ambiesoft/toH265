@@ -1,5 +1,6 @@
 #pragma once
 
+#include "AVCodec.h"
 
 namespace Ambiesoft {
 	namespace toH265 {
@@ -23,6 +24,8 @@ namespace Ambiesoft {
 		public ref class FormMain : public System::Windows::Forms::Form
 		{
 		public:
+			static initonly cli::array<wchar_t>^ char1x = gcnew cli::array<wchar_t>{L'x'};
+
 			literal String^ SECTION_OPTION = L"Option";
 			literal String^ SECTION_LOCATION = L"Location";
 
@@ -181,45 +184,68 @@ namespace Ambiesoft {
 
 			void SetCodecStatusText();
 
-			String^ inputAudioCodec_;
-			property String^ InputAudioCodec
+			AVCodec inputAudioCodec_;
+			property AVCodec InputAudioCodec
 			{
-				String^ get() { return inputAudioCodec_; }
-				void set(String^ v) {
+				AVCodec get() { return inputAudioCodec_; }
+				void set(AVCodec v) {
 					inputAudioCodec_ = v;
 					SetCodecStatusText();
 				}
 			}
-			String^ inputVideoCodec_;
-			property String^ InputVideoCodec
+	
+
+
+			AVCodec outputAudioCodec_;
+			property AVCodec OutputAudioCodec
 			{
-				String^ get() { return inputVideoCodec_; }
-				void set(String^ v) {
-					inputVideoCodec_ = v;
-					SetCodecStatusText();
-				}
-			}
-
-
-
-			String^ outputAudioCodec_;
-			property String^ OutputAudioCodec
-			{
-				String^ get() { return outputAudioCodec_; }
-				void set(String^ v) {
+				AVCodec get() { return outputAudioCodec_; }
+				void set(AVCodec v) {
 					outputAudioCodec_ = v;
 					SetCodecStatusText();
 				}
 			}
-			String^ outputVideoCodec_;
-			property String^ OutputVideoCodec
+
+			AVCodec inputVideoCodec_;
+			property AVCodec InputVideoCodec
 			{
-				String^ get() { return outputVideoCodec_; }
-				void set(String^ v) {
+				AVCodec get() { return inputVideoCodec_; }
+				void set(AVCodec v) {
+					inputVideoCodec_ = v;
+					SetCodecStatusText();
+				}
+			}
+			AVCodec outputVideoCodec_;
+			property AVCodec OutputVideoCodec
+			{
+				AVCodec get() { return outputVideoCodec_; }
+				void set(AVCodec v) {
 					outputVideoCodec_ = v;
 					SetCodecStatusText();
 				}
 			}
+
+
+			void SetTimeStatusText();
+			String^ inputDuration_;
+			property String^ InputDuration
+			{
+				String^ get() { return inputDuration_; }
+				void set(String^ v) {
+					inputDuration_ = v;
+					SetTimeStatusText();
+				}
+			}
+			String^ outputDuration_;
+			property String^ OutputDuration
+			{
+				String^ get() { return outputDuration_; }
+				void set(String^ v) {
+					outputDuration_ = v;
+					SetTimeStatusText();
+				}
+			}
+
 
 			property TaskState FFMpegState
 			{
@@ -235,6 +261,7 @@ namespace Ambiesoft {
 			void SetStatusText(STATUSTEXT ss);
 			void SetStatusText(STATUSTEXT ss, String^ supplement);
 
+			bool GetInfoFromFFMpegoutput(String^ text, TimeSpan% tsTime, double% dblSpeed);
 			void UpdateTitleTS(TimeSpan ts, double speed);
 			void UpdateTitleComplete();
 			String^ buildTitleText(int percent, bool bFilenameOnly);

@@ -1,6 +1,8 @@
 #include "stdafx.h"
 
 #include "toH265.h"
+#include "TargetCodecDialog.h"
+
 #include "FormMain.h"
 
 
@@ -12,9 +14,8 @@ namespace Ambiesoft {
 #ifdef _DEBUG
 		System::Void FormMain::FormMain_OnTest(System::Object^ sender, System::EventArgs^ e)
 		{
-			//TargetCodecDialog dlg;
-			//dlg.ShowDialog();
-
+			TargetCodecDialog dlg;
+			dlg.ShowDialog();
 		}
 #endif
 	}

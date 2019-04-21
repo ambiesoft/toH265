@@ -220,6 +220,7 @@
     </ClCompile>
     <ClCompile Include="TargetCodecDialog.cpp" />
     <ClCompile Include="toH265.cpp" />
+    <ClCompile Include="AVCodec.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\lsMisc\HighDPI.h" />
@@ -234,6 +235,7 @@
     <ClInclude Include="toH265.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="AVCodec.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico" />
