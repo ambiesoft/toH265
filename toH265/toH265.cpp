@@ -105,18 +105,13 @@ namespace Ambiesoft {
 			//	return RETURN_NOINPUTFILE;
 			//}
 
-			if (args->Length > 1)
-			{
-				CppUtils::Alert(I18N(L"Too many input files"));
-				return RETURN_TOOMANYINPUTFILES;
-			}
+			//if (args->Length > 1)
+			//{
+			//	CppUtils::Alert(I18N(L"Too many input files"));
+			//	return RETURN_TOOMANYINPUTFILES;
+			//}
 
-			if (args->Length > 0)
-			{
-				movieFile_ = args[0];
-			}
-
-
+			clMovieFiles_.AddRange(args);
 
 
 			// Enabling Windows XP visual effects before any controls are created

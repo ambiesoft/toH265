@@ -53,6 +53,7 @@ namespace Ambiesoft {
 			case VC::VC_VORBIS:return "vorbis";
 			case VC::VC_VP8:return "vp8";
 			case VC::VC_VP9:return "vp9";
+			case VC::VC_MIXED:return "mixed";
 			default:
 				DASSERT(false);
 			}
@@ -76,6 +77,21 @@ namespace Ambiesoft {
 			}
 			return String::Empty;
 		}
+		void AVCodec::Merge(AVCodec^ that)
+		{
+			unknownString_ = String::Empty;
+			if (vc_ == VC::VC_NONE)
+			{
+				vc_ = that->vc_;
+				unknownString_ = that->unknownString_;
+				return;
+			}
 
+			if (this->vc_ == that->vc_)
+				return;
+
+			this->vc_ = VC::VC_MIXED;
+			unknownString_ = String::Empty;
+		}
 	}
 }

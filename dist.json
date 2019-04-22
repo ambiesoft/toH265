@@ -38,7 +38,11 @@
         "winnice.README.md",
         "libwinnice.dll",
         "winnicew.exe",
-        "ja-JP\\toH265.resources.dll"
+        "ja-JP\\toH265.resources.dll",
+        "Ambiesoft.toH265Helper.dll",
+        "Ambiesoft.toH265Helper.pdb",
+        "ListViewEx.dll",
+        "ListViewEx.pdb"
     ],
     "TotalFileCount": "exact",
     "archivedir": "C:\\Linkout",

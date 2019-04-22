@@ -4,7 +4,7 @@ namespace Ambiesoft {
 	namespace toH265 {
 		using namespace System;
 
-		value class AVCodec
+		ref class AVCodec
 		{
 		public:
 			enum class VC {
@@ -18,6 +18,7 @@ namespace Ambiesoft {
 				VC_VORBIS,
 				VC_VP8,
 				VC_VP9,
+				VC_MIXED,
 			};
 		private:
 			String^ unknownString_;
@@ -26,6 +27,12 @@ namespace Ambiesoft {
 
 			AVCodec(String^ codec);
 			AVCodec(VC vc) : vc_(vc){}
+			AVCodec():vc_(VC::VC_NONE){}
+
+			void Clear() {
+				vc_ = VC::VC_NONE;
+				unknownString_ = String::Empty;
+			}
 			property bool IsEmpty
 			{
 				bool get() { return vc_ == VC::VC_NONE; }
@@ -58,16 +65,14 @@ namespace Ambiesoft {
 			{
 				bool get() { return vc_ == VC::VC_VORBIS; }
 			}
+			property bool IsMixed
+			{
+				bool get() { return vc_ == VC::VC_MIXED; }
+			}
 			String^ ToString() override;
 			String^ ToFFMpegString();
-			//bool operator==(String^ v)
-			//{
-			//	if (String::IsNullOrEmpty(v))
-			//		return vc_ == VC::VC_NONE;
-			//	VideoCodec vc(v);
 
-			//	return vc_.ToString() == vc.ToString();
-			//}
+			void Merge(AVCodec^ that);
 		};
 
 	}

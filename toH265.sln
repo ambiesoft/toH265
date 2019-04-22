@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "toH265", "toH265\toH265.vcxproj", "{91D72104-485C-45DA-AE4B-1BFBFA67EFE1}"
 EndProject
@@ -9,6 +9,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zzzDist", "zzzDist\zzzDist.
 	ProjectSection(ProjectDependencies) = postProject
 		{91D72104-485C-45DA-AE4B-1BFBFA67EFE1} = {91D72104-485C-45DA-AE4B-1BFBFA67EFE1}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListViewCustomReorder", "ListViewEx\ListViewCustomReorder.csproj", "{53E18018-4774-4952-87F1-B91FBF23F2DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ambiesoft.toH265Helper", "Ambiesoft.toH265Helper\Ambiesoft.toH265Helper.csproj", "{353D7F61-D0C3-448D-BA44-AB7BCDD0059C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,8 +36,27 @@ Global
 		{9F0ED5E4-18FB-4517-B3BD-88CB23122271}.Release|Win32.Build.0 = Release|Win32
 		{9F0ED5E4-18FB-4517-B3BD-88CB23122271}.Release|x64.ActiveCfg = Release|x64
 		{9F0ED5E4-18FB-4517-B3BD-88CB23122271}.Release|x64.Build.0 = Release|x64
+		{53E18018-4774-4952-87F1-B91FBF23F2DF}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{53E18018-4774-4952-87F1-B91FBF23F2DF}.Debug|Win32.Build.0 = Debug|Any CPU
+		{53E18018-4774-4952-87F1-B91FBF23F2DF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{53E18018-4774-4952-87F1-B91FBF23F2DF}.Debug|x64.Build.0 = Debug|Any CPU
+		{53E18018-4774-4952-87F1-B91FBF23F2DF}.Release|Win32.ActiveCfg = Release|Any CPU
+		{53E18018-4774-4952-87F1-B91FBF23F2DF}.Release|Win32.Build.0 = Release|Any CPU
+		{53E18018-4774-4952-87F1-B91FBF23F2DF}.Release|x64.ActiveCfg = Release|Any CPU
+		{53E18018-4774-4952-87F1-B91FBF23F2DF}.Release|x64.Build.0 = Release|Any CPU
+		{353D7F61-D0C3-448D-BA44-AB7BCDD0059C}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{353D7F61-D0C3-448D-BA44-AB7BCDD0059C}.Debug|Win32.Build.0 = Debug|Any CPU
+		{353D7F61-D0C3-448D-BA44-AB7BCDD0059C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{353D7F61-D0C3-448D-BA44-AB7BCDD0059C}.Debug|x64.Build.0 = Debug|Any CPU
+		{353D7F61-D0C3-448D-BA44-AB7BCDD0059C}.Release|Win32.ActiveCfg = Release|Any CPU
+		{353D7F61-D0C3-448D-BA44-AB7BCDD0059C}.Release|Win32.Build.0 = Release|Any CPU
+		{353D7F61-D0C3-448D-BA44-AB7BCDD0059C}.Release|x64.ActiveCfg = Release|Any CPU
+		{353D7F61-D0C3-448D-BA44-AB7BCDD0059C}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB0829DD-AAB3-4C41-88B0-C3D113346A38}
 	EndGlobalSection
 EndGlobal

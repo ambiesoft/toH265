@@ -97,5 +97,10 @@ namespace Ambiesoft {
 			{
 			}
 		}
+
+		String^ sToString(System::Drawing::Size size)
+		{
+			return String::Format("{0}x{1}", size.Width, size.Height);
+		}
 	}
 }

@@ -16,14 +16,16 @@ namespace Ambiesoft {
 		public ref class TargetCodecDialog : public System::Windows::Forms::Form
 		{
 		public:
-			TargetCodecDialog(void)
-			{
-				InitializeComponent();
-				//
-				//TODO: Add the constructor code here
-				//
-			}
+			TargetCodecDialog(bool bLosslessable);
 
+			property bool IsReEncode
+			{
+				bool get() {
+					if (!cmbEncodeType->Enabled)
+						return false;
+					return cmbEncodeType->SelectedIndex == 1;
+				}
+			}
 		protected:
 			/// <summary>
 			/// Clean up any resources being used.
@@ -48,6 +50,8 @@ namespace Ambiesoft {
 		internal:
 		private: System::Windows::Forms::Button^  btnCancel;
 		internal: System::Windows::Forms::RadioButton^ rbCopyVideo;
+		private: System::Windows::Forms::ComboBox^ cmbEncodeType;
+		internal:
 		private:
 
 
@@ -81,6 +85,7 @@ namespace Ambiesoft {
 				this->rbCopyAudio = (gcnew System::Windows::Forms::RadioButton());
 				this->btnOK = (gcnew System::Windows::Forms::Button());
 				this->btnCancel = (gcnew System::Windows::Forms::Button());
+				this->cmbEncodeType = (gcnew System::Windows::Forms::ComboBox());
 				this->groupVideoCodec->SuspendLayout();
 				this->groupAudioCodec->SuspendLayout();
 				this->SuspendLayout();
@@ -92,7 +97,7 @@ namespace Ambiesoft {
 				this->groupVideoCodec->Controls->Add(this->rbVp9);
 				this->groupVideoCodec->Controls->Add(this->rbCopyVideo);
 				this->groupVideoCodec->Controls->Add(this->rbH265);
-				this->groupVideoCodec->Location = System::Drawing::Point(12, 12);
+				this->groupVideoCodec->Location = System::Drawing::Point(12, 59);
 				this->groupVideoCodec->Name = L"groupVideoCodec";
 				this->groupVideoCodec->Size = System::Drawing::Size(289, 100);
 				this->groupVideoCodec->TabIndex = 1;
@@ -140,7 +145,7 @@ namespace Ambiesoft {
 				this->groupAudioCodec->Controls->Add(this->rbOpus);
 				this->groupAudioCodec->Controls->Add(this->rbAac);
 				this->groupAudioCodec->Controls->Add(this->rbCopyAudio);
-				this->groupAudioCodec->Location = System::Drawing::Point(12, 118);
+				this->groupAudioCodec->Location = System::Drawing::Point(12, 165);
 				this->groupAudioCodec->Name = L"groupAudioCodec";
 				this->groupAudioCodec->Size = System::Drawing::Size(289, 100);
 				this->groupAudioCodec->TabIndex = 1;
@@ -185,23 +190,36 @@ namespace Ambiesoft {
 				// 
 				this->btnOK->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 				this->btnOK->DialogResult = System::Windows::Forms::DialogResult::OK;
-				this->btnOK->Location = System::Drawing::Point(145, 244);
+				this->btnOK->Location = System::Drawing::Point(145, 291);
 				this->btnOK->Name = L"btnOK";
 				this->btnOK->Size = System::Drawing::Size(75, 23);
 				this->btnOK->TabIndex = 2;
 				this->btnOK->Text = L"&OK";
 				this->btnOK->UseVisualStyleBackColor = true;
+				this->btnOK->Click += gcnew System::EventHandler(this, &TargetCodecDialog::BtnOK_Click);
 				// 
 				// btnCancel
 				// 
 				this->btnCancel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
 				this->btnCancel->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-				this->btnCancel->Location = System::Drawing::Point(226, 244);
+				this->btnCancel->Location = System::Drawing::Point(226, 291);
 				this->btnCancel->Name = L"btnCancel";
 				this->btnCancel->Size = System::Drawing::Size(75, 23);
 				this->btnCancel->TabIndex = 3;
 				this->btnCancel->Text = L"&Cancel";
 				this->btnCancel->UseVisualStyleBackColor = true;
+				// 
+				// cmbEncodeType
+				// 
+				this->cmbEncodeType->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+					| System::Windows::Forms::AnchorStyles::Right));
+				this->cmbEncodeType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+				this->cmbEncodeType->FormattingEnabled = true;
+				this->cmbEncodeType->Location = System::Drawing::Point(18, 12);
+				this->cmbEncodeType->Name = L"cmbEncodeType";
+				this->cmbEncodeType->Size = System::Drawing::Size(283, 21);
+				this->cmbEncodeType->TabIndex = 4;
+				this->cmbEncodeType->SelectedIndexChanged += gcnew System::EventHandler(this, &TargetCodecDialog::CmbEncodeType_SelectedIndexChanged);
 				// 
 				// TargetCodecDialog
 				// 
@@ -209,7 +227,8 @@ namespace Ambiesoft {
 				this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 				this->CancelButton = this->btnCancel;
-				this->ClientSize = System::Drawing::Size(313, 274);
+				this->ClientSize = System::Drawing::Size(313, 321);
+				this->Controls->Add(this->cmbEncodeType);
 				this->Controls->Add(this->btnCancel);
 				this->Controls->Add(this->btnOK);
 				this->Controls->Add(this->groupAudioCodec);
@@ -230,6 +249,10 @@ namespace Ambiesoft {
 
 			}
 #pragma endregion
-		};
+		private: 
+			System::Void CmbEncodeType_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
+			System::Void BtnOK_Click(System::Object^ sender, System::EventArgs^ e);
+		
+};
 	}
 }

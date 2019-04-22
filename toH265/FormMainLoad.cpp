@@ -14,14 +14,15 @@ namespace Ambiesoft {
 			baseSetFFProbeMenuString_ = tsmiSetFFProbe->Text;
 			baseSetFFMpegMenuString_ = tsmiSetFFMpeg->Text;
 
-			AmbLib::MakeTripleClickTextBox(txtMovie, GetDoubleClickTime());
 			AmbLib::MakeTripleClickTextBox(txtFFMpegArg, GetDoubleClickTime());
 
 			notifyIconMain->Text = Application::ProductName;
 
 			Text = Application::ProductName;
 			ChangeStartButtonText(I18N(STR_BUTTONTEXT_START));
-			CheckMovieAndSet(Program::MovieFile);
+
+			for each (String ^ file in Program::CmdMovieFiles)
+				CheckMovieAndSet(file, true);
 		}
 	}
 }

@@ -28,13 +28,15 @@ namespace Ambiesoft {
 
 			literal String^ SECTION_OPTION = L"Option";
 			literal String^ SECTION_LOCATION = L"Location";
+			literal String^ SECTION_COLUMNS = L"Columns";
 
 			literal String^ KEY_FFPROBE = L"ffprobe";
 			literal String^ KEY_FFMPEG = L"ffmpeg";
 			literal String^ KEY_PROCESS_BACKGROUND = L"processbackground";
 			literal String^ KEY_MINIMIZETOTRAY = L"minimizetotray";
 			literal String^ KEY_CULTURE = L"culture";
-
+			literal String^ KEY_LISTVIEW_COLUMNS = L"columns";
+			literal String^ KEY_SPLITROOT_DISTANCE = L"sprootdistance";
 
 			literal String^ STR_BUTTONTEXT_PAUSE = L"&Pause";
 			literal String^ STR_BUTTONTEXT_START = L"&Start";
@@ -46,12 +48,12 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::TextBox^ txtLogErr;
 		private: System::Windows::Forms::TextBox^ txtLogOut;
 		private: System::Windows::Forms::Button^ btnStart;
-		private: System::Windows::Forms::TextBox^ txtFFMpegArg;
+
 		private: System::Windows::Forms::MenuStrip^ menuMain;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiFile;
 		private: System::Windows::Forms::ToolStripMenuItem^ exitToolStripMenuItem;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiOption;
-		private: System::Windows::Forms::Panel^ panelMain;
+
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiSetFFProbe;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiSetFFMpeg;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiHelp;
@@ -81,7 +83,18 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::ToolStripMenuItem^  tsmiLanguage;
 		private: System::Windows::Forms::ToolStripMenuItem^  tsmiLanguageOSDefault;
 		private: System::Windows::Forms::ToolStripMenuItem^  tsmiLanguageEnglish;
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiLanguageJapanese;
+
+
+
+
+
+
+		private: System::Windows::Forms::TextBox^ txtFFMpegArg;
+		private: System::Windows::Forms::Panel^  panelList;
+		private: System::Windows::Forms::SplitContainer^  splitRoot;
+		private: System::Windows::Forms::ToolStripStatusLabel^ slFormat;
+
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageJapanese;
 
 			
 		public:
@@ -101,7 +114,7 @@ namespace Ambiesoft {
 			}
 
 		protected:
-		private: System::Windows::Forms::TextBox^ txtMovie;
+
 		private: System::Windows::Forms::Button^ btnBrowseMovie;
 		private: System::ComponentModel::IContainer^ components;
 
@@ -122,7 +135,9 @@ namespace Ambiesoft {
 
 
 		private:
-			bool CheckMovieAndSet(String^ file);
+			ListViewCustomReorder::ListViewEx^ lvInputs = gcnew ListViewCustomReorder::ListViewEx();
+
+			bool CheckMovieAndSet(String^ file, bool bSet);
 
 
 			String^ ffprobe_;
@@ -174,7 +189,8 @@ namespace Ambiesoft {
 				Unknown,
 			};
 			System::Text::RegularExpressions::Regex^ regFFMpeg_;
-			TimeSpan tsOrigMovie_;
+			TimeSpan tsOrigMovies_;
+			String^ tempFile_;
 
 			System::Drawing::Icon^ iconBlue_;
 			System::Drawing::Icon^ iconYellow_;
@@ -182,13 +198,23 @@ namespace Ambiesoft {
 
 			String^ outputMovie_;
 
-			void SetCodecStatusText();
-
-			AVCodec inputAudioCodec_;
-			property AVCodec InputAudioCodec
+			void SetFormatStatusText();
+			String^ inputFormat_;
+			property String^ InputFormat
 			{
-				AVCodec get() { return inputAudioCodec_; }
-				void set(AVCodec v) {
+				String^ get() { return inputFormat_; }
+				void set(String^ v) {
+					inputFormat_ = v;
+					SetFormatStatusText();
+				}
+			}
+
+			void SetCodecStatusText();
+			AVCodec^ inputAudioCodec_ = gcnew AVCodec();
+			property AVCodec^ InputAudioCodec
+			{
+				AVCodec^ get() { return inputAudioCodec_; }
+				void set(AVCodec^ v) {
 					inputAudioCodec_ = v;
 					SetCodecStatusText();
 				}
@@ -196,30 +222,30 @@ namespace Ambiesoft {
 	
 
 
-			AVCodec outputAudioCodec_;
-			property AVCodec OutputAudioCodec
+			AVCodec^ outputAudioCodec_ = gcnew AVCodec();
+			property AVCodec^ OutputAudioCodec
 			{
-				AVCodec get() { return outputAudioCodec_; }
-				void set(AVCodec v) {
+				AVCodec^ get() { return outputAudioCodec_; }
+				void set(AVCodec^ v) {
 					outputAudioCodec_ = v;
 					SetCodecStatusText();
 				}
 			}
 
-			AVCodec inputVideoCodec_;
-			property AVCodec InputVideoCodec
+			AVCodec^ inputVideoCodec_ = gcnew AVCodec();
+			property AVCodec^ InputVideoCodec
 			{
-				AVCodec get() { return inputVideoCodec_; }
-				void set(AVCodec v) {
+				AVCodec^ get() { return inputVideoCodec_; }
+				void set(AVCodec^ v) {
 					inputVideoCodec_ = v;
 					SetCodecStatusText();
 				}
 			}
-			AVCodec outputVideoCodec_;
-			property AVCodec OutputVideoCodec
+			AVCodec^ outputVideoCodec_ = gcnew AVCodec();
+			property AVCodec^ OutputVideoCodec
 			{
-				AVCodec get() { return outputVideoCodec_; }
-				void set(AVCodec v) {
+				AVCodec^ get() { return outputVideoCodec_; }
+				void set(AVCodec^ v) {
 					outputVideoCodec_ = v;
 					SetCodecStatusText();
 				}
@@ -258,6 +284,17 @@ namespace Ambiesoft {
 				READY,
 				REMAINING,
 			};
+
+			void InsertMovieItem(
+				String^ movieFile,
+				System::Drawing::Size aspect,
+				String^ format,
+				AVCodec^ acodec,
+				AVCodec^ vcodec,
+				TimeSpan duration);
+			String^ GetMovieFileFromLvi(ListViewItem^ lvi);
+			String^ tsToString(TimeSpan ts);
+
 			void SetStatusText(STATUSTEXT ss);
 			void SetStatusText(STATUSTEXT ss, String^ supplement);
 
@@ -293,10 +330,9 @@ namespace Ambiesoft {
 			System::Void FormMain_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
 			System::Void FormMain_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e);
 
-			System::Void txtMovie_DragOver(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
-			System::Void txtMovie_DragEnter(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
-			System::Void txtMovie_DragLeave(System::Object^ sender, System::EventArgs^ e);
-			System::Void txtMovie_DragDrop(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
+			System::Void ListInputs_DragOver(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
+			System::Void ListInputs_DragEnter(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
+			System::Void ListInputs_DragDrop(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
 
 			System::Void tsmiSetFFProbe_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiSetFFMpeg_Click(System::Object^ sender, System::EventArgs^ e);

@@ -8,7 +8,7 @@ namespace Ambiesoft {
 
 		ref class Program
 		{
-			static String^ movieFile_;
+			static System::Collections::Generic::List<String^> clMovieFiles_;
 			static System::Globalization::CultureInfo^ cultureInfo_;
 			static System::Resources::ResourceManager^ theResource_ = 
 				gcnew System::Resources::ResourceManager(L"Ambiesoft.toH265.toH265Strings", 
@@ -40,11 +40,11 @@ namespace Ambiesoft {
 				String^ get();
 			}
 
-			static property String^ MovieFile
+			static property System::Collections::Generic::List<String^>^ CmdMovieFiles
 			{
-				String^ get()
+				System::Collections::Generic::List<String^>^ get()
 				{
-					return movieFile_;
+					return %clMovieFiles_;
 				}
 			}
 

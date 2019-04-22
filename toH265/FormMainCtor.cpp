@@ -40,6 +40,27 @@ namespace Ambiesoft {
 
 			InitializeComponent();
 
+			
+			lvInputs->Name = L"lvInputs";
+			lvInputs->UseCompatibleStateImageBehavior = false;
+			lvInputs->View = System::Windows::Forms::View::Details;
+			lvInputs->FullRowSelect = true;
+			lvInputs->HideSelection = false;
+			lvInputs->MultiSelect = false;
+			lvInputs->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragDrop);
+			lvInputs->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragEnter);
+			lvInputs->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragOver);
+			lvInputs->AllowDrop = true;
+			lvInputs->Columns->Add("directory", I18N("Directory"));
+			lvInputs->Columns->Add("filename", I18N("Filename"));
+			lvInputs->Columns->Add("aspect", I18N("Aspect"));
+			lvInputs->Columns->Add("vcodec", I18N("VideoCodec"));
+			lvInputs->Columns->Add("acodec", I18N("AudioCodec"));
+			lvInputs->Columns->Add("duration", I18N("Duration"));
+
+			lvInputs->Dock = DockStyle::Fill;
+			panelList->Controls->Add(lvInputs);
+
 			txtLogErr->Font = gcnew System::Drawing::Font(FontFamily::GenericMonospace, txtLogErr->Font->Size + 1);
 			txtLogOut->Font = gcnew System::Drawing::Font(FontFamily::GenericMonospace, txtLogOut->Font->Size + 1);
 
@@ -68,6 +89,7 @@ namespace Ambiesoft {
 
 			DASSERT(ini);
 			bool boolval;
+			int intval;
 			Profile::GetBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, false, boolval, ini);
 			if (boolval)
 			{
@@ -80,6 +102,13 @@ namespace Ambiesoft {
 
 
 			AmbLib::LoadFormXYWH(this, SECTION_LOCATION, ini);
+			
+			AmbLib::LoadListViewColumnWidth(lvInputs, SECTION_COLUMNS, KEY_LISTVIEW_COLUMNS, ini);
+			
+			if (Profile::GetInt(SECTION_OPTION, KEY_SPLITROOT_DISTANCE, 50, intval, ini))
+			{
+				splitRoot->SplitterDistance = intval;
+			}
 
 			try
 			{

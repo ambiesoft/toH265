@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 
 #include "toH265.h"
 #include "helper.h"
@@ -23,14 +23,20 @@ namespace Ambiesoft {
 
 
 
-		void GetStreamInfo(String^ ffprobe, String^ moviefile, String^% audiocodec, String^% videocodec, TimeSpan% ts)
+		void GetStreamInfo(
+			String^ ffprobe,
+			String^ moviefile,
+			String^% format,
+			String^% audiocodec,
+			String^% videocodec,
+			System::Drawing::Size% aspect,
+			TimeSpan% ts)
 		{
 			audiocodec = videocodec = nullptr;
 
 			if (String::IsNullOrEmpty(ffprobe) || !File::Exists(ffprobe))
 			{
-				CppUtils::Alert(String::Format(I18N(FormMain::STR_0_NOT_FOUND), L"ffprobe"));
-				return;
+				throw gcnew Exception(String::Format(I18N(FormMain::STR_0_NOT_FOUND), L"ffprobe"));
 			}
 
 			String^ arg = String::Format(
@@ -40,28 +46,21 @@ namespace Ambiesoft {
 			int retval;
 			String^ output;
 			String^ err;
-			try
-			{
-				AmbLib::OpenCommandGetResult(
-					ffprobe,
-					arg,
-					System::Text::Encoding::UTF8,
-					retval,
-					output,
-					err);
-			}
-			catch (Exception^ ex)
-			{
-				CppUtils::Alert(ex);
-				return;
-			}
+			AmbLib::OpenCommandGetResult(
+				ffprobe,
+				arg,
+				System::Text::Encoding::UTF8,
+				retval,
+				output,
+				err);
 
 
 			// Parse json
 			JObject^ joutput = JObject::Parse(output);
-
 			String^ duration = (String^)joutput->SelectToken("format.duration");
-
+			format = (String^)joutput->SelectToken("format.format_name");
+			int nVideos = 0;
+			int nAudios = 0;
 			for (int i = 0; i < 32; ++i)
 			{
 				String^ codec_type = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_type", i));
@@ -70,18 +69,31 @@ namespace Ambiesoft {
 
 				if (codec_type == "audio")
 				{
+					++nAudios;
 					audiocodec = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
 				}
 				else if (codec_type == "video")
 				{
+					++nVideos;
 					videocodec = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
 
-					if(String::IsNullOrEmpty(duration))
+					if (String::IsNullOrEmpty(duration))
 						duration = (String^)joutput->SelectToken(String::Format("streams[{0}].duration", i));
+
+					int width = (int)joutput->SelectToken(String::Format("streams[{0}].width", i));
+					int height = (int)joutput->SelectToken(String::Format("streams[{0}].height", i));
+					aspect = System::Drawing::Size(width, height);
 				}
 
 				if (!String::IsNullOrEmpty(audiocodec) && !String::IsNullOrEmpty(videocodec))
 				{
+					if (nAudios > 1 || nVideos > 1)
+					{
+						audiocodec = videocodec = String::Empty;
+						throw gcnew Exception(I18N("Could not handle more than 1 audio or video streams."));
+						
+						return;
+					}
 					if (String::IsNullOrEmpty(duration))
 						return;
 
@@ -91,13 +103,70 @@ namespace Ambiesoft {
 				}
 			}
 		}
+		void FormMain::InsertMovieItem(
+			String^ movieFile,
+			System::Drawing::Size aspect,
+			String^ format,
+			AVCodec^ acodec,
+			AVCodec^ vcodec,
+			TimeSpan duration)
+		{
+			ListViewItem^ lvi = gcnew ListViewItem();
+			lvi->Text = Path::GetDirectoryName(movieFile);
+			//	ListViewItem::ListViewSubItem^ subDirectory = gcnew ListViewItem::ListViewSubItem();
+			//	subDirectory->Name = "directory";
+			//	subDirectory->Text = Path::GetDirectoryName(movieFile);
+			//	lvi->SubItems->Add(subDirectory);
+			//}
 
-		bool FormMain::CheckMovieAndSet(String^ moviefile)
+			{
+				ListViewItem::ListViewSubItem^ subFilename = gcnew ListViewItem::ListViewSubItem();
+				subFilename->Name = "filename";
+				subFilename->Text = Path::GetFileName(movieFile);
+				lvi->SubItems->Add(subFilename);
+			}
+
+			{
+				ListViewItem::ListViewSubItem^ subAspect = gcnew ListViewItem::ListViewSubItem();
+				subAspect->Name = "aspect";
+				subAspect->Text = sToString(aspect);
+				lvi->SubItems->Add(subAspect);
+			}
+
+			{
+				ListViewItem::ListViewSubItem^ subFormat = gcnew ListViewItem::ListViewSubItem();
+				subFormat->Name = "format";
+				subFormat->Text = format->ToString();
+				lvi->SubItems->Add(subFormat);
+			}
+			{
+				ListViewItem::ListViewSubItem^ subVcodec = gcnew ListViewItem::ListViewSubItem();
+				subVcodec->Name = "vcodec";
+				subVcodec->Text = vcodec->ToString();
+				lvi->SubItems->Add(subVcodec);
+			}
+			{
+				ListViewItem::ListViewSubItem^ subAcodec = gcnew ListViewItem::ListViewSubItem();
+				subAcodec->Name = "acodec";
+				subAcodec->Text = acodec->ToString();
+				lvi->SubItems->Add(subAcodec);
+			}
+
+			{
+				ListViewItem::ListViewSubItem^ subDuration = gcnew ListViewItem::ListViewSubItem();
+				subDuration->Name = "duration";
+				subDuration->Text = duration.ToString();
+				lvi->SubItems->Add(subDuration);
+			}
+
+			lvInputs->Items->Add(lvi);
+		}
+		bool FormMain::CheckMovieAndSet(String^ moviefile, bool bSet)
 		{
 			WaitCursor wc;
 			if (String::IsNullOrEmpty(moviefile))
 			{
-				txtMovie->Text = String::Empty;
+				return false;
 			}
 			else
 			{
@@ -110,21 +179,32 @@ namespace Ambiesoft {
 
 				String^ audiocodec;
 				String^ videocodec;
+				String^ format;
+				System::Drawing::Size aspect;
 				TimeSpan duration;
-				GetStreamInfo(FFProbe, moviefile, audiocodec, videocodec, duration);
-				if(String::IsNullOrEmpty(videocodec))
+				try
+				{
+					GetStreamInfo(FFProbe, moviefile, format, audiocodec, videocodec, aspect, duration);
+				}
+				catch (Exception ^ ex)
+				{
+					CppUtils::Alert(this, ex->Message);
+					return false;
+				}
+
+				if (String::IsNullOrEmpty(videocodec))
 				{
 					CppUtils::Alert(this, String::Format(I18N(L"'{0}' does not have a video stream."), moviefile));
 					ReturnValue = RETURN_STREAMNOTFOUND;
 					return false;
 				}
-				if (duration.TotalMilliseconds==0)
+				if (duration.TotalMilliseconds == 0)
 				{
 					CppUtils::Alert(this, String::Format(I18N(L"'{0}' does not have duration."), moviefile));
 					ReturnValue = RETURN_DURATIONNOTFOUND;
 					return false;
 				}
-				
+
 				// Check if the encoding is already h265 or vp9
 				String^ sformat = I18N(L"'{0}' already has a stream of {1}.");
 				if (String::Compare(videocodec, "hevc", true) == 0)
@@ -139,31 +219,70 @@ namespace Ambiesoft {
 					ReturnValue = RETURN_STREAMISVP9;
 					return false;
 				}
-				txtMovie->Text = moviefile;
+
+				if (bSet)
+				{
+					InsertMovieItem(moviefile, 
+						aspect,
+						format,
+						gcnew AVCodec(audiocodec), gcnew AVCodec(videocodec),
+						duration);
+				}
+
 				DASSERT(FFMpegState == TaskState::None);
 				SetStatusText(STATUSTEXT::READY);
 
+				InputDuration = String::Empty;
+				AVCodec^ inputAudioCodec = gcnew AVCodec();
+				AVCodec^ inputVideoCodec = gcnew AVCodec();
+				String^ tryFormat;
+				double mDuration = 0;
+				for each(ListViewItem^ lvi in lvInputs->Items)
+				{
+					if (String::IsNullOrEmpty(tryFormat))
+					{
+						tryFormat = lvi->SubItems["format"]->Text;
+					}
+					else if(tryFormat=="mixed")
+					{
+						
+					}
+					else
+					{
+						// not mixed
+						if (tryFormat != lvi->SubItems["format"]->Text)
+							tryFormat = "mixed";
+					}
+					// succeeded, set values
+					inputAudioCodec->Merge(gcnew AVCodec(lvi->SubItems["acodec"]->Text));
+					inputVideoCodec->Merge(gcnew AVCodec(lvi->SubItems["vcodec"]->Text));
 
-
-				// succeeded, set values
-				InputAudioCodec = AVCodec(audiocodec);
-				InputVideoCodec = AVCodec(videocodec);
-
-				InputDuration = duration.ToString("hh\\:mm\\:ss");
-
-				tsOrigMovie_ = duration;
+					TimeSpan ts = TimeSpan::Parse(lvi->SubItems["duration"]->Text);
+					mDuration += ts.TotalMilliseconds;
+				}
+				TimeSpan all(10 * 1000 * (long long)mDuration);
+				InputDuration = all.ToString("hh\\:mm\\:ss");
+				InputFormat = tryFormat;
+				InputAudioCodec = inputAudioCodec;
+				InputVideoCodec = inputVideoCodec;
+				tsOrigMovies_ = all;
 			}
 			return true;
 		}
-		
+
+		void FormMain::SetFormatStatusText()
+		{
+			slFormat->Text = inputFormat_;
+		}
+
 		void FormMain::SetCodecStatusText()
 		{
 			{
 				StringBuilder sbAC;
-				if (!InputAudioCodec.IsEmpty)
+				if (!InputAudioCodec->IsEmpty)
 				{
 					sbAC.Append(InputAudioCodec);
-					if (!OutputAudioCodec.IsEmpty)
+					if (!OutputAudioCodec->IsEmpty)
 					{
 						sbAC.Append(" -> ");
 						sbAC.Append(OutputAudioCodec);
@@ -175,10 +294,10 @@ namespace Ambiesoft {
 
 			{
 				StringBuilder sbVC;
-				if (!InputVideoCodec.IsEmpty)
+				if (!InputVideoCodec->IsEmpty)
 				{
-					sbVC.Append(InputVideoCodec.ToString());
-					if (!OutputVideoCodec.IsEmpty)
+					sbVC.Append(InputVideoCodec->ToString());
+					if (!OutputVideoCodec->IsEmpty)
 					{
 						sbVC.Append(" -> ");
 						sbVC.Append(OutputVideoCodec);
@@ -195,7 +314,7 @@ namespace Ambiesoft {
 			if (!String::IsNullOrEmpty(InputDuration))
 			{
 				sb.Append(InputDuration);
-				if(!String::IsNullOrEmpty(OutputDuration))
+				if (!String::IsNullOrEmpty(OutputDuration))
 				{
 					sb.Append(" -> ");
 					sb.Append(OutputDuration);
@@ -208,10 +327,12 @@ namespace Ambiesoft {
 		System::Void FormMain::btnBrowseMovie_Click(System::Object^  sender, System::EventArgs^  e)
 		{
 			OpenFileDialog dlg;
+			dlg.Multiselect = true;
 			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
 				return;
 
-			CheckMovieAndSet(dlg.FileName);
+			for each(String^ file in dlg.FileNames)
+				CheckMovieAndSet(file, true);
 		}
 
 		Object^ safeEndInvoke(System::Windows::Forms::Control^ c, IAsyncResult^ r, Object^ defRet)
@@ -284,26 +405,26 @@ namespace Ambiesoft {
 			UpdateTitle(100);
 		}
 
-		String^ tsToString(TimeSpan ts)
+		String^ FormMain::tsToString(TimeSpan ts)
 		{
 			if (ts.Days != 0)
 				return ts.ToString(I18N(L"d'd 'h'h 'm'm'"));
-			
+
 			return ts.ToString(I18N(L"h'h 'm'm'"));
 		}
 		void FormMain::UpdateTitleTS(TimeSpan tsProgress, double speed)
 		{
-			double percent = (tsProgress.TotalMilliseconds / tsOrigMovie_.TotalMilliseconds) * 100;
+			double percent = (tsProgress.TotalMilliseconds / tsOrigMovies_.TotalMilliseconds) * 100;
 			UpdateTitle((int)percent);
 
-			DTRACE("All:" + tsOrigMovie_.ToString() + " " + tsOrigMovie_.TotalMilliseconds);
+			DTRACE("All:" + tsOrigMovies_.ToString() + " " + tsOrigMovies_.TotalMilliseconds);
 			DTRACE("Cur:" + tsProgress.ToString() + " " + tsProgress.TotalMilliseconds);
-			double mRemaining = tsOrigMovie_.TotalMilliseconds - tsProgress.TotalMilliseconds;
+			double mRemaining = tsOrigMovies_.TotalMilliseconds - tsProgress.TotalMilliseconds;
 			DTRACE("Remain:" + mRemaining);
 
 			if (speed == 0)
 				speed = 0.00001;
-			
+
 			TimeSpan ts = TimeSpan::FromMilliseconds(mRemaining / speed);
 
 			String^ stRemainingText = tsToString(ts);
@@ -312,7 +433,7 @@ namespace Ambiesoft {
 			String^ stElapsedText = tsProgress.ToString("hh\\:mm\\:ss");
 			OutputDuration = stElapsedText;
 		}
-		
+
 		void FormMain::SetStatusText(STATUSTEXT ss)
 		{
 			DASSERT(ss == STATUSTEXT::READY);
@@ -437,8 +558,8 @@ namespace Ambiesoft {
 
 			ChangeStartButtonText(I18N(STR_BUTTONTEXT_PAUSE));
 
-			txtMovie->Enabled = false;
-			txtMovie->AllowDrop = false;
+			lvInputs->Enabled = false;
+			lvInputs->AllowDrop = false;
 			btnBrowseMovie->Enabled = false;
 
 			this->Icon = iconRed_;
@@ -451,6 +572,16 @@ namespace Ambiesoft {
 		}
 		void FormMain::ThreadEnded(int retval)
 		{
+			if (!String::IsNullOrEmpty(tempFile_))
+			{
+				try
+				{
+					File::Delete(tempFile_);
+				}
+				catch (Exception^)
+				{
+				}
+			}
 			pidFFMpeg_ = 0;
 			processSuspeded_ = false;
 			SafeJoin(thFFMpeg_);
@@ -461,8 +592,8 @@ namespace Ambiesoft {
 
 			ChangeStartButtonText(I18N(STR_BUTTONTEXT_START));
 
-			txtMovie->Enabled = true;
-			txtMovie->AllowDrop = true;
+			lvInputs->Enabled = true;
+			lvInputs->AllowDrop = true;
 			btnBrowseMovie->Enabled = true;
 
 			this->Icon = iconBlue_;
@@ -482,10 +613,19 @@ namespace Ambiesoft {
 					// Succeeded
 					UpdateTitleComplete();
 
+					String^ format;
 					String^ ac = String::Empty;
 					String^ vc = String::Empty;
+					System::Drawing::Size aspect;
 					TimeSpan ts;
-					GetStreamInfo(FFProbe, outputMovie_, ac, vc, ts);
+					try
+					{
+						GetStreamInfo(FFProbe, outputMovie_, format, ac, vc, aspect, ts);
+					}
+					catch (Exception ^ ex)
+					{
+						CppUtils::Alert(this, ex);
+					}
 					DASSERT(!String::IsNullOrEmpty(ac));
 					DASSERT(!String::IsNullOrEmpty(vc));
 					DASSERT(ts.TotalMilliseconds != 0);
@@ -493,6 +633,7 @@ namespace Ambiesoft {
 					StringBuilder sbMessage;
 					sbMessage.AppendLine(I18N(L"Encoding Succeeded."));
 					sbMessage.AppendLine();
+					sbMessage.AppendLine(String::Format(I18N(L"Format = {0}"), format));
 					sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), ac));
 					sbMessage.AppendLine(String::Format(I18N(L"Video codec = {0}"), vc));
 					sbMessage.AppendLine(String::Format(I18N(L"Duration = {0}"), ts.ToString()));
@@ -502,8 +643,8 @@ namespace Ambiesoft {
 					CppUtils::OpenFolder(this, outputMovie_);
 				}
 			}
-			OutputAudioCodec = AVCodec(AVCodec::VC::VC_NONE);
-			OutputVideoCodec = AVCodec(AVCodec::VC::VC_NONE);
+			OutputAudioCodec->Clear();
+			OutputVideoCodec->Clear();
 			OutputDuration = String::Empty;
 			outputMovie_ = String::Empty;
 		}
@@ -534,7 +675,7 @@ namespace Ambiesoft {
 			String^ ffmpeg = hash["ffmpeg"];
 			String^ arg = hash["arg"];
 			int retval;
-			
+
 			try
 			{
 				AmbLib::OpenCommandGetResultCallback(ffmpeg,
@@ -545,7 +686,7 @@ namespace Ambiesoft {
 					gcnew DataReceivedEventHandler(this, &FormMain::errHandler),
 					gcnew EventHandler(this, &FormMain::OnProcessStarted),
 					processFFMpeg_
-					);
+				);
 			}
 			catch (Exception^ ex)
 			{
@@ -555,7 +696,12 @@ namespace Ambiesoft {
 
 			BeginInvoke(gcnew VIDelegate(this, &FormMain::ThreadEnded), retval);
 		}
-		System::Void FormMain::btnStart_Click(System::Object^  sender, System::EventArgs^  e)
+		String^ FormMain::GetMovieFileFromLvi(ListViewItem^ lvi)
+		{
+			return Path::Combine(lvi->Text, lvi->SubItems["filename"]->Text);
+		}
+
+		System::Void FormMain::btnStart_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			switch (FFMpegState)
 			{
@@ -597,43 +743,93 @@ namespace Ambiesoft {
 				return;
 			}
 
-			String^ inputmovie = txtMovie->Text;
-			if (!CheckMovieAndSet(inputmovie))
-				return;
-
-			if (String::IsNullOrEmpty(inputmovie))
+			if (lvInputs->Items->Count == 0)
 			{
-				CppUtils::Alert(this, I18N(L"input movie is empty."));
+				CppUtils::Alert(this, I18N("No items"));
 				return;
 			}
 
 
-			String^ outExt = String::Empty;
+
+			SortedSet<String^> outExts;
+			String^ initialDir;
+			String^ baseFileName = "Encoded";
+			List<String^> inputmovies;
+
+			// check input
+			for each (ListViewItem ^ lvi in lvInputs->Items)
 			{
-				TargetCodecDialog codecDlg;
-				if (InputVideoCodec.IsH264)
-				{
-					codecDlg.rbH265->Checked = true;
+				String^ inputmovie = GetMovieFileFromLvi(lvi);
 
-					//if (InputAudioCodec == "aac" ||
-					//	InputAudioCodec == "vorbis")
-					{
-						codecDlg.rbCopyAudio->Checked = true;
-					}
-				}
-				else if (InputVideoCodec.IsVp8)
+				if (String::IsNullOrEmpty(inputmovie))
 				{
-					codecDlg.rbVp9->Checked = true;
-
-					// if (InputAudioCodec == "opus")
-					{
-						codecDlg.rbCopyAudio->Checked = true;
-					}
-				}
-				
-				if (System::Windows::Forms::DialogResult::OK != codecDlg.ShowDialog())
+					CppUtils::Alert(this, I18N(L"input movie is empty."));
 					return;
+				}
+				if (!CheckMovieAndSet(inputmovie, false))
+					return;
+			}
 
+			// add files 
+			for each (ListViewItem ^ lvi in lvInputs->Items)
+			{
+				String^ inputmovie = GetMovieFileFromLvi(lvi);
+				inputmovies.Add(inputmovie);
+			}
+
+			// set basename
+			baseFileName = Ambiesoft::toH265Helper::GetCommonFilename(%inputmovies);
+			if (String::IsNullOrEmpty(baseFileName))
+				baseFileName = "output";
+
+			if (String::IsNullOrEmpty(initialDir))
+				initialDir = Path::GetDirectoryName(inputmovies[0]);
+
+
+
+			bool isLosslessable = inputmovies.Count != 0 &&
+				InputFormat != "mixed" &&
+				!InputAudioCodec->IsMixed && !InputVideoCodec->IsMixed;
+			TargetCodecDialog codecDlg(isLosslessable);
+
+			if (InputVideoCodec->IsH264)
+			{
+				codecDlg.rbH265->Checked = true;
+
+				//if (InputAudioCodec == "aac" ||
+				//	InputAudioCodec == "vorbis")
+				{
+					codecDlg.rbCopyAudio->Checked = true;
+				}
+			}
+			else if (InputVideoCodec->IsVp8)
+			{
+				codecDlg.rbVp9->Checked = true;
+
+				// if (InputAudioCodec == "opus")
+				{
+					codecDlg.rbCopyAudio->Checked = true;
+				}
+			}
+
+
+			if (InputAudioCodec->IsMixed)
+			{
+				codecDlg.rbCopyAudio->Checked = false;
+			}
+
+			if (System::Windows::Forms::DialogResult::OK != codecDlg.ShowDialog())
+				return;
+
+			bool bReEncode = codecDlg.IsReEncode;
+			if(!bReEncode)
+			{
+				outExts.Add(Path::GetExtension(inputmovies[0]));
+				OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
+				OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
+			}
+			else
+			{
 				// check if both codecs are 'copy'
 				if (codecDlg.rbCopyVideo->Checked && codecDlg.rbCopyAudio->Checked)
 				{
@@ -650,18 +846,21 @@ namespace Ambiesoft {
 				}
 				if (codecDlg.rbH265->Checked)
 				{
-					OutputVideoCodec = AVCodec(AVCodec::VC::VC_H265);
-					outExt = ".mp4";
+					OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_H265);
+					outExts.Add(".mp4");
 				}
 				else if (codecDlg.rbVp9->Checked)
 				{
-					OutputVideoCodec = AVCodec("vp9");
-					outExt = ".webm";
+					OutputVideoCodec = gcnew AVCodec("vp9");
+					outExts.Add(".webm");
 				}
 				else if (codecDlg.rbCopyVideo->Checked)
 				{
-					OutputVideoCodec = AVCodec(AVCodec::VC::VC_COPY);
-					outExt = Path::GetExtension(inputmovie);
+					if (InputVideoCodec->IsH264)
+						outExts.Add(".mp4");
+
+					OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
+					outExts.Add(Path::GetExtension(inputmovies[0]));
 				}
 				else
 				{
@@ -670,11 +869,11 @@ namespace Ambiesoft {
 				}
 
 				if (codecDlg.rbCopyAudio->Checked)
-					OutputAudioCodec = AVCodec(AVCodec::VC::VC_COPY);
+					OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
 				else if (codecDlg.rbAac->Checked)
-					OutputAudioCodec = AVCodec(AVCodec::VC::VC_AAC);
+					OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_AAC);
 				else if (codecDlg.rbOpus->Checked)
-					OutputAudioCodec = AVCodec(AVCodec::VC::VC_OPUS);
+					OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_OPUS);
 				else
 				{
 					CppUtils::Alert(this, I18N(L"No audio codec selected."));
@@ -682,68 +881,138 @@ namespace Ambiesoft {
 				}
 
 
-				AVCodec targetVideoCodec = OutputVideoCodec.IsCopy ? InputVideoCodec : OutputVideoCodec;
-				AVCodec targetAudioCodec = OutputAudioCodec.IsCopy ? InputAudioCodec : OutputAudioCodec;
+				AVCodec^ targetVideoCodec = OutputVideoCodec->IsCopy ? InputVideoCodec : OutputVideoCodec;
+				AVCodec^ targetAudioCodec = OutputAudioCodec->IsCopy ? InputAudioCodec : OutputAudioCodec;
 
 				// vp9 can only hold audio of "vorbis" or "opus"
-				if (OutputVideoCodec.IsVp9)
+				if (OutputVideoCodec->IsVp9)
 				{
-					if (!targetAudioCodec.IsVorbis && !targetAudioCodec.IsOpus)
+					if (!targetAudioCodec->IsVorbis && !targetAudioCodec->IsOpus)
 					{
-						outExt = ".mkv";
+						outExts.Add(".mkv");
 					}
 				}
-				if (outExt == ".mp4")
+				if (outExts.Contains(".mp4"))
 				{
-					if (targetVideoCodec.IsH265 && targetAudioCodec.IsOpus)
+					if (targetVideoCodec->IsH265 && targetAudioCodec->IsOpus)
 					{
-						outExt = ".mkv";
+						outExts.Add(".mkv");
 					}
 				}
 			}
+	
+
 
 			SaveFileDialog dlg;
-			
-			List<String^> availableext;
+
+
 			{
-				// libx265 must has mp4 foramt
-				availableext.Add(Path::GetExtension(outExt));
-
+		
 				StringBuilder sbFilter;
-				for each(String^ ae in availableext)
+				for each (String ^ ae in outExts)
 				{
-					sbFilter.Append(ae);
-					sbFilter.Append("File ");
-					sbFilter.Append("(*");
-					sbFilter.Append(ae);
+					sbFilter.AppendFormat("{0} (*{1})|*{2}|",
+						ae, ae, ae);
+					//sbFilter.Append(ae);
+					//sbFilter.Append(" ");
+					//sbFilter.Append("(*");
+					//sbFilter.Append(ae);
 
-					sbFilter.Append(")|*");
-					sbFilter.Append(ae);
-					sbFilter.Append("|");
+					//sbFilter.Append(")|*");
+					//sbFilter.Append(ae);
+					//sbFilter.Append("|");
 				}
-				sbFilter.Append("All File(*.*)|*.*");
+				sbFilter.Append(I18N("All File") + "(*.*)|*.*");
 				dlg.Filter = sbFilter.ToString();
 			}
 
-			dlg.InitialDirectory = Path::GetDirectoryName(inputmovie);
+			dlg.InitialDirectory = initialDir;
+
+			String^ firstExt;
+			for each(String^ s in outExts)
 			{
-				String^ name = Path::GetFileNameWithoutExtension(inputmovie);
-				dlg.FileName = String::Format(L"{0} [{1}]{2}",
-					name, 
-					OutputVideoCodec.ToString(), 
-					outExt);
+				firstExt = s;
+				break;
 			}
-			
+			DASSERT(!String::IsNullOrEmpty(OutputVideoCodec->ToString()));
+			dlg.FileName = String::Format(L"{0} [{1}]{2}",
+				baseFileName,
+				OutputVideoCodec->ToString(),
+				firstExt);
+					
 			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
 				return;
 
 			outputMovie_ = dlg.FileName;
 
-			String^ arg = String::Format(L"-y -i \"{0}\" -c:v {1} -c:a {2} \"{3}\"",
-				inputmovie, 
-				OutputVideoCodec.ToFFMpegString(),
-				OutputAudioCodec.ToFFMpegString(),
-				outputMovie_);
+			String^ arg;
+			
+			DASSERT(inputmovies.Count != 0);
+			if (inputmovies.Count == 1)
+			{
+				arg = String::Format(L"-y -i \"{0}\" -c:v {1} -c:a {2} \"{3}\"",
+					inputmovies[0],
+					OutputVideoCodec->ToFFMpegString(),
+					OutputAudioCodec->ToFFMpegString(),
+					outputMovie_);
+			}
+			else
+			{
+				if (!bReEncode)
+				{
+					tempFile_ = Path::GetTempFileName();
+					StreamWriter sw(tempFile_, false, gcnew UTF8Encoding(false));
+
+					for each (String ^ file in inputmovies)
+					{
+						sw.WriteLine(String::Format("file '{0}'", file));
+					}
+
+					arg = String::Format("-y -safe 0 -f concat -i \"{0}\" -c copy \"{1}\"",
+						tempFile_,
+						outputMovie_);
+				}
+				else
+				{
+					/*
+	-filter_complex "[0:v:0] [0:a:0] [1:v:0] [1:a:0] [2:v:0] [2:a:0] [3:v:0] [3:a:0] concat=n=4:v=1:a=1 [v] [a]"
+	-map "[v]" -map "[a]" "Y:\Share\3333.mkv"
+					*/
+
+					/*
+	-i 480.mp4 -i 640.mp4 -filter_complex \
+	"[0:v]scale=640:480:force_original_aspect_ratio=decrease,pad=640:480:(ow-iw)/2:(oh-ih)/2[v0]; \
+	 [v0][0:a][1:v][1:a]concat=n=2:v=1:a=1[v][a]" \
+	-map "[v]" -map "[a]" -c:v libx264 -c:a aac -movflags +faststart output.mp4
+	Your ffmpeg is old: you should really consider updating to a build from the current git master branch. The ea
+					*/
+					StringBuilder sb;
+					sb.Append("-y ");
+
+					for each (String ^ f in inputmovies)
+						sb.AppendFormat("-i \"{0}\" ", f);
+
+					sb.Append("-filter_complex \"");
+					{
+						for (int i = 0; i < inputmovies.Count; ++i)
+						{
+							sb.AppendFormat("[{0}:v:0]", i);
+							sb.AppendFormat("[{0}:a:0]", i);
+						}
+						sb.AppendFormat("concat=n={0}:v=1:a=1[v][a]", inputmovies.Count);
+					}
+					sb.Append("\" ");
+
+					sb.Append("-map \"[v]\" -map \"[a]\" ");
+
+					sb.AppendFormat("-c:v {0} -c:a {1} \"{2}\"",
+						OutputVideoCodec->ToFFMpegString(),
+						OutputAudioCodec->ToFFMpegString(),
+						outputMovie_);
+
+					arg = sb.ToString();
+				}
+			}
 
 			txtLogOut->Clear();
 			txtLogErr->Clear();

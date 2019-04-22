@@ -7,5 +7,7 @@ namespace Ambiesoft {
 		bool KillProcess(System::Diagnostics::Process^ process);
 		bool KillThread(System::Threading::Thread^ thread);
 		void SafeJoin(System::Threading::Thread^ thread);
+
+		String^ sToString(System::Drawing::Size size);
 	}
 }
