@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AVCodec.h"
+#include "AVDuration.h"
 
 namespace Ambiesoft {
 	namespace toH265 {
@@ -93,6 +94,8 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::Panel^  panelList;
 		private: System::Windows::Forms::SplitContainer^  splitRoot;
 		private: System::Windows::Forms::ToolStripStatusLabel^ slFormat;
+		private: System::Windows::Forms::ContextMenuStrip^ cmList;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiRemoveFromList;
 
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageJapanese;
 
@@ -189,7 +192,7 @@ namespace Ambiesoft {
 				Unknown,
 			};
 			System::Text::RegularExpressions::Regex^ regFFMpeg_;
-			TimeSpan tsOrigMovies_;
+			// TimeSpan tsOrigMovies_;
 			String^ tempFile_;
 
 			System::Drawing::Icon^ iconBlue_;
@@ -253,20 +256,21 @@ namespace Ambiesoft {
 
 
 			void SetTimeStatusText();
-			String^ inputDuration_;
-			property String^ InputDuration
+			AVDuration^ inputDuration_ = gcnew AVDuration();
+			property AVDuration^ InputDuration
 			{
-				String^ get() { return inputDuration_; }
-				void set(String^ v) {
+				AVDuration^ get() { return inputDuration_; }
+				void set(AVDuration^ v) {
 					inputDuration_ = v;
 					SetTimeStatusText();
 				}
 			}
-			String^ outputDuration_;
-			property String^ OutputDuration
+			AVDuration^ outputDuration_ = gcnew AVDuration();
+			property AVDuration^ OutputDuration
 			{
-				String^ get() { return outputDuration_; }
-				void set(String^ v) {
+				AVDuration^ get() { return outputDuration_; }
+				void set(AVDuration^ v) {
+					DASSERT(v);
 					outputDuration_ = v;
 					SetTimeStatusText();
 				}
@@ -291,7 +295,7 @@ namespace Ambiesoft {
 				String^ format,
 				AVCodec^ acodec,
 				AVCodec^ vcodec,
-				TimeSpan duration);
+				AVDuration^ duration);
 			String^ GetMovieFileFromLvi(ListViewItem^ lvi);
 			String^ tsToString(TimeSpan ts);
 
@@ -368,6 +372,8 @@ namespace Ambiesoft {
 
 			System::Void tsmiLanguageCommon_Click(System::Object^  sender, System::EventArgs^  e);
 			System::Void tsmiLanguage_DropDownOpening(System::Object^  sender, System::EventArgs^  e);
+
+			System::Void TsmiRemoveFromList_Click(System::Object^ sender, System::EventArgs^ e);
 
 };
 

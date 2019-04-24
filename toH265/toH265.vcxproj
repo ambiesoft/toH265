@@ -198,6 +198,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\lsMisc\HighDPI.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="AVDuration.cpp" />
     <ClCompile Include="FormMain.cpp" />
     <ClCompile Include="FormMainAbout.cpp" />
     <ClCompile Include="FormMainClose.cpp" />
@@ -224,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\lsMisc\HighDPI.h" />
+    <ClInclude Include="AVDuration.h" />
     <ClInclude Include="DebugMacro.h" />
     <ClInclude Include="FormMain.h">
       <FileType>CppForm</FileType>

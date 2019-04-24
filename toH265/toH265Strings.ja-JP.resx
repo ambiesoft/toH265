@@ -240,4 +240,7 @@
   <data name="The application needs to restart for the change to take effect." xml:space="preserve">
     <value>変更を有効にするにはアプリケーションを再起動する必要があります。</value>
   </data>
+  <data name="Format = {0}" xml:space="preserve">
+    <value>フォーマット＝{0}</value>
+  </data>
 </root>

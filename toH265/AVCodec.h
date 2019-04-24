@@ -29,10 +29,10 @@ namespace Ambiesoft {
 			AVCodec(VC vc) : vc_(vc){}
 			AVCodec():vc_(VC::VC_NONE){}
 
-			void Clear() {
-				vc_ = VC::VC_NONE;
-				unknownString_ = String::Empty;
-			}
+			//void Clear() {
+			//	vc_ = VC::VC_NONE;
+			//	unknownString_ = String::Empty;
+			//}
 			property bool IsEmpty
 			{
 				bool get() { return vc_ == VC::VC_NONE; }

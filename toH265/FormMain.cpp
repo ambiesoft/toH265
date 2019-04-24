@@ -109,7 +109,7 @@ namespace Ambiesoft {
 			String^ format,
 			AVCodec^ acodec,
 			AVCodec^ vcodec,
-			TimeSpan duration)
+			AVDuration^ duration)
 		{
 			ListViewItem^ lvi = gcnew ListViewItem();
 			lvi->Text = Path::GetDirectoryName(movieFile);
@@ -155,7 +155,7 @@ namespace Ambiesoft {
 			{
 				ListViewItem::ListViewSubItem^ subDuration = gcnew ListViewItem::ListViewSubItem();
 				subDuration->Name = "duration";
-				subDuration->Text = duration.ToString();
+				subDuration->Text = duration->ToString();
 				lvi->SubItems->Add(subDuration);
 			}
 
@@ -222,17 +222,17 @@ namespace Ambiesoft {
 
 				if (bSet)
 				{
-					InsertMovieItem(moviefile, 
+					InsertMovieItem(moviefile,
 						aspect,
 						format,
 						gcnew AVCodec(audiocodec), gcnew AVCodec(videocodec),
-						duration);
+						gcnew AVDuration(duration));
 				}
 
 				DASSERT(FFMpegState == TaskState::None);
 				SetStatusText(STATUSTEXT::READY);
 
-				InputDuration = String::Empty;
+				InputDuration = gcnew AVDuration();
 				AVCodec^ inputAudioCodec = gcnew AVCodec();
 				AVCodec^ inputVideoCodec = gcnew AVCodec();
 				String^ tryFormat;
@@ -261,11 +261,12 @@ namespace Ambiesoft {
 					mDuration += ts.TotalMilliseconds;
 				}
 				TimeSpan all(10 * 1000 * (long long)mDuration);
-				InputDuration = all.ToString("hh\\:mm\\:ss");
+				// InputDuration = all.ToString("hh\\:mm\\:ss");
+				InputDuration = gcnew AVDuration(all);
 				InputFormat = tryFormat;
 				InputAudioCodec = inputAudioCodec;
 				InputVideoCodec = inputVideoCodec;
-				tsOrigMovies_ = all;
+				// tsOrigMovies_ = all;
 			}
 			return true;
 		}
@@ -311,14 +312,18 @@ namespace Ambiesoft {
 		void FormMain::SetTimeStatusText()
 		{
 			StringBuilder sb;
-			if (!String::IsNullOrEmpty(InputDuration))
+			if (!InputDuration->IsEmpty())
 			{
 				sb.Append(InputDuration);
-				if (!String::IsNullOrEmpty(OutputDuration))
+				if (!OutputDuration->IsEmpty())
 				{
 					sb.Append(" -> ");
 					sb.Append(OutputDuration);
 				}
+			}
+			else
+			{
+				sb.Append(InputDuration);
 			}
 			if (slDuration->Text != sb.ToString())
 				slDuration->Text = sb.ToString();
@@ -414,12 +419,12 @@ namespace Ambiesoft {
 		}
 		void FormMain::UpdateTitleTS(TimeSpan tsProgress, double speed)
 		{
-			double percent = (tsProgress.TotalMilliseconds / tsOrigMovies_.TotalMilliseconds) * 100;
+			double percent = (tsProgress.TotalMilliseconds / InputDuration->TotalMilliseconds) * 100;
 			UpdateTitle((int)percent);
 
-			DTRACE("All:" + tsOrigMovies_.ToString() + " " + tsOrigMovies_.TotalMilliseconds);
+			DTRACE("All:" + InputDuration->ToString() + " " + InputDuration->TotalMilliseconds);
 			DTRACE("Cur:" + tsProgress.ToString() + " " + tsProgress.TotalMilliseconds);
-			double mRemaining = tsOrigMovies_.TotalMilliseconds - tsProgress.TotalMilliseconds;
+			double mRemaining = InputDuration->TotalMilliseconds - tsProgress.TotalMilliseconds;
 			DTRACE("Remain:" + mRemaining);
 
 			if (speed == 0)
@@ -430,8 +435,8 @@ namespace Ambiesoft {
 			String^ stRemainingText = tsToString(ts);
 			SetStatusText(STATUSTEXT::REMAINING, stRemainingText);
 
-			String^ stElapsedText = tsProgress.ToString("hh\\:mm\\:ss");
-			OutputDuration = stElapsedText;
+			// String^ stElapsedText = tsProgress.ToString("hh\\:mm\\:ss");
+			OutputDuration = gcnew AVDuration(tsProgress);
 		}
 
 		void FormMain::SetStatusText(STATUSTEXT ss)
@@ -643,9 +648,9 @@ namespace Ambiesoft {
 					CppUtils::OpenFolder(this, outputMovie_);
 				}
 			}
-			OutputAudioCodec->Clear();
-			OutputVideoCodec->Clear();
-			OutputDuration = String::Empty;
+			OutputAudioCodec = gcnew AVCodec();
+			OutputVideoCodec = gcnew AVCodec();
+			OutputDuration = gcnew AVDuration();
 			outputMovie_ = String::Empty;
 		}
 
@@ -857,8 +862,12 @@ namespace Ambiesoft {
 				else if (codecDlg.rbCopyVideo->Checked)
 				{
 					if (InputVideoCodec->IsH264)
-						outExts.Add(".mp4");
-
+					{
+						if (codecDlg.rbOpus->Checked)
+							outExts.Add(".mkv");
+						else
+							outExts.Add(".mp4");
+					}
 					OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
 					outExts.Add(Path::GetExtension(inputmovies[0]));
 				}
@@ -1107,6 +1116,27 @@ namespace Ambiesoft {
 				return;
 
 			StopEncoding();
+		}
+
+		System::Void FormMain::TsmiRemoveFromList_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			while (lvInputs->SelectedItems->Count != 0)
+			{
+				lvInputs->SelectedItems[0]->Remove();
+			}
+
+			if(lvInputs->Items->Count==0)
+			{
+				InputFormat = String::Empty;
+				InputAudioCodec = gcnew AVCodec();
+				InputVideoCodec = gcnew AVCodec();
+				InputDuration = gcnew AVDuration();
+			}
+			else
+			{
+				for each (ListViewItem ^ lvi in lvInputs->Items)
+					CheckMovieAndSet(GetMovieFileFromLvi(lvi), false);
+			}
 		}
 
 		WaitCursor::WaitCursor()
