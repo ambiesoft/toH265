@@ -32,6 +32,8 @@ namespace Ambiesoft {
 			System::Drawing::Size% aspect,
 			TimeSpan% ts)
 		{
+			WaitCursor wc;
+
 			audiocodec = videocodec = nullptr;
 
 			if (String::IsNullOrEmpty(ffprobe) || !File::Exists(ffprobe))
@@ -136,7 +138,7 @@ namespace Ambiesoft {
 			{
 				ListViewItem::ListViewSubItem^ subFormat = gcnew ListViewItem::ListViewSubItem();
 				subFormat->Name = "format";
-				subFormat->Text = format->ToString();
+				subFormat->Text = Ambiesoft::toH265Helper::human_format(format->ToString());
 				lvi->SubItems->Add(subFormat);
 			}
 			{
@@ -273,7 +275,7 @@ namespace Ambiesoft {
 
 		void FormMain::SetFormatStatusText()
 		{
-			slFormat->Text = inputFormat_;
+			slFormat->Text = Ambiesoft::toH265Helper::human_format(inputFormat_);
 		}
 
 		void FormMain::SetCodecStatusText()

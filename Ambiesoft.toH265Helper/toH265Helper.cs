@@ -36,5 +36,13 @@ namespace Ambiesoft
             }
             return outfilename;
         }
+
+        public static string human_format(string format)
+        {
+            if (format == null)
+                return null;
+
+            return format.Split(',')[0];
+        }
     }
 }
