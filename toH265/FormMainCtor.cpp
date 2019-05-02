@@ -55,8 +55,8 @@ namespace Ambiesoft {
 			lvInputs->Columns->Add("filename", I18N("Filename"));
 			lvInputs->Columns->Add("aspect", I18N("Aspect"));
 			lvInputs->Columns->Add("format", I18N("Format"));
-			lvInputs->Columns->Add("vcodec", I18N("VideoCodec"));
-			lvInputs->Columns->Add("acodec", I18N("AudioCodec"));
+			lvInputs->Columns->Add("vcodec", I18N("Video"));
+			lvInputs->Columns->Add("acodec", I18N("Audio"));
 			lvInputs->Columns->Add("duration", I18N("Duration"));
 
 			lvInputs->Dock = DockStyle::Fill;

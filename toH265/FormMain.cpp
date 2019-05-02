@@ -59,49 +59,57 @@ namespace Ambiesoft {
 
 			// Parse json
 			JObject^ joutput = JObject::Parse(output);
-			String^ duration = (String^)joutput->SelectToken("format.duration");
+			String^ myDuration = (String^)joutput->SelectToken("format.duration");
 			format = (String^)joutput->SelectToken("format.format_name");
 			int nVideos = 0;
 			int nAudios = 0;
-			for (int i = 0; i < 32; ++i)
+			try
 			{
-				String^ codec_type = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_type", i));
-				if (!codec_type)
-					break;
-
-				if (codec_type == "audio")
+				for (int i = 0; i < 32; ++i)
 				{
-					++nAudios;
-					audiocodec = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
-				}
-				else if (codec_type == "video")
-				{
-					++nVideos;
-					videocodec = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
+					String^ codec_type = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_type", i));
+					if (!codec_type)
+						break;
 
-					if (String::IsNullOrEmpty(duration))
-						duration = (String^)joutput->SelectToken(String::Format("streams[{0}].duration", i));
-
-					int width = (int)joutput->SelectToken(String::Format("streams[{0}].width", i));
-					int height = (int)joutput->SelectToken(String::Format("streams[{0}].height", i));
-					aspect = System::Drawing::Size(width, height);
-				}
-
-				if (!String::IsNullOrEmpty(audiocodec) && !String::IsNullOrEmpty(videocodec))
-				{
-					if (nAudios > 1 || nVideos > 1)
+					if (codec_type == "audio")
 					{
-						audiocodec = videocodec = String::Empty;
-						throw gcnew Exception(I18N("Could not handle more than 1 audio or video streams."));
-						
-						return;
+						++nAudios;
+						audiocodec = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
 					}
-					if (String::IsNullOrEmpty(duration))
-						return;
+					else if (codec_type == "video")
+					{
+						++nVideos;
+						videocodec = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
 
-					double d = System::Double::Parse(duration);
+						if (String::IsNullOrEmpty(myDuration))
+							myDuration = (String^)joutput->SelectToken(String::Format("streams[{0}].duration", i));
+
+						int width = (int)joutput->SelectToken(String::Format("streams[{0}].width", i));
+						int height = (int)joutput->SelectToken(String::Format("streams[{0}].height", i));
+						aspect = System::Drawing::Size(width, height);
+					}
+
+					if (!String::IsNullOrEmpty(audiocodec) && !String::IsNullOrEmpty(videocodec))
+					{
+						if (nAudios > 1 || nVideos > 1)
+						{
+							audiocodec = videocodec = String::Empty;
+							throw gcnew Exception(I18N("Could not handle more than 1 audio or video streams."));
+							return;
+						}
+					}
+				}
+			}
+			catch (Exception ^ ex)
+			{
+				throw ex;
+			}
+			finally
+			{
+				if (!String::IsNullOrEmpty(myDuration))
+				{
+					double d = System::Double::Parse(myDuration);
 					ts = TimeSpan::FromMilliseconds(d * 1000);
-					return;
 				}
 			}
 		}
@@ -1048,38 +1056,8 @@ namespace Ambiesoft {
 			btnStart_Click(sender, e);
 		}
 
-		void FormMain::StopEncoding()
-		{
-			switch (FFMpegState)
-			{
-			case TaskState::None:
-				break;
-			case TaskState::Pausing:
-			case TaskState::ProcessLaunching:
-			case TaskState::Running:
-				processTerminated_ = true;
-				if (!KillProcess(processFFMpeg_))
-				{
-					processTerminated_ = false;
-					CppUtils::Alert(this, I18N(L"Failed to kill process."));
-				}
-				processFFMpeg_ = nullptr;
-				//if (!KillThread(thFFMpeg_))
-				//{
-				//	CppUtils::Alert(I18N(L"Failed to kill thread."));
-				//}
-				SafeJoin(thFFMpeg_);
-				thFFMpeg_ = nullptr;
 
-				ChangeStartButtonText(I18N(STR_BUTTONTEXT_RESUME));
-				processSuspeded_ = true;
-				return;
-			case TaskState::Unknown:
-				return;
-			}
-
-			return;
-		}
+		
 
 		
 		System::Void FormMain::tsmiOption_DropDownOpening(System::Object^ sender, System::EventArgs^ e)
@@ -1114,10 +1092,9 @@ namespace Ambiesoft {
 
 		System::Void FormMain::tsmiStop_Click(System::Object^  sender, System::EventArgs^  e)
 		{
-			if (!ConfirmEncodeStop())
+			if (!ConfirmAndStopEncode())
 				return;
 
-			StopEncoding();
 		}
 
 		System::Void FormMain::TsmiRemoveFromList_Click(System::Object^ sender, System::EventArgs^ e)

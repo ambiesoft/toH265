@@ -316,8 +316,7 @@ namespace Ambiesoft {
 			delegate void VIDelegate(int value);
 			void ThreadStarted();
 			void ThreadEnded(int retval);
-			void StopEncoding();
-			bool ConfirmEncodeStop();
+			bool ConfirmAndStopEncode();
 			void ChangeStartButtonText(String^ text);
 			void OnProcessStarted(Object^ sender, EventArgs^ e);
 
