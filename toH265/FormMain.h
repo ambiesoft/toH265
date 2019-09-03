@@ -296,7 +296,12 @@ namespace Ambiesoft {
 				AVCodec^ acodec,
 				AVCodec^ vcodec,
 				AVDuration^ duration);
+
 			String^ GetMovieFileFromLvi(ListViewItem^ lvi);
+			System::Drawing::Size GetVideoSize(ListViewItem^ lvi);
+			double GetVideoArea(ListViewItem^ lvi);
+			System::Drawing::Size GetMaxVideoSize();
+			bool IsSameSizeVideos();
 			String^ tsToString(TimeSpan ts);
 
 			void SetStatusText(STATUSTEXT ss);

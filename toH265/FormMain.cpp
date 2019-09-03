@@ -140,6 +140,7 @@ namespace Ambiesoft {
 				ListViewItem::ListViewSubItem^ subAspect = gcnew ListViewItem::ListViewSubItem();
 				subAspect->Name = "aspect";
 				subAspect->Text = sToString(aspect);
+				subAspect->Tag = aspect;
 				lvi->SubItems->Add(subAspect);
 			}
 
@@ -715,7 +716,61 @@ namespace Ambiesoft {
 		{
 			return Path::Combine(lvi->Text, lvi->SubItems["filename"]->Text);
 		}
+		Size FormMain::GetVideoSize(ListViewItem^ lvi)
+		{
+			DASSERT(lvi->SubItems["aspect"]->Tag);
+			return (System::Drawing::Size)(lvi->SubItems["aspect"]->Tag);
+		}
+		double FormMain::GetVideoArea(ListViewItem^ lvi)
+		{
+			System::Drawing::Size size = GetVideoSize(lvi);
+			return size.Width * size.Height;
+		}
+		Size FormMain::GetMaxVideoSize()
+		{
+			double maxWidth = 0;
+			ListViewItem^ lviMax;
+			for each (ListViewItem ^ lvi in lvInputs->Items)
+			{
+				const double area = GetVideoArea(lvi);
+				if (maxWidth < area)
+				{
+					maxWidth = area;
+					lviMax = lvi;
+				}
+			}
+			DASSERT(lviMax);
+			return GetVideoSize(lviMax);
+		}
+		bool FormMain::IsSameSizeVideos()
+		{
+			System::Drawing::Size size;
+			bool first = false;
+			for each (ListViewItem ^ lvi in lvInputs->Items)
+			{
+				if (!first)
+				{
+					size = GetVideoSize(lvi);
+					first = true;
+					continue;
+				}
+				if (size != GetVideoSize(lvi))
+					return false;
+			}
+			return true;
+		}
 
+		List<String^>^ MakeUnique(List<String^>^ inList)
+		{
+			List<String^>^ result = gcnew List<String^>();
+			for each (String ^ s in inList)
+			{
+				if (result->Contains(s))
+					continue;
+				result->Add(s);
+			}
+			return result;
+		}
 		System::Void FormMain::btnStart_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			switch (FFMpegState)
@@ -766,7 +821,7 @@ namespace Ambiesoft {
 
 
 
-			SortedSet<String^> outExts;
+			List<String^>^ outExts = gcnew List<String^>();
 			String^ initialDir;
 			String^ baseFileName = "Encoded";
 			List<String^> inputmovies;
@@ -809,28 +864,28 @@ namespace Ambiesoft {
 
 			if (InputVideoCodec->IsH264)
 			{
-				codecDlg.rbH265->Checked = true;
+				codecDlg.rbVideoH265->Checked = true;
 
 				//if (InputAudioCodec == "aac" ||
 				//	InputAudioCodec == "vorbis")
 				{
-					codecDlg.rbCopyAudio->Checked = true;
+					codecDlg.rbAudioCopy->Checked = true;
 				}
 			}
 			else if (InputVideoCodec->IsVp8)
 			{
-				codecDlg.rbVp9->Checked = true;
+				codecDlg.rbVideoVp9->Checked = true;
 
 				// if (InputAudioCodec == "opus")
 				{
-					codecDlg.rbCopyAudio->Checked = true;
+					codecDlg.rbAudioCopy->Checked = true;
 				}
 			}
 
 
 			if (InputAudioCodec->IsMixed)
 			{
-				codecDlg.rbCopyAudio->Checked = false;
+				codecDlg.rbAudioCopy->Checked = false;
 			}
 
 			if (System::Windows::Forms::DialogResult::OK != codecDlg.ShowDialog())
@@ -839,14 +894,14 @@ namespace Ambiesoft {
 			bool bReEncode = codecDlg.IsReEncode;
 			if(!bReEncode)
 			{
-				outExts.Add(Path::GetExtension(inputmovies[0]));
+				outExts->Add(Path::GetExtension(inputmovies[0]));
 				OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
 				OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
 			}
 			else
 			{
 				// check if both codecs are 'copy'
-				if (codecDlg.rbCopyVideo->Checked && codecDlg.rbCopyAudio->Checked)
+				if (codecDlg.rbVideoCopy->Checked && codecDlg.rbAudioCopy->Checked)
 				{
 					if (System::Windows::Forms::DialogResult::Yes != CppUtils::CenteredMessageBox(
 						this,
@@ -859,27 +914,27 @@ namespace Ambiesoft {
 						return;
 					}
 				}
-				if (codecDlg.rbH265->Checked)
+				if (codecDlg.rbVideoH265->Checked)
 				{
 					OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_H265);
-					outExts.Add(".mp4");
+					outExts->Add(".mp4");
 				}
-				else if (codecDlg.rbVp9->Checked)
+				else if (codecDlg.rbVideoVp9->Checked)
 				{
 					OutputVideoCodec = gcnew AVCodec("vp9");
-					outExts.Add(".webm");
+					outExts->Add(".webm");
 				}
-				else if (codecDlg.rbCopyVideo->Checked)
+				else if (codecDlg.rbVideoCopy->Checked)
 				{
 					if (InputVideoCodec->IsH264)
 					{
-						if (codecDlg.rbOpus->Checked)
-							outExts.Add(".mkv");
+						if (codecDlg.rbAudioOpus->Checked)
+							outExts->Add(".mkv");
 						else
-							outExts.Add(".mp4");
+							outExts->Add(".mp4");
 					}
 					OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
-					outExts.Add(Path::GetExtension(inputmovies[0]));
+					outExts->Add(Path::GetExtension(inputmovies[0]));
 				}
 				else
 				{
@@ -887,11 +942,11 @@ namespace Ambiesoft {
 					return;
 				}
 
-				if (codecDlg.rbCopyAudio->Checked)
+				if (codecDlg.rbAudioCopy->Checked)
 					OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
-				else if (codecDlg.rbAac->Checked)
+				else if (codecDlg.rbAudioAac->Checked)
 					OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_AAC);
-				else if (codecDlg.rbOpus->Checked)
+				else if (codecDlg.rbAudioOpus->Checked)
 					OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_OPUS);
 				else
 				{
@@ -908,18 +963,21 @@ namespace Ambiesoft {
 				{
 					if (!targetAudioCodec->IsVorbis && !targetAudioCodec->IsOpus)
 					{
-						outExts.Add(".mkv");
+						outExts->Add(".mkv");
 					}
 				}
-				if (outExts.Contains(".mp4"))
+				if (outExts->Contains(".mp4"))
 				{
 					if (targetVideoCodec->IsH265 && targetAudioCodec->IsOpus)
 					{
-						outExts.Add(".mkv");
+						outExts->Add(".mkv");
 					}
 				}
+
+				outExts->Add(".mkv");
 			}
-	
+			
+			outExts = MakeUnique(outExts);
 
 
 			SaveFileDialog dlg;
@@ -932,14 +990,6 @@ namespace Ambiesoft {
 				{
 					sbFilter.AppendFormat("{0} (*{1})|*{2}|",
 						ae, ae, ae);
-					//sbFilter.Append(ae);
-					//sbFilter.Append(" ");
-					//sbFilter.Append("(*");
-					//sbFilter.Append(ae);
-
-					//sbFilter.Append(")|*");
-					//sbFilter.Append(ae);
-					//sbFilter.Append("|");
 				}
 				sbFilter.Append(I18N("All File") + "(*.*)|*.*");
 				dlg.Filter = sbFilter.ToString();
@@ -1012,11 +1062,27 @@ namespace Ambiesoft {
 						sb.AppendFormat("-i \"{0}\" ", f);
 
 					sb.Append("-filter_complex \"");
+					if(IsSameSizeVideos())
 					{
 						for (int i = 0; i < inputmovies.Count; ++i)
 						{
 							sb.AppendFormat("[{0}:v:0]", i);
 							sb.AppendFormat("[{0}:a:0]", i);
+						}
+						sb.AppendFormat("concat=n={0}:v=1:a=1[v][a]", inputmovies.Count);
+					}
+					else
+					{
+						System::Drawing::Size size = GetMaxVideoSize();
+						for (int i = 0; i < inputmovies.Count; ++i)
+						{
+							sb.AppendFormat("[{0}:v:0]", i);
+							sb.AppendFormat("scale={1}:{2}:force_original_aspect_ratio=decrease,pad={1}:{2}:(ow-iw)/2:(oh-ih)/2[v{0}];",
+								i, size.Width, size.Height);
+						}
+						for (int i = 0; i < inputmovies.Count; ++i)
+						{
+							sb.AppendFormat("[v{0}][{0}:a:0]", i);
 						}
 						sb.AppendFormat("concat=n={0}:v=1:a=1[v][a]", inputmovies.Count);
 					}

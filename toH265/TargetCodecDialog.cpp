@@ -10,14 +10,17 @@ namespace Ambiesoft {
 		{
 			InitializeComponent();
 
+			cmbEncodeType->Items->Add(I18N("Lossless concat"));
+			cmbEncodeType->Items->Add(I18N("Reencode"));
+
 			if (bLosslessable)
 			{
-				cmbEncodeType->Items->Add(I18N("Lossless concat"));
-				cmbEncodeType->Items->Add(I18N("Reencode"));
 				cmbEncodeType->SelectedIndex = 1;
 			}
 			else
 			{
+				// Fix 'Reencode'
+				cmbEncodeType->SelectedIndex = 1;
 				cmbEncodeType->Enabled = false;
 			}
 		}
@@ -28,8 +31,8 @@ namespace Ambiesoft {
 			{
 			case 0:
 				// lossless
-				rbCopyAudio->Checked = true;
-				rbCopyVideo->Checked = true;
+				rbAudioCopy->Checked = true;
+				rbVideoCopy->Checked = true;
 				groupAudioCodec->Enabled = false;
 				groupVideoCodec->Enabled = false;
 				return;
@@ -37,26 +40,53 @@ namespace Ambiesoft {
 			groupAudioCodec->Enabled = true;
 			groupVideoCodec->Enabled = true;
 		}
+
+		System::Void TargetCodecDialog::TargetCodecDialog_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
+		{
+			if (this->DialogResult == System::Windows::Forms::DialogResult::None)
+			{
+				e->Cancel = true;
+				return;
+			}
+		}
 		System::Void TargetCodecDialog::BtnOK_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (!cmbEncodeType->Enabled)
-				return;
+			//if (!cmbEncodeType->Enabled)
+			//	return;
 
-			if (cmbEncodeType->SelectedIndex != 0)
+			// default is OK
+			this->DialogResult = System::Windows::Forms::DialogResult::OK;
+
+			if (cmbEncodeType->SelectedIndex == 0)
 			{
-				// if not lossless, any selection is OK
-				return;
+				// LossLess
+				// Copy must be 'checked'
+				if (rbAudioCopy->Checked && rbVideoCopy->Checked)
+				{
+					// OK
+					return;
+				}
+				CppUtils::Alert(I18N("'Copy' must be selected for 'Lossless concat'."));
+				this->DialogResult = System::Windows::Forms::DialogResult::None;
 			}
-
-			// Here below is lossless
-			if (rbCopyAudio->Checked && rbCopyVideo->Checked)
+			else
 			{
-				// OK
-				return;
+				// Reencode
+				if (!rbAudioCopy->Checked && !rbAudioAac->Checked && !rbAudioOpus->Checked)
+				{
+					// No audio selected
+					CppUtils::Alert(I18N("No audio selected"));
+					this->DialogResult = System::Windows::Forms::DialogResult::None;
+					return;
+				}
+				if (!rbVideoCopy->Checked && !rbVideoH265->Checked && !rbVideoVp9->Checked)
+				{
+					// No video selected
+					CppUtils::Alert(I18N("No video selected"));
+					this->DialogResult = System::Windows::Forms::DialogResult::None;
+					return;
+				}
 			}
-
-			CppUtils::Alert(I18N("'Copy' must be selected for 'Lossless concat'."));
-			btnOK->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 		}
 	}
 }
