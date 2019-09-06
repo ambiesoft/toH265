@@ -888,6 +888,7 @@ namespace Ambiesoft {
 				codecDlg.rbAudioCopy->Checked = false;
 			}
 
+			// show the dialog
 			if (System::Windows::Forms::DialogResult::OK != codecDlg.ShowDialog())
 				return;
 
@@ -935,6 +936,11 @@ namespace Ambiesoft {
 					}
 					OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
 					outExts->Add(Path::GetExtension(inputmovies[0]));
+				}
+				else if (codecDlg.rbAV1->Checked)
+				{
+					OutputVideoCodec = gcnew AVCodec("av1");
+					outExts->Add(".mkv");
 				}
 				else
 				{

@@ -79,7 +79,7 @@ namespace Ambiesoft {
 					this->DialogResult = System::Windows::Forms::DialogResult::None;
 					return;
 				}
-				if (!rbVideoCopy->Checked && !rbVideoH265->Checked && !rbVideoVp9->Checked)
+				if (!rbVideoCopy->Checked && !rbVideoH265->Checked && !rbVideoVp9->Checked && !rbAV1->Checked)
 				{
 					// No video selected
 					CppUtils::Alert(I18N("No video selected"));

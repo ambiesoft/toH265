@@ -51,6 +51,7 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::Button^ btnCancel;
 		internal: System::Windows::Forms::RadioButton^ rbVideoCopy;
 		private: System::Windows::Forms::ComboBox^ cmbEncodeType;
+		internal: System::Windows::Forms::RadioButton^ rbAV1;
 		internal:
 		private:
 
@@ -76,6 +77,7 @@ namespace Ambiesoft {
 			void InitializeComponent(void)
 			{
 				this->groupVideoCodec = (gcnew System::Windows::Forms::GroupBox());
+				this->rbAV1 = (gcnew System::Windows::Forms::RadioButton());
 				this->rbVideoVp9 = (gcnew System::Windows::Forms::RadioButton());
 				this->rbVideoCopy = (gcnew System::Windows::Forms::RadioButton());
 				this->rbVideoH265 = (gcnew System::Windows::Forms::RadioButton());
@@ -94,15 +96,27 @@ namespace Ambiesoft {
 				// 
 				this->groupVideoCodec->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 					| System::Windows::Forms::AnchorStyles::Right));
+				this->groupVideoCodec->Controls->Add(this->rbAV1);
 				this->groupVideoCodec->Controls->Add(this->rbVideoVp9);
 				this->groupVideoCodec->Controls->Add(this->rbVideoCopy);
 				this->groupVideoCodec->Controls->Add(this->rbVideoH265);
 				this->groupVideoCodec->Location = System::Drawing::Point(12, 59);
 				this->groupVideoCodec->Name = L"groupVideoCodec";
 				this->groupVideoCodec->Size = System::Drawing::Size(289, 100);
-				this->groupVideoCodec->TabIndex = 1;
+				this->groupVideoCodec->TabIndex = 200;
 				this->groupVideoCodec->TabStop = false;
 				this->groupVideoCodec->Text = L"Video Codec";
+				// 
+				// rbAV1
+				// 
+				this->rbAV1->AutoSize = true;
+				this->rbAV1->Location = System::Drawing::Point(180, 19);
+				this->rbAV1->Name = L"rbAV1";
+				this->rbAV1->Size = System::Drawing::Size(43, 17);
+				this->rbAV1->TabIndex = 600;
+				this->rbAV1->TabStop = true;
+				this->rbAV1->Text = L"&av1";
+				this->rbAV1->UseVisualStyleBackColor = true;
 				// 
 				// rbVideoVp9
 				// 
@@ -110,7 +124,7 @@ namespace Ambiesoft {
 				this->rbVideoVp9->Location = System::Drawing::Point(6, 65);
 				this->rbVideoVp9->Name = L"rbVideoVp9";
 				this->rbVideoVp9->Size = System::Drawing::Size(43, 17);
-				this->rbVideoVp9->TabIndex = 2;
+				this->rbVideoVp9->TabIndex = 500;
 				this->rbVideoVp9->TabStop = true;
 				this->rbVideoVp9->Text = L"&vp9";
 				this->rbVideoVp9->UseVisualStyleBackColor = true;
@@ -122,7 +136,7 @@ namespace Ambiesoft {
 				this->rbVideoCopy->Location = System::Drawing::Point(6, 19);
 				this->rbVideoCopy->Name = L"rbVideoCopy";
 				this->rbVideoCopy->Size = System::Drawing::Size(48, 17);
-				this->rbVideoCopy->TabIndex = 0;
+				this->rbVideoCopy->TabIndex = 300;
 				this->rbVideoCopy->TabStop = true;
 				this->rbVideoCopy->Text = L"&copy";
 				this->rbVideoCopy->UseVisualStyleBackColor = true;
@@ -133,7 +147,7 @@ namespace Ambiesoft {
 				this->rbVideoH265->Location = System::Drawing::Point(6, 42);
 				this->rbVideoH265->Name = L"rbVideoH265";
 				this->rbVideoH265->Size = System::Drawing::Size(82, 17);
-				this->rbVideoH265->TabIndex = 1;
+				this->rbVideoH265->TabIndex = 400;
 				this->rbVideoH265->TabStop = true;
 				this->rbVideoH265->Text = L"&hevc (h265)";
 				this->rbVideoH265->UseVisualStyleBackColor = true;
@@ -148,7 +162,7 @@ namespace Ambiesoft {
 				this->groupAudioCodec->Location = System::Drawing::Point(12, 165);
 				this->groupAudioCodec->Name = L"groupAudioCodec";
 				this->groupAudioCodec->Size = System::Drawing::Size(289, 100);
-				this->groupAudioCodec->TabIndex = 1;
+				this->groupAudioCodec->TabIndex = 700;
 				this->groupAudioCodec->TabStop = false;
 				this->groupAudioCodec->Text = L"Audio Codec";
 				// 
@@ -158,7 +172,7 @@ namespace Ambiesoft {
 				this->rbAudioOpus->Location = System::Drawing::Point(6, 65);
 				this->rbAudioOpus->Name = L"rbAudioOpus";
 				this->rbAudioOpus->Size = System::Drawing::Size(48, 17);
-				this->rbAudioOpus->TabIndex = 2;
+				this->rbAudioOpus->TabIndex = 1000;
 				this->rbAudioOpus->TabStop = true;
 				this->rbAudioOpus->Text = L"&opus";
 				this->rbAudioOpus->UseVisualStyleBackColor = true;
@@ -169,7 +183,7 @@ namespace Ambiesoft {
 				this->rbAudioAac->Location = System::Drawing::Point(6, 42);
 				this->rbAudioAac->Name = L"rbAudioAac";
 				this->rbAudioAac->Size = System::Drawing::Size(43, 17);
-				this->rbAudioAac->TabIndex = 1;
+				this->rbAudioAac->TabIndex = 900;
 				this->rbAudioAac->TabStop = true;
 				this->rbAudioAac->Text = L"&aac";
 				this->rbAudioAac->UseVisualStyleBackColor = true;
@@ -181,7 +195,7 @@ namespace Ambiesoft {
 				this->rbAudioCopy->Location = System::Drawing::Point(6, 19);
 				this->rbAudioCopy->Name = L"rbAudioCopy";
 				this->rbAudioCopy->Size = System::Drawing::Size(48, 17);
-				this->rbAudioCopy->TabIndex = 0;
+				this->rbAudioCopy->TabIndex = 800;
 				this->rbAudioCopy->TabStop = true;
 				this->rbAudioCopy->Text = L"c&opy";
 				this->rbAudioCopy->UseVisualStyleBackColor = true;
@@ -193,7 +207,7 @@ namespace Ambiesoft {
 				this->btnOK->Location = System::Drawing::Point(145, 291);
 				this->btnOK->Name = L"btnOK";
 				this->btnOK->Size = System::Drawing::Size(75, 23);
-				this->btnOK->TabIndex = 2;
+				this->btnOK->TabIndex = 1100;
 				this->btnOK->Text = L"&OK";
 				this->btnOK->UseVisualStyleBackColor = true;
 				this->btnOK->Click += gcnew System::EventHandler(this, &TargetCodecDialog::BtnOK_Click);
@@ -205,7 +219,7 @@ namespace Ambiesoft {
 				this->btnCancel->Location = System::Drawing::Point(226, 291);
 				this->btnCancel->Name = L"btnCancel";
 				this->btnCancel->Size = System::Drawing::Size(75, 23);
-				this->btnCancel->TabIndex = 3;
+				this->btnCancel->TabIndex = 1200;
 				this->btnCancel->Text = L"&Cancel";
 				this->btnCancel->UseVisualStyleBackColor = true;
 				// 
@@ -218,7 +232,7 @@ namespace Ambiesoft {
 				this->cmbEncodeType->Location = System::Drawing::Point(18, 12);
 				this->cmbEncodeType->Name = L"cmbEncodeType";
 				this->cmbEncodeType->Size = System::Drawing::Size(283, 21);
-				this->cmbEncodeType->TabIndex = 4;
+				this->cmbEncodeType->TabIndex = 100;
 				this->cmbEncodeType->SelectedIndexChanged += gcnew System::EventHandler(this, &TargetCodecDialog::CmbEncodeType_SelectedIndexChanged);
 				// 
 				// TargetCodecDialog

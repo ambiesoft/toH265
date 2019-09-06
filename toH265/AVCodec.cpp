@@ -31,6 +31,8 @@ namespace Ambiesoft {
 				vc_ = VC::VC_VP9;
 			else if (codec == "aac")
 				vc_ = VC::VC_AAC;
+			else if (codec == "av1")
+				vc_ = VC::VC_AV1;
 			else
 			{
 				DASSERT(false);
@@ -53,6 +55,7 @@ namespace Ambiesoft {
 			case VC::VC_VORBIS:return "vorbis";
 			case VC::VC_VP8:return "vp8";
 			case VC::VC_VP9:return "vp9";
+			case VC::VC_AV1:return "av1";
 			case VC::VC_MIXED:return "mixed";
 			default:
 				DASSERT(false);
@@ -72,6 +75,7 @@ namespace Ambiesoft {
 			case VC::VC_VORBIS:return "libvorbis";
 			case VC::VC_VP8:return "vp8";
 			case VC::VC_VP9:return "vp9";
+			case VC::VC_AV1:return "av1 -strict -2";
 			default:
 				DASSERT(false);
 			}
