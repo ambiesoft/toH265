@@ -115,8 +115,9 @@ namespace Ambiesoft {
 			{
 				StringBuilder sbMessage;
 				sbMessage.AppendFormat(I18N(L"This file does not look like '{0}'."), findInOutput);
-				CppUtils::Alert(this, sbMessage.ToString());
-				return nullptr;
+				sbMessage.AppendFormat(I18N(L"Are you sure to continue?"), findInOutput);
+				if(System::Windows::Forms::DialogResult::Yes != CppUtils::YesOrNo(this, sbMessage.ToString(), MessageBoxDefaultButton::Button2))
+					return nullptr;
 			}
 
 			target = dlg.FileName;

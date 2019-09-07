@@ -1,3 +1,6 @@
+2019/09/07 ver1.0.23
+allow user choosed ffmpeg
+
 2019/09/06 ver1.0.22
 av1
 
