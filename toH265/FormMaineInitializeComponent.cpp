@@ -67,13 +67,11 @@ namespace Ambiesoft {
 			// 
 			// splitRoot.Panel1
 			// 
-			resources->ApplyResources(this->splitRoot->Panel1, L"splitRoot.Panel1");
 			this->splitRoot->Panel1->Controls->Add(this->btnBrowseMovie);
 			this->splitRoot->Panel1->Controls->Add(this->panelList);
 			// 
 			// splitRoot.Panel2
 			// 
-			resources->ApplyResources(this->splitRoot->Panel2, L"splitRoot.Panel2");
 			this->splitRoot->Panel2->Controls->Add(this->txtFFMpegArg);
 			this->splitRoot->Panel2->Controls->Add(this->btnStart);
 			this->splitRoot->Panel2->Controls->Add(this->txtLogErr);
@@ -94,14 +92,14 @@ namespace Ambiesoft {
 			// 
 			// cmList
 			// 
-			resources->ApplyResources(this->cmList, L"cmList");
 			this->cmList->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tsmiRemoveFromList });
 			this->cmList->Name = L"cmList";
+			resources->ApplyResources(this->cmList, L"cmList");
 			// 
 			// tsmiRemoveFromList
 			// 
-			resources->ApplyResources(this->tsmiRemoveFromList, L"tsmiRemoveFromList");
 			this->tsmiRemoveFromList->Name = L"tsmiRemoveFromList";
+			resources->ApplyResources(this->tsmiRemoveFromList, L"tsmiRemoveFromList");
 			this->tsmiRemoveFromList->Click += gcnew System::EventHandler(this, &FormMain::TsmiRemoveFromList_Click);
 			// 
 			// txtFFMpegArg
@@ -128,207 +126,207 @@ namespace Ambiesoft {
 			// 
 			// menuMain
 			// 
-			resources->ApplyResources(this->menuMain, L"menuMain");
 			this->menuMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->tsmiFile, this->tsmiOption,
 					this->tsmiHelp
 			});
+			resources->ApplyResources(this->menuMain, L"menuMain");
 			this->menuMain->Name = L"menuMain";
 			// 
 			// tsmiFile
 			// 
-			resources->ApplyResources(this->tsmiFile, L"tsmiFile");
 			this->tsmiFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->tsmiStop, this->exitToolStripMenuItem });
 			this->tsmiFile->Name = L"tsmiFile";
+			resources->ApplyResources(this->tsmiFile, L"tsmiFile");
 			// 
 			// tsmiStop
 			// 
-			resources->ApplyResources(this->tsmiStop, L"tsmiStop");
 			this->tsmiStop->Name = L"tsmiStop";
+			resources->ApplyResources(this->tsmiStop, L"tsmiStop");
 			this->tsmiStop->Click += gcnew System::EventHandler(this, &FormMain::tsmiStop_Click);
 			// 
 			// exitToolStripMenuItem
 			// 
-			resources->ApplyResources(this->exitToolStripMenuItem, L"exitToolStripMenuItem");
 			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
+			resources->ApplyResources(this->exitToolStripMenuItem, L"exitToolStripMenuItem");
 			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::exitToolStripMenuItem_Click);
 			// 
 			// tsmiOption
 			// 
-			resources->ApplyResources(this->tsmiOption, L"tsmiOption");
 			this->tsmiOption->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(8) {
 				this->tsmiSetFFProbe,
 					this->tsmiSetFFMpeg, this->toolStripMenuItem1, this->tsmiPriority, this->toolStripMenuItem2, this->tsmiMinimizeToTray, this->toolStripMenuItem3,
 					this->tsmiLanguage
 			});
 			this->tsmiOption->Name = L"tsmiOption";
+			resources->ApplyResources(this->tsmiOption, L"tsmiOption");
 			this->tsmiOption->DropDownOpening += gcnew System::EventHandler(this, &FormMain::tsmiOption_DropDownOpening);
 			// 
 			// tsmiSetFFProbe
 			// 
-			resources->ApplyResources(this->tsmiSetFFProbe, L"tsmiSetFFProbe");
 			this->tsmiSetFFProbe->Name = L"tsmiSetFFProbe";
+			resources->ApplyResources(this->tsmiSetFFProbe, L"tsmiSetFFProbe");
 			this->tsmiSetFFProbe->Click += gcnew System::EventHandler(this, &FormMain::tsmiSetFFProbe_Click);
 			// 
 			// tsmiSetFFMpeg
 			// 
-			resources->ApplyResources(this->tsmiSetFFMpeg, L"tsmiSetFFMpeg");
 			this->tsmiSetFFMpeg->Name = L"tsmiSetFFMpeg";
+			resources->ApplyResources(this->tsmiSetFFMpeg, L"tsmiSetFFMpeg");
 			this->tsmiSetFFMpeg->Click += gcnew System::EventHandler(this, &FormMain::tsmiSetFFMpeg_Click);
 			// 
 			// toolStripMenuItem1
 			// 
-			resources->ApplyResources(this->toolStripMenuItem1, L"toolStripMenuItem1");
 			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
+			resources->ApplyResources(this->toolStripMenuItem1, L"toolStripMenuItem1");
 			// 
 			// tsmiPriority
 			// 
-			resources->ApplyResources(this->tsmiPriority, L"tsmiPriority");
 			this->tsmiPriority->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->tsmiPriorityNormal,
 					this->tsmiPriorityBackground
 			});
 			this->tsmiPriority->Name = L"tsmiPriority";
+			resources->ApplyResources(this->tsmiPriority, L"tsmiPriority");
 			// 
 			// tsmiPriorityNormal
 			// 
-			resources->ApplyResources(this->tsmiPriorityNormal, L"tsmiPriorityNormal");
 			this->tsmiPriorityNormal->Checked = true;
 			this->tsmiPriorityNormal->CheckState = System::Windows::Forms::CheckState::Checked;
 			this->tsmiPriorityNormal->Name = L"tsmiPriorityNormal";
+			resources->ApplyResources(this->tsmiPriorityNormal, L"tsmiPriorityNormal");
 			this->tsmiPriorityNormal->Click += gcnew System::EventHandler(this, &FormMain::tsmiPriorityNormal_Click);
 			// 
 			// tsmiPriorityBackground
 			// 
-			resources->ApplyResources(this->tsmiPriorityBackground, L"tsmiPriorityBackground");
 			this->tsmiPriorityBackground->Name = L"tsmiPriorityBackground";
+			resources->ApplyResources(this->tsmiPriorityBackground, L"tsmiPriorityBackground");
 			this->tsmiPriorityBackground->Click += gcnew System::EventHandler(this, &FormMain::tsmiPriorityBackground_Click);
 			// 
 			// toolStripMenuItem2
 			// 
-			resources->ApplyResources(this->toolStripMenuItem2, L"toolStripMenuItem2");
 			this->toolStripMenuItem2->Name = L"toolStripMenuItem2";
+			resources->ApplyResources(this->toolStripMenuItem2, L"toolStripMenuItem2");
 			// 
 			// tsmiMinimizeToTray
 			// 
-			resources->ApplyResources(this->tsmiMinimizeToTray, L"tsmiMinimizeToTray");
 			this->tsmiMinimizeToTray->Name = L"tsmiMinimizeToTray";
+			resources->ApplyResources(this->tsmiMinimizeToTray, L"tsmiMinimizeToTray");
 			this->tsmiMinimizeToTray->Click += gcnew System::EventHandler(this, &FormMain::tsmiMinimizeToTray_Click);
 			// 
 			// toolStripMenuItem3
 			// 
-			resources->ApplyResources(this->toolStripMenuItem3, L"toolStripMenuItem3");
 			this->toolStripMenuItem3->Name = L"toolStripMenuItem3";
+			resources->ApplyResources(this->toolStripMenuItem3, L"toolStripMenuItem3");
 			// 
 			// tsmiLanguage
 			// 
-			resources->ApplyResources(this->tsmiLanguage, L"tsmiLanguage");
 			this->tsmiLanguage->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->tsmiLanguageOSDefault,
 					this->tsmiLanguageEnglish, this->tsmiLanguageJapanese
 			});
 			this->tsmiLanguage->Name = L"tsmiLanguage";
+			resources->ApplyResources(this->tsmiLanguage, L"tsmiLanguage");
 			this->tsmiLanguage->DropDownOpening += gcnew System::EventHandler(this, &FormMain::tsmiLanguage_DropDownOpening);
 			// 
 			// tsmiLanguageOSDefault
 			// 
-			resources->ApplyResources(this->tsmiLanguageOSDefault, L"tsmiLanguageOSDefault");
 			this->tsmiLanguageOSDefault->Name = L"tsmiLanguageOSDefault";
+			resources->ApplyResources(this->tsmiLanguageOSDefault, L"tsmiLanguageOSDefault");
 			this->tsmiLanguageOSDefault->Click += gcnew System::EventHandler(this, &FormMain::tsmiLanguageCommon_Click);
 			// 
 			// tsmiLanguageEnglish
 			// 
-			resources->ApplyResources(this->tsmiLanguageEnglish, L"tsmiLanguageEnglish");
 			this->tsmiLanguageEnglish->Name = L"tsmiLanguageEnglish";
+			resources->ApplyResources(this->tsmiLanguageEnglish, L"tsmiLanguageEnglish");
 			this->tsmiLanguageEnglish->Tag = L"en-US";
 			this->tsmiLanguageEnglish->Click += gcnew System::EventHandler(this, &FormMain::tsmiLanguageCommon_Click);
 			// 
 			// tsmiLanguageJapanese
 			// 
-			resources->ApplyResources(this->tsmiLanguageJapanese, L"tsmiLanguageJapanese");
 			this->tsmiLanguageJapanese->Name = L"tsmiLanguageJapanese";
+			resources->ApplyResources(this->tsmiLanguageJapanese, L"tsmiLanguageJapanese");
 			this->tsmiLanguageJapanese->Tag = L"ja-JP";
 			this->tsmiLanguageJapanese->Click += gcnew System::EventHandler(this, &FormMain::tsmiLanguageCommon_Click);
 			// 
 			// tsmiHelp
 			// 
-			resources->ApplyResources(this->tsmiHelp, L"tsmiHelp");
 			this->tsmiHelp->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
 				this->tsmiAbout,
 					this->tsmiFFMpegHelp
 			});
 			this->tsmiHelp->Name = L"tsmiHelp";
+			resources->ApplyResources(this->tsmiHelp, L"tsmiHelp");
 			// 
 			// tsmiAbout
 			// 
-			resources->ApplyResources(this->tsmiAbout, L"tsmiAbout");
 			this->tsmiAbout->Name = L"tsmiAbout";
+			resources->ApplyResources(this->tsmiAbout, L"tsmiAbout");
 			this->tsmiAbout->Click += gcnew System::EventHandler(this, &FormMain::tsmiAbout_Click);
 			// 
 			// tsmiFFMpegHelp
 			// 
-			resources->ApplyResources(this->tsmiFFMpegHelp, L"tsmiFFMpegHelp");
 			this->tsmiFFMpegHelp->Name = L"tsmiFFMpegHelp";
+			resources->ApplyResources(this->tsmiFFMpegHelp, L"tsmiFFMpegHelp");
 			this->tsmiFFMpegHelp->Click += gcnew System::EventHandler(this, &FormMain::tsmiFFMpegHelp_Click);
 			// 
 			// notifyIconMain
 			// 
-			resources->ApplyResources(this->notifyIconMain, L"notifyIconMain");
 			this->notifyIconMain->ContextMenuStrip = this->cmNotify;
+			resources->ApplyResources(this->notifyIconMain, L"notifyIconMain");
 			this->notifyIconMain->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &FormMain::notifyIconMain_MouseClick);
 			// 
 			// cmNotify
 			// 
-			resources->ApplyResources(this->cmNotify, L"cmNotify");
 			this->cmNotify->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->tsmiNotifyShow, this->tsmiNotifyStart });
 			this->cmNotify->Name = L"cmNotify";
+			resources->ApplyResources(this->cmNotify, L"cmNotify");
 			// 
 			// tsmiNotifyShow
 			// 
-			resources->ApplyResources(this->tsmiNotifyShow, L"tsmiNotifyShow");
 			this->tsmiNotifyShow->Name = L"tsmiNotifyShow";
+			resources->ApplyResources(this->tsmiNotifyShow, L"tsmiNotifyShow");
 			this->tsmiNotifyShow->Click += gcnew System::EventHandler(this, &FormMain::tsmiNotifyShow_Click);
 			// 
 			// tsmiNotifyStart
 			// 
-			resources->ApplyResources(this->tsmiNotifyStart, L"tsmiNotifyStart");
 			this->tsmiNotifyStart->Name = L"tsmiNotifyStart";
+			resources->ApplyResources(this->tsmiNotifyStart, L"tsmiNotifyStart");
 			this->tsmiNotifyStart->Click += gcnew System::EventHandler(this, &FormMain::tsmiNotifyStart_Click);
 			// 
 			// statusMain
 			// 
-			resources->ApplyResources(this->statusMain, L"statusMain");
 			this->statusMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
 				this->slMain, this->slFormat,
 					this->slVideoCodec, this->slAudioCodec, this->slDuration
 			});
+			resources->ApplyResources(this->statusMain, L"statusMain");
 			this->statusMain->Name = L"statusMain";
 			// 
 			// slMain
 			// 
-			resources->ApplyResources(this->slMain, L"slMain");
 			this->slMain->Name = L"slMain";
+			resources->ApplyResources(this->slMain, L"slMain");
 			this->slMain->Spring = true;
 			// 
 			// slFormat
 			// 
-			resources->ApplyResources(this->slFormat, L"slFormat");
 			this->slFormat->Name = L"slFormat";
+			resources->ApplyResources(this->slFormat, L"slFormat");
 			// 
 			// slVideoCodec
 			// 
-			resources->ApplyResources(this->slVideoCodec, L"slVideoCodec");
 			this->slVideoCodec->Name = L"slVideoCodec";
+			resources->ApplyResources(this->slVideoCodec, L"slVideoCodec");
 			// 
 			// slAudioCodec
 			// 
-			resources->ApplyResources(this->slAudioCodec, L"slAudioCodec");
 			this->slAudioCodec->Name = L"slAudioCodec";
+			resources->ApplyResources(this->slAudioCodec, L"slAudioCodec");
 			// 
 			// slDuration
 			// 
-			resources->ApplyResources(this->slDuration, L"slDuration");
 			this->slDuration->Name = L"slDuration";
+			resources->ApplyResources(this->slDuration, L"slDuration");
 			// 
 			// FormMain
 			// 

@@ -73,11 +73,11 @@ namespace Ambiesoft {
 		}
 		System::Void FormMain::FormMain_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 		{
-			if (e->CloseReason == CloseReason::WindowsShutDown)
-			{
-				// TODO: anyway ffmpeg process closes
-				return;
-			}
+			//if (e->CloseReason == CloseReason::WindowsShutDown)
+			//{
+			//	// TODO: anyway ffmpeg process closes
+			//	return;
+			//}
 			if (!ConfirmAndStopEncode())
 			{
 				e->Cancel = true;

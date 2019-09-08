@@ -1,3 +1,6 @@
+2019/09/08 ver1.0.24
+Prevent shutdown while encoding is in progress
+
 2019/09/07 ver1.0.23
 allow user choosed ffmpeg
 
