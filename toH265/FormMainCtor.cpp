@@ -51,13 +51,12 @@ namespace Ambiesoft {
 			lvInputs->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragEnter);
 			lvInputs->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragOver);
 			lvInputs->AllowDrop = true;
-			lvInputs->Columns->Add("directory", I18N("Directory"));
-			lvInputs->Columns->Add("filename", I18N("Filename"));
-			lvInputs->Columns->Add("aspect", I18N("Aspect"));
-			lvInputs->Columns->Add("format", I18N("Format"));
-			lvInputs->Columns->Add("vcodec", I18N("Video"));
-			lvInputs->Columns->Add("acodec", I18N("Audio"));
-			lvInputs->Columns->Add("duration", I18N("Duration"));
+		
+			for each (ColumnItem^ ci in ColumnItems)
+			{
+				lvInputs->Columns->Add(ci->key_, ci->text_);
+			}
+
 
 			lvInputs->Dock = DockStyle::Fill;
 			panelList->Controls->Add(lvInputs);

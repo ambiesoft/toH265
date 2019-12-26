@@ -115,6 +115,7 @@ namespace Ambiesoft {
 		}
 		void FormMain::InsertMovieItem(
 			String^ movieFile,
+			LONGLONG size,
 			System::Drawing::Size aspect,
 			String^ format,
 			AVCodec^ acodec,
@@ -122,53 +123,46 @@ namespace Ambiesoft {
 			AVDuration^ duration)
 		{
 			ListViewItem^ lvi = gcnew ListViewItem();
-			lvi->Text = Path::GetDirectoryName(movieFile);
-			//	ListViewItem::ListViewSubItem^ subDirectory = gcnew ListViewItem::ListViewSubItem();
-			//	subDirectory->Name = "directory";
-			//	subDirectory->Text = Path::GetDirectoryName(movieFile);
-			//	lvi->SubItems->Add(subDirectory);
-			//}
 
+			for each (ColumnItem ^ ci in ColumnItems)
 			{
-				ListViewItem::ListViewSubItem^ subFilename = gcnew ListViewItem::ListViewSubItem();
-				subFilename->Name = "filename";
-				subFilename->Text = Path::GetFileName(movieFile);
-				lvi->SubItems->Add(subFilename);
-			}
-
-			{
-				ListViewItem::ListViewSubItem^ subAspect = gcnew ListViewItem::ListViewSubItem();
-				subAspect->Name = "aspect";
-				subAspect->Text = sToString(aspect);
-				subAspect->Tag = aspect;
-				lvi->SubItems->Add(subAspect);
-			}
-
-			{
-				ListViewItem::ListViewSubItem^ subFormat = gcnew ListViewItem::ListViewSubItem();
-				subFormat->Name = "format";
-				subFormat->Text = Ambiesoft::toH265Helper::human_format(format->ToString());
-				lvi->SubItems->Add(subFormat);
-			}
-			{
-				ListViewItem::ListViewSubItem^ subVcodec = gcnew ListViewItem::ListViewSubItem();
-				subVcodec->Name = "vcodec";
-				subVcodec->Text = vcodec->ToString();
-				lvi->SubItems->Add(subVcodec);
-			}
-			{
-				ListViewItem::ListViewSubItem^ subAcodec = gcnew ListViewItem::ListViewSubItem();
-				subAcodec->Name = "acodec";
-				subAcodec->Text = acodec->ToString();
-				lvi->SubItems->Add(subAcodec);
+				if (ci->key_ == "main")
+					continue;
+				ListViewItem::ListViewSubItem^ newSubItem;
+				bool toAdd = false;
+				if (lvi->SubItems[ci->key_] == nullptr)
+				{
+					newSubItem = gcnew ListViewItem::ListViewSubItem();
+					toAdd = true;
+				}
+				else
+				{
+					newSubItem = lvi->SubItems[ci->key_];
+				}
+				newSubItem->Name = ci->key_;
+				newSubItem->Text = ci->text_;
+				if (toAdd)
+				{
+					lvi->SubItems->Add(newSubItem);
+					DASSERT(lvi->SubItems[ci->key_]);
+				}
 			}
 
-			{
-				ListViewItem::ListViewSubItem^ subDuration = gcnew ListViewItem::ListViewSubItem();
-				subDuration->Name = "duration";
-				subDuration->Text = duration->ToString();
-				lvi->SubItems->Add(subDuration);
-			}
+			lvi->SubItems["directory"]->Text = Path::GetDirectoryName(movieFile);
+			lvi->SubItems["filename"]->Text = Path::GetFileName(movieFile);
+
+			lvi->SubItems["size"]->Text = AmbLib::FormatSize(size);
+
+			lvi->SubItems["aspect"]->Text = sToString(aspect);
+			lvi->SubItems["aspect"]->Tag = aspect;
+
+			lvi->SubItems["format"]->Text = Ambiesoft::toH265Helper::human_format(format->ToString());
+
+			lvi->SubItems["vcodec"]->Text = vcodec->ToString();
+
+			lvi->SubItems["acodec"]->Text = acodec->ToString();
+
+			lvi->SubItems["duration"]->Text = duration->ToString();
 
 			lvInputs->Items->Add(lvi);
 		}
@@ -188,11 +182,23 @@ namespace Ambiesoft {
 					return false;
 				}
 
+				LONGLONG size;
 				String^ audiocodec;
 				String^ videocodec;
 				String^ format;
 				System::Drawing::Size aspect;
 				TimeSpan duration;
+
+				try
+				{
+					size = FileInfo(moviefile).Length;
+				}
+				catch (Exception ^ ex)
+				{
+					CppUtils::Alert(this, ex->Message);
+					return false;
+				}
+
 				try
 				{
 					GetStreamInfo(FFProbe, moviefile, format, audiocodec, videocodec, aspect, duration);
@@ -234,6 +240,7 @@ namespace Ambiesoft {
 				if (bSet)
 				{
 					InsertMovieItem(moviefile,
+						size,
 						aspect,
 						format,
 						gcnew AVCodec(audiocodec), gcnew AVCodec(videocodec),
@@ -714,7 +721,7 @@ namespace Ambiesoft {
 		}
 		String^ FormMain::GetMovieFileFromLvi(ListViewItem^ lvi)
 		{
-			return Path::Combine(lvi->Text, lvi->SubItems["filename"]->Text);
+			return Path::Combine(lvi->SubItems["directory"]->Text, lvi->SubItems["filename"]->Text);
 		}
 		Size FormMain::GetVideoSize(ListViewItem^ lvi)
 		{

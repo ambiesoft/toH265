@@ -3,6 +3,8 @@
 #include "AVCodec.h"
 #include "AVDuration.h"
 
+#include "toH265.h"
+
 namespace Ambiesoft {
 	namespace toH265 {
 
@@ -24,6 +26,28 @@ namespace Ambiesoft {
 		/// </summary>
 		public ref class FormMain : public System::Windows::Forms::Form
 		{
+			ref struct ColumnItem
+			{
+				String^ key_;
+				String^ text_;
+				ColumnItem(String^ key, String^ text):
+					key_(key),
+					text_(text)
+				{
+					
+				}
+			};
+			static initonly array<ColumnItem^>^ ColumnItems = gcnew array<ColumnItem^> { 
+				gcnew ColumnItem{ "main", "" },
+				gcnew ColumnItem{ "directory", I18N("Directory") },
+				gcnew ColumnItem{ "filename", I18N("Filename") },
+				gcnew ColumnItem{ "size", I18N("Size") },
+				gcnew ColumnItem{ "aspect", I18N("Aspect") },
+				gcnew ColumnItem{ "format", I18N("Format") },
+				gcnew ColumnItem{ "vcodec", I18N("Video") },
+				gcnew ColumnItem{ "acodec", I18N("Audio") },
+				gcnew ColumnItem{ "duration", I18N("Duration") },
+			};
 		public:
 			static initonly cli::array<wchar_t>^ char1x = gcnew cli::array<wchar_t>{L'x'};
 
@@ -291,6 +315,7 @@ namespace Ambiesoft {
 
 			void InsertMovieItem(
 				String^ movieFile,
+				LONGLONG size,
 				System::Drawing::Size aspect,
 				String^ format,
 				AVCodec^ acodec,
