@@ -23,6 +23,9 @@ namespace Ambiesoft {
 			this->tsmiFile = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiStop = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItem4 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->tsmiOpenInputLocation = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiOpenOutput = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiOption = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiSetFFProbe = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiSetFFMpeg = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -135,7 +138,10 @@ namespace Ambiesoft {
 			// 
 			// tsmiFile
 			// 
-			this->tsmiFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->tsmiStop, this->exitToolStripMenuItem });
+			this->tsmiFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+				this->tsmiStop, this->exitToolStripMenuItem,
+					this->toolStripMenuItem4, this->tsmiOpenInputLocation, this->tsmiOpenOutput
+			});
 			this->tsmiFile->Name = L"tsmiFile";
 			resources->ApplyResources(this->tsmiFile, L"tsmiFile");
 			// 
@@ -150,6 +156,23 @@ namespace Ambiesoft {
 			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
 			resources->ApplyResources(this->exitToolStripMenuItem, L"exitToolStripMenuItem");
 			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::exitToolStripMenuItem_Click);
+			// 
+			// toolStripMenuItem4
+			// 
+			this->toolStripMenuItem4->Name = L"toolStripMenuItem4";
+			resources->ApplyResources(this->toolStripMenuItem4, L"toolStripMenuItem4");
+			// 
+			// tsmiOpenInputLocation
+			// 
+			this->tsmiOpenInputLocation->Name = L"tsmiOpenInputLocation";
+			resources->ApplyResources(this->tsmiOpenInputLocation, L"tsmiOpenInputLocation");
+			this->tsmiOpenInputLocation->Click += gcnew System::EventHandler(this, &FormMain::tsmiOpenInputLocation_Click);
+			// 
+			// tsmiOpenOutput
+			// 
+			this->tsmiOpenOutput->Name = L"tsmiOpenOutput";
+			resources->ApplyResources(this->tsmiOpenOutput, L"tsmiOpenOutput");
+			this->tsmiOpenOutput->Click += gcnew System::EventHandler(this, &FormMain::tsmiOpenOutput_Click);
 			// 
 			// tsmiOption
 			// 

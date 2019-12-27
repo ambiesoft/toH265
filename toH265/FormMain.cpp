@@ -1,11 +1,16 @@
 ﻿#include "stdafx.h"
 
+#include "../../lsMisc/IsFileOpen.h"
+#include "../../lsMisc/getStdString.net.h"
+#include "../../lsMisc/OpenCommon.h"
+
 #include "toH265.h"
 #include "helper.h"
 #include "TargetCodecDialog.h"
 
 #include "FormMain.h"
 
+#pragma comment(lib, "shell32.lib")
 
 namespace Ambiesoft {
 	namespace toH265 {
@@ -439,6 +444,8 @@ namespace Ambiesoft {
 		{
 			double percent = (tsProgress.TotalMilliseconds / InputDuration->TotalMilliseconds) * 100;
 			UpdateTitle((int)percent);
+			if (this->WindowState == FormWindowState::Minimized)
+				return;
 
 			DTRACE("All:" + InputDuration->ToString() + " " + InputDuration->TotalMilliseconds);
 			DTRACE("Cur:" + tsProgress.ToString() + " " + tsProgress.TotalMilliseconds);
@@ -517,9 +524,11 @@ namespace Ambiesoft {
 				double dblSpeed;
 				if (GetInfoFromFFMpegoutput(text, tsTime, dblSpeed))
 				{
-
 					UpdateTitleTS(tsTime, dblSpeed);
-					txtLogOut->Text = text;
+					if (this->WindowState != FormWindowState::Minimized)
+					{
+						txtLogOut->Text = text;
+					}
 				}
 				else
 				{
@@ -778,6 +787,17 @@ namespace Ambiesoft {
 			}
 			return result;
 		}
+		array<String^>^ FormMain::GetInputMovies()
+		{
+			List<String^> inputmovies;
+			// add files 
+			for each (ListViewItem ^ lvi in lvInputs->Items)
+			{
+				String^ inputmovie = GetMovieFileFromLvi(lvi);
+				inputmovies.Add(inputmovie);
+			}
+			return inputmovies.ToArray();
+		}
 		System::Void FormMain::btnStart_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			switch (FFMpegState)
@@ -831,7 +851,7 @@ namespace Ambiesoft {
 			List<String^>^ outExts = gcnew List<String^>();
 			String^ initialDir;
 			String^ baseFileName = "Encoded";
-			List<String^> inputmovies;
+			
 
 			// check input
 			for each (ListViewItem ^ lvi in lvInputs->Items)
@@ -847,12 +867,7 @@ namespace Ambiesoft {
 					return;
 			}
 
-			// add files 
-			for each (ListViewItem ^ lvi in lvInputs->Items)
-			{
-				String^ inputmovie = GetMovieFileFromLvi(lvi);
-				inputmovies.Add(inputmovie);
-			}
+			List<String^> inputmovies = GetInputMovies();
 
 			// set basename
 			baseFileName = Ambiesoft::toH265Helper::GetCommonFilename(%inputmovies);
@@ -1024,7 +1039,23 @@ namespace Ambiesoft {
 					
 			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
 				return;
-
+			if (IsFileOpen(getStdWstring(dlg.FileName).c_str()))
+			{
+				StringBuilder sb;
+				sb.AppendLine(String::Format(I18N(STR_0_ALREADY_OPENED), dlg.FileName));
+				sb.AppendLine();
+				sb.AppendLine(STR_ARE_YOU_SURE_TO_CONTINUE);
+				if (System::Windows::Forms::DialogResult::Yes != CppUtils::CenteredMessageBox(
+					this,
+					sb.ToString(),
+					Application::ProductName,
+					MessageBoxButtons::YesNo,
+					MessageBoxIcon::Warning,
+					MessageBoxDefaultButton::Button2))
+				{
+					return;
+				}
+			}
 			outputMovie_ = dlg.FileName;
 
 			String^ arg;
@@ -1194,6 +1225,23 @@ namespace Ambiesoft {
 			{
 				for each (ListViewItem ^ lvi in lvInputs->Items)
 					CheckMovieAndSet(GetMovieFileFromLvi(lvi), false);
+			}
+		}
+
+		System::Void FormMain::tsmiOpenInputLocation_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			for each (String ^ inputmovie in GetInputMovies())
+			{
+				OpenFolder((HWND)this->Handle.ToPointer(),
+					getStdWstring(inputmovie).c_str());
+			}
+		}
+		System::Void FormMain::tsmiOpenOutput_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (String::IsNullOrEmpty(outputMovie_))
+			{
+				CppUtils::Alert(this, I18N(L"No output movie"));
+				return;
 			}
 		}
 

@@ -69,6 +69,8 @@ namespace Ambiesoft {
 
 			literal String^ STR_FAILED_TO_SAVE_SETTING = L"Failed to save settings.";
 			literal String^ STR_0_NOT_FOUND = L"'{0}' not found.";
+			literal String^ STR_0_ALREADY_OPENED = L"'{0}' may be already opened by another application.";
+			literal String^ STR_ARE_YOU_SURE_TO_CONTINUE =  L"Are you sure to continue?";
 
 		private: System::Windows::Forms::TextBox^ txtLogErr;
 		private: System::Windows::Forms::TextBox^ txtLogOut;
@@ -120,6 +122,9 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::ToolStripStatusLabel^ slFormat;
 		private: System::Windows::Forms::ContextMenuStrip^ cmList;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiRemoveFromList;
+		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem4;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiOpenInputLocation;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiOpenOutput;
 
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageJapanese;
 
@@ -223,6 +228,7 @@ namespace Ambiesoft {
 			System::Drawing::Icon^ iconYellow_;
 			System::Drawing::Icon^ iconRed_;
 
+			array<String^>^ GetInputMovies();
 			String^ outputMovie_;
 
 			void SetFormatStatusText();
@@ -403,6 +409,9 @@ namespace Ambiesoft {
 			System::Void tsmiLanguage_DropDownOpening(System::Object^  sender, System::EventArgs^  e);
 
 			System::Void TsmiRemoveFromList_Click(System::Object^ sender, System::EventArgs^ e);
+
+			System::Void tsmiOpenInputLocation_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiOpenOutput_Click(System::Object^ sender, System::EventArgs^ e);
 
 };
 

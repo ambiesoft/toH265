@@ -196,7 +196,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\lsMisc\getStdString.net.cpp" />
     <ClCompile Include="..\..\lsMisc\HighDPI.cpp" />
+    <ClCompile Include="..\..\lsMisc\IsFileOpen.cpp" />
+    <ClCompile Include="..\..\lsMisc\OpenCommon.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="AVDuration.cpp" />
     <ClCompile Include="FormMain.cpp" />
@@ -224,7 +227,10 @@
     <ClCompile Include="AVCodec.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\lsMisc\getStdString.net.h" />
     <ClInclude Include="..\..\lsMisc\HighDPI.h" />
+    <ClInclude Include="..\..\lsMisc\IsFileOpen.h" />
+    <ClInclude Include="..\..\lsMisc\OpenCommon.h" />
     <ClInclude Include="AVDuration.h" />
     <ClInclude Include="DebugMacro.h" />
     <ClInclude Include="FormMain.h">

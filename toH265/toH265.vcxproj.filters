@@ -81,6 +81,15 @@
     <ClCompile Include="AVDuration.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\lsMisc\IsFileOpen.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\getStdString.net.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\OpenCommon.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -111,6 +120,15 @@
       <Filter>1 Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AVDuration.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\IsFileOpen.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\getStdString.net.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\OpenCommon.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
   </ItemGroup>
