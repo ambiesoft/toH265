@@ -54,7 +54,7 @@ namespace Ambiesoft {
 		
 			for each (ColumnItem^ ci in ColumnItems)
 			{
-				lvInputs->Columns->Add(ci->key_, ci->text_);
+				lvInputs->Columns->Add(ci->Key, ci->Text, ci->Width);
 			}
 
 

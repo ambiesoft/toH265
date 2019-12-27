@@ -26,23 +26,43 @@ namespace Ambiesoft {
 		/// </summary>
 		public ref class FormMain : public System::Windows::Forms::Form
 		{
-			ref struct ColumnItem
+			ref class ColumnItem
 			{
 				String^ key_;
 				String^ text_;
-				ColumnItem(String^ key, String^ text):
+				int width_;
+			public:
+				ColumnItem(String^ key, String^ text, int width):
 					key_(key),
-					text_(text)
+					text_(text),
+					width_(width){}
+				ColumnItem(String^ key, String^ text) :
+					ColumnItem(key, text, 50) {}
+				property String^ Key
 				{
-					
+					String^ get() {
+						return key_;
+					}
+				}
+				property String^ Text
+				{
+					String^ get() {
+						return text_;
+					}
+				}
+				property int Width
+				{
+					int get() {
+						return width_;
+					}
 				}
 			};
 			static initonly array<ColumnItem^>^ ColumnItems = gcnew array<ColumnItem^> { 
-				gcnew ColumnItem{ "main", "" },
-				gcnew ColumnItem{ "directory", I18N("Directory") },
-				gcnew ColumnItem{ "filename", I18N("Filename") },
+				gcnew ColumnItem{ "main", "", 0},
+				gcnew ColumnItem{ "directory", I18N("Directory"), 150 },
+				gcnew ColumnItem{ "filename", I18N("Filename"), 150 },
 				gcnew ColumnItem{ "size", I18N("Size") },
-				gcnew ColumnItem{ "aspect", I18N("Aspect") },
+				gcnew ColumnItem{ "aspect", I18N("Aspect Ratio") },
 				gcnew ColumnItem{ "format", I18N("Format") },
 				gcnew ColumnItem{ "vcodec", I18N("Video") },
 				gcnew ColumnItem{ "acodec", I18N("Audio") },
@@ -70,7 +90,8 @@ namespace Ambiesoft {
 			literal String^ STR_FAILED_TO_SAVE_SETTING = L"Failed to save settings.";
 			literal String^ STR_0_NOT_FOUND = L"'{0}' not found.";
 			literal String^ STR_0_ALREADY_OPENED = L"'{0}' may be already opened by another application.";
-			literal String^ STR_ARE_YOU_SURE_TO_CONTINUE =  L"Are you sure to continue?";
+			literal String^ STR_ARE_YOU_SURE_TO_CONTINUE = L"Are you sure to continue?";
+			literal String^ STR_NO_OUTPUT_MOVIE = L"No output movie";
 
 		private: System::Windows::Forms::TextBox^ txtLogErr;
 		private: System::Windows::Forms::TextBox^ txtLogOut;
@@ -123,8 +144,12 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::ContextMenuStrip^ cmList;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiRemoveFromList;
 		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem4;
-		private: System::Windows::Forms::ToolStripMenuItem^ tsmiOpenInputLocation;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiOpenInputLocations;
+
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiOpenOutput;
+		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem5;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenInputLocations;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenOutputLocation;
 
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageJapanese;
 
@@ -410,8 +435,8 @@ namespace Ambiesoft {
 
 			System::Void TsmiRemoveFromList_Click(System::Object^ sender, System::EventArgs^ e);
 
-			System::Void tsmiOpenInputLocation_Click(System::Object^ sender, System::EventArgs^ e);
-			System::Void tsmiOpenOutput_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiOpenInputLocations_ClickCommon(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiOpenOutput_ClickCommon(System::Object^ sender, System::EventArgs^ e);
 
 };
 

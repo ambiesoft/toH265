@@ -131,25 +131,25 @@ namespace Ambiesoft {
 
 			for each (ColumnItem ^ ci in ColumnItems)
 			{
-				if (ci->key_ == "main")
+				if (ci->Key == "main")
 					continue;
 				ListViewItem::ListViewSubItem^ newSubItem;
 				bool toAdd = false;
-				if (lvi->SubItems[ci->key_] == nullptr)
+				if (lvi->SubItems[ci->Key] == nullptr)
 				{
 					newSubItem = gcnew ListViewItem::ListViewSubItem();
 					toAdd = true;
 				}
 				else
 				{
-					newSubItem = lvi->SubItems[ci->key_];
+					newSubItem = lvi->SubItems[ci->Key];
 				}
-				newSubItem->Name = ci->key_;
-				newSubItem->Text = ci->text_;
+				newSubItem->Name = ci->Key;
+				newSubItem->Text = ci->Text;
 				if (toAdd)
 				{
 					lvi->SubItems->Add(newSubItem);
-					DASSERT(lvi->SubItems[ci->key_]);
+					DASSERT(lvi->SubItems[ci->Key]);
 				}
 			}
 
@@ -1044,7 +1044,7 @@ namespace Ambiesoft {
 				StringBuilder sb;
 				sb.AppendLine(String::Format(I18N(STR_0_ALREADY_OPENED), dlg.FileName));
 				sb.AppendLine();
-				sb.AppendLine(STR_ARE_YOU_SURE_TO_CONTINUE);
+				sb.AppendLine(I18N(STR_ARE_YOU_SURE_TO_CONTINUE));
 				if (System::Windows::Forms::DialogResult::Yes != CppUtils::CenteredMessageBox(
 					this,
 					sb.ToString(),
@@ -1228,7 +1228,7 @@ namespace Ambiesoft {
 			}
 		}
 
-		System::Void FormMain::tsmiOpenInputLocation_Click(System::Object^ sender, System::EventArgs^ e)
+		System::Void FormMain::tsmiOpenInputLocations_ClickCommon(System::Object^ sender, System::EventArgs^ e)
 		{
 			for each (String ^ inputmovie in GetInputMovies())
 			{
@@ -1236,31 +1236,19 @@ namespace Ambiesoft {
 					getStdWstring(inputmovie).c_str());
 			}
 		}
-		System::Void FormMain::tsmiOpenOutput_Click(System::Object^ sender, System::EventArgs^ e)
+		System::Void FormMain::tsmiOpenOutput_ClickCommon(System::Object^ sender, System::EventArgs^ e)
 		{
 			if (String::IsNullOrEmpty(outputMovie_))
 			{
-				CppUtils::Alert(this, I18N(L"No output movie"));
+				CppUtils::Alert(this, I18N(STR_NO_OUTPUT_MOVIE));
 				return;
 			}
+
+			OpenFolder((HWND)this->Handle.ToPointer(),
+				getStdWstring(outputMovie_).c_str());
 		}
 
-		WaitCursor::WaitCursor()
-		{
-			if (1 == System::Threading::Interlocked::Increment(counter_))
-			{
-				cur_ = System::Windows::Forms::Cursor::Current;
-				System::Windows::Forms::Cursor::Current = System::Windows::Forms::Cursors::WaitCursor;
-			}
-		}
 
-		WaitCursor::~WaitCursor()
-		{
-			if (0 == System::Threading::Interlocked::Decrement(counter_))
-			{
-				System::Windows::Forms::Cursor::Current = cur_;
-			}
-		}
 	}
 
 }

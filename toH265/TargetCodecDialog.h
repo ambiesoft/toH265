@@ -76,6 +76,7 @@ namespace Ambiesoft {
 			/// </summary>
 			void InitializeComponent(void)
 			{
+				System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(TargetCodecDialog::typeid));
 				this->groupVideoCodec = (gcnew System::Windows::Forms::GroupBox());
 				this->rbAV1 = (gcnew System::Windows::Forms::RadioButton());
 				this->rbVideoVp9 = (gcnew System::Windows::Forms::RadioButton());
@@ -94,154 +95,103 @@ namespace Ambiesoft {
 				// 
 				// groupVideoCodec
 				// 
-				this->groupVideoCodec->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
-					| System::Windows::Forms::AnchorStyles::Right));
+				resources->ApplyResources(this->groupVideoCodec, L"groupVideoCodec");
 				this->groupVideoCodec->Controls->Add(this->rbAV1);
 				this->groupVideoCodec->Controls->Add(this->rbVideoVp9);
 				this->groupVideoCodec->Controls->Add(this->rbVideoCopy);
 				this->groupVideoCodec->Controls->Add(this->rbVideoH265);
-				this->groupVideoCodec->Location = System::Drawing::Point(12, 59);
 				this->groupVideoCodec->Name = L"groupVideoCodec";
-				this->groupVideoCodec->Size = System::Drawing::Size(289, 100);
-				this->groupVideoCodec->TabIndex = 200;
 				this->groupVideoCodec->TabStop = false;
-				this->groupVideoCodec->Text = L"Video Codec";
 				// 
 				// rbAV1
 				// 
-				this->rbAV1->AutoSize = true;
-				this->rbAV1->Location = System::Drawing::Point(180, 19);
+				resources->ApplyResources(this->rbAV1, L"rbAV1");
 				this->rbAV1->Name = L"rbAV1";
-				this->rbAV1->Size = System::Drawing::Size(43, 17);
-				this->rbAV1->TabIndex = 600;
 				this->rbAV1->TabStop = true;
-				this->rbAV1->Text = L"&av1";
 				this->rbAV1->UseVisualStyleBackColor = true;
 				// 
 				// rbVideoVp9
 				// 
-				this->rbVideoVp9->AutoSize = true;
-				this->rbVideoVp9->Location = System::Drawing::Point(6, 65);
+				resources->ApplyResources(this->rbVideoVp9, L"rbVideoVp9");
 				this->rbVideoVp9->Name = L"rbVideoVp9";
-				this->rbVideoVp9->Size = System::Drawing::Size(43, 17);
-				this->rbVideoVp9->TabIndex = 500;
 				this->rbVideoVp9->TabStop = true;
-				this->rbVideoVp9->Text = L"&vp9";
 				this->rbVideoVp9->UseVisualStyleBackColor = true;
 				// 
 				// rbVideoCopy
 				// 
-				this->rbVideoCopy->AutoSize = true;
+				resources->ApplyResources(this->rbVideoCopy, L"rbVideoCopy");
 				this->rbVideoCopy->Checked = true;
-				this->rbVideoCopy->Location = System::Drawing::Point(6, 19);
 				this->rbVideoCopy->Name = L"rbVideoCopy";
-				this->rbVideoCopy->Size = System::Drawing::Size(48, 17);
-				this->rbVideoCopy->TabIndex = 300;
 				this->rbVideoCopy->TabStop = true;
-				this->rbVideoCopy->Text = L"&copy";
 				this->rbVideoCopy->UseVisualStyleBackColor = true;
 				// 
 				// rbVideoH265
 				// 
-				this->rbVideoH265->AutoSize = true;
-				this->rbVideoH265->Location = System::Drawing::Point(6, 42);
+				resources->ApplyResources(this->rbVideoH265, L"rbVideoH265");
 				this->rbVideoH265->Name = L"rbVideoH265";
-				this->rbVideoH265->Size = System::Drawing::Size(82, 17);
-				this->rbVideoH265->TabIndex = 400;
 				this->rbVideoH265->TabStop = true;
-				this->rbVideoH265->Text = L"&hevc (h265)";
 				this->rbVideoH265->UseVisualStyleBackColor = true;
 				// 
 				// groupAudioCodec
 				// 
-				this->groupAudioCodec->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
-					| System::Windows::Forms::AnchorStyles::Right));
+				resources->ApplyResources(this->groupAudioCodec, L"groupAudioCodec");
 				this->groupAudioCodec->Controls->Add(this->rbAudioOpus);
 				this->groupAudioCodec->Controls->Add(this->rbAudioAac);
 				this->groupAudioCodec->Controls->Add(this->rbAudioCopy);
-				this->groupAudioCodec->Location = System::Drawing::Point(12, 165);
 				this->groupAudioCodec->Name = L"groupAudioCodec";
-				this->groupAudioCodec->Size = System::Drawing::Size(289, 100);
-				this->groupAudioCodec->TabIndex = 700;
 				this->groupAudioCodec->TabStop = false;
-				this->groupAudioCodec->Text = L"Audio Codec";
 				// 
 				// rbAudioOpus
 				// 
-				this->rbAudioOpus->AutoSize = true;
-				this->rbAudioOpus->Location = System::Drawing::Point(6, 65);
+				resources->ApplyResources(this->rbAudioOpus, L"rbAudioOpus");
 				this->rbAudioOpus->Name = L"rbAudioOpus";
-				this->rbAudioOpus->Size = System::Drawing::Size(48, 17);
-				this->rbAudioOpus->TabIndex = 1000;
 				this->rbAudioOpus->TabStop = true;
-				this->rbAudioOpus->Text = L"&opus";
 				this->rbAudioOpus->UseVisualStyleBackColor = true;
 				// 
 				// rbAudioAac
 				// 
-				this->rbAudioAac->AutoSize = true;
-				this->rbAudioAac->Location = System::Drawing::Point(6, 42);
+				resources->ApplyResources(this->rbAudioAac, L"rbAudioAac");
 				this->rbAudioAac->Name = L"rbAudioAac";
-				this->rbAudioAac->Size = System::Drawing::Size(43, 17);
-				this->rbAudioAac->TabIndex = 900;
 				this->rbAudioAac->TabStop = true;
-				this->rbAudioAac->Text = L"&aac";
 				this->rbAudioAac->UseVisualStyleBackColor = true;
 				// 
 				// rbAudioCopy
 				// 
-				this->rbAudioCopy->AutoSize = true;
+				resources->ApplyResources(this->rbAudioCopy, L"rbAudioCopy");
 				this->rbAudioCopy->Checked = true;
-				this->rbAudioCopy->Location = System::Drawing::Point(6, 19);
 				this->rbAudioCopy->Name = L"rbAudioCopy";
-				this->rbAudioCopy->Size = System::Drawing::Size(48, 17);
-				this->rbAudioCopy->TabIndex = 800;
 				this->rbAudioCopy->TabStop = true;
-				this->rbAudioCopy->Text = L"c&opy";
 				this->rbAudioCopy->UseVisualStyleBackColor = true;
 				// 
 				// btnOK
 				// 
-				this->btnOK->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+				resources->ApplyResources(this->btnOK, L"btnOK");
 				this->btnOK->DialogResult = System::Windows::Forms::DialogResult::OK;
-				this->btnOK->Location = System::Drawing::Point(145, 291);
 				this->btnOK->Name = L"btnOK";
-				this->btnOK->Size = System::Drawing::Size(75, 23);
-				this->btnOK->TabIndex = 1100;
-				this->btnOK->Text = L"&OK";
 				this->btnOK->UseVisualStyleBackColor = true;
 				this->btnOK->Click += gcnew System::EventHandler(this, &TargetCodecDialog::BtnOK_Click);
 				// 
 				// btnCancel
 				// 
-				this->btnCancel->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+				resources->ApplyResources(this->btnCancel, L"btnCancel");
 				this->btnCancel->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-				this->btnCancel->Location = System::Drawing::Point(226, 291);
 				this->btnCancel->Name = L"btnCancel";
-				this->btnCancel->Size = System::Drawing::Size(75, 23);
-				this->btnCancel->TabIndex = 1200;
-				this->btnCancel->Text = L"&Cancel";
 				this->btnCancel->UseVisualStyleBackColor = true;
 				// 
 				// cmbEncodeType
 				// 
-				this->cmbEncodeType->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
-					| System::Windows::Forms::AnchorStyles::Right));
+				resources->ApplyResources(this->cmbEncodeType, L"cmbEncodeType");
 				this->cmbEncodeType->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 				this->cmbEncodeType->FormattingEnabled = true;
-				this->cmbEncodeType->Location = System::Drawing::Point(18, 12);
 				this->cmbEncodeType->Name = L"cmbEncodeType";
-				this->cmbEncodeType->Size = System::Drawing::Size(283, 21);
-				this->cmbEncodeType->TabIndex = 100;
 				this->cmbEncodeType->SelectedIndexChanged += gcnew System::EventHandler(this, &TargetCodecDialog::CmbEncodeType_SelectedIndexChanged);
 				// 
 				// TargetCodecDialog
 				// 
 				this->AcceptButton = this->btnOK;
-				this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+				resources->ApplyResources(this, L"$this");
 				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 				this->CancelButton = this->btnCancel;
-				this->ClientSize = System::Drawing::Size(313, 321);
 				this->Controls->Add(this->cmbEncodeType);
 				this->Controls->Add(this->btnCancel);
 				this->Controls->Add(this->btnOK);
@@ -249,12 +199,9 @@ namespace Ambiesoft {
 				this->Controls->Add(this->groupVideoCodec);
 				this->MaximizeBox = false;
 				this->MinimizeBox = false;
-				this->MinimumSize = System::Drawing::Size(194, 292);
 				this->Name = L"TargetCodecDialog";
 				this->ShowIcon = false;
 				this->ShowInTaskbar = false;
-				this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
-				this->Text = L"TargetCodecDialog";
 				this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &TargetCodecDialog::TargetCodecDialog_FormClosing);
 				this->groupVideoCodec->ResumeLayout(false);
 				this->groupVideoCodec->PerformLayout();

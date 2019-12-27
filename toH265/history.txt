@@ -1,3 +1,6 @@
+2019/12/27 ver1.0.27
+I18N
+
 2019/12/26 ver1.0.26
 Waring of 'already open'
 Reduce burden when iconized

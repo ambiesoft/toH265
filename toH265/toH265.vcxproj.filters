@@ -90,6 +90,9 @@
     <ClCompile Include="..\..\lsMisc\OpenCommon.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FormMainMisc.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
