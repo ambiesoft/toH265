@@ -2,6 +2,7 @@
 
 #include "AVCodec.h"
 #include "AVDuration.h"
+#include "ElapseInfo.h"
 
 #include "toH265.h"
 
@@ -344,6 +345,10 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenOutputLocation
 				REMAINING,
 			};
 
+			static initonly int ELAPSESIZE = 50;
+			Ambiesoft::FixSizedQueue<ElapseInfo^> elapses_{ ELAPSESIZE };
+			String^ GetRemainingTimeText(ElapseInfo^ firstElapse, ElapseInfo^ lastElapse, double total);
+
 			void InsertMovieItem(
 				String^ movieFile,
 				LONGLONG size,
@@ -439,6 +444,8 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenOutputLocation
 			System::Void tsmiOpenOutput_ClickCommon(System::Object^ sender, System::EventArgs^ e);
 
 };
+
+		
 
 		public ref class WaitCursor
 		{

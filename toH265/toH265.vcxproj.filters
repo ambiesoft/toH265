@@ -93,6 +93,9 @@
     <ClCompile Include="FormMainMisc.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ElapseInfo.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -132,6 +135,9 @@
       <Filter>1 Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\lsMisc\OpenCommon.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ElapseInfo.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -440,25 +440,68 @@ namespace Ambiesoft {
 
 			return ts.ToString(I18N(L"h'h 'm'm'"));
 		}
+		String^ FormMain::GetRemainingTimeText(ElapseInfo^ firstElapse, ElapseInfo^ lastElapse, double total)
+		{
+			do
+			{
+				DASSERT(lastElapse);
+				if (elapses_.Count <= 1)
+					break;
+				if (!firstElapse)
+				{
+					firstElapse = elapses_.Peek();
+				}
+
+				DASSERT(firstElapse->Progress <= lastElapse->Progress);
+				DASSERT(firstElapse->TimeStamp <= lastElapse->TimeStamp);
+
+				double progress = (lastElapse->Progress - firstElapse->Progress) / 1000.0;
+				if (!progress)
+					break;
+				double interval = (lastElapse->TimeStamp - firstElapse->TimeStamp) / (1000.0);
+
+				try
+				{
+
+					double progressPerSec = progress / interval;
+
+					double remainSec = total / 1000.0 - lastElapse->Progress / 1000.0;
+
+					double result = remainSec / progressPerSec;
+
+					return tsToString(TimeSpan::FromSeconds(result));
+				}
+				catch (Exception^)
+				{
+				}
+			} while (false);
+			return I18N("Unknown");
+		}
 		void FormMain::UpdateTitleTS(TimeSpan tsProgress, double speed)
 		{
+			// for culculating eta
+			ElapseInfo^ lastElapse = gcnew ElapseInfo(tsProgress.TotalMilliseconds);
+			ElapseInfo^ firstElapse = elapses_.Enqueue(lastElapse);
+
 			double percent = (tsProgress.TotalMilliseconds / InputDuration->TotalMilliseconds) * 100;
 			UpdateTitle((int)percent);
 			if (this->WindowState == FormWindowState::Minimized)
 				return;
 
-			DTRACE("All:" + InputDuration->ToString() + " " + InputDuration->TotalMilliseconds);
-			DTRACE("Cur:" + tsProgress.ToString() + " " + tsProgress.TotalMilliseconds);
-			double mRemaining = InputDuration->TotalMilliseconds - tsProgress.TotalMilliseconds;
-			DTRACE("Remain:" + mRemaining);
+			//DTRACE("All:" + InputDuration->ToString() + " " + InputDuration->TotalMilliseconds);
+			//DTRACE("Cur:" + tsProgress.ToString() + " " + tsProgress.TotalMilliseconds);
+			//double mRemaining = InputDuration->TotalMilliseconds - tsProgress.TotalMilliseconds;
+			//DTRACE("Remain:" + mRemaining);
 
-			if (speed == 0)
-				speed = 0.00001;
+			//if (speed == 0)
+			//	speed = 0.00001;
 
-			TimeSpan ts = TimeSpan::FromMilliseconds(mRemaining / speed);
+			//TimeSpan ts = TimeSpan::FromMilliseconds(mRemaining / speed);
 
-			String^ stRemainingText = tsToString(ts);
-			SetStatusText(STATUSTEXT::REMAINING, stRemainingText);
+			//String^ stRemainingText = tsToString(ts);
+			//SetStatusText(STATUSTEXT::REMAINING, stRemainingText);
+			SetStatusText(STATUSTEXT::REMAINING, 
+				GetRemainingTimeText(firstElapse, lastElapse, InputDuration->TotalMilliseconds));
 
 			// String^ stElapsedText = tsProgress.ToString("hh\\:mm\\:ss");
 			OutputDuration = gcnew AVDuration(tsProgress);
@@ -492,10 +535,13 @@ namespace Ambiesoft {
 				RegularExpressions::Match^ match = regFFMpeg_->Match(text);
 				String^ timeValue = match->Groups["time"]->Value;
 				if (!String::IsNullOrEmpty(timeValue) && timeValue[0] == '-')
-					timeValue = "00:00:00";
-				DateTime dtTime = DateTime::ParseExact(timeValue, L"hh:mm:ss",
-					System::Globalization::CultureInfo::InvariantCulture);
-				tsTime = dtTime - dtTime.Date;
+					timeValue = "00:00:00.00";
+				
+				//DateTime dtTime = DateTime::ParseExact(timeValue, L"hh:mm:ss.ff",
+				//	System::Globalization::CultureInfo::InvariantCulture);
+				//tsTime = dtTime - dtTime.Date;
+				
+				tsTime = TimeSpan::Parse(timeValue);
 
 				String ^ speedValue = match->Groups["speed"]->Value;
 				if (speedValue == "N/A")
@@ -601,6 +647,7 @@ namespace Ambiesoft {
 			if (tsmiPriorityBackground->Checked)
 				SetPriorityClass(GetCurrentProcess(), PROCESS_MODE_BACKGROUND_BEGIN);
 
+			elapses_.Clear();
 		}
 		void FormMain::ThreadEnded(int retval)
 		{
@@ -679,6 +726,8 @@ namespace Ambiesoft {
 			OutputVideoCodec = gcnew AVCodec();
 			OutputDuration = gcnew AVDuration();
 			outputMovie_ = String::Empty;
+			
+			elapses_.Clear();
 		}
 
 		void FormMain::OnProcessStarted(Object^ sender, EventArgs^ e)
@@ -1146,7 +1195,8 @@ namespace Ambiesoft {
 			txtLogOut->Clear();
 			txtLogErr->Clear();
 
-			txtFFMpegArg->Text = arg;
+			txtFFMpegArg->Text = String::Format(L"{0} {1}",
+				AmbLib::doubleQuoteIfSpace(ffmpeg), arg);
 
 			Dictionary<String^, String^> param;
 			param["ffmpeg"] = ffmpeg;

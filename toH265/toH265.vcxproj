@@ -202,6 +202,7 @@
     <ClCompile Include="..\..\lsMisc\OpenCommon.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="AVDuration.cpp" />
+    <ClCompile Include="ElapseInfo.cpp" />
     <ClCompile Include="FormMain.cpp" />
     <ClCompile Include="FormMainAbout.cpp" />
     <ClCompile Include="FormMainClose.cpp" />
@@ -234,6 +235,7 @@
     <ClInclude Include="..\..\lsMisc\OpenCommon.h" />
     <ClInclude Include="AVDuration.h" />
     <ClInclude Include="DebugMacro.h" />
+    <ClInclude Include="ElapseInfo.h" />
     <ClInclude Include="FormMain.h">
       <FileType>CppForm</FileType>
     </ClInclude>
