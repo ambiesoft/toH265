@@ -3,6 +3,7 @@ Build/
 Debug/
 Release/
 ipch/
+packages/
 
 .*~
 *.sdf

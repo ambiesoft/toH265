@@ -1112,7 +1112,7 @@ namespace Ambiesoft {
 			DASSERT(inputmovies.Count != 0);
 			if (inputmovies.Count == 1)
 			{
-				arg = String::Format(L"-y -i \"{0}\" -c:v {1} -c:a {2} \"{3}\"",
+				arg = String::Format(L"-y -i \"{0}\" -c copy -c:v {1} -c:a {2} \"{3}\"",
 					inputmovies[0],
 					OutputVideoCodec->ToFFMpegString(),
 					OutputAudioCodec->ToFFMpegString(),
