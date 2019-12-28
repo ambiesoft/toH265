@@ -70,7 +70,7 @@ namespace Ambiesoft {
 				gcnew ColumnItem{ "duration", I18N("Duration") },
 			};
 		public:
-			static initonly cli::array<wchar_t>^ char1x = gcnew cli::array<wchar_t>{L'x'};
+			// static initonly cli::array<wchar_t>^ char1x = gcnew cli::array<wchar_t>{L'x'};
 
 			literal String^ SECTION_OPTION = L"Option";
 			literal String^ SECTION_LOCATION = L"Location";
@@ -192,7 +192,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenOutputLocation
 
 
 
-		private:
+		protected:
 			ListViewCustomReorder::ListViewEx^ lvInputs = gcnew ListViewCustomReorder::ListViewEx();
 
 			bool CheckMovieAndSet(String^ file, bool bSet);
@@ -246,8 +246,8 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenOutputLocation
 				Pausing,
 				Unknown,
 			};
-			System::Text::RegularExpressions::Regex^ regFFMpeg_;
-			// TimeSpan tsOrigMovies_;
+			// System::Text::RegularExpressions::Regex^ regFFMpeg_;
+			
 			String^ tempFile_;
 
 			System::Drawing::Icon^ iconBlue_;
@@ -368,7 +368,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenOutputLocation
 			void SetStatusText(STATUSTEXT ss);
 			void SetStatusText(STATUSTEXT ss, String^ supplement);
 
-			bool GetInfoFromFFMpegoutput(String^ text, TimeSpan% tsTime, double% dblSpeed);
+			// bool GetInfoFromFFMpegoutput(String^ text, TimeSpan% tsTime, double% dblSpeed);
 			void UpdateTitleTS(TimeSpan ts, double speed);
 			void UpdateTitleComplete();
 			String^ buildTitleText(int percent, bool bFilenameOnly);

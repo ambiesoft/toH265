@@ -3,7 +3,7 @@ namespace Ambiesoft {
 	namespace toH265 {
 		using namespace System;
 
-		ref class AVDuration
+		public ref class AVDuration
 		{
 			TimeSpan^ ts_ = gcnew TimeSpan();
 		public:

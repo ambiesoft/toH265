@@ -4,7 +4,7 @@ namespace Ambiesoft {
 	namespace toH265 {
 		using namespace System;
 
-		ref class AVCodec
+		public ref class AVCodec
 		{
 		public:
 			enum class VC {

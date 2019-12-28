@@ -20,27 +20,6 @@ namespace Ambiesoft {
 
 		FormMain::FormMain()
 		{
-			regFFMpeg_ = gcnew RegularExpressions::Regex(
-				// "frame=.*fps=.*size=.*time=(?<time>.*)\\.\\d\\d.*speed=\\s*(?<speed>.*)"
-				"frame=.*fps=.*size=.*time=(?<time>.*)\\s+bitrate=.*speed=\\s*(?<speed>.*)"
-			);
-
-#ifdef _DEBUG
-			List<String^> ls;
-			ls.Add("frame=   61 fps= 18 q=-0.0 size=       0kB time=00:00:02.08 bitrate=   0.2kbits/s dup=1 drop=0 speed=0.619x");
-			ls.Add("frame=    0 fps=0.0 q=0.0 size=       0kB time=-577014:32:22.77 bitrate=  -0.0kbits/s speed=N/A");
-			for each (String ^ text in ls)
-			{
-				TimeSpan ts;
-				double dbSpeed;
-				GetInfoFromFFMpegoutput(text, ts, dbSpeed);
-				DTRACE(ts.TotalMilliseconds);
-				DTRACE(dbSpeed);
-			}
-#endif // _DEBUG
-
-
-
 			InitializeComponent();
 
 			

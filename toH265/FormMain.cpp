@@ -528,47 +528,47 @@ namespace Ambiesoft {
 				slMain->Text = text;
 		}
 
-		bool FormMain::GetInfoFromFFMpegoutput(String^ text, TimeSpan% tsTime, double% dblSpeed)
-		{
-			if (regFFMpeg_->IsMatch(text))
-			{
-				RegularExpressions::Match^ match = regFFMpeg_->Match(text);
-				String^ timeValue = match->Groups["time"]->Value;
-				if (!String::IsNullOrEmpty(timeValue) && timeValue[0] == '-')
-					timeValue = "00:00:00.00";
-				
-				//DateTime dtTime = DateTime::ParseExact(timeValue, L"hh:mm:ss.ff",
-				//	System::Globalization::CultureInfo::InvariantCulture);
-				//tsTime = dtTime - dtTime.Date;
-				
-				tsTime = TimeSpan::Parse(timeValue);
+		//bool FormMain::GetInfoFromFFMpegoutput(String^ text, TimeSpan% tsTime, double% dblSpeed)
+		//{
+		//	if (regFFMpeg_->IsMatch(text))
+		//	{
+		//		RegularExpressions::Match^ match = regFFMpeg_->Match(text);
+		//		String^ timeValue = match->Groups["time"]->Value;
+		//		if (!String::IsNullOrEmpty(timeValue) && timeValue[0] == '-')
+		//			timeValue = "00:00:00.00";
+		//		
+		//		//DateTime dtTime = DateTime::ParseExact(timeValue, L"hh:mm:ss.ff",
+		//		//	System::Globalization::CultureInfo::InvariantCulture);
+		//		//tsTime = dtTime - dtTime.Date;
+		//		
+		//		tsTime = TimeSpan::Parse(timeValue);
 
-				String ^ speedValue = match->Groups["speed"]->Value;
-				if (speedValue == "N/A")
-				{
-					dblSpeed = 0;
-				}
-				else
-				{
-					speedValue = speedValue->Trim()->TrimEnd(char1x);
-					if (!double::TryParse(speedValue, dblSpeed))
-						return false;
-				}
-				//UpdateTitleTS(tsTime, dblSpeed);
-				//txtLogOut->Text = text;
-				return true;
-			}
-			return false;
-		}
+		//		String ^ speedValue = match->Groups["speed"]->Value;
+		//		if (speedValue == "N/A")
+		//		{
+		//			dblSpeed = 0;
+		//		}
+		//		else
+		//		{
+		//			speedValue = speedValue->Trim()->TrimEnd(char1x);
+		//			if (!double::TryParse(speedValue, dblSpeed))
+		//				return false;
+		//		}
+		//		//UpdateTitleTS(tsTime, dblSpeed);
+		//		//txtLogOut->Text = text;
+		//		return true;
+		//	}
+		//	return false;
+		//}
 
 		void FormMain::AddToErr(String^ text)
 		{
 			try
 			{
-				DASSERT(regFFMpeg_);
+				// DASSERT(regFFMpeg_);
 				TimeSpan tsTime;
 				double dblSpeed;
-				if (GetInfoFromFFMpegoutput(text, tsTime, dblSpeed))
+				if (FFMpegHelper::GetInfoFromFFMpegoutput(text, tsTime, dblSpeed))
 				{
 					UpdateTitleTS(tsTime, dblSpeed);
 					if (this->WindowState != FormWindowState::Minimized)
