@@ -56,6 +56,9 @@ namespace Ambiesoft {
 			this->slVideoCodec = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->slAudioCodec = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->slDuration = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->tsmiProcessAfterFinish = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiEnabledtsmiProcessAfterFinish = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsmiProcesstsmiProcessAfterFinish = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitRoot))->BeginInit();
 			this->splitRoot->Panel1->SuspendLayout();
 			this->splitRoot->Panel2->SuspendLayout();
@@ -181,10 +184,10 @@ namespace Ambiesoft {
 			// 
 			// tsmiOption
 			// 
-			this->tsmiOption->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(8) {
+			this->tsmiOption->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(9) {
 				this->tsmiSetFFProbe,
-					this->tsmiSetFFMpeg, this->toolStripMenuItem1, this->tsmiPriority, this->toolStripMenuItem2, this->tsmiMinimizeToTray, this->toolStripMenuItem3,
-					this->tsmiLanguage
+					this->tsmiSetFFMpeg, this->toolStripMenuItem1, this->tsmiPriority, this->tsmiProcessAfterFinish, this->toolStripMenuItem2, this->tsmiMinimizeToTray,
+					this->toolStripMenuItem3, this->tsmiLanguage
 			});
 			this->tsmiOption->Name = L"tsmiOption";
 			resources->ApplyResources(this->tsmiOption, L"tsmiOption");
@@ -375,6 +378,27 @@ namespace Ambiesoft {
 			// 
 			this->slDuration->Name = L"slDuration";
 			resources->ApplyResources(this->slDuration, L"slDuration");
+			// 
+			// tsmiProcessAfterFinish
+			// 
+			this->tsmiProcessAfterFinish->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->tsmiEnabledtsmiProcessAfterFinish,
+					this->tsmiProcesstsmiProcessAfterFinish
+			});
+			this->tsmiProcessAfterFinish->Name = L"tsmiProcessAfterFinish";
+			resources->ApplyResources(this->tsmiProcessAfterFinish, L"tsmiProcessAfterFinish");
+			// 
+			// tsmiEnabledtsmiProcessAfterFinish
+			// 
+			this->tsmiEnabledtsmiProcessAfterFinish->CheckOnClick = true;
+			this->tsmiEnabledtsmiProcessAfterFinish->Name = L"tsmiEnabledtsmiProcessAfterFinish";
+			resources->ApplyResources(this->tsmiEnabledtsmiProcessAfterFinish, L"tsmiEnabledtsmiProcessAfterFinish");
+			// 
+			// tsmiProcesstsmiProcessAfterFinish
+			// 
+			this->tsmiProcesstsmiProcessAfterFinish->Name = L"tsmiProcesstsmiProcessAfterFinish";
+			resources->ApplyResources(this->tsmiProcesstsmiProcessAfterFinish, L"tsmiProcesstsmiProcessAfterFinish");
+			this->tsmiProcesstsmiProcessAfterFinish->Click += gcnew System::EventHandler(this, &FormMain::tsmiProcesstsmiProcessAfterFinish_Click);
 			// 
 			// FormMain
 			// 

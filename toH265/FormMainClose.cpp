@@ -94,6 +94,7 @@ namespace Ambiesoft {
 			success &= AmbLib::SaveFormXYWH(this, SECTION_LOCATION, ini);
 			success &= AmbLib::SaveListViewColumnWidth(lvInputs, SECTION_COLUMNS, KEY_LISTVIEW_COLUMNS, ini);
 			success &= Profile::WriteInt(SECTION_OPTION, KEY_SPLITROOT_DISTANCE, splitRoot->SplitterDistance, ini);
+			success &= Profile::WriteBool(SECTION_OPTION, KEY_AFTERPROCESS_ENABLED, tsmiEnabledtsmiProcessAfterFinish->Checked, ini);
 			if (success)
 			{
 				success = Profile::WriteAll(ini, Program::IniFile);

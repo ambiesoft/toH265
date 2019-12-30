@@ -692,34 +692,62 @@ namespace Ambiesoft {
 					// Succeeded
 					UpdateTitleComplete();
 
-					String^ format;
-					String^ ac = String::Empty;
-					String^ vc = String::Empty;
-					System::Drawing::Size aspect;
-					TimeSpan ts;
-					try
+					if (tsmiEnabledtsmiProcessAfterFinish->Checked)
 					{
-						GetStreamInfo(FFProbe, outputMovie_, format, ac, vc, aspect, ts);
+						HashIni^ ini = Profile::ReadAll(Program::IniFile);
+						DVERIFY(dlgAfterFinish_.LoadValues("AfterFinish", ini));
+
+						if (dlgAfterFinish_.chkOpenFolder->Checked)
+						{
+							// Show outputmovie in Explorer
+							CppUtils::OpenFolder(this, outputMovie_);
+						}
+
+						if (dlgAfterFinish_.chkShutdown->Checked)
+						{
+
+						}
+
+						if (dlgAfterFinish_.chkLaunchApp->Checked)
+						{
+							Process::Start(dlgAfterFinish_.txtApp->Text, dlgAfterFinish_.txtArg->Text);
+						}
+
+						// this must be last, messagebox stops execution
+						if (dlgAfterFinish_.chkShowMessage->Checked)
+						{
+							String^ format;
+							String^ ac = String::Empty;
+							String^ vc = String::Empty;
+							System::Drawing::Size aspect;
+							TimeSpan ts;
+							try
+							{
+								GetStreamInfo(FFProbe, outputMovie_, format, ac, vc, aspect, ts);
+							}
+							catch (Exception^)
+							{
+								// Should not stop, User may expect shutdown
+								// CppUtils::Alert(this, ex);
+							}
+							DASSERT(!String::IsNullOrEmpty(ac));
+							DASSERT(!String::IsNullOrEmpty(vc));
+							DASSERT(ts.TotalMilliseconds != 0);
+
+							StringBuilder sbMessage;
+							sbMessage.AppendLine(I18N(L"Encoding Succeeded."));
+							sbMessage.AppendLine();
+							sbMessage.AppendLine(String::Format(I18N(L"Format = {0}"), format));
+							sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), ac));
+							sbMessage.AppendLine(String::Format(I18N(L"Video codec = {0}"), vc));
+							sbMessage.AppendLine(String::Format(I18N(L"Duration = {0}"), ts.ToString()));
+							CppUtils::Info(this, sbMessage.ToString());
+						}
 					}
-					catch (Exception ^ ex)
+					else
 					{
-						CppUtils::Alert(this, ex);
+						CppUtils::Info(this, "Finished");
 					}
-					DASSERT(!String::IsNullOrEmpty(ac));
-					DASSERT(!String::IsNullOrEmpty(vc));
-					DASSERT(ts.TotalMilliseconds != 0);
-
-					StringBuilder sbMessage;
-					sbMessage.AppendLine(I18N(L"Encoding Succeeded."));
-					sbMessage.AppendLine();
-					sbMessage.AppendLine(String::Format(I18N(L"Format = {0}"), format));
-					sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), ac));
-					sbMessage.AppendLine(String::Format(I18N(L"Video codec = {0}"), vc));
-					sbMessage.AppendLine(String::Format(I18N(L"Duration = {0}"), ts.ToString()));
-					CppUtils::Info(this, sbMessage.ToString());
-
-					// Show outputmovie in Explorer
-					CppUtils::OpenFolder(this, outputMovie_);
 				}
 			}
 			OutputAudioCodec = gcnew AVCodec();
@@ -1297,7 +1325,30 @@ namespace Ambiesoft {
 			OpenFolder((HWND)this->Handle.ToPointer(),
 				getStdWstring(outputMovie_).c_str());
 		}
+		System::Void FormMain::tsmiProcesstsmiProcessAfterFinish_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			HashIni^ ini = Profile::ReadAll(Program::IniFile);
+			DVERIFY(dlgAfterFinish_.LoadValues("AfterFinish", ini));
+			if (System::Windows::Forms::DialogResult::OK != dlgAfterFinish_.ShowDialog())
+			{
+				return;
+			}
 
+			if (dlgAfterFinish_.chkPlaySound->Checked)
+			{
+				CppUtils::Alert("playsound not yet implemented");
+			}
+			if (dlgAfterFinish_.chkShutdown->Checked)
+			{
+				CppUtils::Alert("shutdown not yet implemented");
+			}
+
+			if (!dlgAfterFinish_.SaveValues("AfterFinish", ini) || !Profile::WriteAll(ini, Program::IniFile))
+			{
+				CppUtils::Alert(I18N(L"Failed to save ini"));
+				return;
+			}
+		}
 
 	}
 

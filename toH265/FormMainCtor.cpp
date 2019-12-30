@@ -92,6 +92,9 @@ namespace Ambiesoft {
 				splitRoot->SplitterDistance = intval;
 			}
 
+			Profile::GetBool(SECTION_OPTION, KEY_AFTERPROCESS_ENABLED, false, boolval, ini);
+			tsmiEnabledtsmiProcessAfterFinish->Checked = boolval;
+
 			try
 			{
 				String^ imagePath = Path::Combine(Path::GetDirectoryName(Application::ExecutablePath), L"images");

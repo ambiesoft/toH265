@@ -83,6 +83,7 @@ namespace Ambiesoft {
 			literal String^ KEY_CULTURE = L"culture";
 			literal String^ KEY_LISTVIEW_COLUMNS = L"columns";
 			literal String^ KEY_SPLITROOT_DISTANCE = L"sprootdistance";
+			literal String^ KEY_AFTERPROCESS_ENABLED = L"afterprocessenabled";
 
 			literal String^ STR_BUTTONTEXT_PAUSE = L"&Pause";
 			literal String^ STR_BUTTONTEXT_START = L"&Start";
@@ -151,6 +152,9 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem5;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenInputLocations;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenOutputLocation;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiProcessAfterFinish;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnabledtsmiProcessAfterFinish;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiProcesstsmiProcessAfterFinish;
 
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageJapanese;
 
@@ -386,6 +390,8 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenOutputLocation
 			void ChangeStartButtonText(String^ text);
 			void OnProcessStarted(Object^ sender, EventArgs^ e);
 
+			AfterFinish::OptionDialog dlgAfterFinish_;
+
 			System::Void FormMain_Load(System::Object^ sender, System::EventArgs^ e);
 			System::Void exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 				Close();
@@ -442,6 +448,8 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenOutputLocation
 
 			System::Void tsmiOpenInputLocations_ClickCommon(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiOpenOutput_ClickCommon(System::Object^ sender, System::EventArgs^ e);
+
+			System::Void tsmiProcesstsmiProcessAfterFinish_Click(System::Object^ sender, System::EventArgs^ e);
 
 };
 
