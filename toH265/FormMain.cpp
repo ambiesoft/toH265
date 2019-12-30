@@ -905,6 +905,7 @@ namespace Ambiesoft {
 				processSuspeded_ = true;
 				this->Icon = iconYellow_;
 				notifyIconMain->Icon = iconYellow_;
+				elapses_.Clear();
 				return;
 			case TaskState::Unknown:
 				CppUtils::Alert(this, I18N(L"Unknow Error."));
