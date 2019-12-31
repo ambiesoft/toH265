@@ -259,8 +259,8 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiProcesstsmiProcessAfterF
 			System::Drawing::Icon^ iconRed_;
 
 			array<String^>^ GetInputMovies();
-			String^ outputMovie_;
-
+			String^ outputtingMovie_;
+			String^ outputtedMovie_;
 			void SetFormatStatusText();
 			String^ inputFormat_;
 			property String^ InputFormat

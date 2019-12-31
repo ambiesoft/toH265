@@ -397,12 +397,12 @@ namespace Ambiesoft {
 			sbTitle.Append(percent);
 			sbTitle.Append("% - ");
 
-			if (!String::IsNullOrEmpty(outputMovie_))
+			if (!String::IsNullOrEmpty(outputtingMovie_))
 			{
 				if (bFilenameOnly)
-					sbTitle.Append(Path::GetFileName(outputMovie_));
+					sbTitle.Append(Path::GetFileName(outputtingMovie_));
 				else
-					sbTitle.Append(outputMovie_);
+					sbTitle.Append(outputtingMovie_);
 				sbTitle.Append(" - ");
 			}
 
@@ -700,12 +700,7 @@ namespace Ambiesoft {
 						if (dlgAfterFinish_.chkOpenFolder->Checked)
 						{
 							// Show outputmovie in Explorer
-							CppUtils::OpenFolder(this, outputMovie_);
-						}
-
-						if (dlgAfterFinish_.chkShutdown->Checked)
-						{
-
+							CppUtils::OpenFolder(this, outputtingMovie_);
 						}
 
 						if (dlgAfterFinish_.chkLaunchApp->Checked)
@@ -713,47 +708,54 @@ namespace Ambiesoft {
 							Process::Start(dlgAfterFinish_.txtApp->Text, dlgAfterFinish_.txtArg->Text);
 						}
 
-						// this must be last, messagebox stops execution
-						if (dlgAfterFinish_.chkShowMessage->Checked)
+						if (dlgAfterFinish_.chkShutdown->Checked)
 						{
-							String^ format;
-							String^ ac = String::Empty;
-							String^ vc = String::Empty;
-							System::Drawing::Size aspect;
-							TimeSpan ts;
-							try
-							{
-								GetStreamInfo(FFProbe, outputMovie_, format, ac, vc, aspect, ts);
-							}
-							catch (Exception^)
-							{
-								// Should not stop, User may expect shutdown
-								// CppUtils::Alert(this, ex);
-							}
-							DASSERT(!String::IsNullOrEmpty(ac));
-							DASSERT(!String::IsNullOrEmpty(vc));
-							DASSERT(ts.TotalMilliseconds != 0);
-
-							StringBuilder sbMessage;
-							sbMessage.AppendLine(I18N(L"Encoding Succeeded."));
-							sbMessage.AppendLine();
-							sbMessage.AppendLine(String::Format(I18N(L"Format = {0}"), format));
-							sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), ac));
-							sbMessage.AppendLine(String::Format(I18N(L"Video codec = {0}"), vc));
-							sbMessage.AppendLine(String::Format(I18N(L"Duration = {0}"), ts.ToString()));
-							CppUtils::Info(this, sbMessage.ToString());
+							AmbLib::ExitWin(AmbLib::EXITWINTYPE::EXITWIN_SHUTDOWN);
 						}
 					}
-					else
+					else  // no process after finish
 					{
-						CppUtils::Info(this, "Finished");
+						String^ outputtedFormat;
+						String^ outputtedAC = String::Empty;
+						String^ outputtedVC = String::Empty;
+						System::Drawing::Size outputtedAspect;
+						TimeSpan outputtedTS;
+						LONGLONG inputSize;
+						LONGLONG outputtedSize;
+
+						try
+						{
+							GetStreamInfo(FFProbe, outputtingMovie_, outputtedFormat, outputtedAC, outputtedVC, outputtedAspect, outputtedTS);
+							for each (String ^ infile in GetInputMovies())
+								inputSize += FileInfo(infile).Length;
+							outputtedSize = FileInfo(outputtingMovie_).Length;
+						}
+						catch (Exception^ ex)
+						{
+							CppUtils::Alert(this, ex);
+						}
+						DASSERT(!String::IsNullOrEmpty(outputtedAC));
+						DASSERT(!String::IsNullOrEmpty(outputtedVC));
+						DASSERT(outputtedTS.TotalMilliseconds != 0);
+
+						StringBuilder sbMessage;
+						sbMessage.AppendLine(I18N(L"Encoding Succeeded."));
+						sbMessage.AppendLine();
+						sbMessage.AppendLine(String::Format(I18N(L"Format = {0}"), outputtedFormat));
+						sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), outputtedAC));
+						sbMessage.AppendLine(String::Format(I18N(L"Video codec = {0}"), outputtedVC));
+						sbMessage.AppendLine(String::Format(I18N(L"Duration = {0}"), outputtedTS.ToString()));
+						sbMessage.AppendLine(String::Format(I18N(L"Sizen = {0}"), outputtedSize.ToString()));
+						sbMessage.AppendLine(String::Format(I18N(L"Compless = {0}%"), ((outputtedSize / inputSize) * 100).ToString()));
+						CppUtils::Info(this, sbMessage.ToString());
 					}
 				}
 			}
 			OutputAudioCodec = gcnew AVCodec();
 			OutputVideoCodec = gcnew AVCodec();
 			OutputDuration = gcnew AVDuration();
-			outputMovie_ = String::Empty;
+			outputtedMovie_ = outputtingMovie_;
+			outputtingMovie_ = String::Empty;
 			
 			elapses_.Clear();
 		}
@@ -1134,7 +1136,7 @@ namespace Ambiesoft {
 					return;
 				}
 			}
-			outputMovie_ = dlg.FileName;
+			outputtingMovie_ = dlg.FileName;
 
 			String^ arg;
 			
@@ -1145,7 +1147,7 @@ namespace Ambiesoft {
 					inputmovies[0],
 					OutputVideoCodec->ToFFMpegString(),
 					OutputAudioCodec->ToFFMpegString(),
-					outputMovie_);
+					outputtingMovie_);
 			}
 			else
 			{
@@ -1161,7 +1163,7 @@ namespace Ambiesoft {
 
 					arg = String::Format("-y -safe 0 -f concat -i \"{0}\" -c copy \"{1}\"",
 						tempFile_,
-						outputMovie_);
+						outputtingMovie_);
 				}
 				else
 				{
@@ -1215,7 +1217,7 @@ namespace Ambiesoft {
 					sb.AppendFormat("-c:v {0} -c:a {1} \"{2}\"",
 						OutputVideoCodec->ToFFMpegString(),
 						OutputAudioCodec->ToFFMpegString(),
-						outputMovie_);
+						outputtingMovie_);
 
 					arg = sb.ToString();
 				}
@@ -1317,14 +1319,17 @@ namespace Ambiesoft {
 		}
 		System::Void FormMain::tsmiOpenOutput_ClickCommon(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (String::IsNullOrEmpty(outputMovie_))
+			String^ file = outputtingMovie_;
+			if (String::IsNullOrEmpty(file))
+				file = outputtedMovie_;
+			if (String::IsNullOrEmpty(file))
 			{
 				CppUtils::Alert(this, I18N(STR_NO_OUTPUT_MOVIE));
 				return;
 			}
 
 			OpenFolder((HWND)this->Handle.ToPointer(),
-				getStdWstring(outputMovie_).c_str());
+				getStdWstring(file).c_str());
 		}
 		System::Void FormMain::tsmiProcesstsmiProcessAfterFinish_Click(System::Object^ sender, System::EventArgs^ e)
 		{
@@ -1339,10 +1344,10 @@ namespace Ambiesoft {
 			{
 				CppUtils::Alert("playsound not yet implemented");
 			}
-			if (dlgAfterFinish_.chkShutdown->Checked)
-			{
-				CppUtils::Alert("shutdown not yet implemented");
-			}
+			//if (dlgAfterFinish_.chkShutdown->Checked)
+			//{
+			//	CppUtils::Alert("shutdown not yet implemented");
+			//}
 
 			if (!dlgAfterFinish_.SaveValues("AfterFinish", ini) || !Profile::WriteAll(ini, Program::IniFile))
 			{
