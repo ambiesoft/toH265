@@ -165,6 +165,9 @@
     <Reference Include="Ambiesoft.AfterFinish">
       <HintPath>C:\Linkout\DNAssembly.NET4\Ambiesoft.AfterFinish.dll</HintPath>
     </Reference>
+    <Reference Include="Ambiesoft.AfterRunLib">
+      <HintPath>..\..\..\..\..\..\Linkout\DNAssembly.NET4\Ambiesoft.AfterRunLib.dll</HintPath>
+    </Reference>
     <Reference Include="Ambiesoft.AmbLib">
       <HintPath>C:\Linkout\DNAssembly.NET4\Ambiesoft.AmbLib.dll</HintPath>
     </Reference>

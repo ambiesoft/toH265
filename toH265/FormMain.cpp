@@ -445,7 +445,7 @@ namespace Ambiesoft {
 			do
 			{
 				DASSERT(lastElapse);
-				if (elapses_.Count <= 1)
+				if (!elapses_.Filled)
 					break;
 				if (!firstElapse)
 				{
@@ -710,7 +710,7 @@ namespace Ambiesoft {
 
 						if (dlgAfterFinish_.chkShutdown->Checked)
 						{
-							AmbLib::ExitWin(AmbLib::EXITWINTYPE::EXITWIN_SHUTDOWN);
+							Process::Start(Application::ExecutablePath, "-shutdown");
 						}
 					}
 					else  // no process after finish

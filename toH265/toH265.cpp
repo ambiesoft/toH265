@@ -96,27 +96,33 @@ namespace Ambiesoft {
 		int Program::main(array<System::String ^> ^args)
 		{
 			InitHighDPISupport();
+			Application::EnableVisualStyles();
+			Application::SetCompatibleTextRenderingDefault(false);
 
 			if (!preRun())
 				return 1;
-			//if (args->Length == 0)
-			//{
-			//	CppUtils::Alert(I18N(L"No input files"));
-			//	return RETURN_NOINPUTFILE;
-			//}
 
-			//if (args->Length > 1)
-			//{
-			//	CppUtils::Alert(I18N(L"Too many input files"));
-			//	return RETURN_TOOMANYINPUTFILES;
-			//}
+			bool shutdown = false;
+			for each (String ^ arg in args)
+			{
+				if (arg == "-shutdown")
+					shutdown = true;
+				else
+					clMovieFiles_.Add(arg);
+			}
+			if (shutdown && clMovieFiles_.Count != 0)
+			{
+				CppUtils::Alert(I18N(L"-shutdown must not be with other args."));
+				return RETURN_SHUTDOWN_MUST_NOT_WITH_ARGS;
+			}
+			if (shutdown)
+			{
+				Ambiesoft::AfterRunLib::FormMain form;
+				form.IsShutdown = true;
+				Application::Run(%form);
+				return 0;
+			}
 
-			clMovieFiles_.AddRange(args);
-
-
-			// Enabling Windows XP visual effects before any controls are created
-			Application::EnableVisualStyles();
-			Application::SetCompatibleTextRenderingDefault(false);
 
 			// Create the main window and run it
 			FormMain formMain;
