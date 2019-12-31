@@ -119,6 +119,8 @@ namespace Ambiesoft {
 			{
 				Ambiesoft::AfterRunLib::FormMain form;
 				form.IsShutdown = true;
+				form.Interval = 30;
+				form.TopMost = true;
 				Application::Run(%form);
 				return 0;
 			}

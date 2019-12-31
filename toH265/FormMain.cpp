@@ -745,8 +745,8 @@ namespace Ambiesoft {
 						sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), outputtedAC));
 						sbMessage.AppendLine(String::Format(I18N(L"Video codec = {0}"), outputtedVC));
 						sbMessage.AppendLine(String::Format(I18N(L"Duration = {0}"), outputtedTS.ToString()));
-						sbMessage.AppendLine(String::Format(I18N(L"Sizen = {0}"), outputtedSize.ToString()));
-						sbMessage.AppendLine(String::Format(I18N(L"Compless = {0}%"), ((outputtedSize / inputSize) * 100).ToString()));
+						sbMessage.AppendLine(String::Format(I18N(L"Size = {0}"), AmbLib::FormatSize(outputtedSize)));
+						sbMessage.AppendLine(String::Format(I18N(L"Compressed = {0}%"), AmbLib::GetRatioString((double)outputtedSize, (double)inputSize)));
 						CppUtils::Info(this, sbMessage.ToString());
 					}
 				}
@@ -1344,10 +1344,6 @@ namespace Ambiesoft {
 			{
 				CppUtils::Alert("playsound not yet implemented");
 			}
-			//if (dlgAfterFinish_.chkShutdown->Checked)
-			//{
-			//	CppUtils::Alert("shutdown not yet implemented");
-			//}
 
 			if (!dlgAfterFinish_.SaveValues("AfterFinish", ini) || !Profile::WriteAll(ini, Program::IniFile))
 			{
