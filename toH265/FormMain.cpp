@@ -746,7 +746,7 @@ namespace Ambiesoft {
 						sbMessage.AppendLine(String::Format(I18N(L"Video codec = {0}"), outputtedVC));
 						sbMessage.AppendLine(String::Format(I18N(L"Duration = {0}"), outputtedTS.ToString()));
 						sbMessage.AppendLine(String::Format(I18N(L"Size = {0}"), AmbLib::FormatSize(outputtedSize)));
-						sbMessage.AppendLine(String::Format(I18N(L"Compressed = {0}%"), AmbLib::GetRatioString((double)outputtedSize, (double)inputSize)));
+						sbMessage.AppendLine(String::Format(I18N(L"Compressed = {0}%"), AmbLib::GetRatioString(outputtedSize, inputSize)));
 						CppUtils::Info(this, sbMessage.ToString());
 					}
 				}
@@ -928,7 +928,8 @@ namespace Ambiesoft {
 
 
 
-			List<String^>^ outExts = gcnew List<String^>();
+			List<String^>^ outExtsNormalPriority = gcnew List<String^>();
+			List<String^>^ outExtsHighPriority = gcnew List<String^>();
 			String^ initialDir;
 			String^ baseFileName = "Encoded";
 			
@@ -997,7 +998,7 @@ namespace Ambiesoft {
 			bool bReEncode = codecDlg.IsReEncode;
 			if(!bReEncode)
 			{
-				outExts->Add(Path::GetExtension(inputmovies[0]));
+				outExtsNormalPriority->Add(Path::GetExtension(inputmovies[0]));
 				OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
 				OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
 			}
@@ -1020,29 +1021,29 @@ namespace Ambiesoft {
 				if (codecDlg.rbVideoH265->Checked)
 				{
 					OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_H265);
-					outExts->Add(".mp4");
+					outExtsNormalPriority->Add(".mp4");
 				}
 				else if (codecDlg.rbVideoVp9->Checked)
 				{
 					OutputVideoCodec = gcnew AVCodec("vp9");
-					outExts->Add(".webm");
+					outExtsNormalPriority->Add(".webm");
 				}
 				else if (codecDlg.rbVideoCopy->Checked)
 				{
 					if (InputVideoCodec->IsH264)
 					{
 						if (codecDlg.rbAudioOpus->Checked)
-							outExts->Add(".mkv");
+							outExtsNormalPriority->Add(".mkv");
 						else
-							outExts->Add(".mp4");
+							outExtsNormalPriority->Add(".mp4");
 					}
 					OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
-					outExts->Add(Path::GetExtension(inputmovies[0]));
+					outExtsNormalPriority->Add(Path::GetExtension(inputmovies[0]));
 				}
 				else if (codecDlg.rbAV1->Checked)
 				{
 					OutputVideoCodec = gcnew AVCodec("av1");
-					outExts->Add(".mkv");
+					outExtsNormalPriority->Add(".mkv");
 				}
 				else
 				{
@@ -1071,22 +1072,23 @@ namespace Ambiesoft {
 				{
 					if (!targetAudioCodec->IsVorbis && !targetAudioCodec->IsOpus)
 					{
-						outExts->Add(".mkv");
+						outExtsNormalPriority->Add(".mkv");
 					}
 				}
-				if (outExts->Contains(".mp4"))
+				if (outExtsNormalPriority->Contains(".mp4"))
 				{
 					if (targetVideoCodec->IsH265 && targetAudioCodec->IsOpus)
 					{
-						outExts->Add(".mkv");
+						outExtsHighPriority->Add(".mkv");
 					}
 				}
 
-				outExts->Add(".mkv");
+				outExtsNormalPriority->Add(".mkv");
 			}
 			
-			outExts = MakeUnique(outExts);
-
+			outExtsHighPriority = MakeUnique(outExtsHighPriority);
+			outExtsNormalPriority->InsertRange(0, outExtsHighPriority);
+			outExtsNormalPriority = MakeUnique(outExtsNormalPriority);
 
 			SaveFileDialog dlg;
 
@@ -1094,7 +1096,7 @@ namespace Ambiesoft {
 			{
 		
 				StringBuilder sbFilter;
-				for each (String ^ ae in outExts)
+				for each (String ^ ae in outExtsNormalPriority)
 				{
 					sbFilter.AppendFormat("{0} (*{1})|*{2}|",
 						ae, ae, ae);
@@ -1106,11 +1108,12 @@ namespace Ambiesoft {
 			dlg.InitialDirectory = initialDir;
 
 			String^ firstExt;
-			for each(String^ s in outExts)
+			for each (String ^ s in outExtsNormalPriority)
 			{
 				firstExt = s;
 				break;
 			}
+
 			DASSERT(!String::IsNullOrEmpty(OutputVideoCodec->ToString()));
 			dlg.FileName = String::Format(L"{0} [{1}]{2}",
 				baseFileName,

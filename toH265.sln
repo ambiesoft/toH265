@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ambiesoft.toH265Helper", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "toH265Test", "toH265Test\toH265Test.csproj", "{83A3C703-74B4-42D3-AD34-76386469B94B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "toH265TestCpp", "toH265TestCpp\toH265TestCpp.vcxproj", "{AEF84C03-3E82-47D4-9630-72E697EF5AAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,16 @@ Global
 		{83A3C703-74B4-42D3-AD34-76386469B94B}.Release|Win32.Build.0 = Release|Any CPU
 		{83A3C703-74B4-42D3-AD34-76386469B94B}.Release|x64.ActiveCfg = Release|Any CPU
 		{83A3C703-74B4-42D3-AD34-76386469B94B}.Release|x64.Build.0 = Release|Any CPU
+		{AEF84C03-3E82-47D4-9630-72E697EF5AAB}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{AEF84C03-3E82-47D4-9630-72E697EF5AAB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AEF84C03-3E82-47D4-9630-72E697EF5AAB}.Debug|Win32.Build.0 = Debug|Win32
+		{AEF84C03-3E82-47D4-9630-72E697EF5AAB}.Debug|x64.ActiveCfg = Debug|x64
+		{AEF84C03-3E82-47D4-9630-72E697EF5AAB}.Debug|x64.Build.0 = Debug|x64
+		{AEF84C03-3E82-47D4-9630-72E697EF5AAB}.Release|Any CPU.ActiveCfg = Release|Win32
+		{AEF84C03-3E82-47D4-9630-72E697EF5AAB}.Release|Win32.ActiveCfg = Release|Win32
+		{AEF84C03-3E82-47D4-9630-72E697EF5AAB}.Release|Win32.Build.0 = Release|Win32
+		{AEF84C03-3E82-47D4-9630-72E697EF5AAB}.Release|x64.ActiveCfg = Release|x64
+		{AEF84C03-3E82-47D4-9630-72E697EF5AAB}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

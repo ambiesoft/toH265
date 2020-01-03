@@ -19,6 +19,8 @@ namespace Ambiesoft {
 				VC_VP8,
 				VC_VP9,
 				VC_AV1,
+				VC_WMAV,
+				VC_WMV,
 				VC_MIXED,
 			};
 		private:

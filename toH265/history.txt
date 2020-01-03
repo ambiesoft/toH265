@@ -1,3 +1,6 @@
+2020/01/04 ver1.0.33
+.mkv comes first of extention list
+
 2020/01/01 ver1.0.32
 shutdown after finish
 
