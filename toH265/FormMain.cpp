@@ -778,7 +778,20 @@ namespace Ambiesoft {
 			{
 				SetPriorityClass(GetCurrentProcess(), PROCESS_MODE_BACKGROUND_END);
 			}
+
+			timerSetAffinity_ = gcnew System::Windows::Forms::Timer();
+			timerSetAffinity_->Interval = 5 * 1000;
+			timerSetAffinity_->Enabled = true;
+			timerSetAffinity_->Tick += gcnew System::EventHandler(this, &Ambiesoft::toH265::FormMain::OnTick);
 		}
+		void FormMain::OnTick(System::Object^ sender, System::EventArgs^ e)
+		{
+			timerSetAffinity_->Enabled = false;
+			delete timerSetAffinity_;
+			timerSetAffinity_ = nullptr;
+			tsmiCPUAffinityEnable_Click(nullptr, nullptr);
+		}
+
 		void FormMain::StartOfThread(Object^ obj)
 		{
 			EndInvoke(BeginInvoke(gcnew VVDelegate(this, &FormMain::ThreadStarted)));
@@ -1235,7 +1248,8 @@ namespace Ambiesoft {
 			Dictionary<String^, String^> param;
 			param["ffmpeg"] = ffmpeg;
 			param["arg"] = arg;
-			thFFMpeg_ = gcnew System::Threading::Thread(gcnew ParameterizedThreadStart(this, &FormMain::StartOfThread));
+			thFFMpeg_ = gcnew System::Threading::Thread(
+				gcnew ParameterizedThreadStart(this, &FormMain::StartOfThread));
 			thFFMpeg_->Start(%param);
 		}
 
@@ -1355,6 +1369,76 @@ namespace Ambiesoft {
 			}
 		}
 
+		System::Void FormMain::tsmiCPUAffinity_DropDownOpening(System::Object^ sender, System::EventArgs^ e)
+		{
+			// Create CPU affinity menu
+
+			// Find insert pos
+			int insertIndex = tsmiCPUAffinity->DropDownItems->IndexOf(tsmsCpuAffinity);
+			DASSERT(insertIndex >= 0);
+
+			// Remove items below insertIndex
+			while (tsmiCPUAffinity->DropDownItems->Count > insertIndex + 1)
+			{
+				tsmiCPUAffinity->DropDownItems->RemoveAt(insertIndex + 1);
+			}
+			
+			cpuAffinity_.Update(processFFMpeg_);
+			for (int i = 0; i < Environment::ProcessorCount; ++i)
+			{
+				ToolStripMenuItem^ item = gcnew ToolStripMenuItem();
+				item->CheckOnClick = true;
+				item->Enabled = tsmiCPUAffinityEnable->Checked;
+				item->Text = (i).ToString();
+				item->Name = String::Format("CpuAffinity{0}", i);
+				item->Checked = cpuAffinity_.IsCPUON(i);
+				item->Tag = i;
+				item->Click += gcnew System::EventHandler(this, &Ambiesoft::toH265::FormMain::OnClick);
+				tsmiCPUAffinity->DropDownItems->Insert(++insertIndex, item);
+			}
+		}
+		System::Void FormMain::tsmiCPUAffinityEnable_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (!processFFMpeg_)
+				return;
+
+			HANDLE hProcess = (HANDLE)processFFMpeg_->Handle.ToPointer();
+			WaitForInputIdle(hProcess, INFINITE);
+
+			if (tsmiCPUAffinityEnable->Checked)
+			{
+				DTRACE(String::Format("Set Process {0} Affinity to {1}", pidFFMpeg_, cpuAffinity_.Value()));
+				DVERIFY(SetProcessAffinityMask(hProcess, cpuAffinity_.Value()));
+				DWORD_PTR a;
+				DWORD_PTR s;
+				DVERIFY(GetProcessAffinityMask(hProcess, &a, &s));
+				//if (a != cpuAffinity_.Value())
+				//{
+				//	// try again
+				//	this->BeginInvoke(gcnew System::EventHandler(this, &FormMain::tsmiCPUAffinityEnable_Click),
+				//		sender, e);
+				//	return;
+				//}
+			}
+			else
+			{
+				DWORD_PTR a;
+				DWORD_PTR s;
+				DVERIFY(GetProcessAffinityMask(hProcess, &a, &s));
+				
+				// set default;
+				DVERIFY(SetProcessAffinityMask(hProcess, s));
+			}
+		}
+		void FormMain::OnClick(System::Object^ sender, System::EventArgs^ e)
+		{
+			ToolStripMenuItem^ item = (ToolStripMenuItem^)sender;
+			int cpunum = (int)item->Tag;
+			cpuAffinity_.SetCPU(cpunum, item->Checked);
+			tsmiCPUAffinityEnable_Click(nullptr, nullptr);
+		}
+
 	}
 
 }
+

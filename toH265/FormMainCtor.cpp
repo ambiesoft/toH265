@@ -95,6 +95,11 @@ namespace Ambiesoft {
 			Profile::GetBool(SECTION_OPTION, KEY_AFTERPROCESS_ENABLED, false, boolval, ini);
 			tsmiEnabledtsmiProcessAfterFinish->Checked = boolval;
 
+			Profile::GetBool(SECTION_OPTION, KEY_CPUAFFINITY_ENABLED, false, boolval, ini);
+			tsmiCPUAffinityEnable->Checked = boolval;
+
+			cpuAffinity_.Load(SECTION_CPUAFFINITY, ini);
+
 			try
 			{
 				String^ imagePath = Path::Combine(Path::GetDirectoryName(Application::ExecutablePath), L"images");
@@ -109,6 +114,10 @@ namespace Ambiesoft {
 				sbMessage.AppendLine(ex->Message);
 				CppUtils::Alert(this, sbMessage.ToString());
 			}
+
 		}
+
+
 	}
 }
+

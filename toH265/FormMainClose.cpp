@@ -95,6 +95,8 @@ namespace Ambiesoft {
 			success &= AmbLib::SaveListViewColumnWidth(lvInputs, SECTION_COLUMNS, KEY_LISTVIEW_COLUMNS, ini);
 			success &= Profile::WriteInt(SECTION_OPTION, KEY_SPLITROOT_DISTANCE, splitRoot->SplitterDistance, ini);
 			success &= Profile::WriteBool(SECTION_OPTION, KEY_AFTERPROCESS_ENABLED, tsmiEnabledtsmiProcessAfterFinish->Checked, ini);
+			success &= Profile::WriteBool(SECTION_OPTION, KEY_CPUAFFINITY_ENABLED, tsmiCPUAffinityEnable->Checked, ini);
+			success &= cpuAffinity_.Save(SECTION_CPUAFFINITY, ini);
 			if (success)
 			{
 				success = Profile::WriteAll(ini, Program::IniFile);

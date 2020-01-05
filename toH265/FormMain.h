@@ -3,6 +3,7 @@
 #include "AVCodec.h"
 #include "AVDuration.h"
 #include "ElapseInfo.h"
+#include "CpuAffinity.h"
 
 #include "toH265.h"
 
@@ -69,13 +70,18 @@ namespace Ambiesoft {
 				gcnew ColumnItem{ "acodec", I18N("Audio") },
 				gcnew ColumnItem{ "duration", I18N("Duration") },
 			};
+
+			CpuAffinity cpuAffinity_;
+			System::Windows::Forms::Timer^ timerSetAffinity_;
+
 		public:
 			// static initonly cli::array<wchar_t>^ char1x = gcnew cli::array<wchar_t>{L'x'};
 
 			literal String^ SECTION_OPTION = L"Option";
 			literal String^ SECTION_LOCATION = L"Location";
 			literal String^ SECTION_COLUMNS = L"Columns";
-
+			literal String^ SECTION_CPUAFFINITY = L"CpuAffinity";
+			
 			literal String^ KEY_FFPROBE = L"ffprobe";
 			literal String^ KEY_FFMPEG = L"ffmpeg";
 			literal String^ KEY_PROCESS_BACKGROUND = L"processbackground";
@@ -84,6 +90,7 @@ namespace Ambiesoft {
 			literal String^ KEY_LISTVIEW_COLUMNS = L"columns";
 			literal String^ KEY_SPLITROOT_DISTANCE = L"sprootdistance";
 			literal String^ KEY_AFTERPROCESS_ENABLED = L"afterprocessenabled";
+			literal String^ KEY_CPUAFFINITY_ENABLED = L"cpuaffinityenabled";
 
 			literal String^ STR_BUTTONTEXT_PAUSE = L"&Pause";
 			literal String^ STR_BUTTONTEXT_START = L"&Start";
@@ -155,6 +162,12 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenOutputLocation
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiProcessAfterFinish;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnabledtsmiProcessAfterFinish;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiProcesstsmiProcessAfterFinish;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiCPUAffinity;
+
+private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem6;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiCPUAffinityEnable;
+private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinity;
+
 
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageJapanese;
 
@@ -451,6 +464,12 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiProcesstsmiProcessAfterF
 
 			System::Void tsmiProcesstsmiProcessAfterFinish_Click(System::Object^ sender, System::EventArgs^ e);
 
+			System::Void tsmiCPUAffinity_DropDownOpening(System::Object^ sender, System::EventArgs^ e);
+
+			void OnClick(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiCPUAffinityEnable_Click(System::Object^ sender, System::EventArgs^ e);
+
+			void OnTick(System::Object^ sender, System::EventArgs^ e);
 };
 
 		

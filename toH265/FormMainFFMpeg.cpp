@@ -60,18 +60,19 @@ namespace Ambiesoft {
 			dlg.DefaultExt = L"exe";
 			System::Text::StringBuilder sbFilter;
 			String^ ae = ".exe";
-			sbFilter.Append(ae);
-			sbFilter.Append("File ");
+			sbFilter.Append(I18N(L"Application"));
+			sbFilter.Append(L" ");
 			sbFilter.Append("(*");
 			sbFilter.Append(ae);
 
 			sbFilter.Append(")|*");
 			sbFilter.Append(ae);
 			sbFilter.Append("|");
-			sbFilter.Append("All File(*.*)|*.*");
+			sbFilter.Append("All Files (*.*)|*.*");
 			dlg.Filter = sbFilter.ToString();
 			if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog(parent))
 				return nullptr;
+
 
 			// check if file is ffprobe or ffmpeg
 			int retval;
