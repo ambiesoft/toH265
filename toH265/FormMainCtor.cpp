@@ -100,6 +100,10 @@ namespace Ambiesoft {
 
 			cpuAffinity_.Load(SECTION_CPUAFFINITY, ini);
 
+			Profile::GetInt(SECTION_OPTION, KEY_ELAPSEDTIME_QUEUE_LENGTH, -1, intval, ini);
+			if (intval > 0)
+				elapses_.Size = intval;
+
 			try
 			{
 				String^ imagePath = Path::Combine(Path::GetDirectoryName(Application::ExecutablePath), L"images");

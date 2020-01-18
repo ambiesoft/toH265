@@ -25,6 +25,9 @@ namespace Ambiesoft {
 			sbMessage.Append(" ver");
 			sbMessage.Append(AmbLib::getAssemblyVersion(System::Reflection::Assembly::GetExecutingAssembly(), 3));
 
+			sbMessage.AppendLine();
+			sbMessage.AppendFormat(I18N(L"ElapseTimeQueueLength:{0}"), elapses_.Size);
+
 			CppUtils::Info(this, sbMessage.ToString());
 		}
 

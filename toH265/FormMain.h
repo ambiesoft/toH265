@@ -91,6 +91,7 @@ namespace Ambiesoft {
 			literal String^ KEY_SPLITROOT_DISTANCE = L"sprootdistance";
 			literal String^ KEY_AFTERPROCESS_ENABLED = L"afterprocessenabled";
 			literal String^ KEY_CPUAFFINITY_ENABLED = L"cpuaffinityenabled";
+			literal String^ KEY_ELAPSEDTIME_QUEUE_LENGTH = L"ElapsedTimeQueueLength";
 
 			literal String^ STR_BUTTONTEXT_PAUSE = L"&Pause";
 			literal String^ STR_BUTTONTEXT_START = L"&Start";
