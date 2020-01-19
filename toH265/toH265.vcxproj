@@ -276,7 +276,9 @@
     <EmbeddedResource Include="TargetCodecDialog.resx">
       <DependentUpon>TargetCodecDialog.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="toH265Strings.ja-JP.resx" />
+    <EmbeddedResource Include="toH265Strings.ja-JP.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="toH265Strings.resx" />
   </ItemGroup>
   <ItemGroup>

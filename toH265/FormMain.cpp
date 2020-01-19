@@ -739,7 +739,9 @@ namespace Ambiesoft {
 						DASSERT(outputtedTS.TotalMilliseconds != 0);
 
 						StringBuilder sbMessage;
-						sbMessage.AppendLine(I18N(L"Encoding Succeeded."));
+						sbMessage.AppendFormat(I18N(L"Encoding successfully finished at {0}."),
+							DateTime::Now.ToString());
+						sbMessage.AppendLine();
 						sbMessage.AppendLine();
 						sbMessage.AppendLine(String::Format(I18N(L"Format = {0}"), outputtedFormat));
 						sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), outputtedAC));

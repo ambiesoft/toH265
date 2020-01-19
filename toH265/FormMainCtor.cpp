@@ -47,6 +47,10 @@ namespace Ambiesoft {
 			txtLogOut->Font = gcnew System::Drawing::Font(FontFamily::GenericMonospace, txtLogOut->Font->Size + 1);
 
 #ifdef _DEBUG
+			//StringBuilder sbMessage;
+			//sbMessage.AppendLine(String::Format(I18N(L"Compressed = {0}%"), AmbLib::GetRatioString(33333333331LL, 222222221222LL)));
+			//MessageBox::Show(sbMessage.ToString());
+			// MessageBox::Show(DateTime::Now.ToString());
 			tsmiHelp->DropDownItems->Add(
 				gcnew ToolStripMenuItem(L"Test", nullptr, gcnew EventHandler(this, &FormMain::FormMain_OnTest)));
 #endif
