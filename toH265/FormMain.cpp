@@ -747,7 +747,8 @@ namespace Ambiesoft {
 						sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), outputtedAC));
 						sbMessage.AppendLine(String::Format(I18N(L"Video codec = {0}"), outputtedVC));
 						sbMessage.AppendLine(String::Format(I18N(L"Duration = {0}"), outputtedTS.ToString()));
-						sbMessage.AppendLine(String::Format(I18N(L"Size = {0}"), AmbLib::FormatSize(outputtedSize)));
+						sbMessage.AppendLine(String::Format(I18N(L"Original Size = {0}"), AmbLib::FormatSize(inputSize)));
+						sbMessage.AppendLine(String::Format(I18N(L"Output Size = {0}"), AmbLib::FormatSize(outputtedSize)));
 						sbMessage.AppendLine(String::Format(I18N(L"Compressed = {0}%"), AmbLib::GetRatioString(outputtedSize, inputSize)));
 						CppUtils::Info(this, sbMessage.ToString());
 					}
