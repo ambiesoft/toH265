@@ -27,7 +27,8 @@ namespace Ambiesoft {
 
 			sbMessage.AppendLine();
 			sbMessage.AppendFormat(I18N(L"ElapseTimeQueueLength:{0}"), elapses_.Size);
-
+			sbMessage.AppendLine();
+			sbMessage.AppendFormat("Is64BitProcess:{0}", Environment::Is64BitProcess);
 			CppUtils::Info(this, sbMessage.ToString());
 		}
 
