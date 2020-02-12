@@ -1413,7 +1413,7 @@ namespace Ambiesoft {
 			if (tsmiCPUAffinityEnable->Checked)
 			{
 				DTRACE(String::Format("Set Process {0} Affinity to {1}", pidFFMpeg_, cpuAffinity_.Value()));
-				DVERIFY(SetProcessAffinityMask(hProcess, cpuAffinity_.Value()));
+				DVERIFY(SetProcessAffinityMask(hProcess, cpuAffinity_.ValueAsPtr()));
 				DWORD_PTR a;
 				DWORD_PTR s;
 				DVERIFY(GetProcessAffinityMask(hProcess, &a, &s));

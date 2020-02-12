@@ -51,6 +51,10 @@ namespace Ambiesoft {
 			{
 				return cpuAffinity_;
 			}
+			DWORD_PTR ValueAsPtr()
+			{
+				return (DWORD_PTR)cpuAffinity_;
+			}
 			void Update(Process^ pro)
 			{
 				if (!pro)
