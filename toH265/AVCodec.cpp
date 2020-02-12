@@ -37,6 +37,10 @@ namespace Ambiesoft {
 				vc_ = VC::VC_WMAV;
 			else if (codec->StartsWith("wmv"))
 				vc_ = VC::VC_WMV;
+			else if (codec == "cook")
+				vc_ = VC::VC_COOK;
+			else if (codec == "rv30")
+				vc_ = VC::VC_RV30;
 			else
 			{
 				DASSERT(false);
@@ -62,6 +66,8 @@ namespace Ambiesoft {
 			case VC::VC_AV1:return "av1";
 			case VC::VC_WMV:return "wmv";
 			case VC::VC_WMAV:return "wmav";
+			case VC::VC_COOK:return "cook";
+			case VC::VC_RV30:return "rv30";
 			case VC::VC_MIXED:return "mixed";
 			default:
 				DASSERT(false);

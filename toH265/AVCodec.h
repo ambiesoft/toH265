@@ -21,6 +21,8 @@ namespace Ambiesoft {
 				VC_AV1,
 				VC_WMAV,
 				VC_WMV,
+				VC_COOK,
+				VC_RV30,
 				VC_MIXED,
 			};
 		private:

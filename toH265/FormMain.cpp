@@ -1162,7 +1162,7 @@ namespace Ambiesoft {
 			DASSERT(inputmovies.Count != 0);
 			if (inputmovies.Count == 1)
 			{
-				arg = String::Format(L"-y -i \"{0}\" -c copy -c:v {1} -c:a {2} \"{3}\"",
+				arg = String::Format(L"-y -i \"{0}\" -max_muxing_queue_size 9999 -c copy -c:v {1} -c:a {2} \"{3}\"",
 					inputmovies[0],
 					OutputVideoCodec->ToFFMpegString(),
 					OutputAudioCodec->ToFFMpegString(),
@@ -1180,7 +1180,7 @@ namespace Ambiesoft {
 						sw.WriteLine(String::Format("file '{0}'", file));
 					}
 
-					arg = String::Format("-y -safe 0 -f concat -i \"{0}\" -c copy \"{1}\"",
+					arg = String::Format("-y -safe 0 -f concat -i \"{0}\" -max_muxing_queue_size 9999 -c copy \"{1}\"",
 						tempFile_,
 						outputtingMovie_);
 				}
@@ -1203,6 +1203,8 @@ namespace Ambiesoft {
 
 					for each (String ^ f in inputmovies)
 						sb.AppendFormat("-i \"{0}\" ", f);
+
+					sb.Append("-max_muxing_queue_size 9999 ");
 
 					sb.Append("-filter_complex \"");
 					if(IsSameSizeVideos())
