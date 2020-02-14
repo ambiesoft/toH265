@@ -22,7 +22,14 @@ namespace Ambiesoft {
 		
 		void FormMain::IconizeToTray()
 		{
+			// Hide();
+			//::ShowWindow((HWND)this->Handle.ToPointer(), SW_MINIMIZE);
+			WindowState = FormWindowState::Minimized;
+			System::Threading::Thread::Sleep(200);
 			Hide();
+			//AnimateWindow((HWND)this->Handle.ToPointer(),
+			//	200,
+			//	AW_HIDE| AW_SLIDE);
 			notifyIconMain->Visible = true;
 		}
 		System::Void FormMain::FormMain_Resize(System::Object^ sender, System::EventArgs^ e)

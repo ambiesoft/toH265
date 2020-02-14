@@ -12,6 +12,19 @@ namespace Ambiesoft {
 
 		using namespace System::IO;
 
+		bool FormMain::IsEncoding()
+		{
+			switch (FFMpegState)
+			{
+			case TaskState::Pausing:
+			case TaskState::ProcessLaunching:
+			case TaskState::Running:
+				return true;
+			}
+			
+			return false;
+		}
+
 		bool FormMain::ConfirmAndStopEncode()
 		{
 			switch (FFMpegState)
@@ -30,29 +43,12 @@ namespace Ambiesoft {
 				}
 				processTerminated_ = true;
 		
-				// couldnt close
-				//bool bClosed = true;
-				//try
-				//{
-				//	bClosed &= processFFMpeg_->CloseMainWindow();
-				//}
-				//catch (Exception^) {}
-
-				//if (GenerateConsoleCtrlEvent(0, processFFMpeg_->Id))
-				//{
-				//	Sleep(2000);
-				//	bClosed &= WAIT_OBJECT_0 == WaitForSingleObject((HANDLE)processFFMpeg_->Handle.ToPointer(), 0);
-				//}
-
-				// if (!bClosed)
+				if (!KillProcess(processFFMpeg_))
 				{
-					if (!KillProcess(processFFMpeg_))
-					{
-						processTerminated_ = false;
-						CppUtils::Alert(this, I18N(L"Failed to kill process."));
-					}
+					processTerminated_ = false;
+					CppUtils::Alert(this, I18N(L"Failed to kill process."));
 				}
-				// processFFMpeg_->Close();
+				
 				processFFMpeg_ = nullptr;
 				SafeJoin(thFFMpeg_);
 				thFFMpeg_ = nullptr;
@@ -82,7 +78,8 @@ namespace Ambiesoft {
 		{
 			if (e->CloseReason != CloseReason::WindowsShutDown &&
 				tsmiMinimizeToTray->Checked &&
-				!bCloseFromMenu_)
+				!bCloseFromMenu_
+				&& IsEncoding())
 			{
 				IconizeToTray();
 				e->Cancel = true;

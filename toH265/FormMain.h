@@ -402,6 +402,7 @@ private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem7;
 			delegate void VIDelegate(int value);
 			void ThreadStarted();
 			void ThreadEnded(int retval);
+			bool IsEncoding();
 			bool ConfirmAndStopEncode();
 			void ChangeStartButtonText(String^ text);
 			void OnProcessStarted(Object^ sender, EventArgs^ e);
