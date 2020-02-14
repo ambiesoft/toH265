@@ -1398,7 +1398,7 @@ namespace Ambiesoft {
 				item->Name = String::Format("CpuAffinity{0}", i);
 				item->Checked = cpuAffinity_.IsCPUON(i);
 				item->Tag = i;
-				item->Click += gcnew System::EventHandler(this, &Ambiesoft::toH265::FormMain::OnClick);
+				item->Click += gcnew System::EventHandler(this, &Ambiesoft::toH265::FormMain::OnToggleCPU);
 				tsmiCPUAffinity->DropDownItems->Insert(++insertIndex, item);
 			}
 		}
@@ -1435,7 +1435,7 @@ namespace Ambiesoft {
 				DVERIFY(SetProcessAffinityMask(hProcess, s));
 			}
 		}
-		void FormMain::OnClick(System::Object^ sender, System::EventArgs^ e)
+		void FormMain::OnToggleCPU(System::Object^ sender, System::EventArgs^ e)
 		{
 			ToolStripMenuItem^ item = (ToolStripMenuItem^)sender;
 			int cpunum = (int)item->Tag;

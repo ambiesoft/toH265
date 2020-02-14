@@ -19,13 +19,17 @@ namespace Ambiesoft {
 				CppUtils::Alert(this, I18N(STR_FAILED_TO_SAVE_SETTING));
 			}
 		}
-
+		
+		void FormMain::IconizeToTray()
+		{
+			Hide();
+			notifyIconMain->Visible = true;
+		}
 		System::Void FormMain::FormMain_Resize(System::Object^ sender, System::EventArgs^ e)
 		{
 			if (tsmiMinimizeToTray->Checked && this->WindowState == FormWindowState::Minimized)
 			{
-				Hide();
-				notifyIconMain->Visible = true;
+				IconizeToTray();
 			}
 		}
 		System::Void FormMain::notifyIconMain_MouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)

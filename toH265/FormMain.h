@@ -73,6 +73,7 @@ namespace Ambiesoft {
 
 			CpuAffinity cpuAffinity_;
 			System::Windows::Forms::Timer^ timerSetAffinity_;
+			bool bCloseFromMenu_;
 
 		public:
 			// static initonly cli::array<wchar_t>^ char1x = gcnew cli::array<wchar_t>{L'x'};
@@ -168,6 +169,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiCPUAffinity;
 private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem6;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiCPUAffinityEnable;
 private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinity;
+private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem7;
 
 
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageJapanese;
@@ -403,13 +405,12 @@ private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinity;
 			bool ConfirmAndStopEncode();
 			void ChangeStartButtonText(String^ text);
 			void OnProcessStarted(Object^ sender, EventArgs^ e);
+			void IconizeToTray();
 
 			AfterFinish::OptionDialog dlgAfterFinish_;
 
 			System::Void FormMain_Load(System::Object^ sender, System::EventArgs^ e);
-			System::Void exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-				Close();
-			}
+			System::Void exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 
 			System::Void btnBrowseMovie_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void btnStart_Click(System::Object^ sender, System::EventArgs^ e);
@@ -467,7 +468,7 @@ private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinity;
 
 			System::Void tsmiCPUAffinity_DropDownOpening(System::Object^ sender, System::EventArgs^ e);
 
-			void OnClick(System::Object^ sender, System::EventArgs^ e);
+			void OnToggleCPU(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiCPUAffinityEnable_Click(System::Object^ sender, System::EventArgs^ e);
 
 			void OnTick(System::Object^ sender, System::EventArgs^ e);

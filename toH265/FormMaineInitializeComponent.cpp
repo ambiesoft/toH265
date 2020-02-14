@@ -63,6 +63,7 @@ namespace Ambiesoft {
 			this->slVideoCodec = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->slAudioCodec = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->slDuration = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->toolStripMenuItem7 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitRoot))->BeginInit();
 			this->splitRoot->Panel1->SuspendLayout();
 			this->splitRoot->Panel2->SuspendLayout();
@@ -150,9 +151,9 @@ namespace Ambiesoft {
 			// 
 			// tsmiFile
 			// 
-			this->tsmiFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+			this->tsmiFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
 				this->tsmiOpenInputLocations,
-					this->tsmiOpenOutput, this->toolStripMenuItem4, this->tsmiStop, this->exitToolStripMenuItem
+					this->tsmiOpenOutput, this->toolStripMenuItem4, this->tsmiStop, this->toolStripMenuItem7, this->exitToolStripMenuItem
 			});
 			this->tsmiFile->Name = L"tsmiFile";
 			resources->ApplyResources(this->tsmiFile, L"tsmiFile");
@@ -430,6 +431,11 @@ namespace Ambiesoft {
 			// 
 			this->slDuration->Name = L"slDuration";
 			resources->ApplyResources(this->slDuration, L"slDuration");
+			// 
+			// toolStripMenuItem7
+			// 
+			this->toolStripMenuItem7->Name = L"toolStripMenuItem7";
+			resources->ApplyResources(this->toolStripMenuItem7, L"toolStripMenuItem7");
 			// 
 			// FormMain
 			// 

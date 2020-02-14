@@ -71,13 +71,24 @@ namespace Ambiesoft {
 			DASSERT(false);
 			return false;
 		}
+
+		System::Void FormMain::exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			bCloseFromMenu_ = true;
+			Close();
+		}
+
 		System::Void FormMain::FormMain_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 		{
-			//if (e->CloseReason == CloseReason::WindowsShutDown)
-			//{
-			//	// TODO: anyway ffmpeg process closes
-			//	return;
-			//}
+			if (e->CloseReason != CloseReason::WindowsShutDown &&
+				tsmiMinimizeToTray->Checked &&
+				!bCloseFromMenu_)
+			{
+				IconizeToTray();
+				e->Cancel = true;
+				return;
+			}
+
 			if (!ConfirmAndStopEncode())
 			{
 				e->Cancel = true;
