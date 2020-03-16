@@ -110,10 +110,16 @@ namespace Ambiesoft {
 
 			try
 			{
+#undef ExtractAssociatedIcon
 				String^ imagePath = Path::Combine(Path::GetDirectoryName(Application::ExecutablePath), L"images");
-				iconBlue_ = System::Drawing::Icon::FromHandle((gcnew Bitmap(Path::Combine(imagePath, L"icon.png")))->GetHicon());
-				iconYellow_ = System::Drawing::Icon::FromHandle((gcnew Bitmap(Path::Combine(imagePath, L"pause.png")))->GetHicon());
-				iconRed_ = System::Drawing::Icon::FromHandle((gcnew Bitmap(Path::Combine(imagePath, L"busy.png")))->GetHicon());
+				// iconBlue_ = System::Drawing::Icon::FromHandle((gcnew Bitmap(Path::Combine(imagePath, L"icon.png")))->GetHicon());
+				iconBlue_ = System::Drawing::Icon::ExtractAssociatedIcon(Path::Combine(imagePath, L"icon.ico"));
+
+				// iconYellow_ = System::Drawing::Icon::FromHandle((gcnew Bitmap(Path::Combine(imagePath, L"pause.png")))->GetHicon());
+				iconYellow_ = System::Drawing::Icon::ExtractAssociatedIcon(Path::Combine(imagePath, L"pause.ico"));
+
+				// iconRed_ = System::Drawing::Icon::FromHandle((gcnew Bitmap(Path::Combine(imagePath, L"busy.png")))->GetHicon());
+				iconRed_ = System::Drawing::Icon::ExtractAssociatedIcon(Path::Combine(imagePath, L"busy.ico"));
 			}
 			catch (Exception ^ ex)
 			{

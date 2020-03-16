@@ -1,0 +1,15 @@
+# * not good
+# >c:\LegacyPrograms\ImageMagick\convert.exe 32.png -fuzz 90% -fill yellow +opaque red aaa.png
+# * use ming's imagemagick and script http://www.fmwconcepts.com/imagemagick/replacecolor/index.php
+
+
+
+
+
+~/bin/imscript/replacecolor -i red -o yellow -f 40 -g 10 -b 100 ../red/16.png 16.png
+~/bin/imscript/replacecolor -i red -o yellow -f 40 -g 10 -b 100 ../red/32.png 32.png
+~/bin/imscript/replacecolor -i red -o yellow -f 40 -g 10 -b 100 ../red/48.png 48.png
+~/bin/imscript/replacecolor -i red -o yellow -f 40 -g 10 -b 100 ../red/64.png 64.png
+~/bin/imscript/replacecolor -i red -o yellow -f 40 -g 10 -b 100 ../red/128.png 128.png
+~/bin/imscript/replacecolor -i red -o yellow -f 40 -g 10 -b 100 ../red/256.png 256.png
+~/bin/imscript/replacecolor -i red -o yellow -f 40 -g 10 -b 100 ../red/512.png 512.png

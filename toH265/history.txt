@@ -1,3 +1,6 @@
+2020/03/16 ver1.0.40
+Change icons
+
 2020/02/14 ver1.0.39
 IsEncoding for tray
 

@@ -105,7 +105,10 @@ copy "$(SolutionDir)Copying.txt" "$(TargetDir)"
 copy "$(SolutionDir)toH265\history.txt" "$(TargetDir)"
 
 mkdir "$(TargetDir)images"
-copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
+REM copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
+copy "$(SolutionDir)toH265\materials\red\red.ico" "$(TargetDir)images\busy.ico"
+copy "$(SolutionDir)toH265\materials\yellow\yellow.ico" "$(TargetDir)images\pause.ico"
+copy "$(SolutionDir)toH265\materials\blue\blue.ico" "$(TargetDir)images\icon.ico"
 
 del "$(TargetDir)zzzDist.*"
 
@@ -135,7 +138,10 @@ copy "$(SolutionDir)Copying.txt" "$(TargetDir)"
 copy "$(SolutionDir)toH265\history.txt" "$(TargetDir)"
 
 mkdir "$(TargetDir)images"
-copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
+REM copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
+copy "$(SolutionDir)toH265\materials\red\red.ico" "$(TargetDir)images\busy.ico"
+copy "$(SolutionDir)toH265\materials\yellow\yellow.ico" "$(TargetDir)images\pause.ico"
+copy "$(SolutionDir)toH265\materials\blue\blue.ico" "$(TargetDir)images\icon.ico"
 
 del "$(TargetDir)zzzDist.*"
 
@@ -169,7 +175,10 @@ copy "$(SolutionDir)Copying.txt" "$(TargetDir)"
 copy "$(SolutionDir)toH265\history.txt" "$(TargetDir)"
 
 mkdir "$(TargetDir)images"
-copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
+REM copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
+copy "$(SolutionDir)toH265\materials\red\red.ico" "$(TargetDir)images\busy.ico"
+copy "$(SolutionDir)toH265\materials\yellow\yellow.ico" "$(TargetDir)images\pause.ico"
+copy "$(SolutionDir)toH265\materials\blue\blue.ico" "$(TargetDir)images\icon.ico"
 
 del "$(TargetDir)zzzDist.*"
 
@@ -203,7 +212,10 @@ copy "$(SolutionDir)Copying.txt" "$(TargetDir)"
 copy "$(SolutionDir)toH265\history.txt" "$(TargetDir)"
 
 mkdir "$(TargetDir)images"
-copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
+REM copy "$(SolutionDir)toH265\images\*.png" "$(TargetDir)images"
+copy "$(SolutionDir)toH265\materials\red\red.ico" "$(TargetDir)images\busy.ico"
+copy "$(SolutionDir)toH265\materials\yellow\yellow.ico" "$(TargetDir)images\pause.ico"
+copy "$(SolutionDir)toH265\materials\blue\blue.ico" "$(TargetDir)images\icon.ico"
 
 del "$(TargetDir)zzzDist.*"
 

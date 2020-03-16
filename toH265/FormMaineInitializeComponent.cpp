@@ -25,6 +25,7 @@ namespace Ambiesoft {
 			this->tsmiOpenOutput = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStripMenuItem4 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->tsmiStop = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItem7 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiOption = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiSetFFProbe = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -63,7 +64,6 @@ namespace Ambiesoft {
 			this->slVideoCodec = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->slAudioCodec = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->slDuration = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-			this->toolStripMenuItem7 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitRoot))->BeginInit();
 			this->splitRoot->Panel1->SuspendLayout();
 			this->splitRoot->Panel2->SuspendLayout();
@@ -180,6 +180,11 @@ namespace Ambiesoft {
 			this->tsmiStop->Name = L"tsmiStop";
 			resources->ApplyResources(this->tsmiStop, L"tsmiStop");
 			this->tsmiStop->Click += gcnew System::EventHandler(this, &FormMain::tsmiStop_Click);
+			// 
+			// toolStripMenuItem7
+			// 
+			this->toolStripMenuItem7->Name = L"toolStripMenuItem7";
+			resources->ApplyResources(this->toolStripMenuItem7, L"toolStripMenuItem7");
 			// 
 			// exitToolStripMenuItem
 			// 
@@ -431,11 +436,6 @@ namespace Ambiesoft {
 			// 
 			this->slDuration->Name = L"slDuration";
 			resources->ApplyResources(this->slDuration, L"slDuration");
-			// 
-			// toolStripMenuItem7
-			// 
-			this->toolStripMenuItem7->Name = L"toolStripMenuItem7";
-			resources->ApplyResources(this->toolStripMenuItem7, L"toolStripMenuItem7");
 			// 
 			// FormMain
 			// 
