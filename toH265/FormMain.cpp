@@ -528,38 +528,6 @@ namespace Ambiesoft {
 				slMain->Text = text;
 		}
 
-		//bool FormMain::GetInfoFromFFMpegoutput(String^ text, TimeSpan% tsTime, double% dblSpeed)
-		//{
-		//	if (regFFMpeg_->IsMatch(text))
-		//	{
-		//		RegularExpressions::Match^ match = regFFMpeg_->Match(text);
-		//		String^ timeValue = match->Groups["time"]->Value;
-		//		if (!String::IsNullOrEmpty(timeValue) && timeValue[0] == '-')
-		//			timeValue = "00:00:00.00";
-		//		
-		//		//DateTime dtTime = DateTime::ParseExact(timeValue, L"hh:mm:ss.ff",
-		//		//	System::Globalization::CultureInfo::InvariantCulture);
-		//		//tsTime = dtTime - dtTime.Date;
-		//		
-		//		tsTime = TimeSpan::Parse(timeValue);
-
-		//		String ^ speedValue = match->Groups["speed"]->Value;
-		//		if (speedValue == "N/A")
-		//		{
-		//			dblSpeed = 0;
-		//		}
-		//		else
-		//		{
-		//			speedValue = speedValue->Trim()->TrimEnd(char1x);
-		//			if (!double::TryParse(speedValue, dblSpeed))
-		//				return false;
-		//		}
-		//		//UpdateTitleTS(tsTime, dblSpeed);
-		//		//txtLogOut->Text = text;
-		//		return true;
-		//	}
-		//	return false;
-		//}
 
 		void FormMain::AddToErr(String^ text)
 		{
@@ -1158,7 +1126,7 @@ namespace Ambiesoft {
 			outputtingMovie_ = dlg.FileName;
 
 			String^ arg;
-			
+			StringBuilder sbReportFile;
 			DASSERT(inputmovies.Count != 0);
 			if (inputmovies.Count == 1)
 			{
@@ -1173,12 +1141,15 @@ namespace Ambiesoft {
 				if (!bReEncode)
 				{
 					tempFile_ = Path::GetTempFileName();
+					sbReportFile.AppendLine(tempFile_);
 					StreamWriter sw(tempFile_, false, gcnew UTF8Encoding(false));
 
 					for each (String ^ file in inputmovies)
 					{
+						sbReportFile.AppendLine(String::Format("file '{0}'", file));
 						sw.WriteLine(String::Format("file '{0}'", file));
 					}
+					sbReportFile.AppendLine();
 
 					arg = String::Format("-y -safe 0 -f concat -i \"{0}\" -max_muxing_queue_size 9999 -c copy \"{1}\"",
 						tempFile_,
@@ -1246,6 +1217,7 @@ namespace Ambiesoft {
 
 			txtLogOut->Clear();
 			txtLogErr->Clear();
+			txtLogErr->Text = sbReportFile.ToString();
 
 			txtFFMpegArg->Text = String::Format(L"{0} {1}",
 				AmbLib::doubleQuoteIfSpace(ffmpeg), arg);

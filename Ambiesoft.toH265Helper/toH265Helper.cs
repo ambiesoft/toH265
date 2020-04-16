@@ -80,7 +80,6 @@ namespace Ambiesoft
                         return false;
                 }
                 //UpdateTitleTS(tsTime, dblSpeed);
-                //txtLogOut->Text = text;
                 return true;
             }
             tsTime = TimeSpan.Zero;
