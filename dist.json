@@ -47,7 +47,8 @@
         "Ambiesoft.toH265Helper.dll",
         "Ambiesoft.toH265Helper.pdb",
         "ListViewEx.dll",
-        "ListViewEx.pdb"
+        "ListViewEx.pdb",
+        "ja-JP\\Ambiesoft.AfterFinish.resources.dll"
     ],
     "TotalFileCount": "exact",
     "archivedir": "C:\\Linkout",

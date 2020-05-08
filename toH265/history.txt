@@ -1,3 +1,7 @@
+2020/05/08 ver1.0.42
+I18N dialog
+save dialog settings
+
 2020/04/16 ver1.0.41
 show tmp files
 
