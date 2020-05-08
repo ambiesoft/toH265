@@ -673,7 +673,14 @@ namespace Ambiesoft {
 
 						if (dlgAfterFinish_.chkLaunchApp->Checked)
 						{
-							Process::Start(dlgAfterFinish_.txtApp->Text, dlgAfterFinish_.txtArg->Text);
+							try
+							{
+								Process::Start(dlgAfterFinish_.txtApp->Text, dlgAfterFinish_.txtArg->Text);
+							}
+							catch (Exception^ ex)
+							{
+								CppUtils::Alert(ex);
+							}
 						}
 
 						if (dlgAfterFinish_.chkShutdown->Checked)
@@ -947,7 +954,7 @@ namespace Ambiesoft {
 			bool isLosslessable = inputmovies.Count != 0 &&
 				InputFormat != "mixed" &&
 				!InputAudioCodec->IsMixed && !InputVideoCodec->IsMixed;
-			TargetCodecDialog codecDlg(isLosslessable);
+			TargetCodecDialog codecDlg(isLosslessable, Program::IniFile, SECTION_TARGETCODECDIALOG);
 
 			if (InputVideoCodec->IsH264)
 			{
@@ -1024,7 +1031,7 @@ namespace Ambiesoft {
 					OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
 					outExtsNormalPriority->Add(Path::GetExtension(inputmovies[0]));
 				}
-				else if (codecDlg.rbAV1->Checked)
+				else if (codecDlg.rbVideoAV1->Checked)
 				{
 					OutputVideoCodec = gcnew AVCodec("av1");
 					outExtsNormalPriority->Add(".mkv");

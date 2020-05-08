@@ -14,7 +14,7 @@ namespace Ambiesoft {
 #ifdef _DEBUG
 		System::Void FormMain::FormMain_OnTest(System::Object^ sender, System::EventArgs^ e)
 		{
-			TargetCodecDialog dlg(true);
+			TargetCodecDialog dlg(true, Program::IniFile, SECTION_TARGETCODECDIALOG);
 			dlg.ShowDialog();
 		}
 #endif

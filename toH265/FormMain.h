@@ -82,6 +82,7 @@ namespace Ambiesoft {
 			literal String^ SECTION_LOCATION = L"Location";
 			literal String^ SECTION_COLUMNS = L"Columns";
 			literal String^ SECTION_CPUAFFINITY = L"CpuAffinity";
+			literal String^ SECTION_TARGETCODECDIALOG = L"TargetCodecDialog";
 			
 			literal String^ KEY_FFPROBE = L"ffprobe";
 			literal String^ KEY_FFMPEG = L"ffmpeg";

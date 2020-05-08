@@ -6,16 +6,33 @@
 
 namespace Ambiesoft {
 	namespace toH265 {
-		TargetCodecDialog::TargetCodecDialog(bool bLosslessable)
+		TargetCodecDialog::TargetCodecDialog(bool bLosslessable, String^ iniPath, String^ section):
+			losslessable_(bLosslessable), iniPath_(iniPath), section_(section)
 		{
 			InitializeComponent();
 
 			cmbEncodeType->Items->Add(I18N("Lossless concat"));
 			cmbEncodeType->Items->Add(I18N("Reencode"));
-
-			if (bLosslessable)
+		}
+		System::Void TargetCodecDialog::TargetCodecDialog_Load(System::Object^ sender, System::EventArgs^ e)
+		{
+			int iniComboIndex = -1;
+			if (CanSerialize)
 			{
-				cmbEncodeType->SelectedIndex = 1;
+				HashIni^ ini = Profile::ReadAll(iniPath_);
+				Profile::GetInt(SECTION, KEY_ENCODE_TYPE, -1, iniComboIndex, ini);
+				int v = -1;
+				Profile::GetInt(SECTION, KEY_AUIDOCODEC, -1, v, ini);
+				if (v != -1)
+					AudioCodecInt = v;
+				Profile::GetInt(SECTION, KEY_VIDEOCODEC, -1, v, ini);
+				if (v != -1)
+					VideoCodecInt = v;
+			}
+
+			if (losslessable_)
+			{
+				cmbEncodeType->SelectedIndex = iniComboIndex != -1 ? iniComboIndex : 1;
 			}
 			else
 			{
@@ -24,7 +41,6 @@ namespace Ambiesoft {
 				cmbEncodeType->Enabled = false;
 			}
 		}
-
 		System::Void TargetCodecDialog::CmbEncodeType_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 		{
 			switch (cmbEncodeType->SelectedIndex)
@@ -49,11 +65,24 @@ namespace Ambiesoft {
 				return;
 			}
 		}
+		System::Void TargetCodecDialog::TargetCodecDialog_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e)
+		{
+			if (this->DialogResult != System::Windows::Forms::DialogResult::OK)
+				return;
+			if (!CanSerialize)
+				return;
+			HashIni^ ini = Profile::ReadAll(IniPath);
+			Profile::WriteInt(SECTION, KEY_ENCODE_TYPE, cmbEncodeType->SelectedIndex, ini);
+			Profile::WriteInt(SECTION, KEY_AUIDOCODEC, AudioCodecInt, ini);
+			Profile::WriteInt(SECTION, KEY_VIDEOCODEC, VideoCodecInt, ini);
+
+			if (!Profile::WriteAll(ini, IniPath))
+			{
+				CppUtils::Alert(I18N(L"Failed to save ini"));
+			}
+		}
 		System::Void TargetCodecDialog::BtnOK_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			//if (!cmbEncodeType->Enabled)
-			//	return;
-
 			// default is OK
 			this->DialogResult = System::Windows::Forms::DialogResult::OK;
 
@@ -79,7 +108,7 @@ namespace Ambiesoft {
 					this->DialogResult = System::Windows::Forms::DialogResult::None;
 					return;
 				}
-				if (!rbVideoCopy->Checked && !rbVideoH265->Checked && !rbVideoVp9->Checked && !rbAV1->Checked)
+				if (!rbVideoCopy->Checked && !rbVideoH265->Checked && !rbVideoVp9->Checked && !rbVideoAV1->Checked)
 				{
 					// No video selected
 					CppUtils::Alert(I18N("No video selected"));

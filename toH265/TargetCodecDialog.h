@@ -15,8 +15,15 @@ namespace Ambiesoft {
 		/// </summary>
 		public ref class TargetCodecDialog : public System::Windows::Forms::Form
 		{
+			literal String^ KEY_ENCODE_TYPE = L"EncodeType";
+			literal String^ KEY_AUIDOCODEC = L"AudioCodec";
+			literal String^ KEY_VIDEOCODEC = L"VideoCodec";
+
+			initonly String^ iniPath_;
+			initonly String^ section_;
+			initonly bool losslessable_;
 		public:
-			TargetCodecDialog(bool bLosslessable);
+			TargetCodecDialog(bool bLosslessable, String^ iniPath, String^ section);
 
 			property bool IsReEncode
 			{
@@ -24,6 +31,81 @@ namespace Ambiesoft {
 					//if (!cmbEncodeType->Enabled)
 					//	return false;
 					return cmbEncodeType->SelectedIndex == 1;
+				}
+			}
+			property bool CanSerialize
+			{
+				bool get()
+				{
+					return (!String::IsNullOrEmpty(iniPath_) && !String::IsNullOrEmpty(section_));
+				}
+			}
+			property String^ IniPath
+			{
+				String^ get()
+				{
+					return iniPath_;
+				}
+			}
+			property String^ SECTION
+			{
+				String^ get()
+				{
+					return section_;
+				}
+			}
+			property int AudioCodecInt
+			{
+				int get()
+				{
+					if (rbAudioCopy->Checked)
+						return 0;
+					else if (rbAudioAac->Checked)
+						return 1;
+					else if (rbAudioOpus->Checked)
+						return 2;
+					DASSERT(false);
+					return 0;
+				}
+				void set(int value)
+				{
+					if (value == 0)
+						rbAudioCopy->Checked = true;
+					else if (value == 1)
+						rbAudioAac->Checked = true;
+					else if (value == 2)
+						rbAudioOpus->Checked = true;
+					else
+						DASSERT(false);
+				}
+			}
+			property int VideoCodecInt
+			{
+				int get()
+				{
+					if (rbVideoCopy->Checked)
+						return 0;
+					else if (rbVideoH265->Checked)
+						return 1;
+					else if (rbVideoVp9->Checked)
+						return 2;
+					else if (rbVideoAV1->Checked)
+						return 3;
+					DASSERT(false);
+					return 0;
+				}
+				void set(int value)
+				{
+					if (value == 0)
+						rbVideoCopy->Checked = true;
+					else if (value == 1)
+						rbVideoH265->Checked = true;
+					else if (value == 2)
+						rbVideoVp9->Checked = true;
+					else if (value == 3)
+						rbVideoAV1->Checked = true;
+					else
+						DASSERT(false);
 				}
 			}
 		protected:
@@ -51,7 +133,9 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::Button^ btnCancel;
 		internal: System::Windows::Forms::RadioButton^ rbVideoCopy;
 		private: System::Windows::Forms::ComboBox^ cmbEncodeType;
-		internal: System::Windows::Forms::RadioButton^ rbAV1;
+internal: System::Windows::Forms::RadioButton^ rbVideoAV1;
+private:
+
 		internal:
 		private:
 
@@ -78,7 +162,7 @@ namespace Ambiesoft {
 			{
 				System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(TargetCodecDialog::typeid));
 				this->groupVideoCodec = (gcnew System::Windows::Forms::GroupBox());
-				this->rbAV1 = (gcnew System::Windows::Forms::RadioButton());
+				this->rbVideoAV1 = (gcnew System::Windows::Forms::RadioButton());
 				this->rbVideoVp9 = (gcnew System::Windows::Forms::RadioButton());
 				this->rbVideoCopy = (gcnew System::Windows::Forms::RadioButton());
 				this->rbVideoH265 = (gcnew System::Windows::Forms::RadioButton());
@@ -96,19 +180,19 @@ namespace Ambiesoft {
 				// groupVideoCodec
 				// 
 				resources->ApplyResources(this->groupVideoCodec, L"groupVideoCodec");
-				this->groupVideoCodec->Controls->Add(this->rbAV1);
+				this->groupVideoCodec->Controls->Add(this->rbVideoAV1);
 				this->groupVideoCodec->Controls->Add(this->rbVideoVp9);
 				this->groupVideoCodec->Controls->Add(this->rbVideoCopy);
 				this->groupVideoCodec->Controls->Add(this->rbVideoH265);
 				this->groupVideoCodec->Name = L"groupVideoCodec";
 				this->groupVideoCodec->TabStop = false;
 				// 
-				// rbAV1
+				// rbVideoAV1
 				// 
-				resources->ApplyResources(this->rbAV1, L"rbAV1");
-				this->rbAV1->Name = L"rbAV1";
-				this->rbAV1->TabStop = true;
-				this->rbAV1->UseVisualStyleBackColor = true;
+				resources->ApplyResources(this->rbVideoAV1, L"rbVideoAV1");
+				this->rbVideoAV1->Name = L"rbVideoAV1";
+				this->rbVideoAV1->TabStop = true;
+				this->rbVideoAV1->UseVisualStyleBackColor = true;
 				// 
 				// rbVideoVp9
 				// 
@@ -203,6 +287,8 @@ namespace Ambiesoft {
 				this->ShowIcon = false;
 				this->ShowInTaskbar = false;
 				this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &TargetCodecDialog::TargetCodecDialog_FormClosing);
+				this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &TargetCodecDialog::TargetCodecDialog_FormClosed);
+				this->Load += gcnew System::EventHandler(this, &TargetCodecDialog::TargetCodecDialog_Load);
 				this->groupVideoCodec->ResumeLayout(false);
 				this->groupVideoCodec->PerformLayout();
 				this->groupAudioCodec->ResumeLayout(false);
@@ -215,7 +301,9 @@ namespace Ambiesoft {
 			System::Void CmbEncodeType_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
 			System::Void BtnOK_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void TargetCodecDialog_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
+			System::Void TargetCodecDialog_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e);
+			System::Void TargetCodecDialog_Load(System::Object^ sender, System::EventArgs^ e);
 
-		};
+};
 	}
 }

@@ -117,352 +117,352 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>194, 272</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rbAudioAac.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="&gt;&gt;rbAudioAac.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupAudioCodec.Text" xml:space="preserve">
-    <value>Audio Codec</value>
-  </data>
-  <data name="cmbEncodeType.TabIndex" type="System.Int32, mscorlib">
-    <value>100</value>
-  </data>
-  <data name="rbAudioAac.TabIndex" type="System.Int32, mscorlib">
-    <value>900</value>
-  </data>
-  <data name="rbVideoH265.TabIndex" type="System.Int32, mscorlib">
-    <value>400</value>
-  </data>
-  <data name="rbVideoVp9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 16</value>
-  </data>
-  <data name="rbVideoH265.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 39</value>
-  </data>
-  <data name="&gt;&gt;rbVideoVp9.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
-    <value>btnOK</value>
-  </data>
-  <data name="rbAudioCopy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rbAudioCopy.Name" xml:space="preserve">
-    <value>rbAudioCopy</value>
-  </data>
-  <data name="&gt;&gt;cmbEncodeType.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="groupAudioCodec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 92</value>
-  </data>
-  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>1200</value>
-  </data>
-  <data name="rbVideoCopy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
-  </data>
-  <data name="&gt;&gt;groupAudioCodec.Name" xml:space="preserve">
-    <value>groupAudioCodec</value>
-  </data>
-  <data name="rbAudioOpus.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rbAudioAac.Text" xml:space="preserve">
-    <value>&amp;aac</value>
-  </data>
-  <data name="&gt;&gt;rbVideoH265.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="rbVideoH265.Text" xml:space="preserve">
-    <value>&amp;hevc (h265)</value>
-  </data>
-  <data name="groupVideoCodec.Text" xml:space="preserve">
-    <value>Video Codec</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>313, 296</value>
-  </data>
-  <data name="&gt;&gt;rbAV1.Parent" xml:space="preserve">
-    <value>groupVideoCodec</value>
-  </data>
-  <data name="groupAudioCodec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 152</value>
-  </data>
-  <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 21</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
-  </data>
-  <data name="rbAV1.TabIndex" type="System.Int32, mscorlib">
-    <value>600</value>
-  </data>
-  <data name="rbAudioCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 16</value>
-  </data>
-  <data name="&gt;&gt;rbVideoH265.Name" xml:space="preserve">
-    <value>rbVideoH265</value>
-  </data>
-  <data name="&gt;&gt;groupVideoCodec.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="rbAV1.Text" xml:space="preserve">
-    <value>&amp;av1</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterParent</value>
-  </data>
-  <data name="btnCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="&gt;&gt;groupAudioCodec.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;rbAudioOpus.Parent" xml:space="preserve">
-    <value>groupAudioCodec</value>
-  </data>
-  <data name="rbVideoVp9.Text" xml:space="preserve">
-    <value>&amp;vp9</value>
-  </data>
-  <data name="cmbEncodeType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="rbVideoCopy.Text" xml:space="preserve">
-    <value>&amp;copy</value>
-  </data>
-  <data name="rbVideoCopy.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rbAudioAac.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 39</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupVideoCodec.Name" xml:space="preserve">
-    <value>groupVideoCodec</value>
-  </data>
-  <data name="&gt;&gt;rbAV1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="groupAudioCodec.TabIndex" type="System.Int32, mscorlib">
-    <value>700</value>
-  </data>
-  <data name="rbAV1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rbAudioAac.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 16</value>
-  </data>
-  <data name="rbAudioOpus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 60</value>
-  </data>
-  <data name="&gt;&gt;rbVideoVp9.Name" xml:space="preserve">
-    <value>rbVideoVp9</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
-    <value>btnCancel</value>
-  </data>
-  <data name="cmbEncodeType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>18, 11</value>
-  </data>
-  <data name="rbVideoH265.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 16</value>
-  </data>
-  <data name="&gt;&gt;cmbEncodeType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rbAudioAac.Name" xml:space="preserve">
-    <value>rbAudioAac</value>
-  </data>
   <data name="groupVideoCodec.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;rbAudioCopy.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 269</value>
-  </data>
-  <data name="&gt;&gt;rbAV1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="rbVideoH265.AutoSize" type="System.Boolean, mscorlib">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="rbVideoAV1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="groupAudioCodec.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="rbVideoAV1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>180, 20</value>
   </data>
-  <data name="&gt;&gt;rbVideoCopy.Name" xml:space="preserve">
-    <value>rbVideoCopy</value>
+  <data name="rbVideoAV1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 17</value>
   </data>
-  <data name="&gt;&gt;rbAudioAac.Type" xml:space="preserve">
+  <data name="rbVideoAV1.TabIndex" type="System.Int32, mscorlib">
+    <value>600</value>
+  </data>
+  <data name="rbVideoAV1.Text" xml:space="preserve">
+    <value>&amp;av1</value>
+  </data>
+  <data name="&gt;&gt;rbVideoAV1.Name" xml:space="preserve">
+    <value>rbVideoAV1</value>
+  </data>
+  <data name="&gt;&gt;rbVideoAV1.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 269</value>
+  <data name="&gt;&gt;rbVideoAV1.Parent" xml:space="preserve">
+    <value>groupVideoCodec</value>
   </data>
-  <data name="&gt;&gt;cmbEncodeType.Name" xml:space="preserve">
-    <value>cmbEncodeType</value>
-  </data>
-  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="rbAudioOpus.TabIndex" type="System.Int32, mscorlib">
-    <value>1000</value>
-  </data>
-  <data name="&gt;&gt;rbVideoCopy.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 21</value>
-  </data>
-  <data name="&gt;&gt;rbAudioCopy.Parent" xml:space="preserve">
-    <value>groupAudioCodec</value>
+  <data name="&gt;&gt;rbVideoAV1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="rbVideoVp9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="groupVideoCodec.TabIndex" type="System.Int32, mscorlib">
-    <value>200</value>
+  <data name="rbVideoVp9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 65</value>
+  </data>
+  <data name="rbVideoVp9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 17</value>
   </data>
   <data name="rbVideoVp9.TabIndex" type="System.Int32, mscorlib">
     <value>500</value>
   </data>
-  <data name="&gt;&gt;groupAudioCodec.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="rbVideoVp9.Text" xml:space="preserve">
+    <value>&amp;vp9</value>
   </data>
-  <data name="rbAudioCopy.Text" xml:space="preserve">
-    <value>c&amp;opy</value>
-  </data>
-  <data name="cmbEncodeType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>283, 20</value>
-  </data>
-  <data name="rbVideoCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 16</value>
-  </data>
-  <data name="rbAudioOpus.Text" xml:space="preserve">
-    <value>&amp;opus</value>
-  </data>
-  <data name="&gt;&gt;groupVideoCodec.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;rbVideoCopy.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="rbAudioCopy.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="btnOK.Text" xml:space="preserve">
-    <value>&amp;OK</value>
-  </data>
-  <data name="&gt;&gt;rbVideoCopy.Parent" xml:space="preserve">
-    <value>groupVideoCodec</value>
+  <data name="&gt;&gt;rbVideoVp9.Name" xml:space="preserve">
+    <value>rbVideoVp9</value>
   </data>
   <data name="&gt;&gt;rbVideoVp9.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;rbVideoVp9.Parent" xml:space="preserve">
+    <value>groupVideoCodec</value>
+  </data>
+  <data name="&gt;&gt;rbVideoVp9.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rbVideoCopy.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbVideoCopy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 20</value>
+  </data>
+  <data name="rbVideoCopy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
   <data name="rbVideoCopy.TabIndex" type="System.Int32, mscorlib">
     <value>300</value>
   </data>
-  <data name="&gt;&gt;rbAudioCopy.Type" xml:space="preserve">
+  <data name="rbVideoCopy.Text" xml:space="preserve">
+    <value>&amp;copy</value>
+  </data>
+  <data name="&gt;&gt;rbVideoCopy.Name" xml:space="preserve">
+    <value>rbVideoCopy</value>
+  </data>
+  <data name="&gt;&gt;rbVideoCopy.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmbEncodeType.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;rbVideoCopy.Parent" xml:space="preserve">
+    <value>groupVideoCodec</value>
   </data>
-  <data name="rbAudioCopy.TabIndex" type="System.Int32, mscorlib">
-    <value>800</value>
-  </data>
-  <data name="rbVideoVp9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 60</value>
-  </data>
-  <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rbVideoCopy.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="rbVideoH265.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbVideoH265.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="rbVideoH265.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 17</value>
+  </data>
+  <data name="rbVideoH265.TabIndex" type="System.Int32, mscorlib">
+    <value>400</value>
+  </data>
+  <data name="rbVideoH265.Text" xml:space="preserve">
+    <value>&amp;hevc (h265)</value>
+  </data>
+  <data name="&gt;&gt;rbVideoH265.Name" xml:space="preserve">
+    <value>rbVideoH265</value>
   </data>
   <data name="&gt;&gt;rbVideoH265.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupAudioCodec.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rbAudioAac.Parent" xml:space="preserve">
-    <value>groupAudioCodec</value>
-  </data>
-  <data name="&gt;&gt;rbAudioOpus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rbAudioOpus.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnCancel.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Encoding Method</value>
-  </data>
-  <data name="rbAudioOpus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 16</value>
-  </data>
-  <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
-    <value>1100</value>
-  </data>
   <data name="&gt;&gt;rbVideoH265.Parent" xml:space="preserve">
     <value>groupVideoCodec</value>
   </data>
+  <data name="&gt;&gt;rbVideoH265.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="groupVideoCodec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 54</value>
+    <value>12, 59</value>
   </data>
-  <data name="&gt;&gt;rbAV1.Name" xml:space="preserve">
-    <value>rbAV1</value>
+  <data name="groupVideoCodec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 100</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>TargetCodecDialog</value>
+  <data name="groupVideoCodec.TabIndex" type="System.Int32, mscorlib">
+    <value>200</value>
   </data>
-  <data name="rbAV1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 16</value>
+  <data name="groupVideoCodec.Text" xml:space="preserve">
+    <value>Video Codec</value>
   </data>
-  <data name="&gt;&gt;rbAudioOpus.Name" xml:space="preserve">
-    <value>rbAudioOpus</value>
-  </data>
-  <data name="rbAV1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 18</value>
-  </data>
-  <data name="&gt;&gt;rbVideoVp9.Parent" xml:space="preserve">
+  <data name="&gt;&gt;groupVideoCodec.Name" xml:space="preserve">
     <value>groupVideoCodec</value>
   </data>
   <data name="&gt;&gt;groupVideoCodec.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="groupVideoCodec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 92</value>
+  <data name="&gt;&gt;groupVideoCodec.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupVideoCodec.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="groupAudioCodec.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="rbAudioOpus.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbAudioOpus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 65</value>
+  </data>
+  <data name="rbAudioOpus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
+  <data name="rbAudioOpus.TabIndex" type="System.Int32, mscorlib">
+    <value>1000</value>
+  </data>
+  <data name="rbAudioOpus.Text" xml:space="preserve">
+    <value>&amp;opus</value>
+  </data>
+  <data name="&gt;&gt;rbAudioOpus.Name" xml:space="preserve">
+    <value>rbAudioOpus</value>
+  </data>
+  <data name="&gt;&gt;rbAudioOpus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbAudioOpus.Parent" xml:space="preserve">
+    <value>groupAudioCodec</value>
+  </data>
+  <data name="&gt;&gt;rbAudioOpus.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rbAudioAac.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbAudioAac.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="rbAudioAac.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 17</value>
+  </data>
+  <data name="rbAudioAac.TabIndex" type="System.Int32, mscorlib">
+    <value>900</value>
+  </data>
+  <data name="rbAudioAac.Text" xml:space="preserve">
+    <value>&amp;aac</value>
+  </data>
+  <data name="&gt;&gt;rbAudioAac.Name" xml:space="preserve">
+    <value>rbAudioAac</value>
+  </data>
+  <data name="&gt;&gt;rbAudioAac.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbAudioAac.Parent" xml:space="preserve">
+    <value>groupAudioCodec</value>
+  </data>
+  <data name="&gt;&gt;rbAudioAac.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rbAudioCopy.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbAudioCopy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 20</value>
+  </data>
+  <data name="rbAudioCopy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 17</value>
+  </data>
+  <data name="rbAudioCopy.TabIndex" type="System.Int32, mscorlib">
+    <value>800</value>
+  </data>
+  <data name="rbAudioCopy.Text" xml:space="preserve">
+    <value>c&amp;opy</value>
+  </data>
+  <data name="&gt;&gt;rbAudioCopy.Name" xml:space="preserve">
+    <value>rbAudioCopy</value>
+  </data>
+  <data name="&gt;&gt;rbAudioCopy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbAudioCopy.Parent" xml:space="preserve">
+    <value>groupAudioCodec</value>
+  </data>
+  <data name="&gt;&gt;rbAudioCopy.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="groupAudioCodec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 165</value>
+  </data>
+  <data name="groupAudioCodec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 100</value>
+  </data>
+  <data name="groupAudioCodec.TabIndex" type="System.Int32, mscorlib">
+    <value>700</value>
+  </data>
+  <data name="groupAudioCodec.Text" xml:space="preserve">
+    <value>Audio Codec</value>
+  </data>
+  <data name="&gt;&gt;groupAudioCodec.Name" xml:space="preserve">
+    <value>groupAudioCodec</value>
+  </data>
+  <data name="&gt;&gt;groupAudioCodec.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupAudioCodec.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupAudioCodec.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="btnOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>145, 291</value>
+  </data>
+  <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
+    <value>1100</value>
+  </data>
+  <data name="btnOK.Text" xml:space="preserve">
+    <value>&amp;OK</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Name" xml:space="preserve">
+    <value>btnOK</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnOK.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btnCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>226, 291</value>
+  </data>
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>1200</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>&amp;Cancel</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+    <value>btnCancel</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cmbEncodeType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="cmbEncodeType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 12</value>
+  </data>
+  <data name="cmbEncodeType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>283, 21</value>
+  </data>
+  <data name="cmbEncodeType.TabIndex" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="&gt;&gt;cmbEncodeType.Name" xml:space="preserve">
+    <value>cmbEncodeType</value>
+  </data>
+  <data name="&gt;&gt;cmbEncodeType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbEncodeType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmbEncodeType.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>313, 321</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>194, 291</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Encoding Method</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>TargetCodecDialog</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
