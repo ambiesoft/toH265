@@ -33,7 +33,7 @@ namespace Ambiesoft {
 			lvInputs->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragEnter);
 			lvInputs->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragOver);
 			lvInputs->AllowDrop = true;
-		
+			lvInputs->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &FormMain::OnColumnClick);
 			for each (ColumnItem^ ci in ColumnItems)
 			{
 				lvInputs->Columns->Add(ci->Key, ci->Text, ci->Width);
@@ -131,7 +131,16 @@ namespace Ambiesoft {
 
 		}
 
+		void FormMain::OnColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e)
+		{
+			bSortRev_ = !bSortRev_;
+			sortColumn_ = e->Column;
+			lvInputs->ListViewItemSorter = this;
+			lvInputs->Sort();
+		}
 
 	}
 }
+
+
 

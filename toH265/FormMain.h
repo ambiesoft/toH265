@@ -26,20 +26,30 @@ namespace Ambiesoft {
 		///          the designers will not be able to interact properly with localized
 		///          resources associated with this form.
 		/// </summary>
-		public ref class FormMain : public System::Windows::Forms::Form
+		public ref class FormMain : public 
+			System::Windows::Forms::Form,
+			public System::Collections::IComparer
 		{
 			ref class ColumnItem
 			{
+			public:
+				enum class SORTTYPE {
+					SORT_INT,
+					SORT_STRING,
+					SORT_ISTRING,
+				};
+			private:
 				String^ key_;
 				String^ text_;
 				int width_;
+				SORTTYPE sorttype_;
+
 			public:
-				ColumnItem(String^ key, String^ text, int width):
+				ColumnItem(String^ key, String^ text, int width, SORTTYPE sorttype) :
 					key_(key),
 					text_(text),
-					width_(width){}
-				ColumnItem(String^ key, String^ text) :
-					ColumnItem(key, text, 50) {}
+					width_(width),
+					sorttype_(sorttype){}
 				property String^ Key
 				{
 					String^ get() {
@@ -58,17 +68,34 @@ namespace Ambiesoft {
 						return width_;
 					}
 				}
+				int Compare(ListViewItem::ListViewSubItem^ x, ListViewItem::ListViewSubItem^ y)
+				{
+					switch (sorttype_)
+					{
+					case SORTTYPE::SORT_INT:
+						int ix, iy;
+						int::TryParse(x->Text, ix);
+						int::TryParse(y->Text, iy);
+						return ix - iy;
+					case SORTTYPE::SORT_STRING:
+						return String::Compare(x->Text, y->Text);
+					case SORTTYPE::SORT_ISTRING:
+						return String::Compare(x->Text, y->Text, true);
+					}
+					DASSERT(false);
+					return 0;
+				}
 			};
-			static initonly array<ColumnItem^>^ ColumnItems = gcnew array<ColumnItem^> { 
-				gcnew ColumnItem{ "main", "", 0},
-				gcnew ColumnItem{ "directory", I18N("Directory"), 150 },
-				gcnew ColumnItem{ "filename", I18N("Filename"), 150 },
-				gcnew ColumnItem{ "size", I18N("Size") },
-				gcnew ColumnItem{ "aspect", I18N("Aspect Ratio") },
-				gcnew ColumnItem{ "format", I18N("Format") },
-				gcnew ColumnItem{ "vcodec", I18N("Video") },
-				gcnew ColumnItem{ "acodec", I18N("Audio") },
-				gcnew ColumnItem{ "duration", I18N("Duration") },
+			static initonly array<ColumnItem^>^ ColumnItems = gcnew array<ColumnItem^> {
+				gcnew ColumnItem{ "main", "", 0, ColumnItem::SORTTYPE::SORT_STRING},
+					gcnew ColumnItem{ "directory", I18N("Directory"), 150, ColumnItem::SORTTYPE::SORT_ISTRING },
+					gcnew ColumnItem{ "filename", I18N("Filename"), 150, ColumnItem::SORTTYPE::SORT_ISTRING },
+					gcnew ColumnItem{ "size", I18N("Size"), 50, ColumnItem::SORTTYPE::SORT_INT },
+					gcnew ColumnItem{ "aspect", I18N("Aspect Ratio"), 50, ColumnItem::SORTTYPE::SORT_ISTRING },
+					gcnew ColumnItem{ "format", I18N("Format"),50,ColumnItem::SORTTYPE::SORT_ISTRING },
+					gcnew ColumnItem{ "vcodec", I18N("Video"),50,ColumnItem::SORTTYPE::SORT_ISTRING },
+					gcnew ColumnItem{ "acodec", I18N("Audio"),50,ColumnItem::SORTTYPE::SORT_ISTRING },
+					gcnew ColumnItem{ "duration", I18N("Duration") ,50,ColumnItem::SORTTYPE::SORT_INT },
 			};
 
 			CpuAffinity cpuAffinity_;
@@ -83,7 +110,7 @@ namespace Ambiesoft {
 			literal String^ SECTION_COLUMNS = L"Columns";
 			literal String^ SECTION_CPUAFFINITY = L"CpuAffinity";
 			literal String^ SECTION_TARGETCODECDIALOG = L"TargetCodecDialog";
-			
+
 			literal String^ KEY_FFPROBE = L"ffprobe";
 			literal String^ KEY_FFMPEG = L"ffmpeg";
 			literal String^ KEY_PROCESS_BACKGROUND = L"processbackground";
@@ -136,13 +163,13 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::ToolStripStatusLabel^ slDuration;
 		private: System::Windows::Forms::ToolStripStatusLabel^ slAudioCodec;
 
-	
 
-		private: System::Windows::Forms::ToolStripSeparator^  toolStripMenuItem3;
+
+		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem3;
 		public:
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiLanguage;
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiLanguageOSDefault;
-		private: System::Windows::Forms::ToolStripMenuItem^  tsmiLanguageEnglish;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguage;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageOSDefault;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageEnglish;
 
 
 
@@ -150,8 +177,8 @@ namespace Ambiesoft {
 
 
 		private: System::Windows::Forms::TextBox^ txtFFMpegArg;
-		private: System::Windows::Forms::Panel^  panelList;
-		private: System::Windows::Forms::SplitContainer^  splitRoot;
+		private: System::Windows::Forms::Panel^ panelList;
+		private: System::Windows::Forms::SplitContainer^ splitRoot;
 		private: System::Windows::Forms::ToolStripStatusLabel^ slFormat;
 		private: System::Windows::Forms::ContextMenuStrip^ cmList;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiRemoveFromList;
@@ -161,21 +188,21 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiOpenOutput;
 		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem5;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenInputLocations;
-private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenOutputLocation;
-private: System::Windows::Forms::ToolStripMenuItem^ tsmiProcessAfterFinish;
-private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnabledtsmiProcessAfterFinish;
-private: System::Windows::Forms::ToolStripMenuItem^ tsmiProcesstsmiProcessAfterFinish;
-private: System::Windows::Forms::ToolStripMenuItem^ tsmiCPUAffinity;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiNotifyOpenOutputLocation;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiProcessAfterFinish;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnabledtsmiProcessAfterFinish;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiProcesstsmiProcessAfterFinish;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiCPUAffinity;
 
-private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem6;
-private: System::Windows::Forms::ToolStripMenuItem^ tsmiCPUAffinityEnable;
-private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinity;
-private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem7;
+		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem6;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiCPUAffinityEnable;
+		private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinity;
+		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem7;
 
 
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageJapanese;
 
-			
+
 		public:
 			FormMain(void);
 
@@ -211,6 +238,18 @@ private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem7;
 			void InitializeComponent(void);
 #pragma endregion
 
+		public:
+			bool bSortRev_;
+			int sortColumn_;
+			virtual int Compare(Object^ x, Object^ y)
+			{
+				DASSERT_IS_CLASS(x, ListViewItem);
+				DASSERT_IS_CLASS(y, ListViewItem);
+				ColumnItem^ ci = ColumnItems[sortColumn_];
+
+				return ci->Compare(((ListViewItem^)x)->SubItems[sortColumn_]
+					, ((ListViewItem^)y)->SubItems[sortColumn_]);
+			}
 
 
 		protected:
@@ -268,7 +307,7 @@ private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem7;
 				Unknown,
 			};
 			// System::Text::RegularExpressions::Regex^ regFFMpeg_;
-			
+
 			String^ tempFile_;
 
 			System::Drawing::Icon^ iconBlue_;
@@ -299,7 +338,7 @@ private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem7;
 					SetCodecStatusText();
 				}
 			}
-	
+
 
 
 			AVCodec^ outputAudioCodec_ = gcnew AVCodec();
@@ -458,8 +497,8 @@ private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem7;
 			System::Void FormMain_OnTest(System::Object^ sender, System::EventArgs^ e);
 #endif
 
-			System::Void tsmiLanguageCommon_Click(System::Object^  sender, System::EventArgs^  e);
-			System::Void tsmiLanguage_DropDownOpening(System::Object^  sender, System::EventArgs^  e);
+			System::Void tsmiLanguageCommon_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiLanguage_DropDownOpening(System::Object^ sender, System::EventArgs^ e);
 
 			System::Void TsmiRemoveFromList_Click(System::Object^ sender, System::EventArgs^ e);
 
@@ -474,9 +513,10 @@ private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem7;
 			System::Void tsmiCPUAffinityEnable_Click(System::Object^ sender, System::EventArgs^ e);
 
 			void OnTick(System::Object^ sender, System::EventArgs^ e);
+			void OnColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e);
 };
 
-		
+
 
 		public ref class WaitCursor
 		{
@@ -486,6 +526,6 @@ private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem7;
 			WaitCursor();
 			~WaitCursor();
 		};
-	}
 
+	}
 }
