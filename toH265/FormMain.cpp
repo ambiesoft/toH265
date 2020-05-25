@@ -477,7 +477,7 @@ namespace Ambiesoft {
 			} while (false);
 			return I18N("Unknown");
 		}
-		void FormMain::UpdateTitleTS(TimeSpan tsProgress, double speed)
+		void FormMain::UpdateTitleTS(TimeSpan tsProgress)
 		{
 			// for culculating eta
 			ElapseInfo^ lastElapse = gcnew ElapseInfo(tsProgress.TotalMilliseconds);
@@ -538,7 +538,7 @@ namespace Ambiesoft {
 				double dblSpeed;
 				if (FFMpegHelper::GetInfoFromFFMpegoutput(text, tsTime, dblSpeed))
 				{
-					UpdateTitleTS(tsTime, dblSpeed);
+					UpdateTitleTS(tsTime);
 					if (this->WindowState != FormWindowState::Minimized)
 					{
 						txtLogOut->Text = text;

@@ -429,7 +429,7 @@ namespace Ambiesoft {
 			void SetStatusText(STATUSTEXT ss, String^ supplement);
 
 			// bool GetInfoFromFFMpegoutput(String^ text, TimeSpan% tsTime, double% dblSpeed);
-			void UpdateTitleTS(TimeSpan ts, double speed);
+			void UpdateTitleTS(TimeSpan ts);
 			void UpdateTitleComplete();
 			String^ buildTitleText(int percent, bool bFilenameOnly);
 			void UpdateTitle();
