@@ -695,8 +695,8 @@ namespace Ambiesoft {
 						String^ outputtedVC = String::Empty;
 						System::Drawing::Size outputtedAspect;
 						TimeSpan outputtedTS;
-						LONGLONG inputSize;
-						LONGLONG outputtedSize;
+						LONGLONG inputSize = 0;
+						LONGLONG outputtedSize = 0;
 
 						try
 						{
