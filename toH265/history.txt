@@ -1,3 +1,7 @@
+2020/07/03 ver1.0.45
+Preserve cpuaffinity after it has been changed.
+Add 'Clear All But Zero' to CpuAffinity menu.
+
 2020/06/14 ver1.0.44
 'inputSize' is initialized with '0'
 

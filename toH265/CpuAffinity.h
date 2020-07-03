@@ -47,6 +47,10 @@ namespace Ambiesoft {
 				else
 					cpuAffinity_ &= ~(1LL << cpunum);
 			}
+			void ClearAllButZero()
+			{
+				cpuAffinity_ = 1LL;
+			}
 			System::UInt64 Value() 
 			{
 				return cpuAffinity_;

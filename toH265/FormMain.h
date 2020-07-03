@@ -196,8 +196,12 @@ namespace Ambiesoft {
 
 		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem6;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiCPUAffinityEnable;
-		private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinity;
+private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinityBegin;
+
 		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem7;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiClearAllButZero;
+private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinityEnd;
+
 
 
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageJapanese;
@@ -514,6 +518,7 @@ namespace Ambiesoft {
 
 			void OnTick(System::Object^ sender, System::EventArgs^ e);
 			void OnColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e);
+			System::Void tsmiClearAllButZero_Click(System::Object^ sender, System::EventArgs^ e);
 };
 
 
