@@ -756,7 +756,10 @@ namespace Ambiesoft {
 			{
 				SetPriorityClass(GetCurrentProcess(), PROCESS_MODE_BACKGROUND_END);
 			}
-
+			else if (tsmiPriorityBelowNormal->Checked)
+			{
+				OnMenuPriorityCommon(FFMpegPriority::BelowNormal);
+			}
 			timerSetAffinity_ = gcnew System::Windows::Forms::Timer();
 			timerSetAffinity_->Interval = 5 * 1000;
 			timerSetAffinity_->Enabled = true;
@@ -1429,6 +1432,11 @@ namespace Ambiesoft {
 		System::Void FormMain::tsmiClearAllButZero_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			cpuAffinity_.ClearAllButZero();
+			tsmiCPUAffinityEnable_Click(nullptr, nullptr);
+		}
+		System::Void FormMain::tsmiEnableAll_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			cpuAffinity_.EnableAll();
 			tsmiCPUAffinityEnable_Click(nullptr, nullptr);
 		}
 		void FormMain::OnToggleCPU(System::Object^ sender, System::EventArgs^ e)

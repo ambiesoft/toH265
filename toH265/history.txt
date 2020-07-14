@@ -1,3 +1,6 @@
+2020/07/15 ver1.0.46
+ProcessPriority 'BelowNormal' added
+
 2020/07/03 ver1.0.45
 Preserve cpuaffinity after it has been changed.
 Add 'Clear All But Zero' to CpuAffinity menu.

@@ -17,7 +17,18 @@ namespace Ambiesoft {
 
 		using namespace Newtonsoft::Json::Linq;
 
-		void FormMain::OnMenuPriorityCommon(bool bBackground)
+		String^ FormMain::getWinnicewArg(FFMpegPriority ffmpegPriority)
+		{
+			switch (ffmpegPriority)
+			{
+			case FFMpegPriority::Normal:		return L"--all-normal";
+			case FFMpegPriority::BelowNormal:	return L"--all-belownormal";
+			case FFMpegPriority::Background:	return L"--all-idle";
+			}
+			DASSERT(false);
+			return String::Empty;
+		}
+		void FormMain::OnMenuPriorityCommon(FFMpegPriority ffmpegPriority)
 		{
 			switch (FFMpegState)
 			{
@@ -36,7 +47,7 @@ namespace Ambiesoft {
 				}
 
 				String^ arg = String::Format(L"{0} --pid {1}",
-					(bBackground ? L" --all-idle" : L" --all-normal"),
+					getWinnicewArg(ffmpegPriority),
 					pidFFMpeg_);
 
 				try
@@ -54,30 +65,74 @@ namespace Ambiesoft {
 			case TaskState::Unknown:
 				break;
 			}
-			if (bBackground)
-			{
-				tsmiPriorityNormal->Checked = false;
-				tsmiPriorityBackground->Checked = true;
-			}
-			else
-			{
-				tsmiPriorityNormal->Checked = true;
-				tsmiPriorityBackground->Checked = false;
-			}
 
-			if (!Profile::WriteBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, bBackground, Program::IniFile))
+			checkFFMpegPriority(ffmpegPriority);
+
+			if (!Profile::WriteString(
+				SECTION_OPTION, KEY_FFMPEG_PRIORITY, 
+				getFFMpegPriorityAsString(ffmpegPriority),
+				Program::IniFile))
 			{
 				CppUtils::Alert(I18N(STR_FAILED_TO_SAVE_SETTING));
 			}
 		}
 		System::Void FormMain::tsmiPriorityNormal_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			OnMenuPriorityCommon(false);
+			OnMenuPriorityCommon(FFMpegPriority::Normal);
+		}
+		System::Void FormMain::tsmiBelowNormal_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			OnMenuPriorityCommon(FFMpegPriority::BelowNormal);
 		}
 		System::Void FormMain::tsmiPriorityBackground_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			OnMenuPriorityCommon(true);
+			OnMenuPriorityCommon(FFMpegPriority::Background);
 		}
 
+		void FormMain::checkFFMpegPriority(FFMpegPriority ffmpegPriority)
+		{
+			tsmiPriorityNormal->Checked = false;
+			tsmiPriorityBelowNormal->Checked = false;
+			tsmiPriorityBackground->Checked = false;
+			switch (ffmpegPriority)
+			{
+			case FFMpegPriority::Normal:
+				tsmiPriorityNormal->Checked = true;
+				break;
+			case FFMpegPriority::BelowNormal:
+				tsmiPriorityBelowNormal->Checked = true;
+				break;
+			case FFMpegPriority::Background:
+				tsmiPriorityBackground->Checked = true;
+				break;
+			}
+		}
+		String^ FormMain::getFFMpegPriorityAsString(FFMpegPriority ffmpegPriority)
+		{
+			switch (ffmpegPriority)
+			{
+			case FFMpegPriority::Normal: return L"normal";
+			case FFMpegPriority::BelowNormal: return L"belownormal";
+			case FFMpegPriority::Background: return L"background";
+			}
+			DASSERT(false);
+			return String::Empty;
+		}
+		FormMain::FFMpegPriority FormMain::getFFMpegPriorityFromString(String^ priority)
+		{
+			if (String::Compare(priority, L"normal", true) == 0)
+			{
+				return FFMpegPriority::Normal;
+			}
+			if (String::Compare(priority, L"belownormal", true) == 0)
+			{
+				return FFMpegPriority::BelowNormal;
+			}
+			if (String::Compare(priority, L"background", true) == 0)
+			{
+				return FFMpegPriority::Background;
+			}
+			return FFMpegPriority::Normal;
+		}
 	}
 }

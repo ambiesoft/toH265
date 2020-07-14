@@ -76,12 +76,9 @@ namespace Ambiesoft {
 			DASSERT(ini);
 			bool boolval;
 			int intval;
-			Profile::GetBool(SECTION_OPTION, KEY_PROCESS_BACKGROUND, false, boolval, ini);
-			if (boolval)
-			{
-				tsmiPriorityNormal->Checked = false;
-				tsmiPriorityBackground->Checked = true;
-			}
+			String^ stringval;
+			Profile::GetString(SECTION_OPTION, KEY_FFMPEG_PRIORITY, String::Empty, stringval, ini);
+			checkFFMpegPriority(getFFMpegPriorityFromString(stringval));
 
 			Profile::GetBool(SECTION_OPTION, KEY_MINIMIZETOTRAY, false, boolval, ini);
 			tsmiMinimizeToTray->Checked = boolval;

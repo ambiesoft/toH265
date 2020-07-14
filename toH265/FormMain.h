@@ -113,7 +113,7 @@ namespace Ambiesoft {
 
 			literal String^ KEY_FFPROBE = L"ffprobe";
 			literal String^ KEY_FFMPEG = L"ffmpeg";
-			literal String^ KEY_PROCESS_BACKGROUND = L"processbackground";
+			literal String^ KEY_FFMPEG_PRIORITY = L"ffmpegpriority";
 			literal String^ KEY_MINIMIZETOTRAY = L"minimizetotray";
 			literal String^ KEY_CULTURE = L"culture";
 			literal String^ KEY_LISTVIEW_COLUMNS = L"columns";
@@ -201,6 +201,9 @@ private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinityBegin;
 		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem7;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiClearAllButZero;
 private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinityEnd;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnableAll;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiPriorityBelowNormal;
+
 
 
 
@@ -309,6 +312,11 @@ private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinityEnd;
 				Running,
 				Pausing,
 				Unknown,
+			};
+			enum class FFMpegPriority {
+				Normal,
+				BelowNormal,
+				Background,
 			};
 			// System::Text::RegularExpressions::Regex^ regFFMpeg_;
 
@@ -478,9 +486,14 @@ private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinityEnd;
 			System::Void tsmiOption_DropDownOpening(System::Object^ sender, System::EventArgs^ e);
 
 
+			String^ getWinnicewArg(FFMpegPriority ffmpegPriority);
+			void OnMenuPriorityCommon(FFMpegPriority ffmpegPriority);
+			void checkFFMpegPriority(FFMpegPriority ffmpegPriority);
+			String^ getFFMpegPriorityAsString(FFMpegPriority ffmpegPriority);
+			FFMpegPriority getFFMpegPriorityFromString(String^ priority);
 
-			void OnMenuPriorityCommon(bool bBackground);
 			System::Void tsmiPriorityNormal_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiBelowNormal_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiPriorityBackground_Click(System::Object^ sender, System::EventArgs^ e);
 
 			System::Void tsmiAbout_Click(System::Object^ sender, System::EventArgs^ e);
@@ -519,6 +532,10 @@ private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinityEnd;
 			void OnTick(System::Object^ sender, System::EventArgs^ e);
 			void OnColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e);
 			System::Void tsmiClearAllButZero_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiEnableAll_Click(System::Object^ sender, System::EventArgs^ e);
+
+
+
 };
 
 

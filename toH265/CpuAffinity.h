@@ -9,14 +9,17 @@ namespace Ambiesoft {
 		{
 			UINT64 cpuAffinity_;
 			static initonly int maxCpu = IntPtr::Size * 8;
-		public:
-			CpuAffinity(){
+			void init() {
 				cpuAffinity_ = 0;
 				int cpucount = Math::Min(maxCpu, Environment::ProcessorCount);
 				for (int i = 0; i < cpucount; ++i)
 				{
 					cpuAffinity_ |= (1LL << i);
 				}
+			}
+		public:
+			CpuAffinity(){
+				init();
 			}
 			bool Load(String^ section, HashIni^ ini)
 			{
@@ -50,6 +53,10 @@ namespace Ambiesoft {
 			void ClearAllButZero()
 			{
 				cpuAffinity_ = 1LL;
+			}
+			void EnableAll()
+			{
+				init();
 			}
 			System::UInt64 Value() 
 			{
