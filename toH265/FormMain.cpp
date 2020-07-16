@@ -1396,6 +1396,8 @@ namespace Ambiesoft {
 				tsmiCPUAffinity->DropDownItems->Insert(insertIndexBegin++, item);
 			}
 			tsmiClearAllButZero->Enabled = tsmiCPUAffinityEnable->Checked;
+			tsmiToggleAll->Enabled = tsmiCPUAffinityEnable->Checked;
+			tsmiEnableAll->Enabled = tsmiCPUAffinityEnable->Checked;
 		}
 		System::Void FormMain::tsmiCPUAffinityEnable_Click(System::Object^ sender, System::EventArgs^ e)
 		{
@@ -1437,6 +1439,11 @@ namespace Ambiesoft {
 		System::Void FormMain::tsmiEnableAll_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			cpuAffinity_.EnableAll();
+			tsmiCPUAffinityEnable_Click(nullptr, nullptr);
+		}
+		System::Void FormMain::tsmiToggleAll_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			cpuAffinity_.ToggleAll();
 			tsmiCPUAffinityEnable_Click(nullptr, nullptr);
 		}
 		void FormMain::OnToggleCPU(System::Object^ sender, System::EventArgs^ e)

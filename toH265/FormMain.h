@@ -203,6 +203,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiClearAllButZero;
 private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinityEnd;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnableAll;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiPriorityBelowNormal;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiToggleAll;
 
 
 
@@ -533,8 +534,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiPriorityBelowNormal;
 			void OnColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e);
 			System::Void tsmiClearAllButZero_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiEnableAll_Click(System::Object^ sender, System::EventArgs^ e);
-
-
+			System::Void tsmiToggleAll_Click(System::Object^ sender, System::EventArgs^ e);
 
 };
 

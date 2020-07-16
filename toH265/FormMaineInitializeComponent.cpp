@@ -68,6 +68,7 @@ namespace Ambiesoft {
             this->slVideoCodec = (gcnew System::Windows::Forms::ToolStripStatusLabel());
             this->slAudioCodec = (gcnew System::Windows::Forms::ToolStripStatusLabel());
             this->slDuration = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+            this->tsmiToggleAll = (gcnew System::Windows::Forms::ToolStripMenuItem());
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitRoot))->BeginInit();
             this->splitRoot->Panel1->SuspendLayout();
             this->splitRoot->Panel2->SuspendLayout();
@@ -255,9 +256,9 @@ namespace Ambiesoft {
             // 
             // tsmiCPUAffinity
             // 
-            this->tsmiCPUAffinity->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+            this->tsmiCPUAffinity->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
                 this->tsmiCPUAffinityEnable,
-                    this->tsmsCpuAffinityBegin, this->tsmsCpuAffinityEnd, this->tsmiEnableAll, this->tsmiClearAllButZero
+                    this->tsmsCpuAffinityBegin, this->tsmsCpuAffinityEnd, this->tsmiEnableAll, this->tsmiToggleAll, this->tsmiClearAllButZero
             });
             this->tsmiCPUAffinity->Name = L"tsmiCPUAffinity";
             resources->ApplyResources(this->tsmiCPUAffinity, L"tsmiCPUAffinity");
@@ -463,6 +464,12 @@ namespace Ambiesoft {
             // 
             this->slDuration->Name = L"slDuration";
             resources->ApplyResources(this->slDuration, L"slDuration");
+            // 
+            // tsmiToggleAll
+            // 
+            this->tsmiToggleAll->Name = L"tsmiToggleAll";
+            resources->ApplyResources(this->tsmiToggleAll, L"tsmiToggleAll");
+            this->tsmiToggleAll->Click += gcnew System::EventHandler(this, &FormMain::tsmiToggleAll_Click);
             // 
             // FormMain
             // 

@@ -9,10 +9,28 @@ namespace Ambiesoft {
 		{
 			UINT64 cpuAffinity_;
 			static initonly int maxCpu = IntPtr::Size * 8;
+			static property int CpuCount
+			{
+				int get()
+				{
+					return Math::Min(maxCpu, Environment::ProcessorCount);
+				}
+			}
+			static property UINT64 CpuBitMask
+			{
+				UINT64 get()
+				{
+					UINT64 ret = 0;
+					for (int i = 0; i < CpuCount; ++i)
+					{
+						ret |= (1LL << i);
+					}
+					return ret;
+				}
+			}
 			void init() {
 				cpuAffinity_ = 0;
-				int cpucount = Math::Min(maxCpu, Environment::ProcessorCount);
-				for (int i = 0; i < cpucount; ++i)
+				for (int i = 0; i < CpuCount; ++i)
 				{
 					cpuAffinity_ |= (1LL << i);
 				}
@@ -53,6 +71,12 @@ namespace Ambiesoft {
 			void ClearAllButZero()
 			{
 				cpuAffinity_ = 1LL;
+			}
+			void ToggleAll()
+			{
+				cpuAffinity_ = (~cpuAffinity_ & CpuBitMask);
+				if (cpuAffinity_ == 0)
+					cpuAffinity_ = 1;
 			}
 			void EnableAll()
 			{
