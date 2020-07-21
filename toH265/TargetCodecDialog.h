@@ -79,6 +79,13 @@ namespace Ambiesoft {
 						DASSERT(false);
 				}
 			}
+			property bool AudioCodecIntEnabled
+			{
+				bool get()
+				{
+					return groupAudioCodec->Enabled;
+				}
+			}
 			property int VideoCodecInt
 			{
 				int get()
@@ -106,6 +113,13 @@ namespace Ambiesoft {
 						rbVideoAV1->Checked = true;
 					else
 						DASSERT(false);
+				}
+			}
+			property bool VideoCodecIntEnabled
+			{
+				bool get()
+				{
+					return groupVideoCodec->Enabled;
 				}
 			}
 		protected:

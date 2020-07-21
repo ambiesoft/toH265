@@ -55,6 +55,15 @@ namespace Ambiesoft {
 			}
 			groupAudioCodec->Enabled = true;
 			groupVideoCodec->Enabled = true;
+
+			HashIni^ ini = Profile::ReadAll(iniPath_);
+			int v = -1;
+			Profile::GetInt(SECTION, KEY_AUIDOCODEC, -1, v, ini);
+			if (v != -1)
+				AudioCodecInt = v;
+			Profile::GetInt(SECTION, KEY_VIDEOCODEC, -1, v, ini);
+			if (v != -1)
+				VideoCodecInt = v;
 		}
 
 		System::Void TargetCodecDialog::TargetCodecDialog_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
@@ -73,8 +82,10 @@ namespace Ambiesoft {
 				return;
 			HashIni^ ini = Profile::ReadAll(IniPath);
 			Profile::WriteInt(SECTION, KEY_ENCODE_TYPE, cmbEncodeType->SelectedIndex, ini);
-			Profile::WriteInt(SECTION, KEY_AUIDOCODEC, AudioCodecInt, ini);
-			Profile::WriteInt(SECTION, KEY_VIDEOCODEC, VideoCodecInt, ini);
+			if(AudioCodecIntEnabled)
+				Profile::WriteInt(SECTION, KEY_AUIDOCODEC, AudioCodecInt, ini);
+			if(VideoCodecIntEnabled)
+				Profile::WriteInt(SECTION, KEY_VIDEOCODEC, VideoCodecInt, ini);
 
 			if (!Profile::WriteAll(ini, IniPath))
 			{

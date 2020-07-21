@@ -1,3 +1,6 @@
+2020/07/21 ver1.0.48
+save codec checks
+
 2020/07/17 ver1.0.47
 Toggle CPU affinity
 
