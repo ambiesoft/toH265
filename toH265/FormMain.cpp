@@ -665,6 +665,11 @@ namespace Ambiesoft {
 						HashIni^ ini = Profile::ReadAll(Program::IniFile);
 						DVERIFY(dlgAfterFinish_.LoadValues("AfterFinish", ini));
 
+						if (dlgAfterFinish_.chkPlaySound->Checked)
+						{
+							dlgAfterFinish_.PlayWav(true);
+						}
+
 						if (dlgAfterFinish_.chkOpenFolder->Checked)
 						{
 							// Show outputmovie in Explorer
@@ -1347,10 +1352,10 @@ namespace Ambiesoft {
 				return;
 			}
 
-			if (dlgAfterFinish_.chkPlaySound->Checked)
-			{
-				CppUtils::Alert("playsound not yet implemented");
-			}
+			//if (dlgAfterFinish_.chkPlaySound->Checked)
+			//{
+			//	CppUtils::Alert("playsound not yet implemented");
+			//}
 
 			if (!dlgAfterFinish_.SaveValues("AfterFinish", ini) || !Profile::WriteAll(ini, Program::IniFile))
 			{

@@ -1,3 +1,6 @@
+2020/08/01 ver1.0.49
+Add wav sound function
+
 2020/07/21 ver1.0.48
 save codec checks
 
