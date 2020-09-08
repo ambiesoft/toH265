@@ -171,7 +171,7 @@ namespace Ambiesoft {
 
 			lvInputs->Items->Add(lvi);
 		}
-		bool FormMain::CheckMovieAndSet(String^ moviefile, bool bSet)
+		bool FormMain::CheckMovieAndSet(String^ moviefile, bool bSet, bool bShowCodecAlert)
 		{
 			WaitCursor wc;
 			if (String::IsNullOrEmpty(moviefile))
@@ -231,15 +231,15 @@ namespace Ambiesoft {
 				String^ sformat = I18N(L"'{0}' already has a stream of {1}.");
 				if (String::Compare(videocodec, "hevc", true) == 0)
 				{
-					CppUtils::Alert(this, String::Format(sformat, moviefile, L"h265"));
+					if(bShowCodecAlert)
+						CppUtils::Alert(this, String::Format(sformat, moviefile, L"h265"));
 					ReturnValue = RETURN_STREAMISH265;
-					return false;
 				}
 				if (String::Compare(videocodec, "vp9", true) == 0)
 				{
-					CppUtils::Alert(this, String::Format(sformat, moviefile, L"vp9"));
+					if(bShowCodecAlert)
+						CppUtils::Alert(this, String::Format(sformat, moviefile, L"vp9"));
 					ReturnValue = RETURN_STREAMISVP9;
-					return false;
 				}
 
 				if (bSet)
@@ -360,7 +360,7 @@ namespace Ambiesoft {
 				return;
 
 			for each(String^ file in dlg.FileNames)
-				CheckMovieAndSet(file, true);
+				CheckMovieAndSet(file, true, false);
 		}
 
 		Object^ safeEndInvoke(System::Windows::Forms::Control^ c, IAsyncResult^ r, Object^ defRet)
@@ -946,7 +946,7 @@ namespace Ambiesoft {
 					CppUtils::Alert(this, I18N(L"input movie is empty."));
 					return;
 				}
-				if (!CheckMovieAndSet(inputmovie, false))
+				if (!CheckMovieAndSet(inputmovie, false, false))
 					return;
 			}
 
@@ -1317,7 +1317,7 @@ namespace Ambiesoft {
 			else
 			{
 				for each (ListViewItem ^ lvi in lvInputs->Items)
-					CheckMovieAndSet(GetMovieFileFromLvi(lvi), false);
+					CheckMovieAndSet(GetMovieFileFromLvi(lvi), false, false);
 			}
 		}
 

@@ -263,7 +263,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiToggleAll;
 		protected:
 			ListViewCustomReorder::ListViewEx^ lvInputs = gcnew ListViewCustomReorder::ListViewEx();
 
-			bool CheckMovieAndSet(String^ file, bool bSet);
+			bool CheckMovieAndSet(String^ file, bool bSet, bool bShowCodecAlert);
 
 
 			String^ ffprobe_;

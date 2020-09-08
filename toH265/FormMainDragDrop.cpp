@@ -41,7 +41,7 @@ namespace Ambiesoft {
 				cli::array<String^>^ ss = (cli::array<String^>^)e->Data->GetData(DataFormats::FileDrop, true);
 				for each (String ^ s in ss)
 				{
-					CheckMovieAndSet(s,true);
+					CheckMovieAndSet(s,true, true);
 				}
 			}
 		}

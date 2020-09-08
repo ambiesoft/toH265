@@ -22,7 +22,7 @@ namespace Ambiesoft {
 			ChangeStartButtonText(I18N(STR_BUTTONTEXT_START));
 
 			for each (String ^ file in Program::CmdMovieFiles)
-				CheckMovieAndSet(file, true);
+				CheckMovieAndSet(file, true, true);
 		}
 	}
 }

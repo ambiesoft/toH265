@@ -19,7 +19,7 @@ namespace Ambiesoft {
 				vc_ = VC::VC_COPY;
 			else if (codec == "h264")
 				vc_ = VC::VC_H264;
-			else if (codec == "h265")
+			else if (codec == "h265" || codec == "hevc")
 				vc_ = VC::VC_H265;
 			else if (codec == "opus")
 				vc_ = VC::VC_OPUS;
