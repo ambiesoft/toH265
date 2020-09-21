@@ -216,7 +216,7 @@
     <ClCompile Include="FormMainCtor.cpp" />
     <ClCompile Include="FormMainCulture.cpp" />
     <ClCompile Include="FormMainDragDrop.cpp" />
-    <ClCompile Include="FormMaineInitializeComponent.cpp" />
+    <ClCompile Include="FormMainInitializeComponent.cpp" />
     <ClCompile Include="FormMainEmpty.cpp" />
     <ClCompile Include="FormMainFFMpeg.cpp" />
     <ClCompile Include="FormMainLoad.cpp" />

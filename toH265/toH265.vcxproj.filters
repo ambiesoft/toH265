@@ -27,9 +27,6 @@
     <ClCompile Include="FormMain.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FormMaineInitializeComponent.cpp">
-      <Filter>2 Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="toH265.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
@@ -97,6 +94,9 @@
       <Filter>2 Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CpuAffinity.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FormMainInitializeComponent.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
   </ItemGroup>
