@@ -7,7 +7,7 @@
 #include "toH265.h"
 #include "helper.h"
 #include "TargetCodecDialog.h"
-
+#include "ContinueException.h"
 #include "FormMain.h"
 
 #pragma comment(lib, "shell32.lib")
@@ -104,8 +104,7 @@ namespace Ambiesoft {
 					{
 						if (nAudios > 1 || nVideos > 1)
 						{
-							audiocodec = videocodec = String::Empty;
-							throw gcnew Exception(I18N("Could not handle more than 1 audio or video streams."));
+							throw gcnew ContinueException(I18N("This video contains more than 1 audio or video streams."));
 							return;
 						}
 					}
@@ -213,6 +212,10 @@ namespace Ambiesoft {
 				try
 				{
 					GetStreamInfo(FFProbe, moviefile, format, audiocodec, videocodec, aspect, duration);
+				}
+				catch (ContinueException^ ex)
+				{
+					CppUtils::Alert(this, ex->Message);
 				}
 				catch (Exception ^ ex)
 				{

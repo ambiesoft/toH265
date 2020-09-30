@@ -208,6 +208,7 @@
     <ClCompile Include="..\..\lsMisc\OpenCommon.cpp" />
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="AVDuration.cpp" />
+    <ClCompile Include="ContinueException.cpp" />
     <ClCompile Include="CpuAffinity.cpp" />
     <ClCompile Include="ElapseInfo.cpp" />
     <ClCompile Include="FormMain.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="..\..\lsMisc\IsFileOpen.h" />
     <ClInclude Include="..\..\lsMisc\OpenCommon.h" />
     <ClInclude Include="AVDuration.h" />
+    <ClInclude Include="ContinueException.h" />
     <ClInclude Include="CpuAffinity.h" />
     <ClInclude Include="DebugMacro.h" />
     <ClInclude Include="ElapseInfo.h" />

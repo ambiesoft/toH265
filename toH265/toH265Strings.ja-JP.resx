@@ -282,4 +282,7 @@
   <data name="Video" xml:space="preserve">
     <value>映像</value>
   </data>
+  <data name="This video contains more than 1 audio or video streams." xml:space="preserve">
+    <value>このビデオには1つ以上の映像または音声が含まれています。</value>
+  </data>
 </root>
