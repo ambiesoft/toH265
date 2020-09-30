@@ -1,3 +1,7 @@
+2020/10/01 ver1.0.52
+Fix: When ffmpeg failed, the app crashes when it tries to set ffmpeg's process id.
+Add: Add codec 'ac3' and 'mpeg4'
+
 2020/09/30 ver1.0.51
 modify i18n
 Allow videos that contains more than 1 video or audio.

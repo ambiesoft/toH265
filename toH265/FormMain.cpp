@@ -786,8 +786,8 @@ namespace Ambiesoft {
 			delete timerSetAffinity_;
 			timerSetAffinity_ = nullptr;
 			tsmiCPUAffinityEnable_Click(nullptr, nullptr);
-			DASSERT(processFFMpeg_);
-			affinitySetProcess_ = processFFMpeg_->Id;
+			if(processFFMpeg_)
+				affinitySetProcess_ = processFFMpeg_->Id;
 		}
 
 		void FormMain::StartOfThread(Object^ obj)

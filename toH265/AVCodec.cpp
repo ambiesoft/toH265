@@ -43,6 +43,10 @@ namespace Ambiesoft {
 				vc_ = VC::VC_RV30;
 			else if (codec == "sipr")
 				vc_ = VC::VC_SIPR;
+			else if (codec == "ac3")
+				vc_ = VC::VC_AC3;
+			else if (codec == "mpeg4")
+				vc_ = VC::VC_MPEG4;
 			else
 			{
 				DASSERT(false);
@@ -71,6 +75,8 @@ namespace Ambiesoft {
 			case VC::VC_COOK:return "cook";
 			case VC::VC_RV30:return "rv30";
 			case VC::VC_SIPR:return "sipr";
+			case VC::VC_AC3:return "ac3";
+			case VC::VC_MPEG4:return "mpeg4";
 			case VC::VC_MIXED:return "mixed";
 			default:
 				DASSERT(false);

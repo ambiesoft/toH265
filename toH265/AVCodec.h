@@ -24,6 +24,8 @@ namespace Ambiesoft {
 				VC_COOK,
 				VC_RV30,
 				VC_SIPR,
+				VC_AC3,
+				VC_MPEG4,
 				VC_MIXED,
 			};
 		private:
