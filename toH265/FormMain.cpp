@@ -79,19 +79,25 @@ namespace Ambiesoft {
 					if (codec_type == "audio")
 					{
 						++nAudios;
-						audiocodec = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
+						if (nAudios == 1)
+						{
+							audiocodec = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
+						}
 					}
 					else if (codec_type == "video")
 					{
 						++nVideos;
-						videocodec = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
+						if (nVideos == 1)
+						{
+							videocodec = (String^)joutput->SelectToken(String::Format("streams[{0}].codec_name", i));
 
-						if (String::IsNullOrEmpty(myDuration))
-							myDuration = (String^)joutput->SelectToken(String::Format("streams[{0}].duration", i));
+							if (String::IsNullOrEmpty(myDuration))
+								myDuration = (String^)joutput->SelectToken(String::Format("streams[{0}].duration", i));
 
-						int width = (int)joutput->SelectToken(String::Format("streams[{0}].width", i));
-						int height = (int)joutput->SelectToken(String::Format("streams[{0}].height", i));
-						aspect = System::Drawing::Size(width, height);
+							int width = (int)joutput->SelectToken(String::Format("streams[{0}].width", i));
+							int height = (int)joutput->SelectToken(String::Format("streams[{0}].height", i));
+							aspect = System::Drawing::Size(width, height);
+						}
 					}
 
 					if (!String::IsNullOrEmpty(audiocodec) && !String::IsNullOrEmpty(videocodec))
