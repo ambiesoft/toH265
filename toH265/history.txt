@@ -1,3 +1,6 @@
+2020/12/28 ver1.0.53
+Add 'fps'
+
 2020/10/01 ver1.0.52
 Fix: When ffmpeg failed, the app crashes when it tries to set ffmpeg's process id.
 Add: Add codec 'ac3' and 'mpeg4'

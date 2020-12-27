@@ -96,6 +96,7 @@ namespace Ambiesoft {
 					gcnew ColumnItem{ "vcodec", I18N("Video"),50,ColumnItem::SORTTYPE::SORT_ISTRING },
 					gcnew ColumnItem{ "acodec", I18N("Audio"),50,ColumnItem::SORTTYPE::SORT_ISTRING },
 					gcnew ColumnItem{ "duration", I18N("Duration") ,50,ColumnItem::SORTTYPE::SORT_INT },
+					gcnew ColumnItem{ "fps", I18N("FPS") ,50,ColumnItem::SORTTYPE::SORT_INT },
 			};
 
 			CpuAffinity cpuAffinity_;
@@ -429,7 +430,8 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiToggleAll;
 				String^ format,
 				AVCodec^ acodec,
 				AVCodec^ vcodec,
-				AVDuration^ duration);
+				AVDuration^ duration,
+				double fps);
 
 			String^ GetMovieFileFromLvi(ListViewItem^ lvi);
 			System::Drawing::Size GetVideoSize(ListViewItem^ lvi);

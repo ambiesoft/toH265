@@ -44,6 +44,15 @@ namespace Ambiesoft
 
             return format.Split(',')[0];
         }
+        /// <summary>
+        /// Format fps like "29.97"
+        /// </summary>
+        /// <param name="fps"></param>
+        /// <returns></returns>
+        public static string FormatFPS(double fps)
+        {
+            return Ambiesoft.AmbLib.FormatSize(fps);
+        }
     }
 
     public static class FFMpegHelper

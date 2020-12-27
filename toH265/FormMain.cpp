@@ -35,12 +35,13 @@ namespace Ambiesoft {
 			String^% audiocodec,
 			String^% videocodec,
 			System::Drawing::Size% aspect,
-			TimeSpan% ts)
+			TimeSpan% ts,
+			double% fps)
 		{
 			WaitCursor wc;
 
 			audiocodec = videocodec = nullptr;
-
+			fps = 0;
 			if (String::IsNullOrEmpty(ffprobe) || !File::Exists(ffprobe))
 			{
 				throw gcnew Exception(String::Format(I18N(FormMain::STR_0_NOT_FOUND), L"ffprobe"));
@@ -97,6 +98,21 @@ namespace Ambiesoft {
 							int width = (int)joutput->SelectToken(String::Format("streams[{0}].width", i));
 							int height = (int)joutput->SelectToken(String::Format("streams[{0}].height", i));
 							aspect = System::Drawing::Size(width, height);
+
+							String^ sfps = (String^)joutput->SelectToken(String::Format("streams[{0}].r_frame_rate", i));
+							if (!String::IsNullOrEmpty(sfps))
+							{
+								array<String^>^ two = sfps->Split('/');
+								if (two && two->Length == 2)
+								{
+									double first, second;
+									if (double::TryParse(two[0], first) && double::TryParse(two[1], second) &&
+										first != 0 && second != 0)
+									{
+										fps = first / second;
+									}
+								}
+							}
 						}
 					}
 
@@ -130,7 +146,8 @@ namespace Ambiesoft {
 			String^ format,
 			AVCodec^ acodec,
 			AVCodec^ vcodec,
-			AVDuration^ duration)
+			AVDuration^ duration,
+			double fps)
 		{
 			ListViewItem^ lvi = gcnew ListViewItem();
 
@@ -160,19 +177,14 @@ namespace Ambiesoft {
 
 			lvi->SubItems["directory"]->Text = Path::GetDirectoryName(movieFile);
 			lvi->SubItems["filename"]->Text = Path::GetFileName(movieFile);
-
 			lvi->SubItems["size"]->Text = AmbLib::FormatSize(size);
-
 			lvi->SubItems["aspect"]->Text = sToString(aspect);
 			lvi->SubItems["aspect"]->Tag = aspect;
-
 			lvi->SubItems["format"]->Text = Ambiesoft::toH265Helper::human_format(format->ToString());
-
 			lvi->SubItems["vcodec"]->Text = vcodec->ToString();
-
 			lvi->SubItems["acodec"]->Text = acodec->ToString();
-
 			lvi->SubItems["duration"]->Text = duration->ToString();
+			lvi->SubItems["fps"]->Text = Ambiesoft::toH265Helper::FormatFPS(fps);
 
 			lvInputs->Items->Add(lvi);
 		}
@@ -198,6 +210,7 @@ namespace Ambiesoft {
 				String^ format;
 				System::Drawing::Size aspect;
 				TimeSpan duration;
+				double fps;
 
 				try
 				{
@@ -211,7 +224,7 @@ namespace Ambiesoft {
 
 				try
 				{
-					GetStreamInfo(FFProbe, moviefile, format, audiocodec, videocodec, aspect, duration);
+					GetStreamInfo(FFProbe, moviefile, format, audiocodec, videocodec, aspect, duration, fps);
 				}
 				catch (ContinueException^ ex)
 				{
@@ -258,7 +271,8 @@ namespace Ambiesoft {
 						aspect,
 						format,
 						gcnew AVCodec(audiocodec), gcnew AVCodec(videocodec),
-						gcnew AVDuration(duration));
+						gcnew AVDuration(duration),
+						fps);
 				}
 
 				DASSERT(FFMpegState == TaskState::None);
@@ -711,10 +725,10 @@ namespace Ambiesoft {
 						TimeSpan outputtedTS;
 						LONGLONG inputSize = 0;
 						LONGLONG outputtedSize = 0;
-
+						double outputtedFps;
 						try
 						{
-							GetStreamInfo(FFProbe, outputtingMovie_, outputtedFormat, outputtedAC, outputtedVC, outputtedAspect, outputtedTS);
+							GetStreamInfo(FFProbe, outputtingMovie_, outputtedFormat, outputtedAC, outputtedVC, outputtedAspect, outputtedTS, outputtedFps);
 							for each (String ^ infile in GetInputMovies())
 								inputSize += FileInfo(infile).Length;
 							outputtedSize = FileInfo(outputtingMovie_).Length;
@@ -736,6 +750,7 @@ namespace Ambiesoft {
 						sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), outputtedAC));
 						sbMessage.AppendLine(String::Format(I18N(L"Video codec = {0}"), outputtedVC));
 						sbMessage.AppendLine(String::Format(I18N(L"Duration = {0}"), outputtedTS.ToString()));
+						sbMessage.AppendLine(String::Format(I18N(L"FPS = {0}"), Ambiesoft::toH265Helper::FormatFPS(outputtedFps)));
 						sbMessage.AppendLine(String::Format(I18N(L"Original Size = {0}"), AmbLib::FormatSize(inputSize)));
 						sbMessage.AppendLine(String::Format(I18N(L"Output Size = {0}"), AmbLib::FormatSize(outputtedSize)));
 						sbMessage.AppendLine(String::Format(I18N(L"Compressed = {0}%"), AmbLib::GetRatioString(outputtedSize, inputSize)));
