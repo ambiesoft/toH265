@@ -312,6 +312,7 @@ namespace Ambiesoft {
 				InputFormat = tryFormat;
 				InputAudioCodec = inputAudioCodec;
 				InputVideoCodec = inputVideoCodec;
+				InputFPS = fps;
 				// tsOrigMovies_ = all;
 			}
 			return true;
@@ -716,7 +717,8 @@ namespace Ambiesoft {
 							Process::Start(Application::ExecutablePath, "-shutdown");
 						}
 					}
-					else  // no process after finish
+					
+					// default process after finish
 					{
 						String^ outputtedFormat;
 						String^ outputtedAC = String::Empty;
@@ -742,9 +744,23 @@ namespace Ambiesoft {
 						DASSERT(outputtedTS.TotalMilliseconds != 0);
 
 						StringBuilder sbMessage;
+						bool isWarning = false;
 						sbMessage.AppendFormat(I18N(L"Encoding successfully finished at {0}."),
 							DateTime::Now.ToString());
 						sbMessage.AppendLine();
+
+						if (!AmbLib::IsAlmostSame(InputDuration->TotalMilliseconds,outputtedTS.TotalMilliseconds))
+						{
+							sbMessage.AppendLine();
+							sbMessage.AppendLine(I18N("Be carefull. The durations differs."));
+							isWarning = true;
+						}
+						if (!AmbLib::IsAlmostSame(InputFPS, outputtedFps))
+						{
+							sbMessage.AppendLine();
+							sbMessage.AppendLine(I18N("Be carefull. The FPSs differs."));
+							isWarning = true;
+						}
 						sbMessage.AppendLine();
 						sbMessage.AppendLine(String::Format(I18N(L"Format = {0}"), outputtedFormat));
 						sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), outputtedAC));
@@ -754,7 +770,9 @@ namespace Ambiesoft {
 						sbMessage.AppendLine(String::Format(I18N(L"Original Size = {0}"), AmbLib::FormatSize(inputSize)));
 						sbMessage.AppendLine(String::Format(I18N(L"Output Size = {0}"), AmbLib::FormatSize(outputtedSize)));
 						sbMessage.AppendLine(String::Format(I18N(L"Compressed = {0}%"), AmbLib::GetRatioString(outputtedSize, inputSize)));
-						CppUtils::Info(this, sbMessage.ToString());
+
+						lastResultMessage_.Set(sbMessage.ToString(), isWarning);
+						lastResultMessage_.ShowMessage(this);
 					}
 				}
 			}
@@ -766,7 +784,15 @@ namespace Ambiesoft {
 			
 			elapses_.Clear();
 		}
-
+		System::Void FormMain::tsmiShowLastResult_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (lastResultMessage_.IsEmpty())
+			{
+				CppUtils::Alert(I18N("No last message"));
+				return;
+			}
+			lastResultMessage_.ShowMessage(this);
+		}
 		void FormMain::OnProcessStarted(Object^ sender, EventArgs^ e)
 		{
 			if (InvokeRequired)

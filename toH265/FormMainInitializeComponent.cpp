@@ -27,6 +27,8 @@ namespace Ambiesoft {
             this->tsmiStop = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->toolStripMenuItem7 = (gcnew System::Windows::Forms::ToolStripSeparator());
             this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+            this->tsmiView = (gcnew System::Windows::Forms::ToolStripMenuItem());
+            this->tsmiShowLastResult = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->tsmiOption = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->tsmiSetFFProbe = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->tsmiSetFFMpeg = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -150,9 +152,9 @@ namespace Ambiesoft {
             // menuMain
             // 
             resources->ApplyResources(this->menuMain, L"menuMain");
-            this->menuMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-                this->tsmiFile, this->tsmiOption,
-                    this->tsmiHelp
+            this->menuMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+                this->tsmiFile, this->tsmiView,
+                    this->tsmiOption, this->tsmiHelp
             });
             this->menuMain->Name = L"menuMain";
             // 
@@ -198,6 +200,18 @@ namespace Ambiesoft {
             resources->ApplyResources(this->exitToolStripMenuItem, L"exitToolStripMenuItem");
             this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
             this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::exitToolStripMenuItem_Click);
+            // 
+            // tsmiView
+            // 
+            resources->ApplyResources(this->tsmiView, L"tsmiView");
+            this->tsmiView->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tsmiShowLastResult });
+            this->tsmiView->Name = L"tsmiView";
+            // 
+            // tsmiShowLastResult
+            // 
+            resources->ApplyResources(this->tsmiShowLastResult, L"tsmiShowLastResult");
+            this->tsmiShowLastResult->Name = L"tsmiShowLastResult";
+            this->tsmiShowLastResult->Click += gcnew System::EventHandler(this, &FormMain::tsmiShowLastResult_Click);
             // 
             // tsmiOption
             // 

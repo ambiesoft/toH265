@@ -4,6 +4,7 @@
 #include "AVDuration.h"
 #include "ElapseInfo.h"
 #include "CpuAffinity.h"
+#include "LastResultMessage.h"
 
 #include "toH265.h"
 
@@ -205,6 +206,8 @@ private: System::Windows::Forms::ToolStripSeparator^ tsmsCpuAffinityEnd;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnableAll;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiPriorityBelowNormal;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiToggleAll;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiView;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
 
 
 
@@ -262,6 +265,8 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiToggleAll;
 
 
 		protected:
+			LastResultMessage lastResultMessage_;
+
 			ListViewCustomReorder::ListViewEx^ lvInputs = gcnew ListViewCustomReorder::ListViewEx();
 
 			bool CheckMovieAndSet(String^ file, bool bSet, bool bShowCodecAlert);
@@ -405,7 +410,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiToggleAll;
 					SetTimeStatusText();
 				}
 			}
-
+			property double InputFPS;
 
 			property TaskState FFMpegState
 			{
@@ -537,6 +542,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiToggleAll;
 			System::Void tsmiClearAllButZero_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiEnableAll_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiToggleAll_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiShowLastResult_Click(System::Object^ sender, System::EventArgs^ e);
 
 };
 

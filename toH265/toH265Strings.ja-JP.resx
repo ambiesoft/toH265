@@ -300,4 +300,13 @@
   <data name="Output Size = {0}" xml:space="preserve">
     <value>結果のサイズ={0}</value>
   </data>
+  <data name="No last message" xml:space="preserve">
+    <value>メッセージはありません</value>
+  </data>
+  <data name="Be carefull. The durations differs." xml:space="preserve">
+    <value>ご注意ください。プレイ時間が異なります。</value>
+  </data>
+  <data name="Be carefull. The FPSs differs." xml:space="preserve">
+    <value>ご注意ください。FPSが異なります。</value>
+  </data>
 </root>
