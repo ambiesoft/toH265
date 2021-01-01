@@ -102,7 +102,10 @@
     <ClCompile Include="ContinueException.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LastResultMessage.cpp">
+    <ClCompile Include="EncodeTask.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Summary.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,7 +158,10 @@
     <ClInclude Include="ContinueException.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LastResultMessage.h">
+    <ClInclude Include="EncodeTask.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Summary.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,7 +4,8 @@
 #include "AVDuration.h"
 #include "ElapseInfo.h"
 #include "CpuAffinity.h"
-#include "LastResultMessage.h"
+#include "EncodeTask.h"
+#include "Summary.h"
 
 #include "toH265.h"
 
@@ -103,6 +104,7 @@ namespace Ambiesoft {
 			CpuAffinity cpuAffinity_;
 			System::Windows::Forms::Timer^ timerSetAffinity_;
 			bool bCloseFromMenu_;
+			EncodeTask^ encodeTask_;
 
 		public:
 			// static initonly cli::array<wchar_t>^ char1x = gcnew cli::array<wchar_t>{L'x'};
@@ -265,7 +267,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
 
 
 		protected:
-			LastResultMessage lastResultMessage_;
+			Summary^ lastSummary_;
 
 			ListViewCustomReorder::ListViewEx^ lvInputs = gcnew ListViewCustomReorder::ListViewEx();
 
@@ -312,7 +314,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
 			System::Threading::Thread^ thFFMpeg_;
 			System::Diagnostics::Process^ processFFMpeg_;
 			bool processSuspeded_;
-			bool processTerminated_;
+			bool processTerminatedDuetoAppClose_;
 			enum class TaskState {
 				None,
 				ProcessLaunching,
@@ -334,72 +336,59 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
 			System::Drawing::Icon^ iconRed_;
 
 			array<String^>^ GetInputMovies();
-			String^ outputtingMovie_;
-			String^ outputtedMovie_;
+			void SetTotalInputInfo();
 			void SetFormatStatusText();
-			String^ inputFormat_;
-			property String^ InputFormat
+			void OnEncodeTaskEnded(int retval);
+
+			void DoNextEncodeTask();
+			void OnAllTaskEnded();
+
+			String^ totalInputFormat_;
+			property String^ TotalInputFormat
 			{
-				String^ get() { return inputFormat_; }
+				String^ get() { return totalInputFormat_; }
 				void set(String^ v) {
-					inputFormat_ = v;
+					totalInputFormat_ = v;
 					SetFormatStatusText();
 				}
 			}
 
 			void SetCodecStatusText();
-			AVCodec^ inputAudioCodec_ = gcnew AVCodec();
-			property AVCodec^ InputAudioCodec
+			AVCodec^ totalInputAudioCodec_ = gcnew AVCodec();
+			property AVCodec^ TotalInputAudioCodec
 			{
-				AVCodec^ get() { return inputAudioCodec_; }
+				AVCodec^ get() { return totalInputAudioCodec_; }
 				void set(AVCodec^ v) {
-					inputAudioCodec_ = v;
+					totalInputAudioCodec_ = v;
 					SetCodecStatusText();
 				}
 			}
 
 
 
-			AVCodec^ outputAudioCodec_ = gcnew AVCodec();
-			property AVCodec^ OutputAudioCodec
-			{
-				AVCodec^ get() { return outputAudioCodec_; }
-				void set(AVCodec^ v) {
-					outputAudioCodec_ = v;
-					SetCodecStatusText();
-				}
-			}
 
-			AVCodec^ inputVideoCodec_ = gcnew AVCodec();
-			property AVCodec^ InputVideoCodec
+			AVCodec^ totalInputVideoCodec_ = gcnew AVCodec();
+			property AVCodec^ TotalInputVideoCodec
 			{
-				AVCodec^ get() { return inputVideoCodec_; }
+				AVCodec^ get() { return totalInputVideoCodec_; }
 				void set(AVCodec^ v) {
-					inputVideoCodec_ = v;
-					SetCodecStatusText();
-				}
-			}
-			AVCodec^ outputVideoCodec_ = gcnew AVCodec();
-			property AVCodec^ OutputVideoCodec
-			{
-				AVCodec^ get() { return outputVideoCodec_; }
-				void set(AVCodec^ v) {
-					outputVideoCodec_ = v;
+					totalInputVideoCodec_ = v;
 					SetCodecStatusText();
 				}
 			}
 
 
 			void SetTimeStatusText();
-			AVDuration^ inputDuration_ = gcnew AVDuration();
-			property AVDuration^ InputDuration
+			AVDuration^ totalInputDuration_ = gcnew AVDuration();
+			property AVDuration^ TotalInputDuration
 			{
-				AVDuration^ get() { return inputDuration_; }
+				AVDuration^ get() { return totalInputDuration_; }
 				void set(AVDuration^ v) {
-					inputDuration_ = v;
+					totalInputDuration_ = v;
 					SetTimeStatusText();
 				}
 			}
+			
 			AVDuration^ outputDuration_ = gcnew AVDuration();
 			property AVDuration^ OutputDuration
 			{
@@ -410,7 +399,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
 					SetTimeStatusText();
 				}
 			}
-			property double InputFPS;
+			property double TotalInputFPS;
 
 			property TaskState FFMpegState
 			{

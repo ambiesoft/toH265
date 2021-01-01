@@ -211,6 +211,7 @@
     <ClCompile Include="ContinueException.cpp" />
     <ClCompile Include="CpuAffinity.cpp" />
     <ClCompile Include="ElapseInfo.cpp" />
+    <ClCompile Include="EncodeTask.cpp" />
     <ClCompile Include="FormMain.cpp" />
     <ClCompile Include="FormMainAbout.cpp" />
     <ClCompile Include="FormMainClose.cpp" />
@@ -226,13 +227,13 @@
     <ClCompile Include="FormMainTest.cpp" />
     <ClCompile Include="FormMainTray.cpp" />
     <ClCompile Include="helper.cpp" />
-    <ClCompile Include="LastResultMessage.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Summary.cpp" />
     <ClCompile Include="TargetCodecDialog.cpp" />
     <ClCompile Include="toH265.cpp" />
     <ClCompile Include="AVCodec.cpp" />
@@ -247,11 +248,12 @@
     <ClInclude Include="CpuAffinity.h" />
     <ClInclude Include="DebugMacro.h" />
     <ClInclude Include="ElapseInfo.h" />
+    <ClInclude Include="EncodeTask.h" />
     <ClInclude Include="FormMain.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="helper.h" />
-    <ClInclude Include="LastResultMessage.h" />
+    <ClInclude Include="Summary.h" />
     <ClInclude Include="TargetCodecDialog.h">
       <FileType>CppForm</FileType>
     </ClInclude>

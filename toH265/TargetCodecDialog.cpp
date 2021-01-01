@@ -128,5 +128,12 @@ namespace Ambiesoft {
 				}
 			}
 		}
+		System::Void TargetCodecDialog::btnBrowseOtherDirectory_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			String^ folder = CppUtils::GetSelectedFolder(this, I18N("Select Folder"));
+			if (String::IsNullOrEmpty(folder))
+				return;
+			txtOtherDirectory->Text = folder;
+		}
 	}
 }

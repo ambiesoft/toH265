@@ -21,7 +21,17 @@ namespace Ambiesoft {
 
 			initonly String^ iniPath_;
 			initonly String^ section_;
-			initonly bool losslessable_;
+		private: System::Windows::Forms::GroupBox^ groupTargetDirectory;
+		private: System::Windows::Forms::Button^ btnBrowseOtherDirectory;
+		private: System::Windows::Forms::Label^ lblOtherDirectory;
+		private: System::Windows::Forms::TextBox^ txtOtherDirectory;
+		private: System::Windows::Forms::CheckBox^ chkSameDirectory;
+		private: System::Windows::Forms::GroupBox^ groupFilename;
+		private: System::Windows::Forms::TextBox^ txtFilename;
+		private: System::Windows::Forms::CheckBox^ chkFileByFile;
+
+
+			   initonly bool losslessable_;
 		public:
 			TargetCodecDialog(bool bLosslessable, String^ iniPath, String^ section);
 
@@ -187,8 +197,18 @@ private:
 				this->btnOK = (gcnew System::Windows::Forms::Button());
 				this->btnCancel = (gcnew System::Windows::Forms::Button());
 				this->cmbEncodeType = (gcnew System::Windows::Forms::ComboBox());
+				this->groupTargetDirectory = (gcnew System::Windows::Forms::GroupBox());
+				this->btnBrowseOtherDirectory = (gcnew System::Windows::Forms::Button());
+				this->lblOtherDirectory = (gcnew System::Windows::Forms::Label());
+				this->txtOtherDirectory = (gcnew System::Windows::Forms::TextBox());
+				this->chkSameDirectory = (gcnew System::Windows::Forms::CheckBox());
+				this->groupFilename = (gcnew System::Windows::Forms::GroupBox());
+				this->txtFilename = (gcnew System::Windows::Forms::TextBox());
+				this->chkFileByFile = (gcnew System::Windows::Forms::CheckBox());
 				this->groupVideoCodec->SuspendLayout();
 				this->groupAudioCodec->SuspendLayout();
+				this->groupTargetDirectory->SuspendLayout();
+				this->groupFilename->SuspendLayout();
 				this->SuspendLayout();
 				// 
 				// groupVideoCodec
@@ -284,12 +304,66 @@ private:
 				this->cmbEncodeType->Name = L"cmbEncodeType";
 				this->cmbEncodeType->SelectedIndexChanged += gcnew System::EventHandler(this, &TargetCodecDialog::CmbEncodeType_SelectedIndexChanged);
 				// 
+				// groupTargetDirectory
+				// 
+				this->groupTargetDirectory->Controls->Add(this->btnBrowseOtherDirectory);
+				this->groupTargetDirectory->Controls->Add(this->lblOtherDirectory);
+				this->groupTargetDirectory->Controls->Add(this->txtOtherDirectory);
+				this->groupTargetDirectory->Controls->Add(this->chkSameDirectory);
+				resources->ApplyResources(this->groupTargetDirectory, L"groupTargetDirectory");
+				this->groupTargetDirectory->Name = L"groupTargetDirectory";
+				this->groupTargetDirectory->TabStop = false;
+				// 
+				// btnBrowseOtherDirectory
+				// 
+				resources->ApplyResources(this->btnBrowseOtherDirectory, L"btnBrowseOtherDirectory");
+				this->btnBrowseOtherDirectory->Name = L"btnBrowseOtherDirectory";
+				this->btnBrowseOtherDirectory->UseVisualStyleBackColor = true;
+				this->btnBrowseOtherDirectory->Click += gcnew System::EventHandler(this, &TargetCodecDialog::btnBrowseOtherDirectory_Click);
+				// 
+				// lblOtherDirectory
+				// 
+				resources->ApplyResources(this->lblOtherDirectory, L"lblOtherDirectory");
+				this->lblOtherDirectory->Name = L"lblOtherDirectory";
+				// 
+				// txtOtherDirectory
+				// 
+				resources->ApplyResources(this->txtOtherDirectory, L"txtOtherDirectory");
+				this->txtOtherDirectory->Name = L"txtOtherDirectory";
+				// 
+				// chkSameDirectory
+				// 
+				resources->ApplyResources(this->chkSameDirectory, L"chkSameDirectory");
+				this->chkSameDirectory->Name = L"chkSameDirectory";
+				this->chkSameDirectory->UseVisualStyleBackColor = true;
+				// 
+				// groupFilename
+				// 
+				this->groupFilename->Controls->Add(this->txtFilename);
+				resources->ApplyResources(this->groupFilename, L"groupFilename");
+				this->groupFilename->Name = L"groupFilename";
+				this->groupFilename->TabStop = false;
+				// 
+				// txtFilename
+				// 
+				resources->ApplyResources(this->txtFilename, L"txtFilename");
+				this->txtFilename->Name = L"txtFilename";
+				// 
+				// chkFileByFile
+				// 
+				resources->ApplyResources(this->chkFileByFile, L"chkFileByFile");
+				this->chkFileByFile->Name = L"chkFileByFile";
+				this->chkFileByFile->UseVisualStyleBackColor = true;
+				// 
 				// TargetCodecDialog
 				// 
 				this->AcceptButton = this->btnOK;
 				resources->ApplyResources(this, L"$this");
 				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 				this->CancelButton = this->btnCancel;
+				this->Controls->Add(this->chkFileByFile);
+				this->Controls->Add(this->groupFilename);
+				this->Controls->Add(this->groupTargetDirectory);
 				this->Controls->Add(this->cmbEncodeType);
 				this->Controls->Add(this->btnCancel);
 				this->Controls->Add(this->btnOK);
@@ -307,7 +381,12 @@ private:
 				this->groupVideoCodec->PerformLayout();
 				this->groupAudioCodec->ResumeLayout(false);
 				this->groupAudioCodec->PerformLayout();
+				this->groupTargetDirectory->ResumeLayout(false);
+				this->groupTargetDirectory->PerformLayout();
+				this->groupFilename->ResumeLayout(false);
+				this->groupFilename->PerformLayout();
 				this->ResumeLayout(false);
+				this->PerformLayout();
 
 			}
 #pragma endregion
@@ -317,7 +396,7 @@ private:
 			System::Void TargetCodecDialog_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
 			System::Void TargetCodecDialog_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e);
 			System::Void TargetCodecDialog_Load(System::Object^ sender, System::EventArgs^ e);
-
-};
+			System::Void btnBrowseOtherDirectory_Click(System::Object^ sender, System::EventArgs^ e);
+		};
 	}
 }

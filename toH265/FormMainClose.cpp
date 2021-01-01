@@ -41,11 +41,11 @@ namespace Ambiesoft {
 				{
 					return false;
 				}
-				processTerminated_ = true;
+				processTerminatedDuetoAppClose_ = true;
 		
 				if (!KillProcess(processFFMpeg_))
 				{
-					processTerminated_ = false;
+					processTerminatedDuetoAppClose_ = false;
 					CppUtils::Alert(this, I18N(L"Failed to kill process."));
 				}
 				
