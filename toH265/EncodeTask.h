@@ -127,6 +127,10 @@ namespace Ambiesoft {
 				retval_ = retval;
 			}
 			String^ GetArg(String^% report);
+			property int RetVal 
+			{
+				int get() { return retval_; }
+			}
 		};
 
 		public ref class EncodeTask
@@ -136,7 +140,9 @@ namespace Ambiesoft {
 
 			property EncodeJob^ CurrentJob
 			{
-				EncodeJob^ get() { return jobs_[currentI_]; }
+				EncodeJob^ get() { 
+					return jobs_[currentI_]; 
+				}
 			}
 		public:
 
@@ -144,38 +150,49 @@ namespace Ambiesoft {
 				bool bConcat,
 				bool bReEncode,
 				array<String^>^ inputFiles,
-				String^ outputFile,
+				array<String^>^ outputFiles,
 				AVCodec^ outputV, AVCodec^ outputA,
 				bool bIsSameSize,
 				System::Drawing::Size maxsize,
-				AVDuration^ totalDuration,
-				double totalFPS)
+				array<AVDuration^>^ durations,
+				array<double>^ fpses)
 			{
-				EncodeJob^ job;
+				DASSERT(currentI_ <= 0);
+				currentI_ = 0;
 				if (bConcat)
 				{
-					job = gcnew EncodeJob(bReEncode,
+					DASSERT(outputFiles->Length == 1);
+					DASSERT(durations->Length == 1);
+					DASSERT(fpses->Length == 1);
+					EncodeJob^ job = gcnew EncodeJob(bReEncode,
 						inputFiles,
-						outputFile,
+						outputFiles[0],
 						outputV,
 						outputA,
 						bIsSameSize,
 						maxsize,
-						totalDuration,
-						totalFPS);
+						durations[0],
+						fpses[0]);
+					jobs_.Add(job);
 				}
 				else
 				{
 					// each file
-					DASSERT(inputFiles->Length == 1);
-					job = gcnew EncodeJob(inputFiles[0],
-						outputFile,
-						outputV, outputA,
-						maxsize,
-						totalDuration,
-						totalFPS);
+					DASSERT(inputFiles->Length > 0);
+					DASSERT(inputFiles->Length == outputFiles->Length);
+					DASSERT(inputFiles->Length == durations->Length);
+					DASSERT(inputFiles->Length == fpses->Length);
+					for(int i=0;i<inputFiles->Length;++i)
+					{
+						EncodeJob^ job = gcnew EncodeJob(inputFiles[i],
+							outputFiles[i],
+							outputV, outputA,
+							maxsize,
+							durations[i],
+							fpses[i]);
+						jobs_.Add(job);
+					}
 				}
-				jobs_.Add(job);
 			}
 			property String^ CurrentOutputtingMovieFile
 			{
@@ -185,13 +202,12 @@ namespace Ambiesoft {
 			void OnTaskEnded(int retval)
 			{
 				DASSERT(currentI_ >= 0);
-				if (retval != 0)
-				{
-					//CppUtils::Alert(this, String::Format(L"Process exited with {0}.", retval));
-					CurrentJob->SetEnded(retval);
-				}
+				CurrentJob->SetEnded(retval);
 			}
-
+			void GoNext()
+			{
+				++currentI_;
+			}
 			String^ GetArg(String^% report)
 			{
 				return CurrentJob->GetArg(report);
@@ -206,7 +222,7 @@ namespace Ambiesoft {
 			}
 
 			bool IsAllEnded() {
-				DASSERT(currentI_ > 0);
+				DASSERT(currentI_ >= 0);
 				bool ret = currentI_ >= jobs_.Count;
 #ifdef _DEBUG
 				if (ret)

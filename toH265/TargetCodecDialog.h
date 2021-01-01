@@ -1,5 +1,7 @@
 #pragma once
 
+#include "AVCodec.h"
+
 namespace Ambiesoft {
 	namespace toH265 {
 
@@ -32,8 +34,15 @@ namespace Ambiesoft {
 
 
 			   initonly bool losslessable_;
+			   initonly array<String^>^ InputMovies;
+			   initonly AVCodec^ DefaultVideoCodec;
+			   initonly AVCodec^ DefaultAudioCodec;
 		public:
-			TargetCodecDialog(bool bLosslessable, String^ iniPath, String^ section);
+			TargetCodecDialog(bool bLosslessable, 
+				String^ iniPath, 
+				String^ section,
+				array<String^>^ inputMovies,
+				AVCodec^ defaultV, AVCodec^ defaultA);
 
 			property bool IsReEncode
 			{
@@ -132,6 +141,34 @@ namespace Ambiesoft {
 					return groupVideoCodec->Enabled;
 				}
 			}
+			property bool IsEachFile
+			{
+				bool get()
+				{
+					return IsReEncode && chkFileByFile->Enabled && chkFileByFile->Checked;
+				}
+			}
+			property bool IsConcat
+			{
+				bool get()
+				{
+					return !IsEachFile;
+				}
+			}
+			property String^ OutputFile
+			{
+				String^ get();
+			}
+			array<String^>^ outputFiles_;
+			property array<String^>^ OutputFiles
+			{
+				array<String^>^ get() {
+					DASSERT(outputFiles_ && outputFiles_->Length != 0);
+					return outputFiles_;
+				}
+			}
+			property AVCodec^ OutputVideoCodec;
+			property AVCodec^ OutputAudioCodec;
 		protected:
 			/// <summary>
 			/// Clean up any resources being used.
@@ -336,6 +373,7 @@ private:
 				resources->ApplyResources(this->chkSameDirectory, L"chkSameDirectory");
 				this->chkSameDirectory->Name = L"chkSameDirectory";
 				this->chkSameDirectory->UseVisualStyleBackColor = true;
+				this->chkSameDirectory->CheckedChanged += gcnew System::EventHandler(this, &TargetCodecDialog::chkSameDirectory_CheckedChanged);
 				// 
 				// groupFilename
 				// 
@@ -390,6 +428,9 @@ private:
 
 			}
 #pragma endregion
+
+			bool UpdateOutputFiles();
+			void UpdateEnableState();
 		private:
 			System::Void CmbEncodeType_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
 			System::Void BtnOK_Click(System::Object^ sender, System::EventArgs^ e);
@@ -397,6 +438,9 @@ private:
 			System::Void TargetCodecDialog_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e);
 			System::Void TargetCodecDialog_Load(System::Object^ sender, System::EventArgs^ e);
 			System::Void btnBrowseOtherDirectory_Click(System::Object^ sender, System::EventArgs^ e);
-		};
+			System::Void chkSameDirectory_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
+				UpdateEnableState();
+			}
+};
 	}
 }

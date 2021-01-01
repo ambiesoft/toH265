@@ -14,7 +14,13 @@ namespace Ambiesoft {
 #ifdef _DEBUG
 		System::Void FormMain::FormMain_OnTest(System::Object^ sender, System::EventArgs^ e)
 		{
-			TargetCodecDialog dlg(true, Program::IniFile, SECTION_TARGETCODECDIALOG);
+			TargetCodecDialog dlg(true,
+				Program::IniFile,
+				SECTION_TARGETCODECDIALOG,
+				gcnew array<String^>{"aaa.mp4"},
+				gcnew AVCodec("mp4"),
+				gcnew AVCodec("acc"));
+
 			dlg.ShowDialog();
 		}
 #endif

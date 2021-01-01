@@ -7,6 +7,10 @@
 
 #include "DebugMacro.h"
 
+#include "../../lsMisc/IsFileOpen.h"
+#include "../../lsMisc/getStdString.net.h"
+#include "../../lsMisc/OpenCommon.h"
+
 enum ERROR_RETURN
 {
 	RETURN_NOERROR = 0,

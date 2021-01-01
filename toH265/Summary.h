@@ -22,6 +22,14 @@ namespace Ambiesoft {
 			{
 				String^ get() { return job_->OutputtingMove; }
 			}
+			property bool IsWarning
+			{
+				bool get() { return hasWarning_; }
+			}
+			property String^ Message
+			{
+				String^ get() { return text_; }
+			}
 		};
 		public ref class Summary
 		{

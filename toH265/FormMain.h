@@ -336,6 +336,9 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
 			System::Drawing::Icon^ iconRed_;
 
 			array<String^>^ GetInputMovies();
+			array<AVDuration^>^ GetInputDurations();
+			array<double>^ GetInputFPSes();
+
 			void SetTotalInputInfo();
 			void SetFormatStatusText();
 			void OnEncodeTaskEnded(int retval);
@@ -428,6 +431,10 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
 				double fps);
 
 			String^ GetMovieFileFromLvi(ListViewItem^ lvi);
+			AVDuration^ GetDurationFromLvi(ListViewItem^ lvi);
+			double GetFPSFromLvi(ListViewItem^ lvi);
+
+
 			System::Drawing::Size GetVideoSize(ListViewItem^ lvi);
 			double GetVideoArea(ListViewItem^ lvi);
 			System::Drawing::Size GetMaxVideoSize();
@@ -440,6 +447,10 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
 			// bool GetInfoFromFFMpegoutput(String^ text, TimeSpan% tsTime, double% dblSpeed);
 			void UpdateTitleTS(TimeSpan ts);
 			void UpdateTitleComplete();
+			property String^ CurrentEncodingOutputtingFile
+			{
+				String^ get();
+			}
 			String^ buildTitleText(int percent, bool bFilenameOnly);
 			void UpdateTitle();
 			void UpdateTitle(int percent);

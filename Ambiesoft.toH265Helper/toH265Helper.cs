@@ -8,7 +8,7 @@ namespace Ambiesoft
 {
     public class toH265Helper
     {
-        public static string GetCommonFilename(List<string> all)
+        public static string GetCommonFilename(string[] all)
         {
             string outfilename = null;
             foreach (string file in all)
