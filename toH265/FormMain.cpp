@@ -876,17 +876,19 @@ namespace Ambiesoft {
 			{
 				OnMenuPriorityCommon(FFMpegPriority::BelowNormal);
 			}
-			timerSetAffinity_ = gcnew System::Windows::Forms::Timer();
-			timerSetAffinity_->Interval = 5 * 1000;
-			timerSetAffinity_->Enabled = true;
-			timerSetAffinity_->Tick += gcnew System::EventHandler(this, &Ambiesoft::toH265::FormMain::OnTick);
+			System::Windows::Forms::Timer^ timerSetAffinity = gcnew System::Windows::Forms::Timer();
+			timerSetAffinity->Interval = 5 * 1000;
+			timerSetAffinity->Enabled = true;
+			timerSetAffinity->Tick += gcnew System::EventHandler(this, &Ambiesoft::toH265::FormMain::OnTick);
+			timerSetAffinity->Tag = timerSetAffinity;
 		}
 		int affinitySetProcess_;
 		void FormMain::OnTick(System::Object^ sender, System::EventArgs^ e)
 		{
-			timerSetAffinity_->Enabled = false;
-			delete timerSetAffinity_;
-			timerSetAffinity_ = nullptr;
+			System::Windows::Forms::Timer^ timerSetAffinity = (System::Windows::Forms::Timer^)sender;
+			timerSetAffinity->Enabled = false;
+			delete timerSetAffinity;
+			timerSetAffinity = nullptr;
 			tsmiCPUAffinityEnable_Click(nullptr, nullptr);
 			if(processFFMpeg_)
 				affinitySetProcess_ = processFFMpeg_->Id;

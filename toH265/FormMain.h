@@ -102,7 +102,7 @@ namespace Ambiesoft {
 			};
 
 			CpuAffinity cpuAffinity_;
-			System::Windows::Forms::Timer^ timerSetAffinity_;
+			// System::Windows::Forms::Timer^ timerSetAffinity_;
 			bool bCloseFromMenu_;
 			EncodeTask^ encodeTask_;
 

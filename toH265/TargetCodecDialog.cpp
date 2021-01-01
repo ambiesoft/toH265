@@ -189,6 +189,7 @@ namespace Ambiesoft {
 				return;
 			}
 
+			AmbLib::IsSameFile()
 			for each (String ^ outputFile in OutputFiles)
 			{
 				if (File::Exists(outputFile))
@@ -324,29 +325,25 @@ namespace Ambiesoft {
 			for (int i = 0; i < countOutput; ++i)
 			{
 				// set basename
-				String^ initialDir;
 				String^ baseFileName = InputMovies[i];
 				if(IsConcat)
 					baseFileName = Ambiesoft::toH265Helper::GetCommonFilename(InputMovies);
 				if (String::IsNullOrEmpty(baseFileName))
 					baseFileName = "output";
 
-				if (String::IsNullOrEmpty(initialDir))
-					initialDir = Path::GetDirectoryName(InputMovies[i]);
+				//SaveFileDialog dlg;
+				//{
+				//	StringBuilder sbFilter;
+				//	for each (String ^ ae in outExtsNormalPriority)
+				//	{
+				//		sbFilter.AppendFormat("{0} (*{1})|*{2}|",
+				//			ae, ae, ae);
+				//	}
+				//	sbFilter.Append(I18N("All File") + "(*.*)|*.*");
+				//	dlg.Filter = sbFilter.ToString();
+				//}
 
-				SaveFileDialog dlg;
-				{
-					StringBuilder sbFilter;
-					for each (String ^ ae in outExtsNormalPriority)
-					{
-						sbFilter.AppendFormat("{0} (*{1})|*{2}|",
-							ae, ae, ae);
-					}
-					sbFilter.Append(I18N("All File") + "(*.*)|*.*");
-					dlg.Filter = sbFilter.ToString();
-				}
-
-				dlg.InitialDirectory = initialDir;
+				// dlg.InitialDirectory = initialDir;
 
 				String^ firstExt;
 				for each (String ^ s in outExtsNormalPriority)
@@ -356,18 +353,20 @@ namespace Ambiesoft {
 				}
 
 				DASSERT(!String::IsNullOrEmpty(OutputVideoCodec->ToString()));
-				dlg.FileName = String::Format(L"{0} [{1}]{2}",
-					baseFileName,
+				String^ fileName = String::Format(L"{0} [{1}]{2}",
+					Path::Combine(
+						chkSameDirectory->Checked ? Path::GetDirectoryName(InputMovies[i]) : txtOtherDirectory->Text, 
+						baseFileName),
 					OutputVideoCodec->ToString(),
 					firstExt);
 
 				//if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
 				//	return;
 
-				if (IsFileOpen(getStdWstring(dlg.FileName).c_str()))
+				if (IsFileOpen(getStdWstring(fileName).c_str()))
 				{
 					StringBuilder sb;
-					sb.AppendLine(String::Format(I18N(FormMain::STR_0_ALREADY_OPENED), dlg.FileName));
+					sb.AppendLine(String::Format(I18N(FormMain::STR_0_ALREADY_OPENED), fileName));
 					sb.AppendLine();
 					sb.AppendLine(I18N(FormMain::STR_ARE_YOU_SURE_TO_CONTINUE));
 					if (System::Windows::Forms::DialogResult::Yes != CppUtils::CenteredMessageBox(
@@ -381,7 +380,7 @@ namespace Ambiesoft {
 						return false;
 					}
 				}
-				outputFiles_[i] = dlg.FileName;
+				outputFiles_[i] = fileName;
 			}
 
 			return true;
