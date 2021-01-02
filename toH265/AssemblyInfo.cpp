@@ -16,11 +16,11 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute("")];
 [assembly:AssemblyCompanyAttribute("Ambiesoft")];
 [assembly:AssemblyProductAttribute("toH265")];
-[assembly:AssemblyCopyrightAttribute("Copyright (c) 2020")];
+[assembly:AssemblyCopyrightAttribute("Copyright (c) 2021")];
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 
-[assembly:AssemblyVersionAttribute("1.0.54.*")];
+[assembly:AssemblyVersionAttribute("1.0.55.*")];
 
 [assembly:ComVisible(false)];
 

@@ -164,7 +164,7 @@ namespace Ambiesoft {
 
 			if (!chkSameDirectory->Checked)
 			{
-				if (!String::IsNullOrEmpty(txtOtherDirectory->Text))
+				if (String::IsNullOrEmpty(txtOtherDirectory->Text))
 				{
 					CppUtils::Alert(I18N("Other Directory is empty."));
 					this->DialogResult = System::Windows::Forms::DialogResult::None;
@@ -189,7 +189,13 @@ namespace Ambiesoft {
 				return;
 			}
 
-			AmbLib::IsSameFile()
+			if (toH265Helper::HasSameFile(OutputFiles))
+			{
+				CppUtils::Alert(I18N("Output files has same file."));
+				this->DialogResult = System::Windows::Forms::DialogResult::None;
+				return;
+			}
+
 			for each (String ^ outputFile in OutputFiles)
 			{
 				if (File::Exists(outputFile))
@@ -325,9 +331,9 @@ namespace Ambiesoft {
 			for (int i = 0; i < countOutput; ++i)
 			{
 				// set basename
-				String^ baseFileName = InputMovies[i];
-				if(IsConcat)
-					baseFileName = Ambiesoft::toH265Helper::GetCommonFilename(InputMovies);
+				String^ baseFileName = IsConcat ?
+					Ambiesoft::toH265Helper::GetCommonFilename(InputMovies) :
+					Path::GetFileName(InputMovies[i]);
 				if (String::IsNullOrEmpty(baseFileName))
 					baseFileName = "output";
 
@@ -355,7 +361,8 @@ namespace Ambiesoft {
 				DASSERT(!String::IsNullOrEmpty(OutputVideoCodec->ToString()));
 				String^ fileName = String::Format(L"{0} [{1}]{2}",
 					Path::Combine(
-						chkSameDirectory->Checked ? Path::GetDirectoryName(InputMovies[i]) : txtOtherDirectory->Text, 
+						chkSameDirectory->Checked ? 
+						Path::GetDirectoryName(InputMovies[i]) : txtOtherDirectory->Text, 
 						baseFileName),
 					OutputVideoCodec->ToString(),
 					firstExt);
