@@ -21,6 +21,10 @@ namespace Ambiesoft {
 			literal String^ KEY_AUIDOCODEC = L"AudioCodec";
 			literal String^ KEY_VIDEOCODEC = L"VideoCodec";
 
+			literal String^ KEY_SAME_DIRECTORY = L"IsSameDirectory";
+			literal String^ KEY_OTHER_DIRECTORY = L"OtherDirectory";
+			literal String^ KEY_FILE_BY_FILE = L"FileByFile";
+
 			initonly String^ iniPath_;
 			initonly String^ section_;
 		private: System::Windows::Forms::GroupBox^ groupTargetDirectory;
@@ -371,6 +375,8 @@ private:
 				// chkSameDirectory
 				// 
 				resources->ApplyResources(this->chkSameDirectory, L"chkSameDirectory");
+				this->chkSameDirectory->Checked = true;
+				this->chkSameDirectory->CheckState = System::Windows::Forms::CheckState::Checked;
 				this->chkSameDirectory->Name = L"chkSameDirectory";
 				this->chkSameDirectory->UseVisualStyleBackColor = true;
 				this->chkSameDirectory->CheckedChanged += gcnew System::EventHandler(this, &TargetCodecDialog::chkSameDirectory_CheckedChanged);

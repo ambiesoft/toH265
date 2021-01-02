@@ -685,16 +685,19 @@ namespace Ambiesoft {
 			SetStatusText(STATUSTEXT::READY);
 
 			OnEncodeTaskEnded(retval);
-			encodeTask_->GoNext();
-			DoNextEncodeTask();
+			if (encodeTask_)
+			{
+				encodeTask_->GoNext();
+				DoNextEncodeTask();
+			}
 		}
 		void FormMain::OnEncodeTaskEnded(int retval)
 		{
 			if (processTerminatedDuetoAppClose_)
 				return;
 
-			encodeTask_->OnTaskEnded(retval);
-
+			if(encodeTask_)
+				encodeTask_->OnTaskEnded(retval);
 		}
 		
 			
@@ -1143,7 +1146,7 @@ namespace Ambiesoft {
 			txtLogOut->Clear();
 			txtLogErr->Clear();
 
-			
+			processTerminatedDuetoAppClose_ = false;
 			DoNextEncodeTask();
 		}
 

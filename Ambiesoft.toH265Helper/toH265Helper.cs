@@ -55,23 +55,7 @@ namespace Ambiesoft
         }
 
 
-        private class FileNameComparer : IEqualityComparer<string>
-        {
-            public bool Equals(string left, string right)
-            {
-                return AmbLib.IsSameFile(left, right);
-            }
 
-            public int GetHashCode(string s)
-            {
-                return s.GetHashCode();
-            }
-        }
-
-        public static bool HasSameFile(string[] files)
-        {
-            return files.Length != files.Distinct(new FileNameComparer()).Count();
-        }
 
     }
 

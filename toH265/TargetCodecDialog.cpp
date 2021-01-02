@@ -46,6 +46,7 @@ namespace Ambiesoft {
 		void TargetCodecDialog::UpdateEnableState()
 		{
 			txtOtherDirectory->Enabled = !chkSameDirectory->Checked;
+			chkFileByFile->Enabled = InputMovies->Length > 1 && cmbEncodeType->SelectedIndex == 1;
 		}
 		System::Void TargetCodecDialog::TargetCodecDialog_Load(System::Object^ sender, System::EventArgs^ e)
 		{
@@ -55,12 +56,24 @@ namespace Ambiesoft {
 				HashIni^ ini = Profile::ReadAll(iniPath_);
 				Profile::GetInt(SECTION, KEY_ENCODE_TYPE, -1, iniComboIndex, ini);
 				int v = -1;
+				bool b;
+				String^ s;
+
 				Profile::GetInt(SECTION, KEY_AUIDOCODEC, -1, v, ini);
 				if (v != -1)
 					AudioCodecInt = v;
 				Profile::GetInt(SECTION, KEY_VIDEOCODEC, -1, v, ini);
 				if (v != -1)
 					VideoCodecInt = v;
+				
+				Profile::GetBool(SECTION, KEY_SAME_DIRECTORY, true, b, ini);
+				chkSameDirectory->Checked = b;
+
+				Profile::GetString(SECTION, KEY_OTHER_DIRECTORY, String::Empty, s, ini);
+				txtOtherDirectory->Text = s;
+
+				Profile::GetBool(SECTION, KEY_FILE_BY_FILE, false, b, ini);
+				chkFileByFile->Checked = b;
 			}
 
 			if (losslessable_)
@@ -76,6 +89,8 @@ namespace Ambiesoft {
 		}
 		System::Void TargetCodecDialog::CmbEncodeType_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 		{
+			UpdateEnableState();
+
 			switch (cmbEncodeType->SelectedIndex)
 			{
 			case 0:
@@ -119,6 +134,10 @@ namespace Ambiesoft {
 				Profile::WriteInt(SECTION, KEY_AUIDOCODEC, AudioCodecInt, ini);
 			if(VideoCodecIntEnabled)
 				Profile::WriteInt(SECTION, KEY_VIDEOCODEC, VideoCodecInt, ini);
+
+			Profile::WriteBool(SECTION, KEY_SAME_DIRECTORY, chkSameDirectory->Checked, ini);
+			Profile::WriteString(SECTION, KEY_OTHER_DIRECTORY, txtOtherDirectory->Text, ini);
+			Profile::WriteBool(SECTION, KEY_FILE_BY_FILE, chkFileByFile->Checked, ini);
 
 			if (!Profile::WriteAll(ini, IniPath))
 			{
@@ -189,7 +208,7 @@ namespace Ambiesoft {
 				return;
 			}
 
-			if (toH265Helper::HasSameFile(OutputFiles))
+			if (AmbLib::HasSameFile(OutputFiles))
 			{
 				CppUtils::Alert(I18N("Output files has same file."));
 				this->DialogResult = System::Windows::Forms::DialogResult::None;
