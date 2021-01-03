@@ -197,9 +197,4 @@
       <Filter>4 Dist</Filter>
     </Text>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Acknowledgement">
-      <Filter>4 Dist</Filter>
-    </None>
-  </ItemGroup>
 </Project>

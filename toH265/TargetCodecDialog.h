@@ -347,11 +347,11 @@ private:
 				// 
 				// groupTargetDirectory
 				// 
+				resources->ApplyResources(this->groupTargetDirectory, L"groupTargetDirectory");
 				this->groupTargetDirectory->Controls->Add(this->btnBrowseOtherDirectory);
 				this->groupTargetDirectory->Controls->Add(this->lblOtherDirectory);
 				this->groupTargetDirectory->Controls->Add(this->txtOtherDirectory);
 				this->groupTargetDirectory->Controls->Add(this->chkSameDirectory);
-				resources->ApplyResources(this->groupTargetDirectory, L"groupTargetDirectory");
 				this->groupTargetDirectory->Name = L"groupTargetDirectory";
 				this->groupTargetDirectory->TabStop = false;
 				// 
@@ -383,8 +383,8 @@ private:
 				// 
 				// groupFilename
 				// 
-				this->groupFilename->Controls->Add(this->txtFilename);
 				resources->ApplyResources(this->groupFilename, L"groupFilename");
+				this->groupFilename->Controls->Add(this->txtFilename);
 				this->groupFilename->Name = L"groupFilename";
 				this->groupFilename->TabStop = false;
 				// 

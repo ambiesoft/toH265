@@ -46,6 +46,7 @@ namespace Ambiesoft {
 		void TargetCodecDialog::UpdateEnableState()
 		{
 			txtOtherDirectory->Enabled = !chkSameDirectory->Checked;
+			btnBrowseOtherDirectory->Enabled = !chkSameDirectory->Checked;
 			chkFileByFile->Enabled = InputMovies->Length > 1 && cmbEncodeType->SelectedIndex == 1;
 		}
 		System::Void TargetCodecDialog::TargetCodecDialog_Load(System::Object^ sender, System::EventArgs^ e)

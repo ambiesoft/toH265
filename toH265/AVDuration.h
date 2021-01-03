@@ -11,6 +11,9 @@ namespace Ambiesoft {
 			{}
 			AVDuration(TimeSpan^ ts) :ts_(ts)
 			{}
+			AVDuration(double d):ts_(TimeSpan::FromMilliseconds(d))
+			{}
+
 			virtual String^ ToString() override {
 				return ts_->ToString("hh\\:mm\\:ss");
 			}

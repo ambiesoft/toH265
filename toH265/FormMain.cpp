@@ -535,28 +535,18 @@ namespace Ambiesoft {
 			ElapseInfo^ lastElapse = gcnew ElapseInfo(tsProgress.TotalMilliseconds);
 			ElapseInfo^ firstElapse = elapses_.Enqueue(lastElapse);
 
-			double percent = (tsProgress.TotalMilliseconds / TotalInputDuration->TotalMilliseconds) * 100;
-			UpdateTitle((int)percent);
+			DASSERT(encodeTask_);
+			double percent = (tsProgress.TotalMilliseconds / encodeTask_->CurrentTotalMilliseconds);
+			percent *= (encodeTask_->EndedPartPercent + encodeTask_->CurrentPartPercent);
+			UpdateTitle((int)(percent * 100));
+
 			if (this->WindowState == FormWindowState::Minimized)
 				return;
 
-			//DTRACE("All:" + InputDuration->ToString() + " " + InputDuration->TotalMilliseconds);
-			//DTRACE("Cur:" + tsProgress.ToString() + " " + tsProgress.TotalMilliseconds);
-			//double mRemaining = InputDuration->TotalMilliseconds - tsProgress.TotalMilliseconds;
-			//DTRACE("Remain:" + mRemaining);
-
-			//if (speed == 0)
-			//	speed = 0.00001;
-
-			//TimeSpan ts = TimeSpan::FromMilliseconds(mRemaining / speed);
-
-			//String^ stRemainingText = tsToString(ts);
-			//SetStatusText(STATUSTEXT::REMAINING, stRemainingText);
-			SetStatusText(STATUSTEXT::REMAINING, 
+			SetStatusText(STATUSTEXT::REMAINING,
 				GetRemainingTimeText(firstElapse, lastElapse, TotalInputDuration->TotalMilliseconds));
 
-			// String^ stElapsedText = tsProgress.ToString("hh\\:mm\\:ss");
-			OutputDuration = gcnew AVDuration(tsProgress);
+			OutputDuration = gcnew AVDuration( encodeTask_->EndedDurations + tsProgress.TotalMilliseconds);
 		}
 
 		void FormMain::SetStatusText(STATUSTEXT ss)

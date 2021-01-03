@@ -24,7 +24,7 @@ namespace Ambiesoft {
 			System::Drawing::Size MaxSize;
 			AVDuration^ totalInputDuration_;
 			double totalInputFPS_;
-
+			double partPercent_;
 			AVCodec^ outputVideoCodec_ = gcnew AVCodec();
 			AVCodec^ outputAudioCodec_ = gcnew AVCodec();
 
@@ -68,7 +68,10 @@ namespace Ambiesoft {
 					// SetCodecStatusText();
 				}
 			}
-
+			property double PartPercent
+			{
+				double get() { return partPercent_; }
+			}
 			void init(bool bReEncode,
 				array<String^>^ inputMovies,
 				String^ outputtingMovie,
@@ -77,7 +80,8 @@ namespace Ambiesoft {
 				bool isSameSize,
 				System::Drawing::Size maxSize,
 				AVDuration^ totalInputDuration,
-				double totalInputFPS)
+				double totalInputFPS,
+				double partPercent)
 			{
 				this->ReEncode = bReEncode;
 				this->inputMovies_ = inputMovies;
@@ -88,6 +92,7 @@ namespace Ambiesoft {
 				this->MaxSize = maxSize;
 				this->totalInputDuration_ = totalInputDuration;
 				this->totalInputFPS_ = totalInputFPS;
+				this->partPercent_ = partPercent;
 			}
 
 			// each
@@ -97,7 +102,8 @@ namespace Ambiesoft {
 				AVCodec^ outputAudioCodec,
 				System::Drawing::Size size,
 				AVDuration^ duration,
-				double fps)
+				double fps,
+				double partPercent)
 			{
 				init(true,
 					gcnew array<String^>{inputMovie},
@@ -107,7 +113,8 @@ namespace Ambiesoft {
 					true,
 					size,
 					duration,
-					fps);
+					fps,
+					partPercent);
 			}
 			// concat
 			EncodeJob(bool bReEncode,
@@ -118,7 +125,8 @@ namespace Ambiesoft {
 				bool isSameSize,
 				System::Drawing::Size maxSize,
 				AVDuration^ totalInputDuration,
-				double totalInputFPS)
+				double totalInputFPS,
+				double partPercent)
 			{
 				init(bReEncode,
 					inputMovies,
@@ -128,7 +136,8 @@ namespace Ambiesoft {
 					isSameSize,
 					maxSize,
 					totalInputDuration,
-					totalInputFPS);
+					totalInputFPS,
+					partPercent);
 			}
 			property bool IsEnded
 			{
@@ -208,7 +217,8 @@ namespace Ambiesoft {
 						bIsSameSize,
 						maxsize,
 						durations[0],
-						fpses[0]);
+						fpses[0],
+						1.0);
 					jobs_.Add(job);
 				}
 				else
@@ -218,14 +228,21 @@ namespace Ambiesoft {
 					DASSERT(inputFiles->Length == outputFiles->Length);
 					DASSERT(inputFiles->Length == durations->Length);
 					DASSERT(inputFiles->Length == fpses->Length);
-					for(int i=0;i<inputFiles->Length;++i)
+					double totalDuration = 0;
+					for (int i = 0; i < inputFiles->Length; ++i)
+					{
+						totalDuration += durations[i]->TotalMilliseconds;
+					}
+					for (int i = 0; i < inputFiles->Length; ++i)
 					{
 						EncodeJob^ job = gcnew EncodeJob(inputFiles[i],
 							outputFiles[i],
 							outputV, outputA,
 							maxsize,
 							durations[i],
-							fpses[i]);
+							fpses[i],
+							durations[i]->TotalMilliseconds / totalDuration
+						);
 						jobs_.Add(job);
 					}
 				}
@@ -271,6 +288,42 @@ namespace Ambiesoft {
 			}
 
 			array<EncodeJob^>^ GetResults();
+
+			property double CurrentTotalMilliseconds
+			{
+				double get() { return CurrentJob->TotalInputDuration->TotalMilliseconds; }
+			}
+			property double CurrentPartPercent
+			{
+				double get() { return CurrentJob->PartPercent; }
+			}
+			property double EndedPartPercent
+			{
+				double get() {
+					double ret = 0;
+					for each (EncodeJob ^ job in jobs_)
+					{
+						if (!job->IsEnded)
+							return ret;
+						ret += job->PartPercent;
+					}
+					DASSERT(0 <= ret && ret <= 1.0);
+					return ret;
+				}
+			}
+			property double EndedDurations
+			{
+				double get() {
+					double ret = 0;
+					for each (EncodeJob ^ job in jobs_)
+					{
+						if (!job->IsEnded)
+							return ret;
+						ret += job->TotalInputDuration->TotalMilliseconds;
+					}
+					return ret;
+				}
+			}
 		};
 
 
