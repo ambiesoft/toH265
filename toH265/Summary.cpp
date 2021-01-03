@@ -18,8 +18,14 @@ namespace Ambiesoft {
 				sb.AppendLine("==============================");
 			}
 
-			CppUtils::CenteredMessageBox(
-				win,
+			//CppUtils::CenteredMessageBox(
+			//	win,
+			//	sb.ToString(),
+			//	Application::ProductName,
+			//	MessageBoxButtons::OK,
+			//	isWarning ? MessageBoxIcon::Warning : MessageBoxIcon::Information);
+
+			JR::Utils::GUI::Forms::FlexibleMessageBox::Show(win,
 				sb.ToString(),
 				Application::ProductName,
 				MessageBoxButtons::OK,

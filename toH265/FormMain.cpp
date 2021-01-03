@@ -173,15 +173,31 @@ namespace Ambiesoft {
 			}
 
 			lvi->SubItems["directory"]->Text = Path::GetDirectoryName(movieFile);
+			lvi->SubItems["directory"]->Tag = Path::GetDirectoryName(movieFile);
+
 			lvi->SubItems["filename"]->Text = Path::GetFileName(movieFile);
+			lvi->SubItems["filename"]->Tag = Path::GetFileName(movieFile);
+
 			lvi->SubItems["size"]->Text = AmbLib::FormatSize(size);
+			lvi->SubItems["size"]->Tag = size;
+
 			lvi->SubItems["aspect"]->Text = sToString(aspect);
 			lvi->SubItems["aspect"]->Tag = aspect;
+
 			lvi->SubItems["format"]->Text = Ambiesoft::toH265Helper::human_format(format->ToString());
+			lvi->SubItems["format"]->Tag = Ambiesoft::toH265Helper::human_format(format->ToString());
+
 			lvi->SubItems["vcodec"]->Text = vcodec->ToString();
+			lvi->SubItems["vcodec"]->Tag = vcodec->ToString();
+
 			lvi->SubItems["acodec"]->Text = acodec->ToString();
+			lvi->SubItems["acodec"]->Tag = acodec->ToString();
+
 			lvi->SubItems["duration"]->Text = duration->ToString();
+			lvi->SubItems["duration"]->Tag = duration->TotalMilliseconds;
+
 			lvi->SubItems["fps"]->Text = Ambiesoft::toH265Helper::FormatFPS(fps);
+			lvi->SubItems["fps"]->Tag = fps;
 
 			lvInputs->Items->Add(lvi);
 		}

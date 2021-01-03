@@ -39,6 +39,9 @@ namespace Ambiesoft {
 					SORT_INT,
 					SORT_STRING,
 					SORT_ISTRING,
+					SORT_LONGLONG,
+					SORT_SIZE,
+					SORT_DOUBLE,
 				};
 			private:
 				String^ key_;
@@ -83,8 +86,32 @@ namespace Ambiesoft {
 						return String::Compare(x->Text, y->Text);
 					case SORTTYPE::SORT_ISTRING:
 						return String::Compare(x->Text, y->Text, true);
+					case SORTTYPE::SORT_LONGLONG:
+					{
+						LONGLONG diff = ((LONGLONG)x->Tag - (LONGLONG)y->Tag);
+						if (int::MinValue <= diff && diff <= int::MaxValue)
+							return (int)diff;
+						return diff == 0 ? 0 :
+							(diff < 0 ? -1 : 1);
 					}
-					DASSERT(false);
+					case SORTTYPE::SORT_DOUBLE:
+					{
+						double diff = ((double)x->Tag - (double)y->Tag);
+						if (int::MinValue <= diff && diff <= int::MaxValue)
+							return (int)diff;
+						return diff == 0 ? 0 :
+							(diff < 0 ? -1 : 1);
+					}
+					case SORTTYPE::SORT_SIZE:
+					{
+						System::Drawing::Size^ s1 = (System::Drawing::Size^)x->Tag;
+						System::Drawing::Size^ s2 = (System::Drawing::Size^)y->Tag;
+						return (s1->Width * s1->Height) - (s2->Width * s2->Height);
+					}
+					default:
+						DASSERT(false);
+					}
+					
 					return 0;
 				}
 			};
@@ -92,13 +119,13 @@ namespace Ambiesoft {
 				gcnew ColumnItem{ "main", "", 0, ColumnItem::SORTTYPE::SORT_STRING},
 					gcnew ColumnItem{ "directory", I18N("Directory"), 150, ColumnItem::SORTTYPE::SORT_ISTRING },
 					gcnew ColumnItem{ "filename", I18N("Filename"), 150, ColumnItem::SORTTYPE::SORT_ISTRING },
-					gcnew ColumnItem{ "size", I18N("Size"), 50, ColumnItem::SORTTYPE::SORT_INT },
-					gcnew ColumnItem{ "aspect", I18N("Aspect Ratio"), 50, ColumnItem::SORTTYPE::SORT_ISTRING },
+					gcnew ColumnItem{ "size", I18N("Size"), 50, ColumnItem::SORTTYPE::SORT_LONGLONG },
+					gcnew ColumnItem{ "aspect", I18N("Aspect Ratio"), 50, ColumnItem::SORTTYPE::SORT_SIZE },
 					gcnew ColumnItem{ "format", I18N("Format"),50,ColumnItem::SORTTYPE::SORT_ISTRING },
 					gcnew ColumnItem{ "vcodec", I18N("Video"),50,ColumnItem::SORTTYPE::SORT_ISTRING },
 					gcnew ColumnItem{ "acodec", I18N("Audio"),50,ColumnItem::SORTTYPE::SORT_ISTRING },
-					gcnew ColumnItem{ "duration", I18N("Duration") ,50,ColumnItem::SORTTYPE::SORT_INT },
-					gcnew ColumnItem{ "fps", I18N("FPS") ,50,ColumnItem::SORTTYPE::SORT_INT },
+					gcnew ColumnItem{ "duration", I18N("Duration") ,50,ColumnItem::SORTTYPE::SORT_DOUBLE },
+					gcnew ColumnItem{ "fps", I18N("FPS") ,50,ColumnItem::SORTTYPE::SORT_DOUBLE },
 			};
 
 			CpuAffinity cpuAffinity_;
@@ -261,8 +288,9 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
 				DASSERT_IS_CLASS(y, ListViewItem);
 				ColumnItem^ ci = ColumnItems[sortColumn_];
 
-				return ci->Compare(((ListViewItem^)x)->SubItems[sortColumn_]
+				int ret = ci->Compare(((ListViewItem^)x)->SubItems[sortColumn_]
 					, ((ListViewItem^)y)->SubItems[sortColumn_]);
+				return bSortRev_ ? -ret : ret;
 			}
 
 

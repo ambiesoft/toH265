@@ -437,6 +437,8 @@ private:
 
 			bool UpdateOutputFiles();
 			void UpdateEnableState();
+			array<String^>^ GetTargetDirectories();
+
 		private:
 			System::Void CmbEncodeType_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
 			System::Void BtnOK_Click(System::Object^ sender, System::EventArgs^ e);
