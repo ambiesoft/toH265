@@ -490,7 +490,8 @@ namespace Ambiesoft {
 			if (ts.Days != 0)
 				return ts.ToString(I18N(L"d'd 'h'h 'm'm'"));
 
-			return ts.ToString(I18N(L"h'h 'm'm'"));
+			// return ts.ToString(I18N(L"h'h 'm'm'"));
+			return ts.ToString(I18N(L"h'h 'm'm 's's'"));
 		}
 		String^ FormMain::GetRemainingTimeText(ElapseInfo^ firstElapse, ElapseInfo^ lastElapse, double total)
 		{
@@ -532,12 +533,12 @@ namespace Ambiesoft {
 		void FormMain::UpdateTitleTS(TimeSpan tsProgress)
 		{
 			// for culculating eta
-			ElapseInfo^ lastElapse = gcnew ElapseInfo(tsProgress.TotalMilliseconds);
+			double totalProgress = encodeTask_->EndedDurations + tsProgress.TotalMilliseconds;
+			ElapseInfo^ lastElapse = gcnew ElapseInfo(totalProgress);
 			ElapseInfo^ firstElapse = elapses_.Enqueue(lastElapse);
 
 			DASSERT(encodeTask_);
-			double percent = (tsProgress.TotalMilliseconds / encodeTask_->CurrentTotalMilliseconds);
-			percent *= (encodeTask_->EndedPartPercent + encodeTask_->CurrentPartPercent);
+			double percent = (totalProgress) / TotalInputDuration->TotalMilliseconds;
 			UpdateTitle((int)(percent * 100));
 
 			if (this->WindowState == FormWindowState::Minimized)
@@ -546,7 +547,7 @@ namespace Ambiesoft {
 			SetStatusText(STATUSTEXT::REMAINING,
 				GetRemainingTimeText(firstElapse, lastElapse, TotalInputDuration->TotalMilliseconds));
 
-			OutputDuration = gcnew AVDuration( encodeTask_->EndedDurations + tsProgress.TotalMilliseconds);
+			OutputDuration = gcnew AVDuration(totalProgress);
 		}
 
 		void FormMain::SetStatusText(STATUSTEXT ss)
@@ -657,7 +658,6 @@ namespace Ambiesoft {
 			if (tsmiPriorityBackground->Checked)
 				SetPriorityClass(GetCurrentProcess(), PROCESS_MODE_BACKGROUND_BEGIN);
 
-			elapses_.Clear();
 		}
 		void FormMain::ThreadEnded(int retval)
 		{

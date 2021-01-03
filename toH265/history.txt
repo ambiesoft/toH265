@@ -1,3 +1,6 @@
+2021/01/03 ver1.0.58
+Fixed: Remaining Time and percent
+
 2021/01/03 ver1.0.57
 lossless
 
