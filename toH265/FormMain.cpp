@@ -808,21 +808,23 @@ namespace Ambiesoft {
 				{
 					if (job->RetVal != 0)
 					{
+						isWarning = true;
 						sbMessage.AppendLine(String::Format(L"Process exited with {0}.", job->RetVal));
+						return;
 					}
-					DASSERT(!String::IsNullOrEmpty(job->OutputtingMove));
-					GetStreamInfo(FFProbe, job->OutputtingMove, outputtedFormat, outputtedAC, outputtedVC, outputtedAspect, outputtedTS, outputtedFps);
+					DASSERT(!String::IsNullOrEmpty(job->OutputtedMovie));
+					GetStreamInfo(FFProbe, job->OutputtedMovie, outputtedFormat, outputtedAC, outputtedVC, outputtedAspect, outputtedTS, outputtedFps);
 					for each (String ^ infile in job->InputMovies)
 						inputSize += FileInfo(infile).Length;
-					outputtedSize = FileInfo(job->OutputtingMove).Length;
+					outputtedSize = FileInfo(job->OutputtedMovie).Length;
 
 					DASSERT(!String::IsNullOrEmpty(outputtedAC));
 					DASSERT(!String::IsNullOrEmpty(outputtedVC));
 					DASSERT(outputtedTS.TotalMilliseconds != 0);
 
 					sbMessage.AppendFormat(I18N(L"Encoding successfully finished at {0}."),
-						DateTime::Now.ToString());
-					sbMessage.AppendLine();
+						job->FinishedDateString);
+					// sbMessage.AppendLine();
 
 					if (!AmbLib::IsAlmostSame(job->TotalInputDuration->TotalMilliseconds,
 						outputtedTS.TotalMilliseconds))
@@ -838,6 +840,8 @@ namespace Ambiesoft {
 						isWarning = true;
 					}
 					sbMessage.AppendLine();
+					job->PrintInputFiles(%sbMessage);
+					job->PrintOutputFile(%sbMessage);
 					sbMessage.AppendLine(String::Format(I18N(L"Format = {0}"), outputtedFormat));
 					sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), outputtedAC));
 					sbMessage.AppendLine(String::Format(I18N(L"Video codec = {0}"), outputtedVC));

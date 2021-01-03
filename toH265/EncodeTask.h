@@ -2,6 +2,7 @@
 
 #include "AVCodec.h"
 #include "AVDuration.h"
+#include "toH265.h"
 
 namespace Ambiesoft {
 	namespace toH265 {
@@ -14,6 +15,7 @@ namespace Ambiesoft {
 			bool ended_ = false;
 			int retval_ = -1;
 			String^ TempFile;
+			DateTime^ finishData_;
 
 			bool ReEncode = false;
 			array<String^>^ inputMovies_;
@@ -38,7 +40,15 @@ namespace Ambiesoft {
 			{
 				double get() { return totalInputFPS_; }
 			}
-			property String^ OutputtingMove;
+			property String^ OutputtingMovie;
+			property String^ OutputtedMovie
+			{
+				String^ get() {
+					if (ended_)
+						return OutputtingMovie;
+					return String::Empty;
+				}
+			}
 			property AVCodec^ OutputVideoCodec
 			{
 				AVCodec^ get() { return outputVideoCodec_; }
@@ -68,7 +78,7 @@ namespace Ambiesoft {
 			{
 				this->ReEncode = bReEncode;
 				this->inputMovies_ = inputMovies;
-				this->OutputtingMove = outputtingMovie;
+				this->OutputtingMovie = outputtingMovie;
 				this->OutputVideoCodec = outputVideoCodec;
 				this->OutputAudioCodec = outputAudioCodec;
 				this->IsSameSize = isSameSize;
@@ -125,11 +135,33 @@ namespace Ambiesoft {
 			{
 				ended_ = true;
 				retval_ = retval;
+				finishData_ = DateTime::Now;
 			}
 			String^ GetArg(String^% report);
 			property int RetVal 
 			{
 				int get() { return retval_; }
+			}
+			property String^ FinishedDateString
+			{
+				String^ get() {
+					if (finishData_)
+						return finishData_->ToString();
+					return String::Empty;
+				}
+			}
+			void PrintInputFiles(System::Text::StringBuilder^ sb) {
+				sb->AppendLine(I18N(L"Input Files:"));
+				for each (String ^ file in inputMovies_)
+				{
+					sb->Append(L"  ");
+					sb->AppendLine(file);
+				}
+			}
+			void PrintOutputFile(System::Text::StringBuilder^ sb) {
+				sb->AppendLine(I18N(L"Output File:"));
+				sb->Append(L"  ");
+				sb->AppendLine(OutputtedMovie);
 			}
 		};
 
@@ -196,7 +228,7 @@ namespace Ambiesoft {
 			}
 			property String^ CurrentOutputtingMovieFile
 			{
-				String^ get() { return CurrentJob->OutputtingMove; }
+				String^ get() { return CurrentJob->OutputtingMovie; }
 			}
 
 			void OnTaskEnded(int retval)

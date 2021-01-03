@@ -16,12 +16,12 @@ namespace Ambiesoft {
 			DASSERT(InputMovies->Length != 0);
 			if (InputMovies->Length == 1)
 			{
-				DASSERT(!String::IsNullOrEmpty(OutputtingMove));
+				DASSERT(!String::IsNullOrEmpty(OutputtingMovie));
 				arg = String::Format(L"-y -i \"{0}\" -max_muxing_queue_size 9999 -c copy -c:v {1} -c:a {2} \"{3}\"",
 					InputMovies[0],
 					OutputVideoCodec->ToFFMpegString(),
 					OutputAudioCodec->ToFFMpegString(),
-					OutputtingMove);
+					OutputtingMovie);
 			}
 			else
 			{
@@ -40,7 +40,7 @@ namespace Ambiesoft {
 
 					arg = String::Format("-y -safe 0 -f concat -i \"{0}\" -max_muxing_queue_size 9999 -c copy \"{1}\"",
 						TempFile,
-						OutputtingMove);
+						OutputtingMovie);
 				}
 				else
 				{
@@ -96,7 +96,7 @@ namespace Ambiesoft {
 					sb.AppendFormat("-c:v {0} -c:a {1} \"{2}\"",
 						OutputVideoCodec->ToFFMpegString(),
 						OutputAudioCodec->ToFFMpegString(),
-						OutputtingMove);
+						OutputtingMovie);
 
 					arg = sb.ToString();
 				}

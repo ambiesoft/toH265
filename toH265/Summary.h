@@ -18,9 +18,9 @@ namespace Ambiesoft {
 				hasWarning_(hasWaring),
 				text_(text),
 				job_(job) {}
-			property String^ LastOutputMovie
+			property String^ OutputtedMovie
 			{
-				String^ get() { return job_->OutputtingMove; }
+				String^ get() { return job_->OutputtedMovie; }
 			}
 			property bool IsWarning
 			{
@@ -48,7 +48,10 @@ namespace Ambiesoft {
 				String^ get() {
 					if (papers_.Count == 0)
 						return nullptr;
-					return papers_[papers_.Count - 1]->LastOutputMovie;
+					for (int i = papers_.Count - 1; i >= 0; --i)
+						if (!String::IsNullOrEmpty(papers_[i]->OutputtedMovie))
+							return papers_[i]->OutputtedMovie;
+					return nullptr;
 				}
 			}
 		};

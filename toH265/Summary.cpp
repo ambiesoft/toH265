@@ -11,10 +11,11 @@ namespace Ambiesoft {
 		{
 			bool isWarning = false;
 			StringBuilder sb;
+			sb.AppendLine("==============================");
 			for each (Paper ^ paper in papers_)
 			{
 				isWarning |= paper->IsWarning;
-				sb.AppendLine(paper->Message);
+				sb.Append(paper->Message);
 				sb.AppendLine("==============================");
 			}
 
