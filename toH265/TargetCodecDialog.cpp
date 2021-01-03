@@ -166,13 +166,12 @@ namespace Ambiesoft {
 			{
 				// LossLess
 				// Copy must be 'checked'
-				if (rbAudioCopy->Checked && rbVideoCopy->Checked)
+				if (!(rbAudioCopy->Checked && rbVideoCopy->Checked))
 				{
-					// OK
+					CppUtils::Alert(I18N("'Copy' must be selected for 'Lossless concat'."));
+					this->DialogResult = System::Windows::Forms::DialogResult::None;
 					return;
 				}
-				CppUtils::Alert(I18N("'Copy' must be selected for 'Lossless concat'."));
-				this->DialogResult = System::Windows::Forms::DialogResult::None;
 			}
 			else
 			{

@@ -14,7 +14,8 @@ namespace Ambiesoft {
 		{
 			bool ended_ = false;
 			int retval_ = -1;
-			String^ TempFile;
+			String^ tempFile_;
+			String^ report_;
 			DateTime^ finishData_;
 
 			bool ReEncode = false;
@@ -27,6 +28,8 @@ namespace Ambiesoft {
 			AVCodec^ outputVideoCodec_ = gcnew AVCodec();
 			AVCodec^ outputAudioCodec_ = gcnew AVCodec();
 
+			void CreateTempFile();
+			void DeleteTempFile();
 		public:
 			property array<String^>^ InputMovies
 			{
@@ -136,6 +139,7 @@ namespace Ambiesoft {
 				ended_ = true;
 				retval_ = retval;
 				finishData_ = DateTime::Now;
+				DeleteTempFile();
 			}
 			String^ GetArg(String^% report);
 			property int RetVal 

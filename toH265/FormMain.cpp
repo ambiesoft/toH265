@@ -671,16 +671,6 @@ namespace Ambiesoft {
 		}
 		void FormMain::ThreadEnded(int retval)
 		{
-			if (!String::IsNullOrEmpty(tempFile_))
-			{
-				try
-				{
-					File::Delete(tempFile_);
-				}
-				catch (Exception^)
-				{
-				}
-			}
 			pidFFMpeg_ = 0;
 			processSuspeded_ = false;
 			SafeJoin(thFFMpeg_);

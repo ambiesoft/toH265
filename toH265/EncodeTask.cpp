@@ -9,10 +9,34 @@ namespace Ambiesoft {
 
 		using namespace System::Collections::Generic;
 
+		void EncodeJob::CreateTempFile()
+		{
+			DASSERT(String::IsNullOrEmpty(tempFile_));
+			tempFile_ = Path::GetTempFileName();
+		}
+		void EncodeJob::DeleteTempFile()
+		{
+			if (String::IsNullOrEmpty(tempFile_))
+				return;
+
+			try
+			{
+				String^ all = File::ReadAllText(tempFile_);
+				if (all == report_)
+				{
+					File::Delete(tempFile_);
+					tempFile_ = nullptr;
+				}
+			}
+			catch(Exception^)
+			{ }
+		}
+
 		String^ EncodeJob::GetArg(String^% report)
 		{
 			String^ arg;
 			StringBuilder sbReportFile;
+			StringBuilder sbFileText;
 			DASSERT(InputMovies->Length != 0);
 			if (InputMovies->Length == 1)
 			{
@@ -27,19 +51,23 @@ namespace Ambiesoft {
 			{
 				if (!ReEncode)
 				{
-					TempFile = Path::GetTempFileName();
-					sbReportFile.AppendLine(TempFile);
-					StreamWriter sw(TempFile, false, gcnew UTF8Encoding(false));
+					CreateTempFile();
+					sbReportFile.AppendLine(tempFile_);
+					
+					
+					StreamWriter sw(tempFile_, false, gcnew UTF8Encoding(false));
 
 					for each (String ^ file in InputMovies)
 					{
-						sbReportFile.AppendLine(String::Format("file '{0}'", file));
-						sw.WriteLine(String::Format("file '{0}'", file));
+						String^ line = String::Format("file '{0}'", file);
+						sbReportFile.AppendLine(line);
+						sw.WriteLine(line);
+						sbFileText.AppendLine(line);
 					}
 					sbReportFile.AppendLine();
 
 					arg = String::Format("-y -safe 0 -f concat -i \"{0}\" -max_muxing_queue_size 9999 -c copy \"{1}\"",
-						TempFile,
+						tempFile_,
 						OutputtingMovie);
 				}
 				else
@@ -102,6 +130,7 @@ namespace Ambiesoft {
 				}
 			}
 			report = sbReportFile.ToString();
+			report_ = sbFileText.ToString();
 			return arg;
 		}
 		

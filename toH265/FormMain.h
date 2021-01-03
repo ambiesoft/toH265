@@ -357,7 +357,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
 			};
 			// System::Text::RegularExpressions::Regex^ regFFMpeg_;
 
-			String^ tempFile_;
+			// String^ tempFile_;
 
 			System::Drawing::Icon^ iconBlue_;
 			System::Drawing::Icon^ iconYellow_;
