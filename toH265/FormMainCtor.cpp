@@ -18,7 +18,7 @@ namespace Ambiesoft {
 
 		using namespace Newtonsoft::Json::Linq;
 
-		FormMain::FormMain() : dlgAfterFinish_(true,true,true,true)
+		FormMain::FormMain() : dlgAfterFinish_(true,!true,true,true)
 		{
 			InitializeComponent();
 

@@ -1,3 +1,6 @@
+2021/01/04 ver1.0.59
+Move shutdown to Lib
+
 2021/01/03 ver1.0.58
 Fixed: Remaining Time and percent
 

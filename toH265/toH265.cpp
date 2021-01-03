@@ -102,29 +102,10 @@ namespace Ambiesoft {
 			if (!preRun())
 				return 1;
 
-			bool shutdown = false;
 			for each (String ^ arg in args)
 			{
-				if (arg == "-shutdown")
-					shutdown = true;
-				else
-					clMovieFiles_.Add(arg);
+				clMovieFiles_.Add(arg);
 			}
-			if (shutdown && clMovieFiles_.Count != 0)
-			{
-				CppUtils::Alert(I18N(L"-shutdown must not be with other args."));
-				return RETURN_SHUTDOWN_MUST_NOT_WITH_ARGS;
-			}
-			if (shutdown)
-			{
-				Ambiesoft::AfterRunLib::FormMain form;
-				form.IsShutdown = true;
-				form.Interval = 30;
-				form.TopMost = true;
-				Application::Run(%form);
-				return 0;
-			}
-
 
 			// Create the main window and run it
 			FormMain formMain;

@@ -736,34 +736,34 @@ namespace Ambiesoft {
 			{
 				HashIni^ ini = Profile::ReadAll(Program::IniFile);
 				DVERIFY(dlgAfterFinish_.LoadValues("AfterFinish", ini));
+				dlgAfterFinish_.DoNotify();
+				//if (dlgAfterFinish_.chkPlaySound->Checked)
+				//{
+				//	dlgAfterFinish_.PlayWav(true);
+				//}
 
-				if (dlgAfterFinish_.chkPlaySound->Checked)
-				{
-					dlgAfterFinish_.PlayWav(true);
-				}
+				//if (dlgAfterFinish_.chkOpenFolder->Checked)
+				//{
+				//	// Show outputmovie in Explorer
+				//	// CppUtils::OpenFolder(this, outputtingMovie_);
+				//}
 
-				if (dlgAfterFinish_.chkOpenFolder->Checked)
-				{
-					// Show outputmovie in Explorer
-					// CppUtils::OpenFolder(this, outputtingMovie_);
-				}
+				//if (dlgAfterFinish_.chkLaunchApp->Checked)
+				//{
+				//	try
+				//	{
+				//		Process::Start(dlgAfterFinish_.txtApp->Text, dlgAfterFinish_.txtArg->Text);
+				//	}
+				//	catch (Exception^ ex)
+				//	{
+				//		CppUtils::Alert(ex);
+				//	}
+				//}
 
-				if (dlgAfterFinish_.chkLaunchApp->Checked)
-				{
-					try
-					{
-						Process::Start(dlgAfterFinish_.txtApp->Text, dlgAfterFinish_.txtArg->Text);
-					}
-					catch (Exception^ ex)
-					{
-						CppUtils::Alert(ex);
-					}
-				}
-
-				if (dlgAfterFinish_.chkShutdown->Checked)
-				{
-					Process::Start(Application::ExecutablePath, "-shutdown");
-				}
+				//if (dlgAfterFinish_.chkShutdown->Checked)
+				//{
+				//	Process::Start(Application::ExecutablePath, "-shutdown");
+				//}
 			}
 
 			Summary^ summary = gcnew Summary();
