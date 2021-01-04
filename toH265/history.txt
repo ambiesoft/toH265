@@ -1,3 +1,6 @@
+2021/01/04 ver1.0.63
+Make Shutdown dialog TopMost
+
 2021/01/04 ver1.0.62
 MessageBox button text
 
