@@ -23,7 +23,14 @@ namespace Ambiesoft {
 			StringBuilder sbMessage;
 			sbMessage.Append(Application::ProductName);
 			sbMessage.Append(" ver");
-			sbMessage.Append(AmbLib::getAssemblyVersion(System::Reflection::Assembly::GetExecutingAssembly(), 3));
+			sbMessage.AppendLine(AmbLib::getAssemblyVersion(System::Reflection::Assembly::GetExecutingAssembly(), 3));
+
+			sbMessage.AppendLine();
+
+			sbMessage.AppendLine(String::Format("AfterFinish ver {0}",
+				AmbLib::getAssemblyVersion(Ambiesoft::AfterFinish::OptionDialog::typeid->Assembly, 3)));
+			sbMessage.AppendLine(String::Format("AfterRunLib ver {0}",
+				AmbLib::getAssemblyVersion(Ambiesoft::AfterRunLib::FormMain::typeid->Assembly, 3)));
 
 			sbMessage.AppendLine();
 			sbMessage.AppendFormat(I18N(L"ElapseTimeQueueLength:{0}"), elapses_.Size);
