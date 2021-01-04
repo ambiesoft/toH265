@@ -560,8 +560,9 @@ namespace JR.Utils.GUI.Forms
                 var marginWidth = flexibleMessageBoxForm.Width - flexibleMessageBoxForm.normalTextBoxMessage.Width;
                 var marginHeight = flexibleMessageBoxForm.Height - flexibleMessageBoxForm.normalTextBoxMessage.Height;
 
+                var widthForHidingScrollBar = 5;
                 //Set calculated dialog size (if the calculated values exceed the maximums, they were cut by windows forms automatically)
-                flexibleMessageBoxForm.Size = new Size(textWidth + marginWidth,
+                flexibleMessageBoxForm.Size = new Size(textWidth + marginWidth + widthForHidingScrollBar,
                                                        textHeight + marginHeight);
             }
 
