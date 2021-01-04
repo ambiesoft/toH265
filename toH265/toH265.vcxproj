@@ -227,6 +227,7 @@
     <ClCompile Include="FormMainTest.cpp" />
     <ClCompile Include="FormMainTray.cpp" />
     <ClCompile Include="helper.cpp" />
+    <ClCompile Include="InputListView.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -253,6 +254,7 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="helper.h" />
+    <ClInclude Include="InputListView.h" />
     <ClInclude Include="Summary.h" />
     <ClInclude Include="TargetCodecDialog.h">
       <FileType>CppForm</FileType>

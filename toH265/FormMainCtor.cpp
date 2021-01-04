@@ -26,14 +26,16 @@ namespace Ambiesoft {
 			lvInputs->Name = L"lvInputs";
 			lvInputs->UseCompatibleStateImageBehavior = false;
 			lvInputs->View = System::Windows::Forms::View::Details;
-			lvInputs->FullRowSelect = true;
+			lvInputs->FullRowSelect = !false;
 			lvInputs->HideSelection = false;
-			lvInputs->MultiSelect = false;
+			lvInputs->MultiSelect = true;
 			lvInputs->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragDrop);
 			lvInputs->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragEnter);
 			lvInputs->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragOver);
 			lvInputs->AllowDrop = true;
 			lvInputs->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &FormMain::OnColumnClick);
+			lvInputs->ItemCountChanged += gcnew Ambiesoft::toH265::InputListView::ItemCountChangedHandler(this, &Ambiesoft::toH265::FormMain::OnItemCountChanged);
+			lvInputs->ItemSelectionChanged += gcnew System::Windows::Forms::ListViewItemSelectionChangedEventHandler(this, &Ambiesoft::toH265::FormMain::OnItemSelectionChanged);
 			for each (ColumnItem^ ci in ColumnItems)
 			{
 				lvInputs->Columns->Add(ci->Key, ci->Text, ci->Width);
@@ -136,8 +138,37 @@ namespace Ambiesoft {
 			lvInputs->Sort();
 		}
 
+		void FormMain::SetItemCountStatus()
+		{
+			if (lvInputs->SelectedItems->Count != 0)
+			{
+				slItemCount->Text = String::Format(I18N(L"{0} {1} {2} {3} selected"),
+					lvInputs->Items->Count,
+					lvInputs->Items->Count == 1 ? I18N("item") : I18N("items"),
+					lvInputs->SelectedItems->Count,
+					lvInputs->SelectedItems->Count == 1 ? I18N("item") : I18N("items"));
+			}
+			else
+			{
+				slItemCount->Text = String::Format(I18N(L"{0} {1}"),
+					lvInputs->Items->Count,
+					lvInputs->Items->Count == 1 ? I18N("item") : I18N("items"));
+			}
+		}
+		void FormMain::OnItemCountChanged()
+		{
+			SetItemCountStatus();
+		}
+		void FormMain::OnItemSelectionChanged(System::Object^ sender, System::Windows::Forms::ListViewItemSelectionChangedEventArgs^ e)
+		{
+			SetItemCountStatus();
+		}
+
 	}
 }
+
+
+
 
 
 

@@ -24,7 +24,7 @@ enum ERROR_RETURN
 	RETURN_SHUTDOWN_MUST_NOT_WITH_ARGS,
 };
 
-
+delegate void VVDelegate();
 
 #define I18N(s) Ambiesoft::toH265::Program::getString(s)
 

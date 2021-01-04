@@ -6,6 +6,7 @@
 #include "CpuAffinity.h"
 #include "EncodeTask.h"
 #include "Summary.h"
+#include "InputListView.h"
 
 #include "toH265.h"
 
@@ -116,7 +117,7 @@ namespace Ambiesoft {
 				}
 			};
 			static initonly array<ColumnItem^>^ ColumnItems = gcnew array<ColumnItem^> {
-				gcnew ColumnItem{ "main", "", 0, ColumnItem::SORTTYPE::SORT_STRING},
+					gcnew ColumnItem{ "main", "", 0, ColumnItem::SORTTYPE::SORT_STRING},
 					gcnew ColumnItem{ "directory", I18N("Directory"), 150, ColumnItem::SORTTYPE::SORT_ISTRING },
 					gcnew ColumnItem{ "filename", I18N("Filename"), 150, ColumnItem::SORTTYPE::SORT_ISTRING },
 					gcnew ColumnItem{ "size", I18N("Size"), 50, ColumnItem::SORTTYPE::SORT_LONGLONG },
@@ -132,7 +133,7 @@ namespace Ambiesoft {
 			// System::Windows::Forms::Timer^ timerSetAffinity_;
 			bool bCloseFromMenu_;
 			EncodeTask^ encodeTask_;
-
+			void SetItemCountStatus();
 		public:
 			// static initonly cli::array<wchar_t>^ char1x = gcnew cli::array<wchar_t>{L'x'};
 
@@ -237,6 +238,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiPriorityBelowNormal;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiToggleAll;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiView;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
+private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 
 
 
@@ -297,7 +299,8 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
 		protected:
 			Summary^ lastSummary_;
 
-			ListViewCustomReorder::ListViewEx^ lvInputs = gcnew ListViewCustomReorder::ListViewEx();
+			// ListViewCustomReorder::ListViewEx^ lvInputs = gcnew ListViewCustomReorder::ListViewEx();
+			InputListView^ lvInputs = gcnew InputListView();
 
 			bool CheckMovieAndSet(String^ file, bool bSet, bool bShowCodecAlert);
 
@@ -572,6 +575,8 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowLastResult;
 			System::Void tsmiToggleAll_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiShowLastResult_Click(System::Object^ sender, System::EventArgs^ e);
 
+			void OnItemCountChanged();
+			void OnItemSelectionChanged(System::Object^ sender, System::Windows::Forms::ListViewItemSelectionChangedEventArgs^ e);
 };
 
 
