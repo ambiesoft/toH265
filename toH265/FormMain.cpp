@@ -199,6 +199,8 @@ namespace Ambiesoft {
 			lvi->SubItems["fps"]->Text = Ambiesoft::toH265Helper::FormatFPS(fps);
 			lvi->SubItems["fps"]->Tag = fps;
 
+			lvi->ImageKey = "listimage_normal.png";
+
 			lvInputs->Items->Add(lvi);
 		}
 		bool FormMain::CheckMovieAndSet(String^ moviefile, bool bSet, bool bShowCodecAlert)

@@ -117,7 +117,7 @@ namespace Ambiesoft {
 				}
 			};
 			static initonly array<ColumnItem^>^ ColumnItems = gcnew array<ColumnItem^> {
-					gcnew ColumnItem{ "main", "", 0, ColumnItem::SORTTYPE::SORT_STRING},
+					gcnew ColumnItem{ "main", "", 16, ColumnItem::SORTTYPE::SORT_STRING},
 					gcnew ColumnItem{ "directory", I18N("Directory"), 150, ColumnItem::SORTTYPE::SORT_ISTRING },
 					gcnew ColumnItem{ "filename", I18N("Filename"), 150, ColumnItem::SORTTYPE::SORT_ISTRING },
 					gcnew ColumnItem{ "size", I18N("Size"), 50, ColumnItem::SORTTYPE::SORT_LONGLONG },
@@ -132,7 +132,8 @@ namespace Ambiesoft {
 			CpuAffinity cpuAffinity_;
 			// System::Windows::Forms::Timer^ timerSetAffinity_;
 			bool bCloseFromMenu_;
-			EncodeTask^ encodeTask_;
+		private: System::Windows::Forms::ImageList^ ilList;
+			   EncodeTask^ encodeTask_;
 			void SetItemCountStatus();
 		public:
 			// static initonly cli::array<wchar_t>^ char1x = gcnew cli::array<wchar_t>{L'x'};

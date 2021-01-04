@@ -1,3 +1,6 @@
+2021/01/04 ver1.0.60
+ImageList
+
 2021/01/04 ver1.0.59
 Move shutdown to Lib
 

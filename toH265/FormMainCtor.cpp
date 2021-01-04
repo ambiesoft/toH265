@@ -22,13 +22,14 @@ namespace Ambiesoft {
 		{
 			InitializeComponent();
 
-			
+		
 			lvInputs->Name = L"lvInputs";
 			lvInputs->UseCompatibleStateImageBehavior = false;
 			lvInputs->View = System::Windows::Forms::View::Details;
 			lvInputs->FullRowSelect = !false;
 			lvInputs->HideSelection = false;
 			lvInputs->MultiSelect = true;
+			lvInputs->SmallImageList = ilList;
 			lvInputs->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragDrop);
 			lvInputs->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragEnter);
 			lvInputs->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragOver);

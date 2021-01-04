@@ -67,11 +67,12 @@ namespace Ambiesoft {
             this->tsmiNotifyStart = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->statusMain = (gcnew System::Windows::Forms::StatusStrip());
             this->slMain = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+            this->slItemCount = (gcnew System::Windows::Forms::ToolStripStatusLabel());
             this->slFormat = (gcnew System::Windows::Forms::ToolStripStatusLabel());
             this->slVideoCodec = (gcnew System::Windows::Forms::ToolStripStatusLabel());
             this->slAudioCodec = (gcnew System::Windows::Forms::ToolStripStatusLabel());
             this->slDuration = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-            this->slItemCount = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+            this->ilList = (gcnew System::Windows::Forms::ImageList(this->components));
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitRoot))->BeginInit();
             this->splitRoot->Panel1->SuspendLayout();
             this->splitRoot->Panel2->SuspendLayout();
@@ -466,6 +467,11 @@ namespace Ambiesoft {
             resources->ApplyResources(this->slMain, L"slMain");
             this->slMain->Spring = true;
             // 
+            // slItemCount
+            // 
+            this->slItemCount->Name = L"slItemCount";
+            resources->ApplyResources(this->slItemCount, L"slItemCount");
+            // 
             // slFormat
             // 
             this->slFormat->Name = L"slFormat";
@@ -486,10 +492,13 @@ namespace Ambiesoft {
             this->slDuration->Name = L"slDuration";
             resources->ApplyResources(this->slDuration, L"slDuration");
             // 
-            // slItemCount
+            // ilList
             // 
-            this->slItemCount->Name = L"slItemCount";
-            resources->ApplyResources(this->slItemCount, L"slItemCount");
+            this->ilList->ImageStream = (cli::safe_cast<System::Windows::Forms::ImageListStreamer^>(resources->GetObject(L"ilList.ImageStream")));
+            this->ilList->TransparentColor = System::Drawing::Color::Transparent;
+            this->ilList->Images->SetKeyName(0, L"listimage_normal.png");
+            this->ilList->Images->SetKeyName(1, L"listimage_encoding.png");
+            this->ilList->Images->SetKeyName(2, L"listimage_done.png");
             // 
             // FormMain
             // 
