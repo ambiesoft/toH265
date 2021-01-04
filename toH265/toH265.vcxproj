@@ -292,7 +292,9 @@
     <EmbeddedResource Include="toH265Strings.resx" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Copying.txt" />
     <Text Include="history.txt" />
+    <Text Include="randomText.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ambiesoft.toH265Helper\Ambiesoft.toH265Helper.csproj">

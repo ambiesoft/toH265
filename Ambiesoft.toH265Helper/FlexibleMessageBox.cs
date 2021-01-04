@@ -279,7 +279,7 @@ namespace JR.Utils.GUI.Forms
             {
                 this.components = new System.ComponentModel.Container();
                 this.button1 = new System.Windows.Forms.Button();
-                this.richTextBoxMessage = new System.Windows.Forms.RichTextBox();
+                this.normalTextBoxMessage = new System.Windows.Forms.TextBox();
                 this.FlexibleMessageBoxFormBindingSource = new System.Windows.Forms.BindingSource(this.components);
                 this.panel1 = new System.Windows.Forms.Panel();
                 this.pictureBoxForIcon = new System.Windows.Forms.PictureBox();
@@ -306,23 +306,25 @@ namespace JR.Utils.GUI.Forms
                 // 
                 // richTextBoxMessage
                 // 
-                this.richTextBoxMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                this.normalTextBoxMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right)));
-                this.richTextBoxMessage.BackColor = System.Drawing.Color.White;
-                this.richTextBoxMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-                this.richTextBoxMessage.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.FlexibleMessageBoxFormBindingSource, "MessageText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-                this.richTextBoxMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                this.richTextBoxMessage.Location = new System.Drawing.Point(50, 26);
-                this.richTextBoxMessage.Margin = new System.Windows.Forms.Padding(0);
-                this.richTextBoxMessage.Name = "richTextBoxMessage";
-                this.richTextBoxMessage.ReadOnly = true;
-                this.richTextBoxMessage.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-                this.richTextBoxMessage.Size = new System.Drawing.Size(200, 20);
-                this.richTextBoxMessage.TabIndex = 0;
-                this.richTextBoxMessage.TabStop = false;
-                this.richTextBoxMessage.Text = "<Message>";
-                this.richTextBoxMessage.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBoxMessage_LinkClicked);
+                this.normalTextBoxMessage.BackColor = System.Drawing.Color.White;
+                this.normalTextBoxMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
+                this.normalTextBoxMessage.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.FlexibleMessageBoxFormBindingSource, "MessageText", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+                this.normalTextBoxMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                this.normalTextBoxMessage.Location = new System.Drawing.Point(50, 26);
+                this.normalTextBoxMessage.Margin = new System.Windows.Forms.Padding(0);
+                this.normalTextBoxMessage.Name = "normalTextBoxMessage";
+                this.normalTextBoxMessage.ReadOnly = true;
+                this.normalTextBoxMessage.Size = new System.Drawing.Size(200, 20);
+                this.normalTextBoxMessage.TabIndex = 0;
+                this.normalTextBoxMessage.TabStop = false;
+                this.normalTextBoxMessage.Text = "<Message>";
+                this.normalTextBoxMessage.Multiline = true;
+                this.normalTextBoxMessage.ScrollBars = ScrollBars.Both;
+                this.normalTextBoxMessage.WordWrap = false;
+                // this.normalTextBoxMessage.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBoxMessage_LinkClicked);
                 // 
                 // panel1
                 // 
@@ -331,7 +333,7 @@ namespace JR.Utils.GUI.Forms
                 | System.Windows.Forms.AnchorStyles.Right)));
                 this.panel1.BackColor = System.Drawing.Color.White;
                 this.panel1.Controls.Add(this.pictureBoxForIcon);
-                this.panel1.Controls.Add(this.richTextBoxMessage);
+                this.panel1.Controls.Add(this.normalTextBoxMessage);
                 this.panel1.Location = new System.Drawing.Point(-3, -4);
                 this.panel1.Name = "panel1";
                 this.panel1.Size = new System.Drawing.Size(268, 59);
@@ -402,7 +404,7 @@ namespace JR.Utils.GUI.Forms
 
             private System.Windows.Forms.Button button1;
             private System.Windows.Forms.BindingSource FlexibleMessageBoxFormBindingSource;
-            private System.Windows.Forms.RichTextBox richTextBoxMessage;
+            private System.Windows.Forms.TextBox normalTextBoxMessage;
             private System.Windows.Forms.Panel panel1;
             private System.Windows.Forms.PictureBox pictureBoxForIcon;
             private System.Windows.Forms.Button button2;
@@ -554,8 +556,8 @@ namespace JR.Utils.GUI.Forms
                 var textWidth = Math.Max(longestTextRowWidth + SCROLLBAR_WIDTH_OFFSET, captionWidth);
                 
                 //Calculate margins
-                var marginWidth = flexibleMessageBoxForm.Width - flexibleMessageBoxForm.richTextBoxMessage.Width;
-                var marginHeight = flexibleMessageBoxForm.Height - flexibleMessageBoxForm.richTextBoxMessage.Height;
+                var marginWidth = flexibleMessageBoxForm.Width - flexibleMessageBoxForm.normalTextBoxMessage.Width;
+                var marginHeight = flexibleMessageBoxForm.Height - flexibleMessageBoxForm.normalTextBoxMessage.Height;
 
                 //Set calculated dialog size (if the calculated values exceed the maximums, they were cut by windows forms automatically)
                 flexibleMessageBoxForm.Size = new Size(textWidth + marginWidth,
@@ -588,8 +590,8 @@ namespace JR.Utils.GUI.Forms
                     default:
                         //When no icon is used: Correct placement and width of rich text box.
                         flexibleMessageBoxForm.pictureBoxForIcon.Visible = false;
-                        flexibleMessageBoxForm.richTextBoxMessage.Left -= flexibleMessageBoxForm.pictureBoxForIcon.Width;
-                        flexibleMessageBoxForm.richTextBoxMessage.Width += flexibleMessageBoxForm.pictureBoxForIcon.Width;
+                        flexibleMessageBoxForm.normalTextBoxMessage.Left -= flexibleMessageBoxForm.pictureBoxForIcon.Width;
+                        flexibleMessageBoxForm.normalTextBoxMessage.Width += flexibleMessageBoxForm.pictureBoxForIcon.Width;
                         break;
                 }
             }
@@ -806,7 +808,7 @@ namespace JR.Utils.GUI.Forms
                     var textForClipboard = STANDARD_MESSAGEBOX_SEPARATOR_LINES
                                          + this.Text + Environment.NewLine
                                          + STANDARD_MESSAGEBOX_SEPARATOR_LINES
-                                         + this.richTextBoxMessage.Text + Environment.NewLine
+                                         + this.normalTextBoxMessage.Text + Environment.NewLine
                                          + STANDARD_MESSAGEBOX_SEPARATOR_LINES
                                          + buttonsTextLine.Replace("&", string.Empty) + Environment.NewLine
                                          + STANDARD_MESSAGEBOX_SEPARATOR_LINES;
@@ -863,7 +865,7 @@ namespace JR.Utils.GUI.Forms
 
                 //Set the font for all controls
                 flexibleMessageBoxForm.Font = FONT;
-                flexibleMessageBoxForm.richTextBoxMessage.Font = FONT;
+                flexibleMessageBoxForm.normalTextBoxMessage.Font = FONT;
 
                 //Calculate the dialogs start size (Try to auto-size width to show longest text row). Also set the maximum dialog size. 
                 SetDialogSizes(flexibleMessageBoxForm, text, caption);

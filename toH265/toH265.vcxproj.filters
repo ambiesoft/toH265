@@ -208,5 +208,9 @@
     <Text Include="history.txt">
       <Filter>4 Dist</Filter>
     </Text>
+    <Text Include="randomText.txt" />
+    <Text Include="Copying.txt">
+      <Filter>4 Dist</Filter>
+    </Text>
   </ItemGroup>
 </Project>

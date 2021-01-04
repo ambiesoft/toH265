@@ -16,16 +16,17 @@ namespace Ambiesoft {
 		{
 			if(true)
 			{
+				String^ text = File::ReadAllText("randomText.txt");
 				MessageBoxIcon icon = MessageBoxIcon::Question;
 				MessageBoxButtons buttons = MessageBoxButtons::YesNo;
 				MessageBox::Show(this,
-					"AAA",
+					text,
 					Application::ProductName,
 					buttons,
 					icon);
 					
 				JR::Utils::GUI::Forms::FlexibleMessageBox::Show(this,
-					"AAA",
+					text,
 					Application::ProductName,
 					buttons,
 					icon);

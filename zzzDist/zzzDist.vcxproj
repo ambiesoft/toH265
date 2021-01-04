@@ -101,7 +101,7 @@
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)README.md" "$(TargetDir)"
-copy "$(SolutionDir)Copying.txt" "$(TargetDir)"
+copy "$(SolutionDir)toH265\Copying.txt" "$(TargetDir)"
 copy "$(SolutionDir)toH265\history.txt" "$(TargetDir)"
 
 mkdir "$(TargetDir)images"
@@ -112,11 +112,11 @@ copy "$(SolutionDir)toH265\materials\blue\blue.ico" "$(TargetDir)images\icon.ico
 
 del "$(TargetDir)zzzDist.*"
 
-copy "C:\Linkout\winnice\x86\README.md" "$(TargetDir)winnice.README.md"
-copy "C:\Linkout\winnice\x86\history.txt" "$(TargetDir)winnice.history.txt"
-copy "C:\Linkout\winnice\x86\libwinnice.dll" "$(TargetDir)"
-copy "C:\Linkout\winnice\x86\winnicew.exe" "$(TargetDir)"
-
+echo "winnice copy $(PlatformTarget)"
+copy "C:\Linkout\winnice\$(PlatformTarget)\README.md" "$(TargetDir)winnice.README.md"
+copy "C:\Linkout\winnice\$(PlatformTarget)\history.txt" "$(TargetDir)winnice.history.txt"
+copy "C:\Linkout\winnice\$(PlatformTarget)\libwinnice.dll" "$(TargetDir)"
+copy "C:\Linkout\winnice\$(PlatformTarget)\winnicew.exe" "$(TargetDir)"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -134,7 +134,7 @@ copy "C:\Linkout\winnice\x86\winnicew.exe" "$(TargetDir)"
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)README.md" "$(TargetDir)"
-copy "$(SolutionDir)Copying.txt" "$(TargetDir)"
+copy "$(SolutionDir)toH265\Copying.txt" "$(TargetDir)"
 copy "$(SolutionDir)toH265\history.txt" "$(TargetDir)"
 
 mkdir "$(TargetDir)images"
@@ -145,11 +145,11 @@ copy "$(SolutionDir)toH265\materials\blue\blue.ico" "$(TargetDir)images\icon.ico
 
 del "$(TargetDir)zzzDist.*"
 
-copy "C:\Linkout\winnice\x86\README.md" "$(TargetDir)winnice.README.md"
-copy "C:\Linkout\winnice\x86\history.txt" "$(TargetDir)winnice.history.txt"
-copy "C:\Linkout\winnice\x86\libwinnice.dll" "$(TargetDir)"
-copy "C:\Linkout\winnice\x86\winnicew.exe" "$(TargetDir)"
-
+echo "winnice copy $(PlatformTarget)"
+copy "C:\Linkout\winnice\$(PlatformTarget)\README.md" "$(TargetDir)winnice.README.md"
+copy "C:\Linkout\winnice\$(PlatformTarget)\history.txt" "$(TargetDir)winnice.history.txt"
+copy "C:\Linkout\winnice\$(PlatformTarget)\libwinnice.dll" "$(TargetDir)"
+copy "C:\Linkout\winnice\$(PlatformTarget)\winnicew.exe" "$(TargetDir)"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -171,7 +171,7 @@ copy "C:\Linkout\winnice\x86\winnicew.exe" "$(TargetDir)"
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)README.md" "$(TargetDir)"
-copy "$(SolutionDir)Copying.txt" "$(TargetDir)"
+copy "$(SolutionDir)toH265\Copying.txt" "$(TargetDir)"
 copy "$(SolutionDir)toH265\history.txt" "$(TargetDir)"
 
 mkdir "$(TargetDir)images"
@@ -182,11 +182,11 @@ copy "$(SolutionDir)toH265\materials\blue\blue.ico" "$(TargetDir)images\icon.ico
 
 del "$(TargetDir)zzzDist.*"
 
-copy "C:\Linkout\winnice\x86\README.md" "$(TargetDir)winnice.README.md"
-copy "C:\Linkout\winnice\x86\history.txt" "$(TargetDir)winnice.history.txt"
-copy "C:\Linkout\winnice\x86\libwinnice.dll" "$(TargetDir)"
-copy "C:\Linkout\winnice\x86\winnicew.exe" "$(TargetDir)"
-
+echo "winnice copy $(PlatformTarget)"
+copy "C:\Linkout\winnice\$(PlatformTarget)\README.md" "$(TargetDir)winnice.README.md"
+copy "C:\Linkout\winnice\$(PlatformTarget)\history.txt" "$(TargetDir)winnice.history.txt"
+copy "C:\Linkout\winnice\$(PlatformTarget)\libwinnice.dll" "$(TargetDir)"
+copy "C:\Linkout\winnice\$(PlatformTarget)\winnicew.exe" "$(TargetDir)"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -208,7 +208,7 @@ copy "C:\Linkout\winnice\x86\winnicew.exe" "$(TargetDir)"
     </Link>
     <PostBuildEvent>
       <Command>copy "$(SolutionDir)README.md" "$(TargetDir)"
-copy "$(SolutionDir)Copying.txt" "$(TargetDir)"
+copy "$(SolutionDir)toH265\Copying.txt" "$(TargetDir)"
 copy "$(SolutionDir)toH265\history.txt" "$(TargetDir)"
 
 mkdir "$(TargetDir)images"
@@ -219,11 +219,11 @@ copy "$(SolutionDir)toH265\materials\blue\blue.ico" "$(TargetDir)images\icon.ico
 
 del "$(TargetDir)zzzDist.*"
 
-copy "C:\Linkout\winnice\x86\README.md" "$(TargetDir)winnice.README.md"
-copy "C:\Linkout\winnice\x86\history.txt" "$(TargetDir)winnice.history.txt"
-copy "C:\Linkout\winnice\x86\libwinnice.dll" "$(TargetDir)"
-copy "C:\Linkout\winnice\x86\winnicew.exe" "$(TargetDir)"
-
+echo "winnice copy $(PlatformTarget)"
+copy "C:\Linkout\winnice\$(PlatformTarget)\README.md" "$(TargetDir)winnice.README.md"
+copy "C:\Linkout\winnice\$(PlatformTarget)\history.txt" "$(TargetDir)winnice.history.txt"
+copy "C:\Linkout\winnice\$(PlatformTarget)\libwinnice.dll" "$(TargetDir)"
+copy "C:\Linkout\winnice\$(PlatformTarget)\winnicew.exe" "$(TargetDir)"
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
