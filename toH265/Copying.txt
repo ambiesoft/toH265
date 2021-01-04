@@ -40,5 +40,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Licensee's Modification
 1. Added: Play Message Beep Sound when opening FlexibleMessageBox
 2. Modified: RichTextBox to TextBox
-
+3. Added: jp button texts
 

@@ -1,3 +1,6 @@
+2021/01/04 ver1.0.62
+MessageBox button text
+
 2021/01/04 ver1.0.61
 Image
 

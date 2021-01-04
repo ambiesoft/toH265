@@ -18,7 +18,7 @@ namespace Ambiesoft {
 			{
 				String^ text = File::ReadAllText("randomText.txt");
 				MessageBoxIcon icon = MessageBoxIcon::Question;
-				MessageBoxButtons buttons = MessageBoxButtons::YesNo;
+				MessageBoxButtons buttons = MessageBoxButtons::AbortRetryIgnore;
 				MessageBox::Show(this,
 					text,
 					Application::ProductName,
