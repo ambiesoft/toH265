@@ -26,5 +26,9 @@ enum ERROR_RETURN
 
 delegate void VVDelegate();
 
+#define IMAGEKEY_NORMAL L"listimage_normal.png";
+#define IMAGEKEY_ENCODING L"listimage_encoding.png";
+#define IMAGEKEY_DONE L"listimage_done.png";
+
 #define I18N(s) Ambiesoft::toH265::Program::getString(s)
 

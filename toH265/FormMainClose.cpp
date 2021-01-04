@@ -55,6 +55,8 @@ namespace Ambiesoft {
 
 				ChangeStartButtonText(I18N(STR_BUTTONTEXT_RESUME));
 				processSuspeded_ = true;
+				if (encodeTask_)
+					encodeTask_->Cancel();
 				encodeTask_ = nullptr;
 				return true;
 			}

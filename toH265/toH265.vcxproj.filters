@@ -111,6 +111,9 @@
     <ClCompile Include="InputListView.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EncodeJob.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -168,6 +171,9 @@
       <Filter>1 Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputListView.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EncodeJob.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
   </ItemGroup>

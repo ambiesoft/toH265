@@ -211,6 +211,7 @@
     <ClCompile Include="ContinueException.cpp" />
     <ClCompile Include="CpuAffinity.cpp" />
     <ClCompile Include="ElapseInfo.cpp" />
+    <ClCompile Include="EncodeJob.cpp" />
     <ClCompile Include="EncodeTask.cpp" />
     <ClCompile Include="FormMain.cpp" />
     <ClCompile Include="FormMainAbout.cpp" />
@@ -249,6 +250,7 @@
     <ClInclude Include="CpuAffinity.h" />
     <ClInclude Include="DebugMacro.h" />
     <ClInclude Include="ElapseInfo.h" />
+    <ClInclude Include="EncodeJob.h" />
     <ClInclude Include="EncodeTask.h" />
     <ClInclude Include="FormMain.h">
       <FileType>CppForm</FileType>

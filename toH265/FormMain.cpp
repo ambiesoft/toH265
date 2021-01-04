@@ -199,7 +199,7 @@ namespace Ambiesoft {
 			lvi->SubItems["fps"]->Text = Ambiesoft::toH265Helper::FormatFPS(fps);
 			lvi->SubItems["fps"]->Tag = fps;
 
-			lvi->ImageKey = "listimage_normal.png";
+			lvi->ImageKey = IMAGEKEY_NORMAL;
 
 			lvInputs->Items->Add(lvi);
 		}
@@ -534,12 +534,14 @@ namespace Ambiesoft {
 		}
 		void FormMain::UpdateTitleTS(TimeSpan tsProgress)
 		{
+			if (!encodeTask_)
+				return;
+
 			// for culculating eta
 			double totalProgress = encodeTask_->EndedDurations + tsProgress.TotalMilliseconds;
 			ElapseInfo^ lastElapse = gcnew ElapseInfo(totalProgress);
 			ElapseInfo^ firstElapse = elapses_.Enqueue(lastElapse);
 
-			DASSERT(encodeTask_);
 			double percent = (totalProgress) / TotalInputDuration->TotalMilliseconds;
 			UpdateTitle((int)(percent * 100));
 
@@ -727,6 +729,9 @@ namespace Ambiesoft {
 			thFFMpeg_ = gcnew System::Threading::Thread(
 				gcnew ParameterizedThreadStart(this, &FormMain::StartOfThread));
 			thFFMpeg_->Start(% param);
+
+			SetCodecStatusText();
+			encodeTask_->OnTaskStarted();
 		}
 
 		void FormMain::OnAllTaskEnded()
@@ -1131,9 +1136,15 @@ namespace Ambiesoft {
 			DASSERT(!encodeTask_ || encodeTask_->IsAllEnded());
 			encodeTask_ = gcnew EncodeTask();
 
+			array<ListViewItem^>^ items = gcnew array<ListViewItem^>(lvInputs->Items->Count);
+			lvInputs->Items->CopyTo(items, 0);
+			DASSERT(items->Length == inputmovies->Length);
+			DASSERT(items->Length == inputdurations->Length);
+			DASSERT(items->Length == inputFpses->Length);
 			encodeTask_->AddJob(
 				codecDlg.IsConcat,
 				codecDlg.IsReEncode,
+				items,
 				inputmovies,
 				codecDlg.OutputFiles,
 				codecDlg.OutputVideoCodec,
@@ -1149,6 +1160,7 @@ namespace Ambiesoft {
 			txtLogErr->Clear();
 
 			processTerminatedDuetoAppClose_ = false;
+			elapses_.Clear();
 			DoNextEncodeTask();
 		}
 
