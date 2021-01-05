@@ -355,7 +355,7 @@ namespace Ambiesoft {
 				if (!TotalInputAudioCodec->IsEmpty)
 				{
 					sbAC.Append(TotalInputAudioCodec);
-					if (encodeTask_ && !encodeTask_->CurrentOutputAudioCodec->IsEmpty)
+					if (IsTaskActive && !encodeTask_->CurrentOutputAudioCodec->IsEmpty)
 					{
 						sbAC.Append(" -> ");
 						sbAC.Append(encodeTask_->CurrentOutputAudioCodec);
@@ -370,7 +370,7 @@ namespace Ambiesoft {
 				if (!TotalInputVideoCodec->IsEmpty)
 				{
 					sbVC.Append(TotalInputVideoCodec->ToString());
-					if (encodeTask_ && !encodeTask_->CurrentOutputVideoCodec->IsEmpty)
+					if (IsTaskActive && !encodeTask_->CurrentOutputVideoCodec->IsEmpty)
 					{
 						sbVC.Append(" -> ");
 						sbVC.Append(encodeTask_->CurrentOutputVideoCodec);
@@ -443,7 +443,7 @@ namespace Ambiesoft {
 
 		String^ FormMain::CurrentEncodingOutputtingFile::get()
 		{
-			if (!encodeTask_ || encodeTask_->IsAllEnded())
+			if(!IsTaskActive)
 				return nullptr;
 			return encodeTask_->CurrentOutputtingMovieFile;
 		}
@@ -536,7 +536,7 @@ namespace Ambiesoft {
 		}
 		void FormMain::UpdateTitleTS(TimeSpan tsProgress)
 		{
-			if (!encodeTask_)
+			if (!IsTaskActive)
 				return;
 
 			// for culculating eta
@@ -751,33 +751,6 @@ namespace Ambiesoft {
 				HashIni^ ini = Profile::ReadAll(Program::IniFile);
 				DVERIFY(dlgAfterFinish_.LoadValues("AfterFinish", ini));
 				dlgAfterFinish_.DoNotify();
-				//if (dlgAfterFinish_.chkPlaySound->Checked)
-				//{
-				//	dlgAfterFinish_.PlayWav(true);
-				//}
-
-				//if (dlgAfterFinish_.chkOpenFolder->Checked)
-				//{
-				//	// Show outputmovie in Explorer
-				//	// CppUtils::OpenFolder(this, outputtingMovie_);
-				//}
-
-				//if (dlgAfterFinish_.chkLaunchApp->Checked)
-				//{
-				//	try
-				//	{
-				//		Process::Start(dlgAfterFinish_.txtApp->Text, dlgAfterFinish_.txtArg->Text);
-				//	}
-				//	catch (Exception^ ex)
-				//	{
-				//		CppUtils::Alert(ex);
-				//	}
-				//}
-
-				//if (dlgAfterFinish_.chkShutdown->Checked)
-				//{
-				//	Process::Start(Application::ExecutablePath, "-shutdown");
-				//}
 			}
 
 			Summary^ summary = gcnew Summary();
@@ -1079,7 +1052,7 @@ namespace Ambiesoft {
 				return;
 			}
 
-			DASSERT(!encodeTask_ || encodeTask_->IsAllEnded());
+			DASSERT(!IsTaskActive);
 			encodeTask_ = nullptr;
 			for each (ListViewItem ^ lvi in lvInputs->Items)
 			{
@@ -1141,7 +1114,7 @@ namespace Ambiesoft {
 
 
 			// Create Task
-			DASSERT(!encodeTask_ || encodeTask_->IsAllEnded());
+			DASSERT(!IsTaskActive);
 			encodeTask_ = gcnew EncodeTask();
 
 			array<ListViewItem^>^ items = gcnew array<ListViewItem^>(lvInputs->Items->Count);
@@ -1226,7 +1199,7 @@ namespace Ambiesoft {
 
 		System::Void FormMain::tsmiRemoveFromList_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (encodeTask_ && !encodeTask_->IsAllEnded())
+			if (IsTaskActive)
 				return;
 			
 			encodeTask_ = nullptr;
