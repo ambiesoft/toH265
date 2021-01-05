@@ -2,8 +2,14 @@
 
 #include "toH265.h"
 
+#include "helper.h"
+
 namespace Ambiesoft {
 	namespace toH265 {
+		using namespace System;
+		using namespace System::Windows::Forms;
+		using namespace System::Collections::Generic;
+
 		typedef LONG(NTAPI *NtSuspendProcess)(HANDLE ProcessHandle);
 		typedef LONG(NTAPI *NtResumeProcess)(HANDLE ProcessHandle);
 
@@ -101,6 +107,18 @@ namespace Ambiesoft {
 		String^ sToString(System::Drawing::Size size)
 		{
 			return String::Format("{0}x{1}", size.Width, size.Height);
+		}
+
+		List<String^>^ MakeUnique(List<String^>^ inList)
+		{
+			List<String^>^ result = gcnew List<String^>();
+			for each (String ^ s in inList)
+			{
+				if (result->Contains(s))
+					continue;
+				result->Add(s);
+			}
+			return result;
 		}
 	}
 }

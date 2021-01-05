@@ -132,6 +132,11 @@ namespace Ambiesoft {
 			CpuAffinity cpuAffinity_;
 			// System::Windows::Forms::Timer^ timerSetAffinity_;
 			bool bCloseFromMenu_;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowInputFileInExplorer;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowOutputFileInExplorer;
+		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem8;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiEdit;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiClearCompletedItems;
 		private: System::Windows::Forms::ImageList^ ilList;
 			   EncodeTask^ encodeTask_;
 			void SetItemCountStatus();
@@ -499,6 +504,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			void ChangeStartButtonText(String^ text);
 			void OnProcessStarted(Object^ sender, EventArgs^ e);
 			void IconizeToTray();
+			array<String^>^ GetOutputMoviesFromList(bool bSelectedOnly);
 
 			AfterFinish::OptionDialog dlgAfterFinish_;
 
@@ -557,7 +563,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			System::Void tsmiLanguageCommon_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiLanguage_DropDownOpening(System::Object^ sender, System::EventArgs^ e);
 
-			System::Void TsmiRemoveFromList_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiRemoveFromList_Click(System::Object^ sender, System::EventArgs^ e);
 
 			System::Void tsmiOpenInputLocations_ClickCommon(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiOpenOutput_ClickCommon(System::Object^ sender, System::EventArgs^ e);
@@ -578,6 +584,11 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 
 			void OnItemCountChanged();
 			void OnItemSelectionChanged(System::Object^ sender, System::Windows::Forms::ListViewItemSelectionChangedEventArgs^ e);
+			System::Void tsmiClearCompletedItems_Click(System::Object^ sender, System::EventArgs^ e);
+
+			System::Void tsmiShowInputFileInExplorer_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiShowOutputFileInExplorer_Click(System::Object^ sender, System::EventArgs^ e);
+
 };
 
 

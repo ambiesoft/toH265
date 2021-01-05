@@ -5,6 +5,8 @@
 #include "helper.h"
 #include "TargetCodecDialog.h"
 #include "ContinueException.h"
+#include "ListViewItemData.h"
+
 #include "FormMain.h"
 
 #pragma comment(lib, "shell32.lib")
@@ -651,7 +653,7 @@ namespace Ambiesoft {
 
 			ChangeStartButtonText(I18N(STR_BUTTONTEXT_PAUSE));
 
-			lvInputs->Enabled = false;
+			// lvInputs->Enabled = false;
 			lvInputs->AllowDrop = false;
 			btnBrowseMovie->Enabled = false;
 
@@ -675,7 +677,7 @@ namespace Ambiesoft {
 
 			ChangeStartButtonText(I18N(STR_BUTTONTEXT_START));
 
-			lvInputs->Enabled = true;
+			// lvInputs->Enabled = true;
 			lvInputs->AllowDrop = true;
 			btnBrowseMovie->Enabled = true;
 
@@ -1216,9 +1218,11 @@ namespace Ambiesoft {
 
 		}
 
-		System::Void FormMain::TsmiRemoveFromList_Click(System::Object^ sender, System::EventArgs^ e)
+		System::Void FormMain::tsmiRemoveFromList_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			DASSERT(!encodeTask_ || encodeTask_->IsAllEnded());
+			if (encodeTask_ && !encodeTask_->IsAllEnded())
+				return;
+			
 			encodeTask_ = nullptr;
 
 			while (lvInputs->SelectedItems->Count != 0)
@@ -1239,6 +1243,36 @@ namespace Ambiesoft {
 					CheckMovieAndSet(GetMovieFileFromLvi(lvi), false, false);
 			}
 		}
+		System::Void FormMain::tsmiShowInputFileInExplorer_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			for each (ListViewItem ^ selItem in lvInputs->SelectedItems)
+			{
+				CppUtils::OpenFolder(this, GetMovieFileFromLvi(selItem));
+			}
+		}
+
+		array<String^>^ FormMain::GetOutputMoviesFromList(bool bSelectedOnly)
+		{
+			List<String^>^ results = gcnew List<String^>();
+
+
+			for each (ListViewItem ^ item in lvInputs->Items)
+			{
+				if (bSelectedOnly && !item->Selected)
+					continue;
+				if (item->ImageKey == IMAGEKEY_DONE ||
+					item->ImageKey == IMAGEKEY_ENCODING)
+				{
+					results->Add(ListViewItemData::Get(item)->OutputFile);
+				}
+			}
+			return MakeUnique(results)->ToArray();
+		}
+		System::Void FormMain::tsmiShowOutputFileInExplorer_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			for each(String^ file in GetOutputMoviesFromList(true))
+				CppUtils::OpenFolder(this, file);
+		}
 
 		System::Void FormMain::tsmiOpenInputLocations_ClickCommon(System::Object^ sender, System::EventArgs^ e)
 		{
@@ -1250,35 +1284,40 @@ namespace Ambiesoft {
 		}
 		System::Void FormMain::tsmiOpenOutput_ClickCommon(System::Object^ sender, System::EventArgs^ e)
 		{
-			String^ outputMovie;
-			do
-			{
-				if (!encodeTask_)
-				{
-					if (!lastSummary_)
-					{
-						break;
-					}
-					outputMovie = lastSummary_->LastOutputMovie;
-				}
-				else if (encodeTask_->IsAllEnded())
-				{
-					outputMovie = lastSummary_->LastOutputMovie;
-				}
-				else
-				{
-					outputMovie = encodeTask_->CurrentOutputtingMovieFile;
-				}
-			} while (false);
+			//String^ outputMovie;
+			//do
+			//{
+			//	if (!encodeTask_)
+			//	{
+			//		if (!lastSummary_)
+			//		{
+			//			break;
+			//		}
+			//		outputMovie = lastSummary_->LastOutputMovie;
+			//	}
+			//	else if (encodeTask_->IsAllEnded())
+			//	{
+			//		outputMovie = lastSummary_->LastOutputMovie;
+			//	}
+			//	else
+			//	{
+			//		outputMovie = encodeTask_->CurrentOutputtingMovieFile;
+			//	}
+			//} while (false);
 
-			if (String::IsNullOrEmpty(outputMovie))
-			{
-				CppUtils::Alert(this, I18N(STR_NO_OUTPUT_MOVIE));
-				return;
-			}
 
-			OpenFolder((HWND)this->Handle.ToPointer(),
-				getStdWstring(outputMovie).c_str());
+			//if (String::IsNullOrEmpty(outputMovie))
+			//{
+			//	CppUtils::Alert(this, I18N(STR_NO_OUTPUT_MOVIE));
+			//	return;
+			//}
+
+			//OpenFolder((HWND)this->Handle.ToPointer(),
+			//	getStdWstring(outputMovie).c_str());
+
+			for each (String ^ file in GetOutputMoviesFromList(false))
+				CppUtils::OpenFolder(this, file);
+
 		}
 		System::Void FormMain::tsmiProcesstsmiProcessAfterFinish_Click(System::Object^ sender, System::EventArgs^ e)
 		{

@@ -14,6 +14,9 @@ namespace Ambiesoft {
             this->btnBrowseMovie = (gcnew System::Windows::Forms::Button());
             this->panelList = (gcnew System::Windows::Forms::Panel());
             this->cmList = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+            this->tsmiShowInputFileInExplorer = (gcnew System::Windows::Forms::ToolStripMenuItem());
+            this->tsmiShowOutputFileInExplorer = (gcnew System::Windows::Forms::ToolStripMenuItem());
+            this->toolStripMenuItem8 = (gcnew System::Windows::Forms::ToolStripSeparator());
             this->tsmiRemoveFromList = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->txtFFMpegArg = (gcnew System::Windows::Forms::TextBox());
             this->btnStart = (gcnew System::Windows::Forms::Button());
@@ -27,6 +30,8 @@ namespace Ambiesoft {
             this->tsmiStop = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->toolStripMenuItem7 = (gcnew System::Windows::Forms::ToolStripSeparator());
             this->exitToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+            this->tsmiEdit = (gcnew System::Windows::Forms::ToolStripMenuItem());
+            this->tsmiClearCompletedItems = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->tsmiView = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->tsmiShowLastResult = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->tsmiOption = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -115,15 +120,35 @@ namespace Ambiesoft {
             // 
             // cmList
             // 
-            this->cmList->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tsmiRemoveFromList });
+            this->cmList->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+                this->tsmiShowInputFileInExplorer,
+                    this->tsmiShowOutputFileInExplorer, this->toolStripMenuItem8, this->tsmiRemoveFromList
+            });
             this->cmList->Name = L"cmList";
             resources->ApplyResources(this->cmList, L"cmList");
+            // 
+            // tsmiShowInputFileInExplorer
+            // 
+            this->tsmiShowInputFileInExplorer->Name = L"tsmiShowInputFileInExplorer";
+            resources->ApplyResources(this->tsmiShowInputFileInExplorer, L"tsmiShowInputFileInExplorer");
+            this->tsmiShowInputFileInExplorer->Click += gcnew System::EventHandler(this, &FormMain::tsmiShowInputFileInExplorer_Click);
+            // 
+            // tsmiShowOutputFileInExplorer
+            // 
+            this->tsmiShowOutputFileInExplorer->Name = L"tsmiShowOutputFileInExplorer";
+            resources->ApplyResources(this->tsmiShowOutputFileInExplorer, L"tsmiShowOutputFileInExplorer");
+            this->tsmiShowOutputFileInExplorer->Click += gcnew System::EventHandler(this, &FormMain::tsmiShowOutputFileInExplorer_Click);
+            // 
+            // toolStripMenuItem8
+            // 
+            this->toolStripMenuItem8->Name = L"toolStripMenuItem8";
+            resources->ApplyResources(this->toolStripMenuItem8, L"toolStripMenuItem8");
             // 
             // tsmiRemoveFromList
             // 
             this->tsmiRemoveFromList->Name = L"tsmiRemoveFromList";
             resources->ApplyResources(this->tsmiRemoveFromList, L"tsmiRemoveFromList");
-            this->tsmiRemoveFromList->Click += gcnew System::EventHandler(this, &FormMain::TsmiRemoveFromList_Click);
+            this->tsmiRemoveFromList->Click += gcnew System::EventHandler(this, &FormMain::tsmiRemoveFromList_Click);
             // 
             // txtFFMpegArg
             // 
@@ -151,9 +176,9 @@ namespace Ambiesoft {
             // 
             // menuMain
             // 
-            this->menuMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-                this->tsmiFile, this->tsmiView,
-                    this->tsmiOption, this->tsmiHelp
+            this->menuMain->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+                this->tsmiFile, this->tsmiEdit,
+                    this->tsmiView, this->tsmiOption, this->tsmiHelp
             });
             resources->ApplyResources(this->menuMain, L"menuMain");
             this->menuMain->Name = L"menuMain";
@@ -200,6 +225,18 @@ namespace Ambiesoft {
             this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
             resources->ApplyResources(this->exitToolStripMenuItem, L"exitToolStripMenuItem");
             this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &FormMain::exitToolStripMenuItem_Click);
+            // 
+            // tsmiEdit
+            // 
+            this->tsmiEdit->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tsmiClearCompletedItems });
+            this->tsmiEdit->Name = L"tsmiEdit";
+            resources->ApplyResources(this->tsmiEdit, L"tsmiEdit");
+            // 
+            // tsmiClearCompletedItems
+            // 
+            this->tsmiClearCompletedItems->Name = L"tsmiClearCompletedItems";
+            resources->ApplyResources(this->tsmiClearCompletedItems, L"tsmiClearCompletedItems");
+            this->tsmiClearCompletedItems->Click += gcnew System::EventHandler(this, &FormMain::tsmiClearCompletedItems_Click);
             // 
             // tsmiView
             // 

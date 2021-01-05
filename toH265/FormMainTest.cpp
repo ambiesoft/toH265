@@ -11,6 +11,16 @@ namespace Ambiesoft {
 
 		using namespace System::IO;
 
+		System::Void FormMain::tsmiClearCompletedItems_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (encodeTask_ && !encodeTask_->IsAllEnded())
+				return;
+			for each(ListViewItem^ item in lvInputs->Items)
+			{
+				if (item->ImageKey == IMAGEKEY_DONE)
+					item->Remove();
+			}
+		}
 #ifdef _DEBUG
 		System::Void FormMain::FormMain_OnTest(System::Object^ sender, System::EventArgs^ e)
 		{

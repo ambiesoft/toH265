@@ -162,8 +162,29 @@
   <metadata name="cmList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>472, 17</value>
   </metadata>
+  <data name="tsmiShowInputFileInExplorer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="tsmiShowInputFileInExplorer.Text" xml:space="preserve">
+    <value>Show &amp;Input File in Explorer</value>
+  </data>
+  <data name="tsmiShowOutputFileInExplorer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="tsmiShowOutputFileInExplorer.Text" xml:space="preserve">
+    <value>Show &amp;Output File in Explorer</value>
+  </data>
+  <data name="toolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 6</value>
+  </data>
+  <data name="tsmiRemoveFromList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="tsmiRemoveFromList.Text" xml:space="preserve">
+    <value>&amp;Remove from the list</value>
+  </data>
   <data name="cmList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 26</value>
+    <value>225, 98</value>
   </data>
   <data name="&gt;&gt;cmList.Name" xml:space="preserve">
     <value>cmList</value>
@@ -348,42 +369,9 @@
   <data name="&gt;&gt;splitRoot.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="tsmiRemoveFromList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="tsmiRemoveFromList.Text" xml:space="preserve">
-    <value>&amp;Remove from the list</value>
-  </data>
   <metadata name="menuMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="menuMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="menuMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>693, 24</value>
-  </data>
-  <data name="menuMain.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;menuMain.Name" xml:space="preserve">
-    <value>menuMain</value>
-  </data>
-  <data name="&gt;&gt;menuMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuMain.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuMain.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="tsmiFile.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
   <data name="tsmiOpenInputLocations.Size" type="System.Drawing.Size, System.Drawing">
     <value>202, 22</value>
   </data>
@@ -414,11 +402,23 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Exit</value>
   </data>
-  <data name="tsmiView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+  <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
   </data>
-  <data name="tsmiView.Text" xml:space="preserve">
-    <value>&amp;View</value>
+  <data name="tsmiFile.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="tsmiClearCompletedItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 22</value>
+  </data>
+  <data name="tsmiClearCompletedItems.Text" xml:space="preserve">
+    <value>&amp;Clear Completed Items</value>
+  </data>
+  <data name="tsmiEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 20</value>
+  </data>
+  <data name="tsmiEdit.Text" xml:space="preserve">
+    <value>&amp;Edit</value>
   </data>
   <data name="tsmiShowLastResult.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 22</value>
@@ -426,11 +426,11 @@
   <data name="tsmiShowLastResult.Text" xml:space="preserve">
     <value>&amp;Show Last Result</value>
   </data>
-  <data name="tsmiOption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
+  <data name="tsmiView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
   </data>
-  <data name="tsmiOption.Text" xml:space="preserve">
-    <value>&amp;Option</value>
+  <data name="tsmiView.Text" xml:space="preserve">
+    <value>&amp;View</value>
   </data>
   <data name="tsmiSetFFProbe.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
@@ -446,12 +446,6 @@
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 6</value>
-  </data>
-  <data name="tsmiPriority.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="tsmiPriority.Text" xml:space="preserve">
-    <value>&amp;Priority</value>
   </data>
   <data name="tsmiPriorityNormal.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 22</value>
@@ -471,11 +465,11 @@
   <data name="tsmiPriorityBackground.Text" xml:space="preserve">
     <value>&amp;Background</value>
   </data>
-  <data name="tsmiCPUAffinity.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tsmiPriority.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="tsmiCPUAffinity.Text" xml:space="preserve">
-    <value>&amp;CPU Affinity</value>
+  <data name="tsmiPriority.Text" xml:space="preserve">
+    <value>&amp;Priority</value>
   </data>
   <data name="tsmiCPUAffinityEnable.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 22</value>
@@ -507,14 +501,14 @@
   <data name="tsmiClearAllButZero.Text" xml:space="preserve">
     <value>&amp;Clear All But 0</value>
   </data>
-  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 6</value>
-  </data>
-  <data name="tsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tsmiCPUAffinity.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
   </data>
-  <data name="tsmiProcessAfterFinish.Text" xml:space="preserve">
-    <value>&amp;Process after Finish</value>
+  <data name="tsmiCPUAffinity.Text" xml:space="preserve">
+    <value>&amp;CPU Affinity</value>
+  </data>
+  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 6</value>
   </data>
   <data name="tsmiEnabledtsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 22</value>
@@ -528,6 +522,12 @@
   <data name="tsmiProcesstsmiProcessAfterFinish.Text" xml:space="preserve">
     <value>&amp;Process...</value>
   </data>
+  <data name="tsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="tsmiProcessAfterFinish.Text" xml:space="preserve">
+    <value>&amp;Process after Finish</value>
+  </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 6</value>
   </data>
@@ -539,12 +539,6 @@
   </data>
   <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 6</value>
-  </data>
-  <data name="tsmiLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="tsmiLanguage.Text" xml:space="preserve">
-    <value>&amp;Language</value>
   </data>
   <data name="tsmiLanguageOSDefault.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 22</value>
@@ -564,11 +558,17 @@
   <data name="tsmiLanguageJapanese.Text" xml:space="preserve">
     <value>&amp;Japanese</value>
   </data>
-  <data name="tsmiHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+  <data name="tsmiLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
   </data>
-  <data name="tsmiHelp.Text" xml:space="preserve">
-    <value>&amp;Help</value>
+  <data name="tsmiLanguage.Text" xml:space="preserve">
+    <value>&amp;Language</value>
+  </data>
+  <data name="tsmiOption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="tsmiOption.Text" xml:space="preserve">
+    <value>&amp;Option</value>
   </data>
   <data name="tsmiAbout.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 22</value>
@@ -582,12 +582,66 @@
   <data name="tsmiFFMpegHelp.Text" xml:space="preserve">
     <value>FFMpeg's Help...</value>
   </data>
+  <data name="tsmiHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="tsmiHelp.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="menuMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="menuMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>693, 24</value>
+  </data>
+  <data name="menuMain.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;menuMain.Name" xml:space="preserve">
+    <value>menuMain</value>
+  </data>
+  <data name="&gt;&gt;menuMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuMain.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <metadata name="notifyIconMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>127, 17</value>
   </metadata>
   <metadata name="cmNotify.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>260, 17</value>
   </metadata>
+  <data name="tsmiNotifyOpenInputLocations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="tsmiNotifyOpenInputLocations.Text" xml:space="preserve">
+    <value>Open &amp;Input location(s)...</value>
+  </data>
+  <data name="tsmiNotifyOpenOutputLocation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="tsmiNotifyOpenOutputLocation.Text" xml:space="preserve">
+    <value>Open &amp;Output location...</value>
+  </data>
+  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 6</value>
+  </data>
+  <data name="tsmiNotifyShow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="tsmiNotifyShow.Text" xml:space="preserve">
+    <value>&amp;Show</value>
+  </data>
+  <data name="tsmiNotifyStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="tsmiNotifyStart.Text" xml:space="preserve">
+    <value>StartDummy</value>
+  </data>
   <data name="cmNotify.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 98</value>
   </data>
@@ -2551,57 +2605,9 @@
         /wDQJ/8fGcDtoWNTJJ0AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="tsmiNotifyOpenInputLocations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="tsmiNotifyOpenInputLocations.Text" xml:space="preserve">
-    <value>Open &amp;Input location(s)...</value>
-  </data>
-  <data name="tsmiNotifyOpenOutputLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="tsmiNotifyOpenOutputLocation.Text" xml:space="preserve">
-    <value>Open &amp;Output location...</value>
-  </data>
-  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 6</value>
-  </data>
-  <data name="tsmiNotifyShow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="tsmiNotifyShow.Text" xml:space="preserve">
-    <value>&amp;Show</value>
-  </data>
-  <data name="tsmiNotifyStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="tsmiNotifyStart.Text" xml:space="preserve">
-    <value>StartDummy</value>
-  </data>
   <metadata name="statusMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>361, 17</value>
   </metadata>
-  <data name="statusMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 354</value>
-  </data>
-  <data name="statusMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>693, 22</value>
-  </data>
-  <data name="statusMain.TabIndex" type="System.Int32, mscorlib">
-    <value>101</value>
-  </data>
-  <data name="&gt;&gt;statusMain.Name" xml:space="preserve">
-    <value>statusMain</value>
-  </data>
-  <data name="&gt;&gt;statusMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;statusMain.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;statusMain.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="slMain.Size" type="System.Drawing.Size, System.Drawing">
     <value>448, 17</value>
   </data>
@@ -2638,6 +2644,27 @@
   <data name="slDuration.Text" xml:space="preserve">
     <value>duration</value>
   </data>
+  <data name="statusMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 354</value>
+  </data>
+  <data name="statusMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>693, 22</value>
+  </data>
+  <data name="statusMain.TabIndex" type="System.Int32, mscorlib">
+    <value>101</value>
+  </data>
+  <data name="&gt;&gt;statusMain.Name" xml:space="preserve">
+    <value>statusMain</value>
+  </data>
+  <data name="&gt;&gt;statusMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;statusMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;statusMain.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <metadata name="ilList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>558, 17</value>
   </metadata>
@@ -2646,7 +2673,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA8
-        CAAAAk1TRnQBSQFMAgEBAwEAAQgBAAEIAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAARgBAAEYAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -4653,6 +4680,24 @@
   <data name="$this.Text" xml:space="preserve">
     <value>FormMain</value>
   </data>
+  <data name="&gt;&gt;tsmiShowInputFileInExplorer.Name" xml:space="preserve">
+    <value>tsmiShowInputFileInExplorer</value>
+  </data>
+  <data name="&gt;&gt;tsmiShowInputFileInExplorer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiShowOutputFileInExplorer.Name" xml:space="preserve">
+    <value>tsmiShowOutputFileInExplorer</value>
+  </data>
+  <data name="&gt;&gt;tsmiShowOutputFileInExplorer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem8.Name" xml:space="preserve">
+    <value>toolStripMenuItem8</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tsmiRemoveFromList.Name" xml:space="preserve">
     <value>tsmiRemoveFromList</value>
   </data>
@@ -4699,6 +4744,18 @@
     <value>exitToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiEdit.Name" xml:space="preserve">
+    <value>tsmiEdit</value>
+  </data>
+  <data name="&gt;&gt;tsmiEdit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiClearCompletedItems.Name" xml:space="preserve">
+    <value>tsmiClearCompletedItems</value>
+  </data>
+  <data name="&gt;&gt;tsmiClearCompletedItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tsmiView.Name" xml:space="preserve">

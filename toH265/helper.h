@@ -9,5 +9,6 @@ namespace Ambiesoft {
 		void SafeJoin(System::Threading::Thread^ thread);
 
 		String^ sToString(System::Drawing::Size size);
+		System::Collections::Generic::List<System::String^>^ MakeUnique(System::Collections::Generic::List<System::String^>^ inList);
 	}
 }

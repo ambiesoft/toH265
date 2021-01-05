@@ -3,6 +3,7 @@
 #include "toH265.h"
 #include "AVCodec.h"
 #include "FormMain.h"
+#include "helper.h"
 
 #include "TargetCodecDialog.h"
 using namespace System::Text;
@@ -13,17 +14,7 @@ using namespace System::IO;
 namespace Ambiesoft {
 	namespace toH265 {
 
-		List<String^>^ MakeUnique(List<String^>^ inList)
-		{
-			List<String^>^ result = gcnew List<String^>();
-			for each (String ^ s in inList)
-			{
-				if (result->Contains(s))
-					continue;
-				result->Add(s);
-			}
-			return result;
-		}
+	
 
 		TargetCodecDialog::TargetCodecDialog(bool bLosslessable, 
 			String^ iniPath,

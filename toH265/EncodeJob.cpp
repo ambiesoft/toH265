@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "EncodeTask.h"
+#include "ListViewItemData.h"
 
 using namespace System::Text;
 using namespace System::IO;
@@ -140,6 +141,7 @@ namespace Ambiesoft {
 			for each (ListViewItem ^ item in items_)
 			{
 				item->ImageKey = IMAGEKEY_ENCODING;
+				ListViewItemData::Get(item)->OutputFile = this->OutputtingMovie;
 				item->EnsureVisible();
 			}
 		}
@@ -150,7 +152,10 @@ namespace Ambiesoft {
 			finishData_ = DateTime::Now;
 			DeleteTempFile();
 			for each (ListViewItem ^ item in items_)
+			{
 				item->ImageKey = IMAGEKEY_DONE;
+				ListViewItemData::Get(item)->OutputFile = this->OutputtedMovie;
+			}
 		}
 		void EncodeJob::Cancel()
 		{
