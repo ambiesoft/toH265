@@ -132,13 +132,19 @@ namespace Ambiesoft {
 			CpuAffinity cpuAffinity_;
 			// System::Windows::Forms::Timer^ timerSetAffinity_;
 			bool bCloseFromMenu_;
+		private: System::Windows::Forms::ToolStripMenuItem^ tsmiClearAllItems;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowInputFileInExplorer;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowOutputFileInExplorer;
 		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem8;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiEdit;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiClearCompletedItems;
 		private: System::Windows::Forms::ImageList^ ilList;
-			   EncodeTask^ encodeTask_;
+			   
+			EncodeTask^ encodeTask_;
+			property bool IsTaskActive
+			{
+				bool get() { return encodeTask_ && !encodeTask_->IsAllEnded(); }
+			}
 			void SetItemCountStatus();
 		public:
 			// static initonly cli::array<wchar_t>^ char1x = gcnew cli::array<wchar_t>{L'x'};
@@ -585,9 +591,15 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			void OnItemCountChanged();
 			void OnItemSelectionChanged(System::Object^ sender, System::Windows::Forms::ListViewItemSelectionChangedEventArgs^ e);
 			System::Void tsmiClearCompletedItems_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiClearAllItems_Click(System::Object^ sender, System::EventArgs^ e);
 
 			System::Void tsmiShowInputFileInExplorer_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiShowOutputFileInExplorer_Click(System::Object^ sender, System::EventArgs^ e);
+
+			System::Void tsmiEdit_DropDownOpening(System::Object^ sender, System::EventArgs^ e);
+			System::Void cmList_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e);
+
+			
 
 };
 

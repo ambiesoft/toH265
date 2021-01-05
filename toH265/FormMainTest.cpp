@@ -11,9 +11,19 @@ namespace Ambiesoft {
 
 		using namespace System::IO;
 
+		System::Void FormMain::tsmiEdit_DropDownOpening(System::Object^ sender, System::EventArgs^ e)
+		{
+			tsmiClearCompletedItems->Enabled = !IsTaskActive;
+			tsmiClearAllItems->Enabled = !IsTaskActive;
+		}
+		System::Void FormMain::cmList_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e)
+		{
+			tsmiRemoveFromList->Enabled = !IsTaskActive;
+		}
+
 		System::Void FormMain::tsmiClearCompletedItems_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (encodeTask_ && !encodeTask_->IsAllEnded())
+			if (IsTaskActive)
 				return;
 			for each(ListViewItem^ item in lvInputs->Items)
 			{
@@ -21,6 +31,22 @@ namespace Ambiesoft {
 					item->Remove();
 			}
 		}
+
+		System::Void FormMain::tsmiClearAllItems_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (IsTaskActive)
+				return;
+			if (lvInputs->Items->Count == 0)
+				return;
+			if (System::Windows::Forms::DialogResult::Yes !=
+				CppUtils::YesOrNo(I18N(L"Are you sure to clear all items?")))
+			{
+				return;
+			}
+
+			lvInputs->Items->Clear();
+		}
+		
 #ifdef _DEBUG
 		System::Void FormMain::FormMain_OnTest(System::Object^ sender, System::EventArgs^ e)
 		{
