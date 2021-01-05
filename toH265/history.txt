@@ -1,3 +1,6 @@
+2021/01/05 ver1.0.66
+Warning show methods
+
 2021/01/05 ver1.0.65
 Add some menus
 

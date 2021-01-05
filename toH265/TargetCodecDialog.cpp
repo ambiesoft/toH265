@@ -205,7 +205,7 @@ namespace Ambiesoft {
 					dirsNotExists->Add(fulldir);
 			}
 			dirsNotExists = MakeUnique(dirsNotExists);
-			if(dirsNotExists->Count != 0)
+			if (dirsNotExists->Count != 0)
 			{
 				StringBuilder sb;
 				sb.AppendLine(I18N("Following target directories does not exist. Do you want to create them?"));
@@ -216,8 +216,8 @@ namespace Ambiesoft {
 				if (System::Windows::Forms::DialogResult::Yes != CppUtils::YesOrNo(sb.ToString()))
 				{
 					this->DialogResult = System::Windows::Forms::DialogResult::None;
-						txtOtherDirectory->Focus();
-						return;
+					txtOtherDirectory->Focus();
+					return;
 				}
 
 				try
@@ -248,19 +248,33 @@ namespace Ambiesoft {
 				return;
 			}
 
+			// check output file exists
+			List<String^> exists;
 			for each (String ^ outputFile in OutputFiles)
 			{
 				if (File::Exists(outputFile))
+					exists.Add(outputFile);
+			}
+			if (exists.Count != 0)
+			{
+				StringBuilder sbMessage;
+				sbMessage.AppendLine(I18N("Following output files already exist. Do you want to override them?"));
+				sbMessage.AppendLine();
+				for each (String ^ file in exists)
+					sbMessage.AppendLine(file);
+				if (System::Windows::Forms::DialogResult::Yes !=
+					CppUtils::CenteredMessageBox(sbMessage.ToString(),
+						Application::ProductName,
+						MessageBoxButtons::YesNo,
+						MessageBoxIcon::Warning,
+						MessageBoxDefaultButton::Button2))
 				{
-					if (System::Windows::Forms::DialogResult::Yes != CppUtils::YesOrNo(String::Format(I18N("Output File '{0}' already exists. Do you want to override?"),
-						outputFile)))
-					{
-						this->DialogResult = System::Windows::Forms::DialogResult::None;
+					this->DialogResult = System::Windows::Forms::DialogResult::None;
 						return;
-					}
 				}
 			}
 		}
+
 		System::Void TargetCodecDialog::btnBrowseOtherDirectory_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			String^ folder = CppUtils::GetSelectedFolder(this, I18N("Select Folder"));
@@ -390,20 +404,7 @@ namespace Ambiesoft {
 					if (String::IsNullOrEmpty(baseFileName))
 						baseFileName = "output";
 
-					//SaveFileDialog dlg;
-					//{
-					//	StringBuilder sbFilter;
-					//	for each (String ^ ae in outExtsNormalPriority)
-					//	{
-					//		sbFilter.AppendFormat("{0} (*{1})|*{2}|",
-					//			ae, ae, ae);
-					//	}
-					//	sbFilter.Append(I18N("All File") + "(*.*)|*.*");
-					//	dlg.Filter = sbFilter.ToString();
-					//}
-
-					// dlg.InitialDirectory = initialDir;
-
+					// set extension
 					String^ firstExt;
 					for each (String ^ s in outExtsNormalPriority)
 					{
@@ -418,9 +419,6 @@ namespace Ambiesoft {
 							baseFileName),
 						OutputVideoCodec->ToString(),
 						firstExt);
-
-					//if (System::Windows::Forms::DialogResult::OK != dlg.ShowDialog())
-					//	return;
 
 					if (IsFileOpen(getStdWstring(fileName).c_str()))
 					{

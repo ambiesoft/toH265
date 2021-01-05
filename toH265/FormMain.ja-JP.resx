@@ -119,217 +119,250 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 26</value>
+    <value>222, 76</value>
   </data>
   <data name="btnStart.Text" xml:space="preserve">
     <value>開始(&amp;S)</value>
   </data>
+  <data name="tsmiShowInputFileInExplorer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
+  </data>
+  <data name="tsmiShowInputFileInExplorer.Text" xml:space="preserve">
+    <value>入力ファイルの場所を開く(&amp;I)</value>
+  </data>
+  <data name="tsmiShowOutputFileInExplorer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
+  </data>
+  <data name="tsmiShowOutputFileInExplorer.Text" xml:space="preserve">
+    <value>出力ファイルの場所を開く(&amp;O)</value>
+  </data>
+  <data name="toolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 6</value>
+  </data>
   <data name="tsmiRemoveFromList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 22</value>
+    <value>221, 22</value>
   </data>
   <data name="tsmiRemoveFromList.Text" xml:space="preserve">
     <value>リストから外す(&amp;R)</value>
   </data>
   <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>81, 20</value>
+    <value>70, 20</value>
   </data>
   <data name="tsmiFile.Text" xml:space="preserve">
     <value>ファイル(&amp;F)</value>
   </data>
   <data name="tsmiOpenInputLocations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 22</value>
+    <value>230, 22</value>
   </data>
   <data name="tsmiOpenInputLocations.Text" xml:space="preserve">
     <value>入力ファイルの場所を開く(&amp;I)...</value>
   </data>
   <data name="tsmiOpenOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 22</value>
+    <value>230, 22</value>
   </data>
   <data name="tsmiOpenOutput.Text" xml:space="preserve">
     <value>出力ファイルの場所を開く(&amp;O)...</value>
   </data>
   <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 6</value>
+    <value>227, 6</value>
   </data>
   <data name="tsmiStop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 22</value>
+    <value>230, 22</value>
   </data>
   <data name="tsmiStop.Text" xml:space="preserve">
     <value>停止(&amp;S)</value>
   </data>
   <data name="toolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 6</value>
+    <value>227, 6</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 22</value>
+    <value>230, 22</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>閉じる(&amp;E)</value>
   </data>
+  <data name="tsmiEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="tsmiEdit.Text" xml:space="preserve">
+    <value>編集(&amp;E)</value>
+  </data>
+  <data name="tsmiClearCompletedItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="tsmiClearCompletedItems.Text" xml:space="preserve">
+    <value>完了アイテムをクリア(&amp;C)</value>
+  </data>
   <data name="tsmiView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 20</value>
+    <value>63, 20</value>
   </data>
   <data name="tsmiView.Text" xml:space="preserve">
     <value>ビュー(&amp;V)</value>
   </data>
   <data name="tsmiShowLastResult.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 22</value>
+    <value>237, 22</value>
   </data>
   <data name="tsmiShowLastResult.Text" xml:space="preserve">
     <value>最後の結果メッセージを表示(&amp;S)</value>
   </data>
   <data name="tsmiOption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 20</value>
+    <value>84, 20</value>
   </data>
   <data name="tsmiOption.Text" xml:space="preserve">
     <value>オプション(&amp;O)</value>
   </data>
   <data name="tsmiSetFFProbe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 22</value>
+    <value>191, 22</value>
   </data>
   <data name="tsmiSetFFProbe.Text" xml:space="preserve">
     <value>FFProbeをセット(&amp;S)...</value>
   </data>
   <data name="tsmiSetFFMpeg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 22</value>
+    <value>191, 22</value>
   </data>
   <data name="tsmiSetFFMpeg.Text" xml:space="preserve">
     <value>FF&amp;Mpegをセット...</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 6</value>
+    <value>188, 6</value>
   </data>
   <data name="tsmiPriority.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 22</value>
+    <value>191, 22</value>
   </data>
   <data name="tsmiPriority.Text" xml:space="preserve">
     <value>優先度(&amp;P)</value>
   </data>
   <data name="tsmiPriorityNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
+    <value>165, 22</value>
   </data>
   <data name="tsmiPriorityNormal.Text" xml:space="preserve">
     <value>通常(&amp;N)</value>
   </data>
   <data name="tsmiPriorityBelowNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
+    <value>165, 22</value>
   </data>
   <data name="tsmiPriorityBelowNormal.Text" xml:space="preserve">
     <value>通常以下(&amp;E)</value>
   </data>
   <data name="tsmiPriorityBackground.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 22</value>
+    <value>165, 22</value>
   </data>
   <data name="tsmiPriorityBackground.Text" xml:space="preserve">
     <value>バックグラウンド(&amp;B)</value>
   </data>
   <data name="tsmiCPUAffinity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 22</value>
+    <value>191, 22</value>
   </data>
   <data name="tsmiCPUAffinity.Text" xml:space="preserve">
     <value>&amp;CPUアフィニティ</value>
   </data>
   <data name="tsmiCPUAffinityEnable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="tsmiCPUAffinityEnable.Text" xml:space="preserve">
     <value>有効(&amp;E)</value>
   </data>
   <data name="tsmsCpuAffinityBegin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="tsmsCpuAffinityEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="tsmiEnableAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
+    <value>180, 22</value>
+  </data>
+  <data name="tsmiEnableAll.Text" xml:space="preserve">
+    <value>すべて有効(&amp;A)</value>
   </data>
   <data name="tsmiToggleAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
+    <value>180, 22</value>
+  </data>
+  <data name="tsmiToggleAll.Text" xml:space="preserve">
+    <value>すべて反転(&amp;T)</value>
   </data>
   <data name="tsmiClearAllButZero.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="tsmiClearAllButZero.Text" xml:space="preserve">
     <value>0以外をクリア(&amp;C)</value>
   </data>
   <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 6</value>
+    <value>188, 6</value>
   </data>
   <data name="tsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 22</value>
+    <value>191, 22</value>
   </data>
   <data name="tsmiProcessAfterFinish.Text" xml:space="preserve">
     <value>終了後の処理(&amp;P)</value>
   </data>
   <data name="tsmiEnabledtsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="tsmiEnabledtsmiProcessAfterFinish.Text" xml:space="preserve">
     <value>有効(&amp;E)</value>
   </data>
   <data name="tsmiProcesstsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="tsmiProcesstsmiProcessAfterFinish.Text" xml:space="preserve">
     <value>処理(&amp;P)...</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 6</value>
+    <value>188, 6</value>
   </data>
   <data name="tsmiMinimizeToTray.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 22</value>
+    <value>191, 22</value>
   </data>
   <data name="tsmiMinimizeToTray.Text" xml:space="preserve">
     <value>トレイに最小化する(&amp;M)</value>
   </data>
   <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 6</value>
+    <value>188, 6</value>
   </data>
   <data name="tsmiLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>201, 22</value>
+    <value>191, 22</value>
   </data>
   <data name="tsmiLanguage.Text" xml:space="preserve">
     <value>言語(&amp;L)</value>
   </data>
   <data name="tsmiLanguageOSDefault.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="tsmiLanguageOSDefault.Text" xml:space="preserve">
     <value>OSデフォルト(&amp;O)</value>
   </data>
   <data name="tsmiLanguageEnglish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="tsmiLanguageEnglish.Text" xml:space="preserve">
     <value>英語 (&amp;English)</value>
   </data>
   <data name="tsmiLanguageJapanese.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
+    <value>171, 22</value>
   </data>
   <data name="tsmiLanguageJapanese.Text" xml:space="preserve">
     <value>日本語 (&amp;Japanese)</value>
   </data>
   <data name="tsmiHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 20</value>
+    <value>68, 20</value>
   </data>
   <data name="tsmiHelp.Text" xml:space="preserve">
     <value>ヘルプ(&amp;H)</value>
   </data>
   <data name="tsmiAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="tsmiAbout.Text" xml:space="preserve">
     <value>バージョン情報(&amp;A)...</value>
   </data>
   <data name="tsmiFFMpegHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="tsmiFFMpegHelp.Text" xml:space="preserve">
     <value>FFMpeg ヘルプ...</value>
   </data>
   <data name="cmNotify.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 98</value>
+    <value>231, 98</value>
   </data>
   <data name="notifyIconMain.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2286,28 +2319,71 @@
 </value>
   </data>
   <data name="tsmiNotifyOpenInputLocations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 22</value>
+    <value>230, 22</value>
   </data>
   <data name="tsmiNotifyOpenInputLocations.Text" xml:space="preserve">
     <value>入力ファイルの場所を開く(&amp;I)...</value>
   </data>
   <data name="tsmiNotifyOpenOutputLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 22</value>
+    <value>230, 22</value>
   </data>
   <data name="tsmiNotifyOpenOutputLocation.Text" xml:space="preserve">
     <value>出力ファイルの場所を開く(&amp;O)...</value>
   </data>
   <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 6</value>
+    <value>227, 6</value>
   </data>
   <data name="tsmiNotifyShow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 22</value>
+    <value>230, 22</value>
   </data>
   <data name="tsmiNotifyShow.Text" xml:space="preserve">
     <value>表示(&amp;S)</value>
   </data>
   <data name="tsmiNotifyStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 22</value>
+    <value>230, 22</value>
+  </data>
+  <data name="ilList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA8
+        CAAAAk1TRnQBSQFMAgEBAwEAATABAAEwAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
+        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
+        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
+        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
+        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
+        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
+        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
+        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
+        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
+        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
+        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
+        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
+        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
+        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
+        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
+        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
+        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
+        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
+        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
+        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
+        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
+        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
+        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
+        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
+        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
+        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
+        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
+        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/5YAB2oBAAFqJQAL5gUA
+        AWoCAAFqAf8DagH/JwAL5gUAAmoBAAX/AmoIAAHWAQAB0BsAC+YGAAH/AWoB/wFqA/8CagcAAdYDAALW
+        GQAL5gYAAmoD/wJqAf8BagYAAdYGAAHWGAAL5gYABWoD/wcAAdYHAAHWFwAL5gYABWoC/wFqBgAB1gkA
+        AdYWAAvmBwAHahEAAtYUAAvmBwABagH/AmoB/wJqJwAL5ggAAWoCAAFqPAABakAAAWqoAAFCAU0BPgcA
+        AT4DAAEoAwABQAMAARADAAEBAQABAQUAAYAXAAP/AQAG/wIABv8CAAL/AfgBCwL/AgAB4AEDAewBDwL/
+        AgAB4AEDAeQBBwH6Af8CAAHgAQMB8AEHAfcBPwIAAeABAwHwAQcB7wHfAgAB4AEDAfABDwLvAgAB4AED
+        AfABDwHfAfcCAAHgAQMB+AEPAf8B+QIAAeABAwH4AQ8C/wIAAeABAwH9Ab8C/wIAAv8B/QP/AgAC/wH+
+        A/8CAAb/AgAG/wIACw==
+</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

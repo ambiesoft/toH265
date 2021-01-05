@@ -33,13 +33,14 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::TextBox^ txtOtherDirectory;
 		private: System::Windows::Forms::CheckBox^ chkSameDirectory;
 		private: System::Windows::Forms::GroupBox^ groupFilename;
-		private: System::Windows::Forms::TextBox^ txtFilename;
+
 		private: System::Windows::Forms::CheckBox^ chkFileByFile;
 
 
 			   initonly bool losslessable_;
 			   initonly array<String^>^ InputMovies;
 			   initonly AVCodec^ DefaultVideoCodec;
+		private: System::Windows::Forms::ComboBox^ cmbFilename;
 			   initonly AVCodec^ DefaultAudioCodec;
 		public:
 			TargetCodecDialog(bool bLosslessable, 
@@ -244,8 +245,8 @@ private:
 				this->txtOtherDirectory = (gcnew System::Windows::Forms::TextBox());
 				this->chkSameDirectory = (gcnew System::Windows::Forms::CheckBox());
 				this->groupFilename = (gcnew System::Windows::Forms::GroupBox());
-				this->txtFilename = (gcnew System::Windows::Forms::TextBox());
 				this->chkFileByFile = (gcnew System::Windows::Forms::CheckBox());
+				this->cmbFilename = (gcnew System::Windows::Forms::ComboBox());
 				this->groupVideoCodec->SuspendLayout();
 				this->groupAudioCodec->SuspendLayout();
 				this->groupTargetDirectory->SuspendLayout();
@@ -384,20 +385,20 @@ private:
 				// groupFilename
 				// 
 				resources->ApplyResources(this->groupFilename, L"groupFilename");
-				this->groupFilename->Controls->Add(this->txtFilename);
+				this->groupFilename->Controls->Add(this->cmbFilename);
 				this->groupFilename->Name = L"groupFilename";
 				this->groupFilename->TabStop = false;
-				// 
-				// txtFilename
-				// 
-				resources->ApplyResources(this->txtFilename, L"txtFilename");
-				this->txtFilename->Name = L"txtFilename";
 				// 
 				// chkFileByFile
 				// 
 				resources->ApplyResources(this->chkFileByFile, L"chkFileByFile");
 				this->chkFileByFile->Name = L"chkFileByFile";
 				this->chkFileByFile->UseVisualStyleBackColor = true;
+				// 
+				// cmbFilename
+				// 
+				resources->ApplyResources(this->cmbFilename, L"cmbFilename");
+				this->cmbFilename->Name = L"cmbFilename";
 				// 
 				// TargetCodecDialog
 				// 
@@ -428,7 +429,6 @@ private:
 				this->groupTargetDirectory->ResumeLayout(false);
 				this->groupTargetDirectory->PerformLayout();
 				this->groupFilename->ResumeLayout(false);
-				this->groupFilename->PerformLayout();
 				this->ResumeLayout(false);
 				this->PerformLayout();
 

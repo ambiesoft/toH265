@@ -117,539 +117,160 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="splitRoot.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="splitRoot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
-  </data>
-  <data name="splitRoot.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
-    <value>Horizontal</value>
-  </data>
-  <data name="btnBrowseMovie.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="btnBrowseMovie.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 3</value>
-  </data>
-  <data name="btnBrowseMovie.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 20</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="btnBrowseMovie.TabIndex" type="System.Int32, mscorlib">
-    <value>100</value>
-  </data>
-  <data name="btnBrowseMovie.Text" xml:space="preserve">
-    <value>&amp;...</value>
-  </data>
-  <data name="&gt;&gt;btnBrowseMovie.Name" xml:space="preserve">
-    <value>btnBrowseMovie</value>
-  </data>
-  <data name="&gt;&gt;btnBrowseMovie.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnBrowseMovie.Parent" xml:space="preserve">
-    <value>splitRoot.Panel1</value>
-  </data>
-  <data name="&gt;&gt;btnBrowseMovie.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="panelList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <metadata name="cmList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>472, 17</value>
-  </metadata>
-  <data name="tsmiShowInputFileInExplorer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 22</value>
-  </data>
-  <data name="tsmiShowInputFileInExplorer.Text" xml:space="preserve">
-    <value>Show &amp;Input File in Explorer</value>
-  </data>
-  <data name="tsmiShowOutputFileInExplorer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 22</value>
-  </data>
-  <data name="tsmiShowOutputFileInExplorer.Text" xml:space="preserve">
-    <value>Show &amp;Output File in Explorer</value>
-  </data>
-  <data name="toolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 6</value>
-  </data>
-  <data name="tsmiRemoveFromList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 22</value>
-  </data>
-  <data name="tsmiRemoveFromList.Text" xml:space="preserve">
-    <value>&amp;Remove from the list</value>
-  </data>
-  <data name="cmList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 98</value>
-  </data>
-  <data name="&gt;&gt;cmList.Name" xml:space="preserve">
-    <value>cmList</value>
-  </data>
-  <data name="&gt;&gt;cmList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="panelList.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 29</value>
-  </data>
-  <data name="panelList.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 95</value>
-  </data>
-  <data name="panelList.TabIndex" type="System.Int32, mscorlib">
-    <value>200</value>
-  </data>
-  <data name="&gt;&gt;panelList.Name" xml:space="preserve">
-    <value>panelList</value>
-  </data>
-  <data name="&gt;&gt;panelList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelList.Parent" xml:space="preserve">
-    <value>splitRoot.Panel1</value>
-  </data>
-  <data name="&gt;&gt;panelList.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;splitRoot.Panel1.Name" xml:space="preserve">
-    <value>splitRoot.Panel1</value>
-  </data>
-  <data name="&gt;&gt;splitRoot.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitRoot.Panel1.Parent" xml:space="preserve">
-    <value>splitRoot</value>
-  </data>
-  <data name="&gt;&gt;splitRoot.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="splitRoot.Panel1MinSize" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="txtFFMpegArg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="txtFFMpegArg.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 10</value>
-  </data>
-  <data name="txtFFMpegArg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 20</value>
-  </data>
-  <data name="txtFFMpegArg.TabIndex" type="System.Int32, mscorlib">
-    <value>300</value>
-  </data>
-  <data name="&gt;&gt;txtFFMpegArg.Name" xml:space="preserve">
-    <value>txtFFMpegArg</value>
-  </data>
-  <data name="&gt;&gt;txtFFMpegArg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtFFMpegArg.Parent" xml:space="preserve">
-    <value>splitRoot.Panel2</value>
-  </data>
-  <data name="&gt;&gt;txtFFMpegArg.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="btnStart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <data name="btnStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 160</value>
-  </data>
-  <data name="btnStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 23</value>
-  </data>
-  <data name="btnStart.TabIndex" type="System.Int32, mscorlib">
-    <value>600</value>
-  </data>
-  <data name="btnStart.Text" xml:space="preserve">
-    <value>&amp;Start</value>
-  </data>
-  <data name="&gt;&gt;btnStart.Name" xml:space="preserve">
-    <value>btnStart</value>
-  </data>
-  <data name="&gt;&gt;btnStart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnStart.Parent" xml:space="preserve">
-    <value>splitRoot.Panel2</value>
-  </data>
-  <data name="&gt;&gt;btnStart.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="txtLogErr.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="txtLogErr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 36</value>
-  </data>
-  <data name="txtLogErr.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="txtLogErr.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Both</value>
-  </data>
-  <data name="txtLogErr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 89</value>
-  </data>
-  <data name="txtLogErr.TabIndex" type="System.Int32, mscorlib">
-    <value>400</value>
-  </data>
-  <data name="&gt;&gt;txtLogErr.Name" xml:space="preserve">
-    <value>txtLogErr</value>
-  </data>
-  <data name="&gt;&gt;txtLogErr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtLogErr.Parent" xml:space="preserve">
-    <value>splitRoot.Panel2</value>
-  </data>
-  <data name="&gt;&gt;txtLogErr.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="txtLogOut.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left, Right</value>
-  </data>
-  <data name="txtLogOut.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 134</value>
-  </data>
-  <data name="txtLogOut.Size" type="System.Drawing.Size, System.Drawing">
-    <value>669, 20</value>
-  </data>
-  <data name="txtLogOut.TabIndex" type="System.Int32, mscorlib">
-    <value>500</value>
-  </data>
-  <data name="&gt;&gt;txtLogOut.Name" xml:space="preserve">
-    <value>txtLogOut</value>
-  </data>
-  <data name="&gt;&gt;txtLogOut.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtLogOut.Parent" xml:space="preserve">
-    <value>splitRoot.Panel2</value>
-  </data>
-  <data name="&gt;&gt;txtLogOut.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;splitRoot.Panel2.Name" xml:space="preserve">
-    <value>splitRoot.Panel2</value>
-  </data>
-  <data name="&gt;&gt;splitRoot.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitRoot.Panel2.Parent" xml:space="preserve">
-    <value>splitRoot</value>
-  </data>
-  <data name="&gt;&gt;splitRoot.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="splitRoot.Panel2MinSize" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="splitRoot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>693, 330</value>
-  </data>
-  <data name="splitRoot.SplitterDistance" type="System.Int32, mscorlib">
-    <value>131</value>
-  </data>
-  <data name="splitRoot.TabIndex" type="System.Int32, mscorlib">
-    <value>601</value>
-  </data>
-  <data name="&gt;&gt;splitRoot.Name" xml:space="preserve">
-    <value>splitRoot</value>
-  </data>
-  <data name="&gt;&gt;splitRoot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;splitRoot.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;splitRoot.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <metadata name="menuMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="tsmiOpenInputLocations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="tsmiOpenInputLocations.Text" xml:space="preserve">
-    <value>Open &amp;Input location(s)...</value>
-  </data>
-  <data name="tsmiOpenOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="tsmiOpenOutput.Text" xml:space="preserve">
-    <value>Open &amp;Output location...</value>
-  </data>
-  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 6</value>
-  </data>
-  <data name="tsmiStop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="tsmiStop.Text" xml:space="preserve">
-    <value>&amp;Stop</value>
-  </data>
-  <data name="toolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 6</value>
-  </data>
-  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Exit</value>
-  </data>
-  <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="tsmiFile.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
-  <data name="tsmiClearCompletedItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
-  </data>
-  <data name="tsmiClearCompletedItems.Text" xml:space="preserve">
-    <value>&amp;Clear Completed Items</value>
-  </data>
-  <data name="tsmiEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
-  </data>
-  <data name="tsmiEdit.Text" xml:space="preserve">
-    <value>&amp;Edit</value>
-  </data>
-  <data name="tsmiShowLastResult.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="tsmiShowLastResult.Text" xml:space="preserve">
-    <value>&amp;Show Last Result</value>
-  </data>
-  <data name="tsmiView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="tsmiView.Text" xml:space="preserve">
-    <value>&amp;View</value>
-  </data>
-  <data name="tsmiSetFFProbe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="tsmiSetFFProbe.Text" xml:space="preserve">
-    <value>&amp;Set FFProbe...</value>
-  </data>
-  <data name="tsmiSetFFMpeg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="tsmiSetFFMpeg.Text" xml:space="preserve">
-    <value>Set FF&amp;Mpeg...</value>
-  </data>
-  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 6</value>
-  </data>
-  <data name="tsmiPriorityNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
-  </data>
-  <data name="tsmiPriorityNormal.Text" xml:space="preserve">
-    <value>&amp;Normal</value>
-  </data>
-  <data name="tsmiPriorityBelowNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
-  </data>
-  <data name="tsmiPriorityBelowNormal.Text" xml:space="preserve">
-    <value>B&amp;elow Normal</value>
-  </data>
-  <data name="tsmiPriorityBackground.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
+  <data name="&gt;&gt;toolStripMenuItem8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsmiPriorityBackground.Text" xml:space="preserve">
     <value>&amp;Background</value>
   </data>
-  <data name="tsmiPriority.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtLogOut.TabIndex" type="System.Int32, mscorlib">
+    <value>500</value>
   </data>
-  <data name="tsmiPriority.Text" xml:space="preserve">
-    <value>&amp;Priority</value>
+  <data name="&gt;&gt;tsmiRemoveFromList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tsmiCPUAffinityEnable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
+  <data name="btnStart.TabIndex" type="System.Int32, mscorlib">
+    <value>600</value>
   </data>
-  <data name="tsmiCPUAffinityEnable.Text" xml:space="preserve">
-    <value>&amp;Enable</value>
+  <data name="&gt;&gt;cmList.Name" xml:space="preserve">
+    <value>cmList</value>
   </data>
-  <data name="tsmsCpuAffinityBegin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 6</value>
-  </data>
-  <data name="tsmsCpuAffinityEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 6</value>
-  </data>
-  <data name="tsmiEnableAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="tsmiEnableAll.Text" xml:space="preserve">
-    <value>Enable &amp;All</value>
-  </data>
-  <data name="tsmiToggleAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
-  </data>
-  <data name="tsmiToggleAll.Text" xml:space="preserve">
-    <value>&amp;Toggle All</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tsmiShowInputFileInExplorer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
   </data>
   <data name="tsmiClearAllButZero.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 22</value>
   </data>
-  <data name="tsmiClearAllButZero.Text" xml:space="preserve">
-    <value>&amp;Clear All But 0</value>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
-  <data name="tsmiCPUAffinity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+  <data name="cmList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 76</value>
   </data>
-  <data name="tsmiCPUAffinity.Text" xml:space="preserve">
-    <value>&amp;CPU Affinity</value>
+  <data name="&gt;&gt;tsmiFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 6</value>
+  <data name="slVideoCodec.Text" xml:space="preserve">
+    <value>vcodec</value>
   </data>
-  <data name="tsmiEnabledtsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
-  </data>
-  <data name="tsmiEnabledtsmiProcessAfterFinish.Text" xml:space="preserve">
-    <value>&amp;Enabled</value>
-  </data>
-  <data name="tsmiProcesstsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
-  </data>
-  <data name="tsmiProcesstsmiProcessAfterFinish.Text" xml:space="preserve">
-    <value>&amp;Process...</value>
-  </data>
-  <data name="tsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="tsmiProcessAfterFinish.Text" xml:space="preserve">
-    <value>&amp;Process after Finish</value>
-  </data>
-  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 6</value>
-  </data>
-  <data name="tsmiMinimizeToTray.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="tsmiMinimizeToTray.Text" xml:space="preserve">
-    <value>&amp;Minimize to Tray</value>
-  </data>
-  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 6</value>
-  </data>
-  <data name="tsmiLanguageOSDefault.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
-  </data>
-  <data name="tsmiLanguageOSDefault.Text" xml:space="preserve">
-    <value>&amp;OS default</value>
-  </data>
-  <data name="tsmiLanguageEnglish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
-  </data>
-  <data name="tsmiLanguageEnglish.Text" xml:space="preserve">
-    <value>&amp;English</value>
-  </data>
-  <data name="tsmiLanguageJapanese.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
-  </data>
-  <data name="tsmiLanguageJapanese.Text" xml:space="preserve">
-    <value>&amp;Japanese</value>
-  </data>
-  <data name="tsmiLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
-  </data>
-  <data name="tsmiLanguage.Text" xml:space="preserve">
-    <value>&amp;Language</value>
-  </data>
-  <data name="tsmiOption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
-  </data>
-  <data name="tsmiOption.Text" xml:space="preserve">
-    <value>&amp;Option</value>
-  </data>
-  <data name="tsmiAbout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="tsmiAbout.Text" xml:space="preserve">
-    <value>&amp;About...</value>
-  </data>
-  <data name="tsmiFFMpegHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="tsmiFFMpegHelp.Text" xml:space="preserve">
-    <value>FFMpeg's Help...</value>
-  </data>
-  <data name="tsmiHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="tsmiHelp.Text" xml:space="preserve">
-    <value>&amp;Help</value>
-  </data>
-  <data name="menuMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="menuMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>693, 24</value>
-  </data>
-  <data name="menuMain.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;menuMain.Name" xml:space="preserve">
-    <value>menuMain</value>
-  </data>
-  <data name="&gt;&gt;menuMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuMain.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuMain.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <metadata name="notifyIconMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>127, 17</value>
-  </metadata>
-  <metadata name="cmNotify.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>260, 17</value>
-  </metadata>
-  <data name="tsmiNotifyOpenInputLocations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="tsmiNotifyOpenInputLocations.Text" xml:space="preserve">
-    <value>Open &amp;Input location(s)...</value>
-  </data>
-  <data name="tsmiNotifyOpenOutputLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="tsmiNotifyOpenOutputLocation.Text" xml:space="preserve">
-    <value>Open &amp;Output location...</value>
-  </data>
-  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 6</value>
+  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Exit</value>
   </data>
   <data name="tsmiNotifyShow.Size" type="System.Drawing.Size, System.Drawing">
     <value>202, 22</value>
   </data>
-  <data name="tsmiNotifyShow.Text" xml:space="preserve">
-    <value>&amp;Show</value>
+  <data name="&gt;&gt;txtLogErr.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="tsmiNotifyStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
+  <data name="&gt;&gt;tsmiRemoveFromList.Name" xml:space="preserve">
+    <value>tsmiRemoveFromList</value>
   </data>
-  <data name="tsmiNotifyStart.Text" xml:space="preserve">
-    <value>StartDummy</value>
+  <data name="tsmiCPUAffinity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="panelList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>669, 95</value>
+  </data>
+  <data name="toolStripMenuItem8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 6</value>
   </data>
   <data name="cmNotify.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 98</value>
   </data>
+  <data name="tsmiSetFFProbe.Text" xml:space="preserve">
+    <value>&amp;Set FFProbe...</value>
+  </data>
+  <data name="&gt;&gt;txtLogErr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiStop.Text" xml:space="preserve">
+    <value>&amp;Stop</value>
+  </data>
+  <data name="&gt;&gt;splitRoot.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tsmiClearCompletedItems.Name" xml:space="preserve">
+    <value>tsmiClearCompletedItems</value>
+  </data>
+  <data name="&gt;&gt;menuMain.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tsmiLanguageOSDefault.Text" xml:space="preserve">
+    <value>&amp;OS default</value>
+  </data>
+  <data name="&gt;&gt;tsmiOpenOutput.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiCPUAffinity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiStop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiPriority.Name" xml:space="preserve">
+    <value>tsmiPriority</value>
+  </data>
+  <data name="&gt;&gt;slAudioCodec.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiClearCompletedItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 22</value>
+  </data>
+  <data name="&gt;&gt;tsmiShowOutputFileInExplorer.Name" xml:space="preserve">
+    <value>tsmiShowOutputFileInExplorer</value>
+  </data>
+  <data name="&gt;&gt;tsmiView.Name" xml:space="preserve">
+    <value>tsmiView</value>
+  </data>
+  <data name="&gt;&gt;statusMain.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;tsmiToggleAll.Name" xml:space="preserve">
+    <value>tsmiToggleAll</value>
+  </data>
+  <data name="&gt;&gt;txtFFMpegArg.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
+    <value>exitToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;tsmiProcesstsmiProcessAfterFinish.Name" xml:space="preserve">
+    <value>tsmiProcesstsmiProcessAfterFinish</value>
+  </data>
+  <data name="&gt;&gt;splitRoot.Panel1.Name" xml:space="preserve">
+    <value>splitRoot.Panel1</value>
+  </data>
+  <data name="tsmiLanguageEnglish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 22</value>
+  </data>
   <data name="&gt;&gt;cmNotify.Name" xml:space="preserve">
     <value>cmNotify</value>
   </data>
-  <data name="&gt;&gt;cmNotify.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tsmiFFMpegHelp.Text" xml:space="preserve">
+    <value>FFMpeg's Help...</value>
+  </data>
+  <data name="menuMain.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitRoot.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="slAudioCodec.Text" xml:space="preserve">
+    <value>acodec</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>FormMain</value>
+  </data>
+  <data name="tsmiRemoveFromList.Text" xml:space="preserve">
+    <value>&amp;Remove from the list</value>
+  </data>
+  <data name="tsmiMinimizeToTray.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
   </data>
   <data name="notifyIconMain.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2605,120 +2226,393 @@
         /wDQJ/8fGcDtoWNTJJ0AAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="statusMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>361, 17</value>
-  </metadata>
-  <data name="slMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>448, 17</value>
+  <data name="tsmiRemoveFromList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="&gt;&gt;slAudioCodec.Name" xml:space="preserve">
+    <value>slAudioCodec</value>
+  </data>
+  <data name="btnBrowseMovie.Size" type="System.Drawing.Size, System.Drawing">
+    <value>669, 20</value>
   </data>
   <data name="slMain.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="slItemCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 17</value>
-  </data>
-  <data name="slItemCount.Text" xml:space="preserve">
-    <value>0 items</value>
-  </data>
-  <data name="slFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 17</value>
-  </data>
-  <data name="slFormat.Text" xml:space="preserve">
-    <value>format</value>
-  </data>
   <data name="slVideoCodec.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 17</value>
   </data>
-  <data name="slVideoCodec.Text" xml:space="preserve">
-    <value>vcodec</value>
+  <data name="&gt;&gt;tsmiNotifyOpenInputLocations.Name" xml:space="preserve">
+    <value>tsmiNotifyOpenInputLocations</value>
   </data>
-  <data name="slAudioCodec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 17</value>
+  <data name="&gt;&gt;btnStart.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="slAudioCodec.Text" xml:space="preserve">
-    <value>acodec</value>
+  <data name="tsmiShowInputFileInExplorer.Text" xml:space="preserve">
+    <value>Show &amp;Input File in Explorer</value>
   </data>
-  <data name="slDuration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 17</value>
+  <data name="&gt;&gt;toolStripMenuItem4.Name" xml:space="preserve">
+    <value>toolStripMenuItem4</value>
   </data>
-  <data name="slDuration.Text" xml:space="preserve">
-    <value>duration</value>
+  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
   </data>
-  <data name="statusMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 354</value>
+  <data name="&gt;&gt;tsmiFFMpegHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="statusMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>693, 22</value>
-  </data>
-  <data name="statusMain.TabIndex" type="System.Int32, mscorlib">
-    <value>101</value>
+  <data name="&gt;&gt;slFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;statusMain.Name" xml:space="preserve">
     <value>statusMain</value>
   </data>
+  <data name="tsmiSetFFMpeg.Text" xml:space="preserve">
+    <value>Set FF&amp;Mpeg...</value>
+  </data>
+  <data name="slAudioCodec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 17</value>
+  </data>
+  <data name="statusMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 354</value>
+  </data>
+  <data name="btnStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>669, 23</value>
+  </data>
+  <data name="txtLogErr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 36</value>
+  </data>
+  <data name="&gt;&gt;tsmiFFMpegHelp.Name" xml:space="preserve">
+    <value>tsmiFFMpegHelp</value>
+  </data>
+  <data name="tsmiEnableAll.Text" xml:space="preserve">
+    <value>Enable &amp;All</value>
+  </data>
+  <data name="&gt;&gt;btnBrowseMovie.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;slDuration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiPriorityBackground.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 22</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="txtLogOut.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="tsmiSetFFMpeg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="&gt;&gt;splitRoot.Panel1.Parent" xml:space="preserve">
+    <value>splitRoot</value>
+  </data>
+  <data name="&gt;&gt;tsmiOption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiNotifyShow.Text" xml:space="preserve">
+    <value>&amp;Show</value>
+  </data>
+  <data name="&gt;&gt;btnStart.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtLogOut.Parent" xml:space="preserve">
+    <value>splitRoot.Panel2</value>
+  </data>
+  <data name="&gt;&gt;tsmiNotifyShow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiMinimizeToTray.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiAbout.Text" xml:space="preserve">
+    <value>&amp;About...</value>
+  </data>
+  <data name="txtLogErr.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 6</value>
+  </data>
+  <data name="btnStart.Text" xml:space="preserve">
+    <value>&amp;Start</value>
+  </data>
+  <data name="slItemCount.Text" xml:space="preserve">
+    <value>0 items</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem7.Name" xml:space="preserve">
+    <value>toolStripMenuItem7</value>
+  </data>
+  <data name="&gt;&gt;tsmiShowInputFileInExplorer.Name" xml:space="preserve">
+    <value>tsmiShowInputFileInExplorer</value>
+  </data>
+  <data name="&gt;&gt;tsmiNotifyStart.Name" xml:space="preserve">
+    <value>tsmiNotifyStart</value>
+  </data>
+  <data name="splitRoot.Panel1MinSize" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtLogOut.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiFFMpegHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="&gt;&gt;tsmiLanguageEnglish.Name" xml:space="preserve">
+    <value>tsmiLanguageEnglish</value>
+  </data>
+  <data name="txtLogErr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>669, 89</value>
+  </data>
+  <data name="&gt;&gt;tsmiNotifyShow.Name" xml:space="preserve">
+    <value>tsmiNotifyShow</value>
+  </data>
+  <data name="tsmiShowOutputFileInExplorer.Text" xml:space="preserve">
+    <value>Show &amp;Output File in Explorer</value>
+  </data>
+  <data name="&gt;&gt;tsmiShowLastResult.Name" xml:space="preserve">
+    <value>tsmiShowLastResult</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem6.Name" xml:space="preserve">
+    <value>toolStripMenuItem6</value>
+  </data>
+  <data name="&gt;&gt;tsmiProcessAfterFinish.Name" xml:space="preserve">
+    <value>tsmiProcessAfterFinish</value>
+  </data>
+  <data name="tsmiSetFFProbe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="txtFFMpegArg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>669, 20</value>
+  </data>
+  <data name="tsmiHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="&gt;&gt;tsmiSetFFProbe.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmsCpuAffinityEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 6</value>
+  </data>
+  <data name="&gt;&gt;tsmiPriorityBelowNormal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiShowInputFileInExplorer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="txtFFMpegArg.TabIndex" type="System.Int32, mscorlib">
+    <value>300</value>
+  </data>
+  <data name="tsmiEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 20</value>
+  </data>
+  <data name="tsmiStop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 6</value>
+  </data>
+  <data name="splitRoot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>693, 330</value>
+  </data>
+  <data name="tsmiShowOutputFileInExplorer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 22</value>
+  </data>
+  <data name="tsmiPriority.Text" xml:space="preserve">
+    <value>&amp;Priority</value>
+  </data>
+  <data name="tsmiCPUAffinityEnable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
+  </data>
+  <data name="tsmiShowLastResult.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="slMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>448, 17</value>
+  </data>
+  <data name="&gt;&gt;menuMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiOpenInputLocations.Name" xml:space="preserve">
+    <value>tsmiOpenInputLocations</value>
+  </data>
+  <data name="&gt;&gt;slDuration.Name" xml:space="preserve">
+    <value>slDuration</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>160, 220</value>
+  </data>
+  <data name="&gt;&gt;tsmiCPUAffinity.Name" xml:space="preserve">
+    <value>tsmiCPUAffinity</value>
+  </data>
+  <data name="tsmiNotifyOpenOutputLocation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="&gt;&gt;splitRoot.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;statusMain.Type" xml:space="preserve">
     <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;statusMain.Parent" xml:space="preserve">
+  <data name="tsmiCPUAffinityEnable.Text" xml:space="preserve">
+    <value>&amp;Enable</value>
+  </data>
+  <data name="&gt;&gt;tsmiEnableAll.Name" xml:space="preserve">
+    <value>tsmiEnableAll</value>
+  </data>
+  <data name="toolStripMenuItem4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 6</value>
+  </data>
+  <data name="tsmiPriority.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
+  </data>
+  <data name="txtLogErr.TabIndex" type="System.Int32, mscorlib">
+    <value>400</value>
+  </data>
+  <data name="tsmiHelp.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="&gt;&gt;tsmiStop.Name" xml:space="preserve">
+    <value>tsmiStop</value>
+  </data>
+  <data name="&gt;&gt;tsmiProcesstsmiProcessAfterFinish.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="statusMain.TabIndex" type="System.Int32, mscorlib">
+    <value>101</value>
+  </data>
+  <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;slVideoCodec.Name" xml:space="preserve">
+    <value>slVideoCodec</value>
+  </data>
+  <data name="&gt;&gt;tsmiEdit.Name" xml:space="preserve">
+    <value>tsmiEdit</value>
+  </data>
+  <data name="tsmiProcesstsmiProcessAfterFinish.Text" xml:space="preserve">
+    <value>&amp;Process...</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;notifyIconMain.Name" xml:space="preserve">
+    <value>notifyIconMain</value>
+  </data>
+  <data name="&gt;&gt;tsmiNotifyOpenOutputLocation.Name" xml:space="preserve">
+    <value>tsmiNotifyOpenOutputLocation</value>
+  </data>
+  <data name="&gt;&gt;tsmiLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiProcesstsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="tsmiView.Text" xml:space="preserve">
+    <value>&amp;View</value>
+  </data>
+  <data name="&gt;&gt;tsmiProcessAfterFinish.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="btnBrowseMovie.TabIndex" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="tsmiOpenInputLocations.Text" xml:space="preserve">
+    <value>Open &amp;Input location(s)...</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem5.Name" xml:space="preserve">
+    <value>toolStripMenuItem5</value>
+  </data>
+  <data name="&gt;&gt;tsmiClearAllButZero.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="splitRoot.Panel2MinSize" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="&gt;&gt;tsmsCpuAffinityEnd.Name" xml:space="preserve">
+    <value>tsmsCpuAffinityEnd</value>
+  </data>
+  <data name="tsmiLanguageJapanese.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 22</value>
+  </data>
+  <data name="&gt;&gt;panelList.Name" xml:space="preserve">
+    <value>panelList</value>
+  </data>
+  <data name="tsmiCPUAffinity.Text" xml:space="preserve">
+    <value>&amp;CPU Affinity</value>
+  </data>
+  <data name="txtLogOut.Size" type="System.Drawing.Size, System.Drawing">
+    <value>669, 20</value>
+  </data>
+  <data name="&gt;&gt;slVideoCodec.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtLogOut.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;txtLogErr.Name" xml:space="preserve">
+    <value>txtLogErr</value>
+  </data>
+  <data name="panelList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 29</value>
+  </data>
+  <data name="tsmiNotifyStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="&gt;&gt;tsmiAbout.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitRoot.Name" xml:space="preserve">
+    <value>splitRoot</value>
+  </data>
+  <data name="&gt;&gt;slMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiPriorityNormal.Text" xml:space="preserve">
+    <value>&amp;Normal</value>
+  </data>
+  <data name="btnBrowseMovie.Text" xml:space="preserve">
+    <value>&amp;...</value>
+  </data>
+  <data name="&gt;&gt;tsmiCPUAffinityEnable.Name" xml:space="preserve">
+    <value>tsmiCPUAffinityEnable</value>
+  </data>
+  <data name="&gt;&gt;tsmiHelp.Name" xml:space="preserve">
+    <value>tsmiHelp</value>
+  </data>
+  <data name="slItemCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 17</value>
+  </data>
+  <data name="&gt;&gt;splitRoot.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;statusMain.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;splitRoot.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <metadata name="ilList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>558, 17</value>
-  </metadata>
-  <data name="ilList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA8
-        CAAAAk1TRnQBSQFMAgEBAwEAARgBAAEYAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
-        AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
-        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
-        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
-        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
-        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
-        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
-        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
-        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
-        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
-        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
-        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
-        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
-        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
-        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
-        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
-        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
-        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
-        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
-        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
-        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
-        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
-        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
-        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
-        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
-        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
-        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
-        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
-        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/5YAB2oBAAFqJQAL5gUA
-        AWoCAAFqAf8DagH/JwAL5gUAAmoBAAX/AmoIAAHWAQAB0BsAC+YGAAH/AWoB/wFqA/8CagcAAdYDAALW
-        GQAL5gYAAmoD/wJqAf8BagYAAdYGAAHWGAAL5gYABWoD/wcAAdYHAAHWFwAL5gYABWoC/wFqBgAB1gkA
-        AdYWAAvmBwAHahEAAtYUAAvmBwABagH/AmoB/wJqJwAL5ggAAWoCAAFqPAABakAAAWqoAAFCAU0BPgcA
-        AT4DAAEoAwABQAMAARADAAEBAQABAQUAAYAXAAP/AQAG/wIABv8CAAL/AfgBCwL/AgAB4AEDAewBDwL/
-        AgAB4AEDAeQBBwH6Af8CAAHgAQMB8AEHAfcBPwIAAeABAwHwAQcB7wHfAgAB4AEDAfABDwLvAgAB4AED
-        AfABDwHfAfcCAAHgAQMB+AEPAf8B+QIAAeABAwH4AQ8C/wIAAeABAwH9Ab8C/wIAAv8B/QP/AgAC/wH+
-        A/8CAAb/AgAG/wIACw==
-</value>
+  <data name="txtLogErr.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Both</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="&gt;&gt;tsmiFile.Name" xml:space="preserve">
+    <value>tsmiFile</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>693, 376</value>
+  <data name="tsmiOption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="&gt;&gt;tsmiNotifyOpenOutputLocation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiLanguageOSDefault.Name" xml:space="preserve">
+    <value>tsmiLanguageOSDefault</value>
+  </data>
+  <data name="&gt;&gt;splitRoot.Panel2.Parent" xml:space="preserve">
+    <value>splitRoot</value>
+  </data>
+  <data name="&gt;&gt;tsmiPriority.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitRoot.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4674,358 +4568,464 @@
         /wDQJ/8fGcDtoWNTJJ0AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>160, 220</value>
+  <data name="tsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>FormMain</value>
-  </data>
-  <data name="&gt;&gt;tsmiShowInputFileInExplorer.Name" xml:space="preserve">
-    <value>tsmiShowInputFileInExplorer</value>
-  </data>
-  <data name="&gt;&gt;tsmiShowInputFileInExplorer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiShowOutputFileInExplorer.Name" xml:space="preserve">
-    <value>tsmiShowOutputFileInExplorer</value>
-  </data>
-  <data name="&gt;&gt;tsmiShowOutputFileInExplorer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem8.Name" xml:space="preserve">
-    <value>toolStripMenuItem8</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem8.Type" xml:space="preserve">
+  <data name="&gt;&gt;tsmsCpuAffinityEnd.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsmiRemoveFromList.Name" xml:space="preserve">
-    <value>tsmiRemoveFromList</value>
+  <data name="&gt;&gt;tsmiClearAllButZero.Name" xml:space="preserve">
+    <value>tsmiClearAllButZero</value>
   </data>
-  <data name="&gt;&gt;tsmiRemoveFromList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiFile.Name" xml:space="preserve">
-    <value>tsmiFile</value>
-  </data>
-  <data name="&gt;&gt;tsmiFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiOpenInputLocations.Name" xml:space="preserve">
-    <value>tsmiOpenInputLocations</value>
-  </data>
-  <data name="&gt;&gt;tsmiOpenInputLocations.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiOpenOutput.Name" xml:space="preserve">
-    <value>tsmiOpenOutput</value>
-  </data>
-  <data name="&gt;&gt;tsmiOpenOutput.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem4.Name" xml:space="preserve">
-    <value>toolStripMenuItem4</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem4.Type" xml:space="preserve">
+  <data name="&gt;&gt;tsmsCpuAffinityBegin.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsmiStop.Name" xml:space="preserve">
-    <value>tsmiStop</value>
+  <data name="&gt;&gt;btnBrowseMovie.Name" xml:space="preserve">
+    <value>btnBrowseMovie</value>
   </data>
-  <data name="&gt;&gt;tsmiStop.Type" xml:space="preserve">
+  <data name="panelList.TabIndex" type="System.Int32, mscorlib">
+    <value>200</value>
+  </data>
+  <data name="&gt;&gt;tsmiLanguage.Name" xml:space="preserve">
+    <value>tsmiLanguage</value>
+  </data>
+  <data name="&gt;&gt;tsmiAbout.Name" xml:space="preserve">
+    <value>tsmiAbout</value>
+  </data>
+  <data name="tsmiClearAllButZero.Text" xml:space="preserve">
+    <value>&amp;Clear All But 0</value>
+  </data>
+  <data name="toolStripMenuItem5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 6</value>
+  </data>
+  <data name="tsmiOption.Text" xml:space="preserve">
+    <value>&amp;Option</value>
+  </data>
+  <data name="btnBrowseMovie.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;menuMain.Name" xml:space="preserve">
+    <value>menuMain</value>
+  </data>
+  <data name="&gt;&gt;tsmiPriorityBelowNormal.Name" xml:space="preserve">
+    <value>tsmiPriorityBelowNormal</value>
+  </data>
+  <data name="slFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 17</value>
+  </data>
+  <data name="&gt;&gt;tsmiLanguageEnglish.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem7.Name" xml:space="preserve">
-    <value>toolStripMenuItem7</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;exitToolStripMenuItem.Name" xml:space="preserve">
-    <value>exitToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;exitToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiEdit.Name" xml:space="preserve">
-    <value>tsmiEdit</value>
   </data>
   <data name="&gt;&gt;tsmiEdit.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsmiClearCompletedItems.Name" xml:space="preserve">
-    <value>tsmiClearCompletedItems</value>
+  <data name="tsmiToggleAll.Text" xml:space="preserve">
+    <value>&amp;Toggle All</value>
   </data>
-  <data name="&gt;&gt;tsmiClearCompletedItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tsmiOpenOutput.Text" xml:space="preserve">
+    <value>Open &amp;Output location...</value>
   </data>
-  <data name="&gt;&gt;tsmiView.Name" xml:space="preserve">
-    <value>tsmiView</value>
+  <data name="&gt;&gt;tsmsCpuAffinityBegin.Name" xml:space="preserve">
+    <value>tsmsCpuAffinityBegin</value>
   </data>
-  <data name="&gt;&gt;tsmiView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;btnBrowseMovie.Parent" xml:space="preserve">
+    <value>splitRoot.Panel1</value>
   </data>
-  <data name="&gt;&gt;tsmiShowLastResult.Name" xml:space="preserve">
-    <value>tsmiShowLastResult</value>
+  <data name="tsmiToggleAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
   </data>
-  <data name="&gt;&gt;tsmiShowLastResult.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;slMain.Name" xml:space="preserve">
+    <value>slMain</value>
   </data>
-  <data name="&gt;&gt;tsmiOption.Name" xml:space="preserve">
-    <value>tsmiOption</value>
+  <data name="&gt;&gt;btnBrowseMovie.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsmiOption.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;panelList.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="&gt;&gt;tsmiSetFFProbe.Name" xml:space="preserve">
-    <value>tsmiSetFFProbe</value>
+  <data name="splitRoot.TabIndex" type="System.Int32, mscorlib">
+    <value>601</value>
   </data>
-  <data name="&gt;&gt;tsmiSetFFProbe.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;menuMain.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;tsmiSetFFMpeg.Name" xml:space="preserve">
-    <value>tsmiSetFFMpeg</value>
+  <data name="slFormat.Text" xml:space="preserve">
+    <value>format</value>
   </data>
-  <data name="&gt;&gt;tsmiSetFFMpeg.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="statusMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>693, 22</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
-    <value>toolStripMenuItem1</value>
+  <data name="btnStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 160</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ilList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA8
+        CAAAAk1TRnQBSQFMAgEBAwEAATABAAE4AQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
+        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
+        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
+        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
+        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
+        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
+        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
+        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
+        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
+        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
+        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
+        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
+        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
+        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
+        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
+        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
+        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
+        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
+        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
+        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
+        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
+        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
+        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
+        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
+        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
+        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
+        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
+        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/5YAB2oBAAFqJQAL5gUA
+        AWoCAAFqAf8DagH/JwAL5gUAAmoBAAX/AmoIAAHWAQAB0BsAC+YGAAH/AWoB/wFqA/8CagcAAdYDAALW
+        GQAL5gYAAmoD/wJqAf8BagYAAdYGAAHWGAAL5gYABWoD/wcAAdYHAAHWFwAL5gYABWoC/wFqBgAB1gkA
+        AdYWAAvmBwAHahEAAtYUAAvmBwABagH/AmoB/wJqJwAL5ggAAWoCAAFqPAABakAAAWqoAAFCAU0BPgcA
+        AT4DAAEoAwABQAMAARADAAEBAQABAQUAAYAXAAP/AQAG/wIABv8CAAL/AfgBCwL/AgAB4AEDAewBDwL/
+        AgAB4AEDAeQBBwH6Af8CAAHgAQMB8AEHAfcBPwIAAeABAwHwAQcB7wHfAgAB4AEDAfABDwLvAgAB4AED
+        AfABDwHfAfcCAAHgAQMB+AEPAf8B+QIAAeABAwH4AQ8C/wIAAeABAwH9Ab8C/wIAAv8B/QP/AgAC/wH+
+        A/8CAAb/AgAG/xgACw==
+</value>
   </data>
-  <data name="&gt;&gt;tsmiPriority.Name" xml:space="preserve">
-    <value>tsmiPriority</value>
+  <data name="splitRoot.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
+    <value>Horizontal</value>
   </data>
-  <data name="&gt;&gt;tsmiPriority.Type" xml:space="preserve">
+  <data name="splitRoot.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;slItemCount.Name" xml:space="preserve">
+    <value>slItemCount</value>
+  </data>
+  <data name="&gt;&gt;tsmiOpenInputLocations.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tsmiPriorityNormal.Name" xml:space="preserve">
     <value>tsmiPriorityNormal</value>
   </data>
-  <data name="&gt;&gt;tsmiPriorityNormal.Type" xml:space="preserve">
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormMain</value>
+  </data>
+  <data name="&gt;&gt;tsmiView.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsmiPriorityBelowNormal.Name" xml:space="preserve">
-    <value>tsmiPriorityBelowNormal</value>
+  <data name="toolStripMenuItem7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>199, 6</value>
   </data>
-  <data name="&gt;&gt;tsmiPriorityBelowNormal.Type" xml:space="preserve">
+  <data name="btnStart.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;tsmiClearCompletedItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiPriorityBackground.Name" xml:space="preserve">
-    <value>tsmiPriorityBackground</value>
   </data>
   <data name="&gt;&gt;tsmiPriorityBackground.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsmiCPUAffinity.Name" xml:space="preserve">
-    <value>tsmiCPUAffinity</value>
+  <data name="tsmiLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 22</value>
   </data>
-  <data name="&gt;&gt;tsmiCPUAffinity.Type" xml:space="preserve">
+  <data name="&gt;&gt;tsmiNotifyStart.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsmiCPUAffinityEnable.Name" xml:space="preserve">
-    <value>tsmiCPUAffinityEnable</value>
+  <data name="tsmiNotifyStart.Text" xml:space="preserve">
+    <value>StartDummy</value>
   </data>
-  <data name="&gt;&gt;tsmiCPUAffinityEnable.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripMenuItem8.Name" xml:space="preserve">
+    <value>toolStripMenuItem8</value>
   </data>
-  <data name="&gt;&gt;tsmsCpuAffinityBegin.Name" xml:space="preserve">
-    <value>tsmsCpuAffinityBegin</value>
+  <data name="&gt;&gt;splitRoot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsmsCpuAffinityBegin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmsCpuAffinityEnd.Name" xml:space="preserve">
-    <value>tsmsCpuAffinityEnd</value>
-  </data>
-  <data name="&gt;&gt;tsmsCpuAffinityEnd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiEnableAll.Name" xml:space="preserve">
-    <value>tsmiEnableAll</value>
-  </data>
-  <data name="&gt;&gt;tsmiEnableAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiToggleAll.Name" xml:space="preserve">
-    <value>tsmiToggleAll</value>
+  <data name="txtFFMpegArg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 10</value>
   </data>
   <data name="&gt;&gt;tsmiToggleAll.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsmiClearAllButZero.Name" xml:space="preserve">
-    <value>tsmiClearAllButZero</value>
+  <data name="splitRoot.SplitterDistance" type="System.Int32, mscorlib">
+    <value>131</value>
   </data>
-  <data name="&gt;&gt;tsmiClearAllButZero.Type" xml:space="preserve">
+  <data name="&gt;&gt;notifyIconMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NotifyIcon, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="slDuration.Text" xml:space="preserve">
+    <value>duration</value>
+  </data>
+  <data name="tsmiNotifyOpenOutputLocation.Text" xml:space="preserve">
+    <value>Open &amp;Output location...</value>
+  </data>
+  <data name="&gt;&gt;tsmiSetFFMpeg.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem6.Name" xml:space="preserve">
-    <value>toolStripMenuItem6</value>
+  <data name="&gt;&gt;tsmiLanguageOSDefault.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiLanguageJapanese.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiEnableAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiEnabledtsmiProcessAfterFinish.Text" xml:space="preserve">
+    <value>&amp;Enabled</value>
+  </data>
+  <data name="splitRoot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="tsmiLanguage.Text" xml:space="preserve">
+    <value>&amp;Language</value>
+  </data>
+  <data name="slDuration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 17</value>
+  </data>
+  <data name="&gt;&gt;tsmiOption.Name" xml:space="preserve">
+    <value>tsmiOption</value>
+  </data>
+  <data name="&gt;&gt;tsmiMinimizeToTray.Name" xml:space="preserve">
+    <value>tsmiMinimizeToTray</value>
+  </data>
+  <data name="&gt;&gt;ilList.Name" xml:space="preserve">
+    <value>ilList</value>
+  </data>
+  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 6</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tsmiProcessAfterFinish.Name" xml:space="preserve">
-    <value>tsmiProcessAfterFinish</value>
+  <data name="menuMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>693, 24</value>
   </data>
-  <data name="&gt;&gt;tsmiProcessAfterFinish.Type" xml:space="preserve">
+  <data name="tsmiOpenInputLocations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem3.Name" xml:space="preserve">
+    <value>toolStripMenuItem3</value>
+  </data>
+  <data name="&gt;&gt;tsmiOpenOutput.Name" xml:space="preserve">
+    <value>tsmiOpenOutput</value>
+  </data>
+  <data name="txtFFMpegArg.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;tsmiCPUAffinityEnable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiOpenOutput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="tsmiPriorityBelowNormal.Text" xml:space="preserve">
+    <value>B&amp;elow Normal</value>
+  </data>
+  <data name="&gt;&gt;txtLogOut.Name" xml:space="preserve">
+    <value>txtLogOut</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem2.Name" xml:space="preserve">
+    <value>toolStripMenuItem2</value>
+  </data>
+  <data name="&gt;&gt;ilList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="tsmiAbout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="menuMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiShowLastResult.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiClearCompletedItems.Text" xml:space="preserve">
+    <value>&amp;Clear Completed Items</value>
+  </data>
+  <data name="&gt;&gt;tsmiPriorityBackground.Name" xml:space="preserve">
+    <value>tsmiPriorityBackground</value>
+  </data>
+  <data name="tsmsCpuAffinityBegin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>145, 6</value>
+  </data>
+  <data name="&gt;&gt;tsmiSetFFMpeg.Name" xml:space="preserve">
+    <value>tsmiSetFFMpeg</value>
+  </data>
+  <data name="&gt;&gt;panelList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnStart.Name" xml:space="preserve">
+    <value>btnStart</value>
+  </data>
+  <data name="&gt;&gt;cmList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="tsmiEdit.Text" xml:space="preserve">
+    <value>&amp;Edit</value>
+  </data>
+  <data name="txtLogOut.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 134</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiEnabledtsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="&gt;&gt;tsmiSetFFProbe.Name" xml:space="preserve">
+    <value>tsmiSetFFProbe</value>
+  </data>
+  <data name="&gt;&gt;txtLogErr.Parent" xml:space="preserve">
+    <value>splitRoot.Panel2</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>693, 376</value>
+  </data>
+  <data name="&gt;&gt;tsmiPriorityNormal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiProcessAfterFinish.Text" xml:space="preserve">
+    <value>&amp;Process after Finish</value>
+  </data>
+  <data name="&gt;&gt;txtFFMpegArg.Name" xml:space="preserve">
+    <value>txtFFMpegArg</value>
+  </data>
+  <data name="&gt;&gt;tsmiHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnStart.Parent" xml:space="preserve">
+    <value>splitRoot.Panel2</value>
+  </data>
+  <data name="&gt;&gt;cmNotify.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiLanguageEnglish.Text" xml:space="preserve">
+    <value>&amp;English</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiShowLastResult.Text" xml:space="preserve">
+    <value>&amp;Show Last Result</value>
+  </data>
+  <data name="&gt;&gt;splitRoot.Panel2.Name" xml:space="preserve">
+    <value>splitRoot.Panel2</value>
+  </data>
+  <data name="&gt;&gt;panelList.Parent" xml:space="preserve">
+    <value>splitRoot.Panel1</value>
+  </data>
+  <data name="&gt;&gt;statusMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="tsmiFile.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="&gt;&gt;tsmiEnabledtsmiProcessAfterFinish.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tsmiEnabledtsmiProcessAfterFinish.Name" xml:space="preserve">
     <value>tsmiEnabledtsmiProcessAfterFinish</value>
   </data>
-  <data name="&gt;&gt;tsmiEnabledtsmiProcessAfterFinish.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="panelList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;tsmiProcesstsmiProcessAfterFinish.Name" xml:space="preserve">
-    <value>tsmiProcesstsmiProcessAfterFinish</value>
+  <data name="btnBrowseMovie.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 3</value>
   </data>
-  <data name="&gt;&gt;tsmiProcesstsmiProcessAfterFinish.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;txtFFMpegArg.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem2.Name" xml:space="preserve">
-    <value>toolStripMenuItem2</value>
+  <data name="&gt;&gt;toolStripMenuItem1.Name" xml:space="preserve">
+    <value>toolStripMenuItem1</value>
   </data>
-  <data name="&gt;&gt;toolStripMenuItem2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tsmiMinimizeToTray.Text" xml:space="preserve">
+    <value>&amp;Minimize to Tray</value>
   </data>
-  <data name="&gt;&gt;tsmiMinimizeToTray.Name" xml:space="preserve">
-    <value>tsmiMinimizeToTray</value>
+  <data name="tsmiNotifyOpenInputLocations.Text" xml:space="preserve">
+    <value>Open &amp;Input location(s)...</value>
   </data>
-  <data name="&gt;&gt;tsmiMinimizeToTray.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem3.Name" xml:space="preserve">
-    <value>toolStripMenuItem3</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiLanguage.Name" xml:space="preserve">
-    <value>tsmiLanguage</value>
-  </data>
-  <data name="&gt;&gt;tsmiLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiLanguageOSDefault.Name" xml:space="preserve">
-    <value>tsmiLanguageOSDefault</value>
-  </data>
-  <data name="&gt;&gt;tsmiLanguageOSDefault.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiLanguageEnglish.Name" xml:space="preserve">
-    <value>tsmiLanguageEnglish</value>
-  </data>
-  <data name="&gt;&gt;tsmiLanguageEnglish.Type" xml:space="preserve">
+  <data name="&gt;&gt;tsmiShowOutputFileInExplorer.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tsmiLanguageJapanese.Name" xml:space="preserve">
     <value>tsmiLanguageJapanese</value>
   </data>
-  <data name="&gt;&gt;tsmiLanguageJapanese.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tsmiPriorityBelowNormal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 22</value>
   </data>
-  <data name="&gt;&gt;tsmiHelp.Name" xml:space="preserve">
-    <value>tsmiHelp</value>
-  </data>
-  <data name="&gt;&gt;tsmiHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiAbout.Name" xml:space="preserve">
-    <value>tsmiAbout</value>
-  </data>
-  <data name="&gt;&gt;tsmiAbout.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiFFMpegHelp.Name" xml:space="preserve">
-    <value>tsmiFFMpegHelp</value>
-  </data>
-  <data name="&gt;&gt;tsmiFFMpegHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;notifyIconMain.Name" xml:space="preserve">
-    <value>notifyIconMain</value>
-  </data>
-  <data name="&gt;&gt;notifyIconMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NotifyIcon, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiNotifyOpenInputLocations.Name" xml:space="preserve">
-    <value>tsmiNotifyOpenInputLocations</value>
-  </data>
-  <data name="&gt;&gt;tsmiNotifyOpenInputLocations.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiNotifyOpenOutputLocation.Name" xml:space="preserve">
-    <value>tsmiNotifyOpenOutputLocation</value>
-  </data>
-  <data name="&gt;&gt;tsmiNotifyOpenOutputLocation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem5.Name" xml:space="preserve">
-    <value>toolStripMenuItem5</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiNotifyShow.Name" xml:space="preserve">
-    <value>tsmiNotifyShow</value>
-  </data>
-  <data name="&gt;&gt;tsmiNotifyShow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiNotifyStart.Name" xml:space="preserve">
-    <value>tsmiNotifyStart</value>
-  </data>
-  <data name="&gt;&gt;tsmiNotifyStart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;slMain.Name" xml:space="preserve">
-    <value>slMain</value>
-  </data>
-  <data name="&gt;&gt;slMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;slItemCount.Name" xml:space="preserve">
-    <value>slItemCount</value>
+  <data name="tsmiLanguageJapanese.Text" xml:space="preserve">
+    <value>&amp;Japanese</value>
   </data>
   <data name="&gt;&gt;slItemCount.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tsmiNotifyOpenInputLocations.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiLanguageOSDefault.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 22</value>
+  </data>
+  <data name="txtLogErr.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;txtFFMpegArg.Parent" xml:space="preserve">
+    <value>splitRoot.Panel2</value>
+  </data>
+  <data name="tsmiNotifyOpenInputLocations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="tsmiPriorityNormal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 22</value>
+  </data>
   <data name="&gt;&gt;slFormat.Name" xml:space="preserve">
     <value>slFormat</value>
   </data>
-  <data name="&gt;&gt;slFormat.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 6</value>
   </data>
-  <data name="&gt;&gt;slVideoCodec.Name" xml:space="preserve">
-    <value>slVideoCodec</value>
+  <data name="tsmiEnableAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 22</value>
   </data>
-  <data name="&gt;&gt;slVideoCodec.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;slAudioCodec.Name" xml:space="preserve">
-    <value>slAudioCodec</value>
-  </data>
-  <data name="&gt;&gt;slAudioCodec.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;slDuration.Name" xml:space="preserve">
-    <value>slDuration</value>
-  </data>
-  <data name="&gt;&gt;slDuration.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ilList.Name" xml:space="preserve">
-    <value>ilList</value>
-  </data>
-  <data name="&gt;&gt;ilList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormMain</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
+  <metadata name="menuMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="ilList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>558, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>472, 17</value>
+  </metadata>
+  <metadata name="notifyIconMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>127, 17</value>
+  </metadata>
+  <metadata name="cmNotify.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>260, 17</value>
+  </metadata>
+  <metadata name="statusMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>361, 17</value>
+  </metadata>
 </root>
