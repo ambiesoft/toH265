@@ -33,6 +33,7 @@ namespace Ambiesoft {
 			switch (FFMpegState)
 			{
 			case TaskState::None:
+			case TaskState::Intermidiate:
 				break;
 			case TaskState::ProcessLaunching:
 				break;

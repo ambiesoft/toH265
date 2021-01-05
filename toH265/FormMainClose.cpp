@@ -12,18 +12,18 @@ namespace Ambiesoft {
 
 		using namespace System::IO;
 
-		bool FormMain::IsEncoding()
-		{
-			switch (FFMpegState)
-			{
-			case TaskState::Pausing:
-			case TaskState::ProcessLaunching:
-			case TaskState::Running:
-				return true;
-			}
-			
-			return false;
-		}
+		//bool FormMain::IsEncoding()
+		//{
+		//	switch (FFMpegState)
+		//	{
+		//	case TaskState::Pausing:
+		//	case TaskState::ProcessLaunching:
+		//	case TaskState::Running:
+		//		return true;
+		//	}
+		//	
+		//	return false;
+		//}
 
 		bool FormMain::ConfirmAndStopEncode()
 		{
@@ -31,6 +31,7 @@ namespace Ambiesoft {
 			{
 			case TaskState::None:
 				return true;
+			case TaskState::Intermidiate:
 			case TaskState::Pausing:
 			case TaskState::ProcessLaunching:
 			case TaskState::Running:
@@ -82,7 +83,7 @@ namespace Ambiesoft {
 			if (e->CloseReason != CloseReason::WindowsShutDown &&
 				tsmiMinimizeToTray->Checked &&
 				!bCloseFromMenu_
-				&& IsEncoding())
+				&& IsTaskActive)
 			{
 				IconizeToTray();
 				e->Cancel = true;
@@ -94,6 +95,7 @@ namespace Ambiesoft {
 				e->Cancel = true;
 				return;
 			}
+			closed_ = true;
 		}
 
 		System::Void FormMain::FormMain_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e)

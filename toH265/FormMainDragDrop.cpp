@@ -20,29 +20,41 @@ namespace Ambiesoft {
 
 		System::Void FormMain::ListInputs_DragOver(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e)
 		{
-			if (FFMpegState != TaskState::None)
+			if (IsTaskActive)
 				return;
 			if (e->Data->GetDataPresent(DataFormats::FileDrop, true))
 				e->Effect = DragDropEffects::Copy;
 		}
 		System::Void FormMain::ListInputs_DragEnter(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e)
 		{
-			if (FFMpegState != TaskState::None)
+			if (IsTaskActive)
 				return;
 			if (e->Data->GetDataPresent(DataFormats::FileDrop, true))
 				e->Effect = DragDropEffects::Copy;
 		}
+
+
+		void FormMain::AfterDrop(array<String^>^ files)
+		{
+			if (closed_)
+				return;
+			if (IsTaskActive)
+				return;
+
+			for each (String ^ file in files)
+			{
+				CheckMovieAndSet(file, true, true);
+			}
+		}
 		System::Void FormMain::ListInputs_DragDrop(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e)
 		{
-			if (FFMpegState != TaskState::None)
+			if (IsTaskActive)
 				return;
 			if (e->Data->GetDataPresent(DataFormats::FileDrop, true))
 			{
-				cli::array<String^>^ ss = (cli::array<String^>^)e->Data->GetData(DataFormats::FileDrop, true);
-				for each (String ^ s in ss)
-				{
-					CheckMovieAndSet(s,true, true);
-				}
+				array<String^>^ ss = (cli::array<String^>^)e->Data->GetData(DataFormats::FileDrop, true);
+				this->BeginInvoke(gcnew VSADelegate(this, &FormMain::AfterDrop),
+					gcnew array<Object^>{ss});
 			}
 		}
 

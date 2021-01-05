@@ -619,10 +619,14 @@ namespace Ambiesoft {
 		{
 			if (!thFFMpeg_ && !processFFMpeg_)
 			{
-				return TaskState::None;
+				if (IsTaskActive)
+					return TaskState::Intermidiate;
+				else
+					return TaskState::None;
 			}
 			else if (thFFMpeg_ && !processFFMpeg_)
 			{
+				DASSERT(IsTaskActive);
 				return TaskState::ProcessLaunching;
 			}
 			else if (!thFFMpeg_ && processFFMpeg_)
@@ -632,6 +636,7 @@ namespace Ambiesoft {
 			}
 			else if (thFFMpeg_ && processFFMpeg_)
 			{
+				DASSERT(IsTaskActive);
 				if (processSuspeded_)
 					return TaskState::Pausing;
 				else
@@ -1028,6 +1033,7 @@ namespace Ambiesoft {
 			switch (FFMpegState)
 			{
 			case TaskState::None:
+			case TaskState::Intermidiate:
 				break;
 			case TaskState::Pausing:
 				if (!ResumeProcess(processFFMpeg_))

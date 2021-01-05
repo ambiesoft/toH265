@@ -130,6 +130,8 @@ namespace Ambiesoft {
 			};
 
 			CpuAffinity cpuAffinity_;
+			bool closed_ = false;
+
 			// System::Windows::Forms::Timer^ timerSetAffinity_;
 			bool bCloseFromMenu_;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiClearAllItems;
@@ -353,6 +355,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			delegate void AddToLog(String^ text);
 			void AddToOutput(String^ text);
 			void AddToErr(String^ text);
+			void AfterDrop(array<String^>^ files);
 
 			System::Threading::Thread^ thFFMpeg_;
 			System::Diagnostics::Process^ processFFMpeg_;
@@ -363,6 +366,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 				ProcessLaunching,
 				Running,
 				Pausing,
+				Intermidiate,
 				Unknown,
 			};
 			enum class FFMpegPriority {
@@ -505,7 +509,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			delegate void VIDelegate(int value);
 			void ThreadStarted();
 			void ThreadEnded(int retval);
-			bool IsEncoding();
+			// bool IsEncoding();
 			bool ConfirmAndStopEncode();
 			void ChangeStartButtonText(String^ text);
 			void OnProcessStarted(Object^ sender, EventArgs^ e);

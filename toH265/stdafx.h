@@ -25,6 +25,7 @@ enum ERROR_RETURN
 };
 
 delegate void VVDelegate();
+delegate void VSADelegate(array<System::String^>^);
 
 #define IMAGEKEY_NORMAL L"listimage_normal.png"
 #define IMAGEKEY_ENCODING L"listimage_encoding.png"
