@@ -335,47 +335,63 @@ namespace Ambiesoft {
 			}
 			TimeSpan all(10 * 1000 * (long long)mDuration);
 			// InputDuration = all.ToString("hh\\:mm\\:ss");
-			TotalInputDuration = gcnew AVDuration(all);
-			TotalInputFormat = tryFormat;
-			TotalInputAudioCodec = totalInputAudioCodec;
-			TotalInputVideoCodec = totalInputVideoCodec;
+			StatusTotalInputDuration = gcnew AVDuration(all);
+			StatusTotalInputFormat = tryFormat;
+			StatusTotalInputAudioCodec = totalInputAudioCodec;
+			StatusTotalInputVideoCodec = totalInputVideoCodec;
 			TotalInputFPS = tryfps;
 			// tsOrigMovies_ = all;
 		}
 
 		void FormMain::SetFormatStatusText()
 		{
-			slFormat->Text = Ambiesoft::toH265Helper::human_format(totalInputFormat_);
+			slFormat->Text = Ambiesoft::toH265Helper::human_format(StatusTotalInputFormat);
 		}
 
 		void FormMain::SetCodecStatusText()
 		{
 			{
 				StringBuilder sbAC;
-				if (!TotalInputAudioCodec->IsEmpty)
-				{
-					sbAC.Append(TotalInputAudioCodec);
-					if (IsTaskActive && !encodeTask_->CurrentOutputAudioCodec->IsEmpty)
-					{
-						sbAC.Append(" -> ");
-						sbAC.Append(encodeTask_->CurrentOutputAudioCodec);
-					}
+				if(IsTaskActive)
+				{ 
+					sbAC.Append(encodeTask_->CurrentInputAudioCodec);
+					sbAC.Append(" -> ");
+					sbAC.Append(encodeTask_->CurrentOutputAudioCodec);
 				}
+				else if (!StatusTotalInputAudioCodec->IsEmpty)
+				{
+					sbAC.Append(StatusTotalInputAudioCodec);
+					//if (totalout
+					//{
+					//	sbAC.Append(" -> ");
+					//	sbAC.Append(encodeTask_->CurrentOutputAudioCodec);
+					//}
+				}
+
+
 				if (slAudioCodec->Text != sbAC.ToString())
 					slAudioCodec->Text = sbAC.ToString();
 			}
 
 			{
 				StringBuilder sbVC;
-				if (!TotalInputVideoCodec->IsEmpty)
+				if (IsTaskActive)
 				{
-					sbVC.Append(TotalInputVideoCodec->ToString());
-					if (IsTaskActive && !encodeTask_->CurrentOutputVideoCodec->IsEmpty)
-					{
-						sbVC.Append(" -> ");
-						sbVC.Append(encodeTask_->CurrentOutputVideoCodec);
-					}
+					sbVC.Append(encodeTask_->CurrentInputVideoCodec);
+					sbVC.Append(" -> ");
+					sbVC.Append(encodeTask_->CurrentOutputVideoCodec);
 				}
+				else if (!StatusTotalInputVideoCodec->IsEmpty)
+				{
+					sbVC.Append(StatusTotalInputVideoCodec->ToString());
+					//if (IsTaskActive && !encodeTask_->CurrentOutputVideoCodec->IsEmpty)
+					//{
+					//	sbVC.Append(" -> ");
+					//	sbVC.Append(encodeTask_->CurrentOutputVideoCodec);
+					//}
+				}
+
+
 				if (slVideoCodec->Text != sbVC.ToString())
 					slVideoCodec->Text = sbVC.ToString();
 			}
@@ -384,19 +400,26 @@ namespace Ambiesoft {
 		void FormMain::SetTimeStatusText()
 		{
 			StringBuilder sb;
-			if (!TotalInputDuration->IsEmpty())
+			if (IsTaskActive)
 			{
-				sb.Append(TotalInputDuration);
-				if (!OutputDuration->IsEmpty())
+				sb.Append(encodeTask_->TotalInputDuration);
+				sb.Append(" -> ");
+				sb.Append(StatusOutputDuration);
+			}
+			else if (!StatusTotalInputDuration->IsEmpty())
+			{
+				sb.Append(StatusTotalInputDuration);
+				if (!StatusOutputDuration->IsEmpty())
 				{
 					sb.Append(" -> ");
-					sb.Append(OutputDuration);
+					sb.Append(StatusOutputDuration);
 				}
 			}
 			else
 			{
-				sb.Append(TotalInputDuration);
+				sb.Append(StatusTotalInputDuration);
 			}
+
 			if (slDuration->Text != sb.ToString())
 				slDuration->Text = sb.ToString();
 		}
@@ -544,16 +567,16 @@ namespace Ambiesoft {
 			ElapseInfo^ lastElapse = gcnew ElapseInfo(totalProgress);
 			ElapseInfo^ firstElapse = elapses_.Enqueue(lastElapse);
 
-			double percent = (totalProgress) / TotalInputDuration->TotalMilliseconds;
+			double percent = (totalProgress) / encodeTask_->TotalInputDuration->TotalMilliseconds;
 			UpdateTitle((int)(percent * 100));
 
 			if (this->WindowState == FormWindowState::Minimized)
 				return;
 
 			SetStatusText(STATUSTEXT::REMAINING,
-				GetRemainingTimeText(firstElapse, lastElapse, TotalInputDuration->TotalMilliseconds));
+				GetRemainingTimeText(firstElapse, lastElapse, encodeTask_->TotalInputDuration->TotalMilliseconds));
 
-			OutputDuration = gcnew AVDuration(totalProgress);
+			StatusOutputDuration = gcnew AVDuration(totalProgress);
 		}
 
 		void FormMain::SetStatusText(STATUSTEXT ss)
@@ -831,7 +854,7 @@ namespace Ambiesoft {
 
 			lastSummary_->Show(this);
 
-			OutputDuration = gcnew AVDuration();
+			StatusOutputDuration = gcnew AVDuration();
 
 			elapses_.Clear();
 		}
@@ -920,6 +943,14 @@ namespace Ambiesoft {
 		{
 			return gcnew AVDuration(TimeSpan::Parse(lvi->SubItems["duration"]->Text));
 		}
+		AVCodec^ FormMain::GetVCodecFromLvi(ListViewItem^ lvi)
+		{
+			return gcnew AVCodec(lvi->SubItems["vcodec"]->Text);
+		}
+		AVCodec^ FormMain::GetACodecFromLvi(ListViewItem^ lvi)
+		{
+			return gcnew AVCodec(lvi->SubItems["acodec"]->Text);
+		}
 		double FormMain::GetFPSFromLvi(ListViewItem^ lvi)
 		{
 			double d;
@@ -936,11 +967,11 @@ namespace Ambiesoft {
 			System::Drawing::Size size = GetVideoSize(lvi);
 			return size.Width * size.Height;
 		}
-		Size FormMain::GetMaxVideoSize()
+		Size FormMain::GetMaxVideoSize(ItemSelection sel)
 		{
 			double maxWidth = 0;
 			ListViewItem^ lviMax;
-			for each (ListViewItem ^ lvi in lvInputs->Items)
+			for each (ListViewItem ^ lvi in GetItems(sel))
 			{
 				const double area = GetVideoArea(lvi);
 				if (maxWidth < area)
@@ -952,11 +983,12 @@ namespace Ambiesoft {
 			DASSERT(lviMax);
 			return GetVideoSize(lviMax);
 		}
-		bool FormMain::IsSameSizeVideos()
+		bool FormMain::IsSameSizeVideos(ItemSelection sel)
 		{
 			System::Drawing::Size size;
 			bool first = false;
-			for each (ListViewItem ^ lvi in lvInputs->Items)
+			
+			for each (ListViewItem ^ lvi in GetItems(sel))
 			{
 				if (!first)
 				{
@@ -970,37 +1002,103 @@ namespace Ambiesoft {
 			return true;
 		}
 
+		ArrayList^ FormMain::GetItemsCommon(ItemToGet toGet, ItemSelection sel)
+		{
+			ArrayList^ rets = gcnew ArrayList();
+			for each (ListViewItem ^ lvi in lvInputs->Items)
+			{
+				switch (sel)
+				{
+				case ItemSelection::All:
+					break;
+				case ItemSelection::Completed:
+					if(lvi->ImageKey != IMAGEKEY_DONE)
+						continue;
+					break;
+				case ItemSelection::Incompleted:
+					if (lvi->ImageKey == IMAGEKEY_DONE)
+						continue;
+					break;
+				case ItemSelection::Selectet:
+					if (!lvi->Selected)
+						continue;
+					break;
+				default:
+					DASSERT(false);
+					continue;
+				}
 
-		array<String^>^ FormMain::GetInputMovies()
+				switch (toGet)
+				{
+				case ItemToGet::Item:
+				{
+					rets->Add(lvi);
+				}
+				break;
+				case ItemToGet::Name:
+				{
+					String^ inputmovie = GetMovieFileFromLvi(lvi);
+					rets->Add(inputmovie);
+				}
+				break;
+				case ItemToGet::Duration:
+				{
+					AVDuration^ duration = GetDurationFromLvi(lvi);
+					rets->Add(duration);
+				}
+				break;
+				case ItemToGet::Fps:
+				{
+					double fps = GetFPSFromLvi(lvi);
+					rets->Add(fps);
+				}
+				break;
+				default:
+					DASSERT(false);
+				}
+			}
+			return rets;
+		}
+		array<ListViewItem^>^ FormMain::GetItems(ItemSelection sel)
 		{
-			List<String^> inputmovies;
+			return (array<ListViewItem^>^)GetItemsCommon(ItemToGet::Item, sel)->ToArray(ListViewItem::typeid);
+		}
+		array<String^>^ FormMain::GetInputMovies(ItemSelection sel)
+		{
+			return (array<String^>^) GetItemsCommon(ItemToGet::Name, sel)->ToArray(String::typeid);
+		}
+		array<AVDuration^>^ FormMain::GetInputDurations(ItemSelection sel)
+		{
+			return (array<AVDuration^>^)GetItemsCommon(ItemToGet::Duration, sel)->ToArray(AVDuration::typeid);
+			//List<AVDuration^> inputdurations;
+			//for each (ListViewItem ^ lvi in lvInputs->Items)
+			//{
+			//	AVDuration^ duration = GetDurationFromLvi(lvi);
+			//	inputdurations.Add(duration);
+			//}
+			//return inputdurations.ToArray();
+		}
+		array<double>^ FormMain::GetInputFPSes(ItemSelection sel)
+		{
+			return (array<double>^)GetItemsCommon(ItemToGet::Fps, sel)->ToArray(double::typeid);
+			//List<double> inputFpses;
+			//for each (ListViewItem ^ lvi in lvInputs->Items)
+			//{
+			//	double duration = GetFPSFromLvi(lvi);
+			//	inputFpses.Add(duration);
+			//}
+			//return inputFpses.ToArray();
+		}
+		bool FormMain::HasCompleteItems::get()
+		{
 			for each (ListViewItem ^ lvi in lvInputs->Items)
 			{
-				String^ inputmovie = GetMovieFileFromLvi(lvi);
-				inputmovies.Add(inputmovie);
+				if (lvi->ImageKey == IMAGEKEY_DONE)
+					return true;
 			}
-			return inputmovies.ToArray();
+			return false;
 		}
-		array<AVDuration^>^ FormMain::GetInputDurations()
-		{
-			List<AVDuration^> inputdurations;
-			for each (ListViewItem ^ lvi in lvInputs->Items)
-			{
-				AVDuration^ duration = GetDurationFromLvi(lvi);
-				inputdurations.Add(duration);
-			}
-			return inputdurations.ToArray();
-		}
-		array<double>^ FormMain::GetInputFPSes()
-		{
-			List<double> inputFpses;
-			for each (ListViewItem ^ lvi in lvInputs->Items)
-			{
-				double duration = GetFPSFromLvi(lvi);
-				inputFpses.Add(duration);
-			}
-			return inputFpses.ToArray();
-		}
+
 		System::Void FormMain::btnStart_Click(System::Object^ sender, System::EventArgs^ e)
 		{
 			switch (FFMpegState)
@@ -1054,6 +1152,8 @@ namespace Ambiesoft {
 
 			DASSERT(!IsTaskActive);
 			encodeTask_ = nullptr;
+
+			// check input movie
 			for each (ListViewItem ^ lvi in lvInputs->Items)
 			{
 				String^ inputmovie = GetMovieFileFromLvi(lvi);
@@ -1067,22 +1167,55 @@ namespace Ambiesoft {
 					return;
 			}
 
+			ItemSelection itemSelection = ItemSelection::All;
+			if (HasCompleteItems)
+			{
+				System::Windows::Forms::DialogResult result =
+					CppUtils::CenteredMessageBox(
+						I18N(L"Some items are already encoded. Do you want to encode them again?"),
+						Application::ProductName,
+						MessageBoxButtons::YesNoCancel,
+						MessageBoxIcon::Question,
+						MessageBoxDefaultButton::Button2);
+				if (result == System::Windows::Forms::DialogResult::Yes)
+				{
+					itemSelection = ItemSelection::All;
+				}
+				else if (result == System::Windows::Forms::DialogResult::No)
+				{
+					itemSelection = ItemSelection::Incompleted;
+				}
+				else if (result == System::Windows::Forms::DialogResult::Cancel)
+				{
+					return;
+				}
+				else
+				{
+					DASSERT(false);
+					return;
+				}
+			}
 
+			array<String^>^ inputmovies = GetInputMovies(itemSelection);
+			array<AVDuration^>^ inputdurations = GetInputDurations(itemSelection);
+			array<double>^ inputFpses = GetInputFPSes(itemSelection);
 
-			array<String^>^ inputmovies = GetInputMovies();
-			array<AVDuration^>^ inputdurations = GetInputDurations();
-			array<double>^ inputFpses = GetInputFPSes();
+			if (inputmovies->Length == 0)
+			{
+				CppUtils::Alert(I18N(L"No items to encode."));
+				return;
+			}
 
 			bool isLosslessable = inputmovies->Length != 0 &&
-				TotalInputFormat != "mixed" &&
-				!TotalInputAudioCodec->IsMixed && !TotalInputVideoCodec->IsMixed;
+				StatusTotalInputFormat != "mixed" &&
+				!StatusTotalInputAudioCodec->IsMixed && !StatusTotalInputVideoCodec->IsMixed;
 			TargetCodecDialog codecDlg(isLosslessable, 
 				Program::IniFile, 
 				SECTION_TARGETCODECDIALOG,
 				inputmovies,
-				TotalInputVideoCodec, TotalInputAudioCodec);
+				StatusTotalInputVideoCodec, StatusTotalInputAudioCodec);
 
-			if (TotalInputVideoCodec->IsH264)
+			if (StatusTotalInputVideoCodec->IsH264)
 			{
 				codecDlg.rbVideoH265->Checked = true;
 
@@ -1092,7 +1225,7 @@ namespace Ambiesoft {
 					codecDlg.rbAudioCopy->Checked = true;
 				}
 			}
-			else if (TotalInputVideoCodec->IsVp8)
+			else if (StatusTotalInputVideoCodec->IsVp8)
 			{
 				codecDlg.rbVideoVp9->Checked = true;
 
@@ -1103,7 +1236,7 @@ namespace Ambiesoft {
 			}
 
 
-			if (TotalInputAudioCodec->IsMixed)
+			if (StatusTotalInputAudioCodec->IsMixed)
 			{
 				codecDlg.rbAudioCopy->Checked = false;
 			}
@@ -1117,8 +1250,7 @@ namespace Ambiesoft {
 			DASSERT(!IsTaskActive);
 			encodeTask_ = gcnew EncodeTask();
 
-			array<ListViewItem^>^ items = gcnew array<ListViewItem^>(lvInputs->Items->Count);
-			lvInputs->Items->CopyTo(items, 0);
+			array<ListViewItem^>^ items = GetItems(itemSelection);
 			DASSERT(items->Length == inputmovies->Length);
 			DASSERT(items->Length == inputdurations->Length);
 			DASSERT(items->Length == inputFpses->Length);
@@ -1130,9 +1262,9 @@ namespace Ambiesoft {
 				codecDlg.OutputFiles,
 				codecDlg.OutputVideoCodec,
 				codecDlg.OutputAudioCodec,
-				IsSameSizeVideos(),
-				GetMaxVideoSize(),
-				codecDlg.IsConcat ? gcnew array<AVDuration^>{ TotalInputDuration } : inputdurations,
+				IsSameSizeVideos(itemSelection),
+				GetMaxVideoSize(itemSelection),
+				codecDlg.IsConcat ? gcnew array<AVDuration^>{ StatusTotalInputDuration } : inputdurations,
 				codecDlg.IsConcat ? gcnew array<double>{TotalInputFPS} : inputFpses);
 			
 			
@@ -1211,10 +1343,10 @@ namespace Ambiesoft {
 
 			if(lvInputs->Items->Count==0)
 			{
-				TotalInputFormat = String::Empty;
-				TotalInputAudioCodec = gcnew AVCodec();
-				TotalInputVideoCodec = gcnew AVCodec();
-				TotalInputDuration = gcnew AVDuration();
+				StatusTotalInputFormat = String::Empty;
+				StatusTotalInputAudioCodec = gcnew AVCodec();
+				StatusTotalInputVideoCodec = gcnew AVCodec();
+				StatusTotalInputDuration = gcnew AVDuration();
 			}
 			else
 			{
@@ -1230,7 +1362,7 @@ namespace Ambiesoft {
 			}
 		}
 
-		array<String^>^ FormMain::GetOutputMoviesFromList(bool bSelectedOnly)
+		array<String^>^ FormMain::GetOutputtedMoviesFromList(bool bSelectedOnly)
 		{
 			List<String^>^ results = gcnew List<String^>();
 
@@ -1242,20 +1374,20 @@ namespace Ambiesoft {
 				if (item->ImageKey == IMAGEKEY_DONE ||
 					item->ImageKey == IMAGEKEY_ENCODING)
 				{
-					results->Add(ListViewItemData::Get(item)->OutputFile);
+					results->Add(ListViewItemData::Get(item)->OutputtedFile);
 				}
 			}
 			return MakeUnique(results)->ToArray();
 		}
 		System::Void FormMain::tsmiShowOutputFileInExplorer_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			for each(String^ file in GetOutputMoviesFromList(true))
+			for each(String^ file in GetOutputtedMoviesFromList(true))
 				CppUtils::OpenFolder(this, file);
 		}
 
 		System::Void FormMain::tsmiOpenInputLocations_ClickCommon(System::Object^ sender, System::EventArgs^ e)
 		{
-			for each (String ^ inputmovie in GetInputMovies())
+			for each (String ^ inputmovie in GetInputMovies(ItemSelection::All))
 			{
 				OpenFolder((HWND)this->Handle.ToPointer(),
 					getStdWstring(inputmovie).c_str());
@@ -1294,7 +1426,7 @@ namespace Ambiesoft {
 			//OpenFolder((HWND)this->Handle.ToPointer(),
 			//	getStdWstring(outputMovie).c_str());
 
-			for each (String ^ file in GetOutputMoviesFromList(false))
+			for each (String ^ file in GetOutputtedMoviesFromList(false))
 				CppUtils::OpenFolder(this, file);
 
 		}

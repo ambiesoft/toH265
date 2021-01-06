@@ -1,11 +1,15 @@
 #pragma once
 
+#include "EncodeJob.h"
 #include "EncodeTask.h"
+
 
 namespace Ambiesoft {
 	namespace toH265 {
 
 		using namespace System;
+
+		ref class EncodeJob;
 
 		ref class Paper
 		{

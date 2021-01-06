@@ -7,7 +7,8 @@ namespace Ambiesoft {
 
 		ref class ListViewItemData
 		{
-			String^ outputFile_;
+			String^ outputtingFile_;
+			String^ outputtedFile_;
 
 			ListViewItemData(){}
 
@@ -21,11 +22,20 @@ namespace Ambiesoft {
 				return (ListViewItemData^)item->Tag;
 			}
 
-			property String^ OutputFile
+			property String^ OutputtingFile
 			{
-				String^ get() { return outputFile_; }
-				void set(String^ v) { outputFile_ = v; }
+				String^ get() { return outputtingFile_; }
+				void set(String^ v) { outputtingFile_ = v; }
 			}
+			property String^ OutputtedFile
+			{
+				String^ get() { return outputtedFile_; }
+				void set(String^ v) { outputtedFile_ = v; }
+			}
+			//property bool IsCompleted
+			//{
+			//	bool get() { return !String::IsNullOrEmpty(outputtedFile_); }
+			//}
 		};
 
 	}

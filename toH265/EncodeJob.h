@@ -3,6 +3,8 @@
 #include "AVCodec.h"
 #include "AVDuration.h"
 #include "toH265.h"
+
+
 #include "EncodeTask.h"
 
 namespace Ambiesoft {
@@ -25,6 +27,8 @@ namespace Ambiesoft {
 			AVDuration^ totalInputDuration_;
 			double totalInputFPS_;
 			double partPercent_;
+			AVCodec^ inputVideoCodec_ = gcnew AVCodec();
+			AVCodec^ inputAudioCodec_ = gcnew AVCodec();
 			AVCodec^ outputVideoCodec_ = gcnew AVCodec();
 			AVCodec^ outputAudioCodec_ = gcnew AVCodec();
 
@@ -51,6 +55,14 @@ namespace Ambiesoft {
 						return OutputtingMovie;
 					return String::Empty;
 				}
+			}
+			property AVCodec^ InputVideoCodec
+			{
+				AVCodec^ get() { return inputVideoCodec_; }
+			}
+			property AVCodec^ InputAudioCodec
+			{
+				AVCodec^ get() { return inputAudioCodec_; }
 			}
 			property AVCodec^ OutputVideoCodec
 			{
@@ -82,23 +94,7 @@ namespace Ambiesoft {
 				System::Drawing::Size maxSize,
 				AVDuration^ totalInputDuration,
 				double totalInputFPS,
-				double partPercent)
-			{
-				this->ReEncode = bReEncode;
-				this->items_ = items;
-				this->inputMovies_ = inputMovies;
-				this->OutputtingMovie = outputtingMovie;
-				this->OutputVideoCodec = outputVideoCodec;
-				this->OutputAudioCodec = outputAudioCodec;
-				this->IsSameSize = isSameSize;
-				this->MaxSize = maxSize;
-				this->totalInputDuration_ = totalInputDuration;
-				this->totalInputFPS_ = totalInputFPS;
-				this->partPercent_ = partPercent;
-
-				for each (System::Windows::Forms::ListViewItem ^ item in items_)
-					item->ImageKey = IMAGEKEY_NORMAL;
-			}
+				double partPercent);
 
 			// each
 			EncodeJob(

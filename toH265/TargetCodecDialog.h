@@ -157,6 +157,8 @@ namespace Ambiesoft {
 			{
 				bool get()
 				{
+					if (InputMovies->Length == 1)
+						return false;
 					return !IsEachFile;
 				}
 			}

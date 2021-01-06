@@ -309,4 +309,13 @@
   <data name="Be carefull. The FPSs differs." xml:space="preserve">
     <value>ご注意ください。FPSが異なります。</value>
   </data>
+  <data name="Are you sure to clear all items?" xml:space="preserve">
+    <value>すべてのアイテムをクリアしますか？</value>
+  </data>
+  <data name="Following target directories does not exist. Do you want to create them?" xml:space="preserve">
+    <value>以下のディレクトリは存在しません。作成しますか？</value>
+  </data>
+  <data name="Following output files already exist. Do you want to override them?" xml:space="preserve">
+    <value>以下の出力ファイルはすでに存在しています。上書きしますか？</value>
+  </data>
 </root>

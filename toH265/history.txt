@@ -1,3 +1,6 @@
+2021/01/06 ver1.0.67
+Many
+
 2021/01/05 ver1.0.66
 Warning show methods
 

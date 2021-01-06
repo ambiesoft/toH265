@@ -11,6 +11,38 @@ namespace Ambiesoft {
 		using namespace System::Collections::Generic;
 		using namespace System::Windows::Forms;
 
+
+		void EncodeJob::init(bool bReEncode,
+			array<System::Windows::Forms::ListViewItem^>^ items,
+			array<String^>^ inputMovies,
+			String^ outputtingMovie,
+			AVCodec^ outputVideoCodec,
+			AVCodec^ outputAudioCodec,
+			bool isSameSize,
+			System::Drawing::Size maxSize,
+			AVDuration^ totalInputDuration,
+			double totalInputFPS,
+			double partPercent)
+		{
+			this->ReEncode = bReEncode;
+			this->items_ = items;
+			this->inputMovies_ = inputMovies;
+			this->OutputtingMovie = outputtingMovie;
+			this->OutputVideoCodec = outputVideoCodec;
+			this->OutputAudioCodec = outputAudioCodec;
+			this->IsSameSize = isSameSize;
+			this->MaxSize = maxSize;
+			this->totalInputDuration_ = totalInputDuration;
+			this->totalInputFPS_ = totalInputFPS;
+			this->partPercent_ = partPercent;
+
+			for each (System::Windows::Forms::ListViewItem ^ item in items_)
+			{
+				item->ImageKey = IMAGEKEY_NORMAL;
+				this->inputVideoCodec_ = FormMain::GetVCodecFromLvi(item);
+				this->inputAudioCodec_ = FormMain::GetACodecFromLvi(item);
+			}
+		}
 		void EncodeJob::CreateTempFile()
 		{
 			DASSERT(String::IsNullOrEmpty(tempFile_));
@@ -141,7 +173,8 @@ namespace Ambiesoft {
 			for each (ListViewItem ^ item in items_)
 			{
 				item->ImageKey = IMAGEKEY_ENCODING;
-				ListViewItemData::Get(item)->OutputFile = this->OutputtingMovie;
+				ListViewItemData::Get(item)->OutputtingFile = this->OutputtingMovie;
+				ListViewItemData::Get(item)->OutputtedFile = nullptr;
 				item->EnsureVisible();
 			}
 		}
@@ -154,7 +187,7 @@ namespace Ambiesoft {
 			for each (ListViewItem ^ item in items_)
 			{
 				item->ImageKey = IMAGEKEY_DONE;
-				ListViewItemData::Get(item)->OutputFile = this->OutputtedMovie;
+				ListViewItemData::Get(item)->OutputtedFile = this->OutputtedMovie;
 			}
 		}
 		void EncodeJob::Cancel()

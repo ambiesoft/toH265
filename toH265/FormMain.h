@@ -308,6 +308,8 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 					, ((ListViewItem^)y)->SubItems[sortColumn_]);
 				return bSortRev_ ? -ret : ret;
 			}
+			static AVCodec^ GetVCodecFromLvi(ListViewItem^ lvi);
+			static AVCodec^ GetACodecFromLvi(ListViewItem^ lvi);
 
 
 		protected:
@@ -376,16 +378,31 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			};
 			// System::Text::RegularExpressions::Regex^ regFFMpeg_;
 
-			// String^ tempFile_;
-
 			System::Drawing::Icon^ iconBlue_;
 			System::Drawing::Icon^ iconYellow_;
 			System::Drawing::Icon^ iconRed_;
 
-			array<String^>^ GetInputMovies();
-			array<AVDuration^>^ GetInputDurations();
-			array<double>^ GetInputFPSes();
-
+			enum class ItemSelection {
+				All,
+				Selectet,
+				Incompleted,
+				Completed,
+			};
+			enum class ItemToGet {
+				Item,
+				Name,
+				Duration,
+				Fps,
+			};
+			System::Collections::ArrayList^ GetItemsCommon(ItemToGet toGet, ItemSelection sel);
+			array<ListViewItem^>^ GetItems(ItemSelection sel);
+			array<String^>^ GetInputMovies(ItemSelection sel);
+			array<AVDuration^>^ GetInputDurations(ItemSelection sel);
+			array<double>^ GetInputFPSes(ItemSelection sel);
+			property bool HasCompleteItems
+			{
+				bool get();
+			}
 			void SetTotalInputInfo();
 			void SetFormatStatusText();
 			void OnEncodeTaskEnded(int retval);
@@ -393,23 +410,32 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			void DoNextEncodeTask();
 			void OnAllTaskEnded();
 
-			String^ totalInputFormat_;
-			property String^ TotalInputFormat
+			String^ statusTotalInputFormat_;
+			property String^ StatusTotalInputFormat
 			{
-				String^ get() { return totalInputFormat_; }
+				String^ get() { return statusTotalInputFormat_; }
 				void set(String^ v) {
-					totalInputFormat_ = v;
+					statusTotalInputFormat_ = v;
 					SetFormatStatusText();
 				}
 			}
 
 			void SetCodecStatusText();
-			AVCodec^ totalInputAudioCodec_ = gcnew AVCodec();
-			property AVCodec^ TotalInputAudioCodec
+			AVCodec^ statusTotalInputVideoCodec_ = gcnew AVCodec();
+			property AVCodec^ StatusTotalInputVideoCodec
 			{
-				AVCodec^ get() { return totalInputAudioCodec_; }
+				AVCodec^ get() { return statusTotalInputVideoCodec_; }
 				void set(AVCodec^ v) {
-					totalInputAudioCodec_ = v;
+					statusTotalInputVideoCodec_ = v;
+					SetCodecStatusText();
+				}
+			}
+			AVCodec^ statusTotalInputAudioCodec_ = gcnew AVCodec();
+			property AVCodec^ StatusTotalInputAudioCodec
+			{
+				AVCodec^ get() { return statusTotalInputAudioCodec_; }
+				void set(AVCodec^ v) {
+					statusTotalInputAudioCodec_ = v;
 					SetCodecStatusText();
 				}
 			}
@@ -417,35 +443,26 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 
 
 
-			AVCodec^ totalInputVideoCodec_ = gcnew AVCodec();
-			property AVCodec^ TotalInputVideoCodec
-			{
-				AVCodec^ get() { return totalInputVideoCodec_; }
-				void set(AVCodec^ v) {
-					totalInputVideoCodec_ = v;
-					SetCodecStatusText();
-				}
-			}
 
 
 			void SetTimeStatusText();
-			AVDuration^ totalInputDuration_ = gcnew AVDuration();
-			property AVDuration^ TotalInputDuration
+			AVDuration^ statusTotalInputDuration_ = gcnew AVDuration();
+			property AVDuration^ StatusTotalInputDuration
 			{
-				AVDuration^ get() { return totalInputDuration_; }
+				AVDuration^ get() { return statusTotalInputDuration_; }
 				void set(AVDuration^ v) {
-					totalInputDuration_ = v;
+					statusTotalInputDuration_ = v;
 					SetTimeStatusText();
 				}
 			}
 			
-			AVDuration^ outputDuration_ = gcnew AVDuration();
-			property AVDuration^ OutputDuration
+			AVDuration^ statusOutputDuration_ = gcnew AVDuration();
+			property AVDuration^ StatusOutputDuration
 			{
-				AVDuration^ get() { return outputDuration_; }
+				AVDuration^ get() { return statusOutputDuration_; }
 				void set(AVDuration^ v) {
 					DASSERT(v);
-					outputDuration_ = v;
+					statusOutputDuration_ = v;
 					SetTimeStatusText();
 				}
 			}
@@ -481,11 +498,10 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			AVDuration^ GetDurationFromLvi(ListViewItem^ lvi);
 			double GetFPSFromLvi(ListViewItem^ lvi);
 
-
 			System::Drawing::Size GetVideoSize(ListViewItem^ lvi);
 			double GetVideoArea(ListViewItem^ lvi);
-			System::Drawing::Size GetMaxVideoSize();
-			bool IsSameSizeVideos();
+			System::Drawing::Size GetMaxVideoSize(ItemSelection sel);
+			bool IsSameSizeVideos(ItemSelection sel);
 			String^ tsToString(TimeSpan ts);
 
 			void SetStatusText(STATUSTEXT ss);
@@ -514,7 +530,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			void ChangeStartButtonText(String^ text);
 			void OnProcessStarted(Object^ sender, EventArgs^ e);
 			void IconizeToTray();
-			array<String^>^ GetOutputMoviesFromList(bool bSelectedOnly);
+			array<String^>^ GetOutputtedMoviesFromList(bool bSelectedOnly);
 
 			AfterFinish::OptionDialog dlgAfterFinish_;
 

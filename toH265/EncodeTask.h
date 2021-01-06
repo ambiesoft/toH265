@@ -26,6 +26,7 @@ namespace Ambiesoft {
 					return 0 <= currentI_ && currentI_ < jobs_.Count;
 				}
 			}
+			AVDuration^ totalInputDuration_ = gcnew AVDuration();
 		public:
 
 			void AddJob(
@@ -42,6 +43,7 @@ namespace Ambiesoft {
 			{
 				DASSERT(currentI_ <= 0);
 				currentI_ = 0;
+
 				if (bConcat)
 				{
 					DASSERT(outputFiles->Length == 1);
@@ -60,6 +62,8 @@ namespace Ambiesoft {
 						fpses[0],
 						1.0);
 					jobs_.Add(job);
+					
+					totalInputDuration_ = durations[0];
 				}
 				else
 				{
@@ -86,6 +90,8 @@ namespace Ambiesoft {
 							durations[i]->TotalMilliseconds / totalDuration
 						);
 						jobs_.Add(job);
+
+						totalInputDuration_ = gcnew AVDuration(totalDuration);
 					}
 				}
 			}
@@ -104,6 +110,14 @@ namespace Ambiesoft {
 			String^ GetArg(String^% report)
 			{
 				return CurrentJob->GetArg(report);
+			}
+			property AVCodec^ CurrentInputVideoCodec
+			{
+				AVCodec^ get() { return CurrentJob->InputVideoCodec; }
+			}
+			property AVCodec^ CurrentInputAudioCodec
+			{
+				AVCodec^ get() { return CurrentJob->InputAudioCodec; }
 			}
 			property AVCodec^ CurrentOutputVideoCodec
 			{
@@ -129,6 +143,14 @@ namespace Ambiesoft {
 
 			array<EncodeJob^>^ GetResults();
 
+			property AVDuration^ TotalInputDuration
+			{
+				AVDuration^ get() { return totalInputDuration_; }
+			}
+			property AVDuration^ CurrentTotalInputDuration
+			{
+				AVDuration^ get() { return CurrentJob->TotalInputDuration; }
+			}
 			property double CurrentTotalMilliseconds
 			{
 				double get() { return CurrentJob->TotalInputDuration->TotalMilliseconds; }
