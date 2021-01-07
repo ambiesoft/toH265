@@ -291,7 +291,7 @@ namespace Ambiesoft {
 					fps);
 			}
 
-			DASSERT(FFMpegState == TaskState::None);
+			DASSERT(CurrentFFMpegState == FFMpegState::None);
 			SetStatusText(STATUSTEXT::READY);
 
 			SetTotalInputInfo();
@@ -581,7 +581,7 @@ namespace Ambiesoft {
 
 		void FormMain::SetStatusText(STATUSTEXT ss)
 		{
-			DASSERT(ss == STATUSTEXT::READY);
+			DASSERT(ss == STATUSTEXT::READY||ss==STATUSTEXT::INTERMEDIATE);
 			SetStatusText(ss, String::Empty);
 		}
 		void FormMain::SetStatusText(STATUSTEXT ss, String^ supplement)
@@ -594,6 +594,9 @@ namespace Ambiesoft {
 				break;
 			case STATUSTEXT::REMAINING:
 				text = String::Format(I18N(L"{0} left"), supplement);
+				break;
+			case STATUSTEXT::INTERMEDIATE:
+				text = I18N(L"...");
 				break;
 			}
 			if (slMain->Text != text)
@@ -638,39 +641,54 @@ namespace Ambiesoft {
 				gcnew AddToLog(this, &FormMain::AddToErr), e->Data);
 		}
 
-		FormMain::TaskState FormMain::FFMpegState::get()
+		FormMain::FFMpegState FormMain::CurrentFFMpegState::get()
 		{
 			if (!thFFMpeg_ && !processFFMpeg_)
 			{
 				if (IsTaskActive)
-					return TaskState::Intermidiate;
+					return FFMpegState::Intermidiate;
 				else
-					return TaskState::None;
+					return FFMpegState::None;
 			}
 			else if (thFFMpeg_ && !processFFMpeg_)
 			{
 				DASSERT(IsTaskActive);
-				return TaskState::ProcessLaunching;
+				return FFMpegState::ProcessLaunching;
 			}
 			else if (!thFFMpeg_ && processFFMpeg_)
 			{
 				DASSERT(false);
-				return TaskState::Unknown;
+				return FFMpegState::Unknown;
 			}
 			else if (thFFMpeg_ && processFFMpeg_)
 			{
 				DASSERT(IsTaskActive);
 				if (processSuspeded_)
-					return TaskState::Pausing;
+					return FFMpegState::Pausing;
 				else
-					return TaskState::Running;
+					return FFMpegState::Running;
 			}
 
-			return TaskState::Unknown;
+			return FFMpegState::Unknown;
 		}
 
-		void FormMain::ChangeStartButtonText(String^ text)
+		void FormMain::ChangeStartButtonText(StartButtonText sbt)
 		{
+			String^ text = String::Empty;
+			switch (sbt)
+			{
+			case StartButtonText::Start:
+				text = I18N(STR_BUTTONTEXT_START);
+				break;
+			case StartButtonText::Pause:
+				text = I18N(STR_BUTTONTEXT_PAUSE);
+				break;
+			case StartButtonText::Resume:
+				text = I18N(STR_BUTTONTEXT_RESUME);
+				break;
+			default:
+				DASSERT(false);
+			}
 			btnStart->Text = text;
 			tsmiNotifyStart->Text = text;
 		}
@@ -679,14 +697,7 @@ namespace Ambiesoft {
 			processSuspeded_ = false;
 			processTerminatedDuetoAppClose_ = false;
 
-			ChangeStartButtonText(I18N(STR_BUTTONTEXT_PAUSE));
-
-			// lvInputs->Enabled = false;
-			lvInputs->AllowDrop = false;
-			btnBrowseMovie->Enabled = false;
-
-			this->Icon = iconRed_;
-			notifyIconMain->Icon = iconRed_;
+			CurrentTaskState = TaskState::Encoding;
 
 			dwBackPriority_ = GetPriorityClass(GetCurrentProcess());
 			if (tsmiPriorityBackground->Checked)
@@ -703,16 +714,7 @@ namespace Ambiesoft {
 
 			processFFMpeg_ = nullptr;
 
-			ChangeStartButtonText(I18N(STR_BUTTONTEXT_START));
-
-			// lvInputs->Enabled = true;
-			lvInputs->AllowDrop = true;
-			btnBrowseMovie->Enabled = true;
-
-			this->Icon = iconBlue_;
-			notifyIconMain->Icon = iconBlue_;
-
-			SetStatusText(STATUSTEXT::READY);
+			CurrentTaskState = TaskState::Intermediate;
 
 			OnEncodeTaskEnded(retval);
 			if (encodeTask_)
@@ -720,7 +722,59 @@ namespace Ambiesoft {
 				encodeTask_->GoNext();
 				DoNextEncodeTask();
 			}
+			else
+			{
+				CurrentTaskState = TaskState::Ready;
+			}
 		}
+
+		
+		void FormMain::CurrentTaskState::set(TaskState state)
+		{
+			taskState_ = state;
+			switch (taskState_)
+			{
+			case TaskState::Ready:
+				btnStart->Enabled = true;
+				ChangeStartButtonText(StartButtonText::Start);
+
+				// lvInputs->Enabled = true;
+				lvInputs->AllowDrop = true;
+				btnBrowseMovie->Enabled = true;
+
+				this->Icon = iconBlue_;
+				notifyIconMain->Icon = iconBlue_;
+
+
+				// TODO(does not go normal): statusMain->BackColor = DefaultStatusColor;
+
+				SetStatusText(STATUSTEXT::READY);
+				
+				break;
+
+			case TaskState::Intermediate:
+				btnStart->Enabled = false;
+				DASSERT(!lvInputs->AllowDrop);
+				DASSERT(!btnBrowseMovie->Enabled);
+
+				SetStatusText(STATUSTEXT::INTERMEDIATE);
+				break;
+
+			case TaskState::Encoding:
+				btnStart->Enabled = true;
+				ChangeStartButtonText(StartButtonText::Pause);
+
+				// lvInputs->Enabled = false;
+				lvInputs->AllowDrop = false;
+				btnBrowseMovie->Enabled = false;
+
+				this->Icon = iconRed_;
+				notifyIconMain->Icon = iconRed_;
+				// TODO(does not go normal): statusMain->BackColor = Color::Red;
+				break;
+			}
+		}
+
 		void FormMain::OnEncodeTaskEnded(int retval)
 		{
 			if (processTerminatedDuetoAppClose_)
@@ -764,10 +818,17 @@ namespace Ambiesoft {
 			encodeTask_->OnTaskStarted();
 		}
 
+
+		void FormMain::OnTaskStarted()
+		{
+			DoNextEncodeTask();
+		}
 		void FormMain::OnAllTaskEnded()
 		{
 			// Succeeded
 			UpdateTitleComplete();
+
+			CurrentTaskState = TaskState::Ready;
 
 			if (tsmiEnabledtsmiProcessAfterFinish->Checked)
 			{
@@ -1101,38 +1162,38 @@ namespace Ambiesoft {
 
 		System::Void FormMain::btnStart_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			switch (FFMpegState)
+			switch (CurrentFFMpegState)
 			{
-			case TaskState::None:
-			case TaskState::Intermidiate:
+			case FFMpegState::None:
+			case FFMpegState::Intermidiate:
 				break;
-			case TaskState::Pausing:
+			case FFMpegState::Pausing:
 				if (!ResumeProcess(processFFMpeg_))
 				{
 					CppUtils::Alert(this, I18N(L"Failed to resume process."));
 					return;
 				}
-				ChangeStartButtonText(I18N(STR_BUTTONTEXT_PAUSE));
+				ChangeStartButtonText(StartButtonText::Pause);
 				processSuspeded_ = false;
 				this->Icon = iconRed_;
 				notifyIconMain->Icon = iconRed_;
 				return;
-			case TaskState::ProcessLaunching:
+			case FFMpegState::ProcessLaunching:
 				CppUtils::Alert(this, I18N(L"Intermidiate state. Wait a while and do it again."));
 				return;
-			case TaskState::Running:
+			case FFMpegState::Running:
 				if (!SuspendProcess(processFFMpeg_))
 				{
 					CppUtils::Alert(this, I18N(L"Failed to suspend process."));
 					return;
 				}
-				ChangeStartButtonText(I18N(STR_BUTTONTEXT_RESUME));
+				ChangeStartButtonText(StartButtonText::Resume);
 				processSuspeded_ = true;
 				this->Icon = iconYellow_;
 				notifyIconMain->Icon = iconYellow_;
 				elapses_.Clear();
 				return;
-			case TaskState::Unknown:
+			case FFMpegState::Unknown:
 				CppUtils::Alert(this, I18N(L"Unknow Error."));
 				return;
 			}
@@ -1172,7 +1233,7 @@ namespace Ambiesoft {
 			{
 				System::Windows::Forms::DialogResult result =
 					CppUtils::CenteredMessageBox(
-						I18N(L"Some items are already encoded. Do you want to encode them again?"),
+						I18N(L"There are items which are already encoded. Do you want to encode them again?"),
 						Application::ProductName,
 						MessageBoxButtons::YesNoCancel,
 						MessageBoxIcon::Question,
@@ -1274,7 +1335,8 @@ namespace Ambiesoft {
 
 			processTerminatedDuetoAppClose_ = false;
 			elapses_.Clear();
-			DoNextEncodeTask();
+			OnTaskStarted();
+			
 		}
 
 		System::Void FormMain::tsmiNotifyShow_Click(System::Object^  sender, System::EventArgs^  e)

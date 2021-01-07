@@ -34,3 +34,5 @@ delegate void VSADelegate(array<System::String^>^);
 #define I18N(s) Ambiesoft::toH265::Program::getString(s)
 
 #include "FormMain.h"
+
+// #include "toH265Strings.ja-JP.h"

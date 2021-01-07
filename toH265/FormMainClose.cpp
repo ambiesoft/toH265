@@ -27,14 +27,14 @@ namespace Ambiesoft {
 
 		bool FormMain::ConfirmAndStopEncode()
 		{
-			switch (FFMpegState)
+			switch (CurrentFFMpegState)
 			{
-			case TaskState::None:
+			case FFMpegState::None:
 				return true;
-			case TaskState::Intermidiate:
-			case TaskState::Pausing:
-			case TaskState::ProcessLaunching:
-			case TaskState::Running:
+			case FFMpegState::Intermidiate:
+			case FFMpegState::Pausing:
+			case FFMpegState::ProcessLaunching:
+			case FFMpegState::Running:
 			{
 				if (System::Windows::Forms::DialogResult::Yes !=
 					CppUtils::YesOrNo(this, I18N(L"Encoding is in progress. Are you sure to quit?"),
@@ -54,7 +54,7 @@ namespace Ambiesoft {
 				SafeJoin(thFFMpeg_);
 				thFFMpeg_ = nullptr;
 
-				ChangeStartButtonText(I18N(STR_BUTTONTEXT_RESUME));
+				ChangeStartButtonText(StartButtonText::Resume);
 				processSuspeded_ = true;
 				if (encodeTask_)
 					encodeTask_->Cancel();
@@ -63,7 +63,7 @@ namespace Ambiesoft {
 			}
 			break;
 
-			case TaskState::Unknown:
+			case FFMpegState::Unknown:
 				CppUtils::Alert(this, I18N(L"Unknow Error."));
 				return false;
 			}

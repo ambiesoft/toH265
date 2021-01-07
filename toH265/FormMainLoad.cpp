@@ -19,7 +19,8 @@ namespace Ambiesoft {
 			notifyIconMain->Text = Application::ProductName;
 
 			Text = Application::ProductName;
-			ChangeStartButtonText(I18N(STR_BUTTONTEXT_START));
+			
+			CurrentTaskState = TaskState::Ready;
 
 			for each (String ^ file in Program::CmdMovieFiles)
 				CheckMovieAndSet(file, true, true);

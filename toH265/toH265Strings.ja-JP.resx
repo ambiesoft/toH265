@@ -318,4 +318,16 @@
   <data name="Following output files already exist. Do you want to override them?" xml:space="preserve">
     <value>以下の出力ファイルはすでに存在しています。上書きしますか？</value>
   </data>
+  <data name="Input Files:" xml:space="preserve">
+    <value>入力ファイル：</value>
+  </data>
+  <data name="No items to encode." xml:space="preserve">
+    <value>エンコードするアイテムがありません。</value>
+  </data>
+  <data name="Output File:" xml:space="preserve">
+    <value>出力ファイル：</value>
+  </data>
+  <data name="There are items which are already encoded. Do you want to encode them again?" xml:space="preserve">
+    <value>すでにエンコードが完了したアイテムがあります。これらを再びエンコードしますか？</value>
+  </data>
 </root>

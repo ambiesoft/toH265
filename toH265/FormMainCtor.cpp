@@ -22,7 +22,8 @@ namespace Ambiesoft {
 		{
 			InitializeComponent();
 
-		
+			DefaultStatusColor = statusMain->BackColor;
+
 			lvInputs->Name = L"lvInputs";
 			lvInputs->UseCompatibleStateImageBehavior = false;
 			lvInputs->View = System::Windows::Forms::View::Details;

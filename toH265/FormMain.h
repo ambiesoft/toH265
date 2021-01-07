@@ -314,6 +314,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 
 		protected:
 			Summary^ lastSummary_;
+			initonly System::Drawing::Color DefaultStatusColor;
 
 			// ListViewCustomReorder::ListViewEx^ lvInputs = gcnew ListViewCustomReorder::ListViewEx();
 			InputListView^ lvInputs = gcnew InputListView();
@@ -363,7 +364,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			System::Diagnostics::Process^ processFFMpeg_;
 			bool processSuspeded_;
 			bool processTerminatedDuetoAppClose_;
-			enum class TaskState {
+			enum class FFMpegState {
 				None,
 				ProcessLaunching,
 				Running,
@@ -405,6 +406,8 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			}
 			void SetTotalInputInfo();
 			void SetFormatStatusText();
+
+			void OnTaskStarted();
 			void OnEncodeTaskEnded(int retval);
 
 			void DoNextEncodeTask();
@@ -468,9 +471,9 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			}
 			property double TotalInputFPS;
 
-			property TaskState FFMpegState
+			property FFMpegState CurrentFFMpegState
 			{
-				TaskState get();
+				FFMpegState get();
 			}
 			DWORD dwBackPriority_;
 			int pidFFMpeg_;
@@ -478,6 +481,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			enum class STATUSTEXT {
 				READY,
 				REMAINING,
+				INTERMEDIATE,
 			};
 
 			static initonly int ELAPSESIZE = 50;
@@ -525,9 +529,27 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			delegate void VIDelegate(int value);
 			void ThreadStarted();
 			void ThreadEnded(int retval);
-			// bool IsEncoding();
+
+			enum class TaskState {
+				Ready,
+				Intermediate,
+				Encoding,
+			} taskState_ = TaskState::Ready;
+			property TaskState CurrentTaskState
+			{
+				TaskState get() { return taskState_; }
+				void set(TaskState state);
+			}
+
 			bool ConfirmAndStopEncode();
-			void ChangeStartButtonText(String^ text);
+
+			enum class StartButtonText {
+				Start,
+				Pause,
+				Resume,
+			};
+			void ChangeStartButtonText(StartButtonText sbt);
+
 			void OnProcessStarted(Object^ sender, EventArgs^ e);
 			void IconizeToTray();
 			array<String^>^ GetOutputtedMoviesFromList(bool bSelectedOnly);

@@ -30,15 +30,15 @@ namespace Ambiesoft {
 		}
 		void FormMain::OnMenuPriorityCommon(FFMpegPriority ffmpegPriority)
 		{
-			switch (FFMpegState)
+			switch (CurrentFFMpegState)
 			{
-			case TaskState::None:
-			case TaskState::Intermidiate:
+			case FFMpegState::None:
+			case FFMpegState::Intermidiate:
 				break;
-			case TaskState::ProcessLaunching:
+			case FFMpegState::ProcessLaunching:
 				break;
-			case TaskState::Pausing:
-			case TaskState::Running:
+			case FFMpegState::Pausing:
+			case FFMpegState::Running:
 			{
 				DASSERT(pidFFMpeg_ != 0);
 				if (pidFFMpeg_ == 0)
@@ -63,7 +63,7 @@ namespace Ambiesoft {
 				}
 			}
 			break;
-			case TaskState::Unknown:
+			case FFMpegState::Unknown:
 				break;
 			}
 

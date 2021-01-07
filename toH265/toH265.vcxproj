@@ -269,6 +269,9 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="AVCodec.h" />
+    <ClInclude Include="toH265Strings.ja-JP.h">
+      <DependentUpon>toH265Strings.ja-JP.resx</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico" />
