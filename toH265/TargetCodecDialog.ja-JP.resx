@@ -123,6 +123,58 @@
   <data name="groupAudioCodec.Text" xml:space="preserve">
     <value>音声コーデック</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblOtherDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 13</value>
+  </data>
+  <data name="lblOtherDirectory.Text" xml:space="preserve">
+    <value>他のフォルダ(&amp;O)</value>
+  </data>
+  <data name="chkSameDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 17</value>
+  </data>
+  <data name="chkSameDirectory.Text" xml:space="preserve">
+    <value>元のファイルと同じフォルダ(&amp;S)</value>
+  </data>
+  <data name="groupTargetDirectory.Text" xml:space="preserve">
+    <value>出力フォルダ</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>後につける名前(&amp;A):</value>
+  </data>
+  <data name="lblBeforeFilename.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
+  <data name="lblBeforeFilename.Text" xml:space="preserve">
+    <value>前につける名前(&amp;B):</value>
+  </data>
+  <data name="groupFilename.Text" xml:space="preserve">
+    <value>ファイル名</value>
+  </data>
+  <data name="chkFileByFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 17</value>
+  </data>
+  <data name="chkFileByFile.Text" xml:space="preserve">
+    <value>ファイルごとにエンコード(&amp;B)</value>
+  </data>
+  <data name="lblAdditonalOptionAfterInput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 13</value>
+  </data>
+  <data name="lblAdditonalOptionAfterInput.Text" xml:space="preserve">
+    <value>入力ファイルオプションの後(&amp;A):</value>
+  </data>
+  <data name="lblBeforeInputFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 13</value>
+  </data>
+  <data name="lblBeforeInputFile.Text" xml:space="preserve">
+    <value>入力ファイルオプションの前(&amp;B):</value>
+  </data>
+  <data name="groupAdditionalOptions.Text" xml:space="preserve">
+    <value>追加オプション</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>エンコード方法</value>
   </data>

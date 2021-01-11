@@ -1,3 +1,6 @@
+2021/01/07 ver1.0.69
+Add file name and other options
+
 2021/01/07 ver1.0.68
 some
 

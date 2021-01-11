@@ -50,6 +50,7 @@ namespace Ambiesoft {
 				int v = -1;
 				bool b;
 				String^ s;
+				cli::array<String^>^ a;
 
 				Profile::GetInt(SECTION, KEY_AUIDOCODEC, -1, v, ini);
 				if (v != -1)
@@ -66,6 +67,28 @@ namespace Ambiesoft {
 
 				Profile::GetBool(SECTION, KEY_FILE_BY_FILE, false, b, ini);
 				chkFileByFile->Checked = b;
+
+				Profile::GetStringArray(SECTION, KEY_FILENAME_BEFORE_ARRAY, a, ini);
+				cmbBeforeFilename->Items->AddRange(a);
+				Profile::GetString(SECTION, KEY_FILENAME_BEFORE, String::Empty, s, ini);
+				cmbBeforeFilename->Text = s;
+				
+				Profile::GetStringArray(SECTION, KEY_FILENAME_AFTER_ARRAY, a, ini);
+				cmbAfterFilename->Items->AddRange(a);
+				Profile::GetString(SECTION, KEY_FILENAME_AFTER, String::Empty, s, ini);
+				cmbAfterFilename->Text = s;
+
+
+
+				Profile::GetStringArray(SECTION, KEY_ADDITIONALOPTIONS_BEFOREINPUT_ARRAY, a, ini);
+				cmbAdditionalOptionsBeforeInput->Items->AddRange(a);
+				Profile::GetString(SECTION, KEY_ADDITIONALOPTIONS_BEFOREINPUT, String::Empty, s, ini);
+				cmbAdditionalOptionsBeforeInput->Text = s;
+
+				Profile::GetStringArray(SECTION, KEY_ADDITIONALOPTIONS_AFTERINPUT_ARRAY, a, ini);
+				cmbAdditionalOptionsAfterInput->Items->AddRange(a);
+				Profile::GetString(SECTION, KEY_ADDITIONALOPTIONS_AFTERINPUT, String::Empty, s, ini);
+				cmbAdditionalOptionsAfterInput->Text = s;
 			}
 
 			if (losslessable_)
@@ -114,6 +137,15 @@ namespace Ambiesoft {
 				return;
 			}
 		}
+
+		cli::array<String^>^ toStringArray(ComboBox::ObjectCollection^ collection)
+		{
+			List<String^> ret;
+			for each (Object ^ o in collection)
+				if(!String::IsNullOrEmpty(o->ToString()))
+					ret.Add(o->ToString());
+			return ret.ToArray();
+		}
 		System::Void TargetCodecDialog::TargetCodecDialog_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e)
 		{
 			if (this->DialogResult != System::Windows::Forms::DialogResult::OK)
@@ -131,12 +163,54 @@ namespace Ambiesoft {
 			Profile::WriteString(SECTION, KEY_OTHER_DIRECTORY, txtOtherDirectory->Text, ini);
 			Profile::WriteBool(SECTION, KEY_FILE_BY_FILE, chkFileByFile->Checked, ini);
 
+			Profile::WriteStringArray(SECTION, KEY_FILENAME_BEFORE_ARRAY,
+				toStringArray(cmbBeforeFilename->Items), ini);
+			Profile::WriteString(SECTION, KEY_FILENAME_BEFORE,
+				cmbBeforeFilename->Text, ini);
+			
+			Profile::WriteStringArray(SECTION, KEY_FILENAME_AFTER_ARRAY,
+				toStringArray(cmbAfterFilename->Items), ini);
+			Profile::WriteString(SECTION, KEY_FILENAME_AFTER,
+				cmbAfterFilename->Text, ini);
+
+
+
+
+
+			Profile::WriteStringArray(SECTION, KEY_ADDITIONALOPTIONS_BEFOREINPUT_ARRAY, 
+				toStringArray(cmbAdditionalOptionsBeforeInput->Items), ini);
+			Profile::WriteString(SECTION, KEY_ADDITIONALOPTIONS_BEFOREINPUT, 
+				cmbAdditionalOptionsBeforeInput->Text, ini);
+
+			Profile::WriteStringArray(SECTION, KEY_ADDITIONALOPTIONS_AFTERINPUT_ARRAY,
+				toStringArray(cmbAdditionalOptionsAfterInput->Items), ini);
+			Profile::WriteString(SECTION, KEY_ADDITIONALOPTIONS_AFTERINPUT, 
+				cmbAdditionalOptionsAfterInput->Text, ini);
+
 			if (!Profile::WriteAll(ini, IniPath))
 			{
 				CppUtils::Alert(I18N(L"Failed to save ini"));
 			}
 		}
 
+		void StoreComboItem(ComboBox^ combo)
+		{
+			String^ text = combo->Text;
+			if (String::IsNullOrEmpty(text))
+				return;
+
+			int index = combo->FindStringExact(text);
+			if (index == 0)
+			{
+				return;
+			}
+			else if (index > 0)
+			{
+				combo->Items->RemoveAt(index);
+			}
+			combo->Items->Insert(0, text);
+			combo->Text = text;
+		}
 		array<String^>^ TargetCodecDialog::GetTargetDirectories()
 		{
 			array<String^>^ dirs = gcnew array<String^>(InputMovies->Length);
@@ -236,7 +310,7 @@ namespace Ambiesoft {
 
 			if (!UpdateOutputFiles())
 			{
-				CppUtils::Alert(I18N("UpdateExtension failed"));
+				// CppUtils::Alert(I18N("UpdateExtension failed"));
 				this->DialogResult = System::Windows::Forms::DialogResult::None;
 				return;
 			}
@@ -273,6 +347,12 @@ namespace Ambiesoft {
 						return;
 				}
 			}
+
+			StoreComboItem(cmbBeforeFilename);
+			StoreComboItem(cmbAfterFilename);
+
+			StoreComboItem(cmbAdditionalOptionsBeforeInput);
+			StoreComboItem(cmbAdditionalOptionsAfterInput);
 		}
 
 		System::Void TargetCodecDialog::btnBrowseOtherDirectory_Click(System::Object^ sender, System::EventArgs^ e)
@@ -290,6 +370,65 @@ namespace Ambiesoft {
 			return OutputFiles[0];
 		}
 
+		System::Char nextc(String^ s, int i)
+		{
+			if (i < 0)
+				return '\0';
+			if (s->Length <= (i+1))
+				return '\0';
+
+			return s[i + 1];
+		}
+		String^ deployFilenameMacro(String^ filename)
+		{
+			String^ ret = String::Empty;
+			for (int i = 0; i < filename->Length; ++i)
+			{
+				if(filename[i]=='$')
+				{
+					if (nextc(filename, i) == '$')
+					{
+						i+=1;
+						ret += L'$';
+						continue;
+					}
+					else if(nextc(filename,i)=='{')
+					{
+						// macro
+						int index = filename->IndexOf('}', i);
+						if (index >= 0)
+						{
+							// found '}'
+							String^ macro = filename->Substring(i + 2, index - i - 2);
+							if (macro == "vcodec")
+							{
+								ret += "VVV";
+								i = index;
+								continue;
+							}
+							else
+							{ 
+								// macro not found
+								throw gcnew Exception(String::Format(I18N("Macro '{0}' not found"),
+									macro));
+							}
+						}
+						else
+						{
+							// } not found
+							throw gcnew Exception(String::Format(I18N("Macro deploy error at {0}"), i));
+						}
+					}
+					else
+					{
+						// $ but not $ or {
+						throw gcnew Exception(String::Format(I18N("Macro deploy error at {0}"), i));
+					}
+				}
+				ret += filename[i];
+			}
+			return ret;
+		}
 		bool TargetCodecDialog::UpdateOutputFiles()
 		{
 			try {
@@ -413,17 +552,26 @@ namespace Ambiesoft {
 					}
 
 					DASSERT(!String::IsNullOrEmpty(OutputVideoCodec->ToString()));
-					String^ fileName = String::Format(L"{0} [{1}]{2}",
-						Path::Combine(
-							GetTargetDirectories()[i],
-							baseFileName),
-						OutputVideoCodec->ToString(),
-						firstExt);
-
-					if (IsFileOpen(getStdWstring(fileName).c_str()))
+					String^ fullName = String::Empty;
+					try
+					{
+						fullName = Path::Combine(GetTargetDirectories()[i],
+							String::Format(L"{0}{1}{2}{3}",
+								deployFilenameMacro(cmbBeforeFilename->Text),
+								baseFileName,
+								deployFilenameMacro(cmbAfterFilename->Text),
+								firstExt));
+					}
+					catch (Exception^ ex)
+					{
+						CppUtils::Alert(ex);
+						return false;
+					}
+					
+					if (IsFileOpen(getStdWstring(fullName).c_str()))
 					{
 						StringBuilder sb;
-						sb.AppendLine(String::Format(I18N(FormMain::STR_0_ALREADY_OPENED), fileName));
+						sb.AppendLine(String::Format(I18N(FormMain::STR_0_ALREADY_OPENED), fullName));
 						sb.AppendLine();
 						sb.AppendLine(I18N(FormMain::STR_ARE_YOU_SURE_TO_CONTINUE));
 						if (System::Windows::Forms::DialogResult::Yes != CppUtils::CenteredMessageBox(
@@ -437,7 +585,7 @@ namespace Ambiesoft {
 							return false;
 						}
 					}
-					outputFiles_[i] = fileName;
+					outputFiles_[i] = fullName;
 				}
 
 				return true;

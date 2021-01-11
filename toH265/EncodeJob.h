@@ -20,6 +20,9 @@ namespace Ambiesoft {
 			DateTime^ finishData_;
 
 			bool ReEncode = false;
+			String^ AdditionalOptionsBeforeInput;
+			String^ AdditionalOptionsAfterInput;
+
 			array<String^>^ inputMovies_;
 			array<System::Windows::Forms::ListViewItem^>^ items_;
 			bool IsSameSize;
@@ -85,6 +88,7 @@ namespace Ambiesoft {
 				double get() { return partPercent_; }
 			}
 			void init(bool bReEncode,
+				String^ addiopbi, String^ addiopai,
 				array<System::Windows::Forms::ListViewItem^>^ items,
 				array<String^>^ inputMovies,
 				String^ outputtingMovie,
@@ -98,6 +102,7 @@ namespace Ambiesoft {
 
 			// each
 			EncodeJob(
+				String^ addiopbi, String^ addiopai,
 				System::Windows::Forms::ListViewItem^ item,
 				String^ inputMovie,
 				String^ outputtingMovie,
@@ -109,6 +114,7 @@ namespace Ambiesoft {
 				double partPercent)
 			{
 				init(true,
+					addiopbi, addiopai,
 					gcnew array<System::Windows::Forms::ListViewItem^>{item},
 					gcnew array<String^>{inputMovie},
 					outputtingMovie,
@@ -122,6 +128,7 @@ namespace Ambiesoft {
 			}
 			// concat
 			EncodeJob(bool bReEncode,
+				String^ addiopbi, String^ addiopai,
 				array<System::Windows::Forms::ListViewItem^>^ items,
 				array<String^>^ inputMovies,
 				String^ outputtingMovie,
@@ -134,6 +141,7 @@ namespace Ambiesoft {
 				double partPercent)
 			{
 				init(bReEncode,
+					addiopbi, addiopai,
 					items,
 					inputMovies,
 					outputtingMovie,

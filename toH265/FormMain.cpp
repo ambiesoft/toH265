@@ -1318,6 +1318,7 @@ namespace Ambiesoft {
 			encodeTask_->AddJob(
 				codecDlg.IsConcat,
 				codecDlg.IsReEncode,
+				codecDlg.AdditonalOptionsBeforeInput, codecDlg.AdditonalOptionsAfterInput,
 				items,
 				inputmovies,
 				codecDlg.OutputFiles,

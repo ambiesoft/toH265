@@ -47,20 +47,30 @@ namespace Ambiesoft {
 					break;
 				}
 
-				String^ arg = String::Format(L"{0} --pid {1}",
-					getWinnicewArg(ffmpegPriority),
-					pidFFMpeg_);
-
 				try
 				{
-					String^ fileName = Path::Combine(Path::GetDirectoryName(Application::ExecutablePath),
-						L"winnicew.exe");
-					Process::Start(fileName, arg);
+					Process^ pro = Process::GetProcessById(pidFFMpeg_);
+					if (!pro->HasExited)
+					{
+						String^ arg = String::Format(L"{0} --pid {1} --show-noerror --show-nooutput",
+							getWinnicewArg(ffmpegPriority),
+							pidFFMpeg_);
+
+						try
+						{
+							String^ fileName = Path::Combine(
+								Path::GetDirectoryName(Application::ExecutablePath),
+								L"winnicew.exe");
+							Process::Start(fileName, arg);
+						}
+						catch (Exception^ ex)
+						{
+							CppUtils::Alert(this, ex);
+						}
+					}
+					pro->Close();
 				}
-				catch (Exception ^ ex)
-				{
-					CppUtils::Alert(this, ex);
-				}
+				catch(Exception^){}
 			}
 			break;
 			case FFMpegState::Unknown:

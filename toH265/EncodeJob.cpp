@@ -13,6 +13,7 @@ namespace Ambiesoft {
 
 
 		void EncodeJob::init(bool bReEncode,
+			String^ addiopbi, String^ addiopai,
 			array<System::Windows::Forms::ListViewItem^>^ items,
 			array<String^>^ inputMovies,
 			String^ outputtingMovie,
@@ -25,6 +26,8 @@ namespace Ambiesoft {
 			double partPercent)
 		{
 			this->ReEncode = bReEncode;
+			this->AdditionalOptionsBeforeInput = addiopbi;
+			this->AdditionalOptionsAfterInput = addiopai;
 			this->items_ = items;
 			this->inputMovies_ = inputMovies;
 			this->OutputtingMovie = outputtingMovie;
@@ -75,11 +78,13 @@ namespace Ambiesoft {
 			if (InputMovies->Length == 1)
 			{
 				DASSERT(!String::IsNullOrEmpty(OutputtingMovie));
-				arg = String::Format(L"-y -i \"{0}\" -max_muxing_queue_size 9999 -c copy -c:v {1} -c:a {2} \"{3}\"",
+				arg = String::Format(L"-y {4} -i \"{0}\" {5} -max_muxing_queue_size 9999 -c copy -c:v {1} -c:a {2} \"{3}\"",
 					InputMovies[0],
 					OutputVideoCodec->ToFFMpegString(),
 					OutputAudioCodec->ToFFMpegString(),
-					OutputtingMovie);
+					OutputtingMovie,
+					AdditionalOptionsBeforeInput,
+					AdditionalOptionsAfterInput);
 			}
 			else
 			{
@@ -100,9 +105,11 @@ namespace Ambiesoft {
 					}
 					sbReportFile.AppendLine();
 
-					arg = String::Format("-y -safe 0 -f concat -i \"{0}\" -max_muxing_queue_size 9999 -c copy \"{1}\"",
+					arg = String::Format("-y -safe 0 -f concat {2} -i \"{0}\" {3} -max_muxing_queue_size 9999 -c copy \"{1}\"",
 						tempFile_,
-						OutputtingMovie);
+						OutputtingMovie,
+						AdditionalOptionsBeforeInput,
+						AdditionalOptionsAfterInput);
 				}
 				else
 				{
@@ -120,10 +127,12 @@ namespace Ambiesoft {
 					*/
 					StringBuilder sb;
 					sb.Append("-y ");
-
+					sb.Append(AdditionalOptionsBeforeInput + " ");
 					for each (String ^ f in InputMovies)
+					{
 						sb.AppendFormat("-i \"{0}\" ", f);
-
+					}
+					sb.Append(AdditionalOptionsAfterInput + " ");
 					sb.Append("-max_muxing_queue_size 9999 ");
 
 					sb.Append("-filter_complex \"");
@@ -186,7 +195,7 @@ namespace Ambiesoft {
 			DeleteTempFile();
 			for each (ListViewItem ^ item in items_)
 			{
-				item->ImageKey = IMAGEKEY_DONE;
+				item->ImageKey = retval==0 ? IMAGEKEY_DONE : IMAGEKEY_NORMAL;
 				ListViewItemData::Get(item)->OutputtedFile = this->OutputtedMovie;
 			}
 		}

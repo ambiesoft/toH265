@@ -25,6 +25,16 @@ namespace Ambiesoft {
 			literal String^ KEY_OTHER_DIRECTORY = L"OtherDirectory";
 			literal String^ KEY_FILE_BY_FILE = L"FileByFile";
 
+			literal String^ KEY_FILENAME_BEFORE = L"FilenameBefore";
+			literal String^ KEY_FILENAME_BEFORE_ARRAY = L"FilenameBeforeArray";
+			literal String^ KEY_FILENAME_AFTER = L"FilenameAfter";
+			literal String^ KEY_FILENAME_AFTER_ARRAY = L"FilenameAfterArray";
+
+			literal String^ KEY_ADDITIONALOPTIONS_BEFOREINPUT = L"AdditionalOptionsBeforeInput";
+			literal String^ KEY_ADDITIONALOPTIONS_BEFOREINPUT_ARRAY = L"AdditionalOptionsBeforeInputArray";
+			literal String^ KEY_ADDITIONALOPTIONS_AFTERINPUT = L"AdditionalOptionsAfterInput";
+			literal String^ KEY_ADDITIONALOPTIONS_AFTERINPUT_ARRAY = L"AdditionalOptionsAfterInputArray";
+
 			initonly String^ iniPath_;
 			initonly String^ section_;
 		private: System::Windows::Forms::GroupBox^ groupTargetDirectory;
@@ -40,7 +50,17 @@ namespace Ambiesoft {
 			   initonly bool losslessable_;
 			   initonly array<String^>^ InputMovies;
 			   initonly AVCodec^ DefaultVideoCodec;
-		private: System::Windows::Forms::ComboBox^ cmbFilename;
+		private: System::Windows::Forms::ComboBox^ cmbBeforeFilename;
+		private: System::Windows::Forms::GroupBox^ groupAdditionalOptions;
+
+		private: System::Windows::Forms::Label^ lblAdditonalOptionAfterInput;
+
+		private: System::Windows::Forms::Label^ lblBeforeInputFile;
+		private: System::Windows::Forms::ComboBox^ cmbAdditionalOptionsAfterInput;
+		private: System::Windows::Forms::ComboBox^ cmbAdditionalOptionsBeforeInput;
+		private: System::Windows::Forms::Label^ label1;
+		private: System::Windows::Forms::Label^ lblBeforeFilename;
+		private: System::Windows::Forms::ComboBox^ cmbAfterFilename;
 			   initonly AVCodec^ DefaultAudioCodec;
 		public:
 			TargetCodecDialog(bool bLosslessable, 
@@ -176,6 +196,16 @@ namespace Ambiesoft {
 			}
 			property AVCodec^ OutputVideoCodec;
 			property AVCodec^ OutputAudioCodec;
+
+
+			property String^ AdditonalOptionsBeforeInput
+			{
+				String^ get() { return cmbAdditionalOptionsBeforeInput->Text; }
+			}
+			property String^ AdditonalOptionsAfterInput
+			{
+				String^ get() { return cmbAdditionalOptionsAfterInput->Text; }
+			}
 		protected:
 			/// <summary>
 			/// Clean up any resources being used.
@@ -247,12 +277,21 @@ private:
 				this->txtOtherDirectory = (gcnew System::Windows::Forms::TextBox());
 				this->chkSameDirectory = (gcnew System::Windows::Forms::CheckBox());
 				this->groupFilename = (gcnew System::Windows::Forms::GroupBox());
+				this->label1 = (gcnew System::Windows::Forms::Label());
+				this->lblBeforeFilename = (gcnew System::Windows::Forms::Label());
+				this->cmbAfterFilename = (gcnew System::Windows::Forms::ComboBox());
+				this->cmbBeforeFilename = (gcnew System::Windows::Forms::ComboBox());
 				this->chkFileByFile = (gcnew System::Windows::Forms::CheckBox());
-				this->cmbFilename = (gcnew System::Windows::Forms::ComboBox());
+				this->groupAdditionalOptions = (gcnew System::Windows::Forms::GroupBox());
+				this->cmbAdditionalOptionsAfterInput = (gcnew System::Windows::Forms::ComboBox());
+				this->cmbAdditionalOptionsBeforeInput = (gcnew System::Windows::Forms::ComboBox());
+				this->lblAdditonalOptionAfterInput = (gcnew System::Windows::Forms::Label());
+				this->lblBeforeInputFile = (gcnew System::Windows::Forms::Label());
 				this->groupVideoCodec->SuspendLayout();
 				this->groupAudioCodec->SuspendLayout();
 				this->groupTargetDirectory->SuspendLayout();
 				this->groupFilename->SuspendLayout();
+				this->groupAdditionalOptions->SuspendLayout();
 				this->SuspendLayout();
 				// 
 				// groupVideoCodec
@@ -387,9 +426,32 @@ private:
 				// groupFilename
 				// 
 				resources->ApplyResources(this->groupFilename, L"groupFilename");
-				this->groupFilename->Controls->Add(this->cmbFilename);
+				this->groupFilename->Controls->Add(this->label1);
+				this->groupFilename->Controls->Add(this->lblBeforeFilename);
+				this->groupFilename->Controls->Add(this->cmbAfterFilename);
+				this->groupFilename->Controls->Add(this->cmbBeforeFilename);
 				this->groupFilename->Name = L"groupFilename";
 				this->groupFilename->TabStop = false;
+				// 
+				// label1
+				// 
+				resources->ApplyResources(this->label1, L"label1");
+				this->label1->Name = L"label1";
+				// 
+				// lblBeforeFilename
+				// 
+				resources->ApplyResources(this->lblBeforeFilename, L"lblBeforeFilename");
+				this->lblBeforeFilename->Name = L"lblBeforeFilename";
+				// 
+				// cmbAfterFilename
+				// 
+				resources->ApplyResources(this->cmbAfterFilename, L"cmbAfterFilename");
+				this->cmbAfterFilename->Name = L"cmbAfterFilename";
+				// 
+				// cmbBeforeFilename
+				// 
+				resources->ApplyResources(this->cmbBeforeFilename, L"cmbBeforeFilename");
+				this->cmbBeforeFilename->Name = L"cmbBeforeFilename";
 				// 
 				// chkFileByFile
 				// 
@@ -397,10 +459,37 @@ private:
 				this->chkFileByFile->Name = L"chkFileByFile";
 				this->chkFileByFile->UseVisualStyleBackColor = true;
 				// 
-				// cmbFilename
+				// groupAdditionalOptions
 				// 
-				resources->ApplyResources(this->cmbFilename, L"cmbFilename");
-				this->cmbFilename->Name = L"cmbFilename";
+				resources->ApplyResources(this->groupAdditionalOptions, L"groupAdditionalOptions");
+				this->groupAdditionalOptions->Controls->Add(this->cmbAdditionalOptionsAfterInput);
+				this->groupAdditionalOptions->Controls->Add(this->cmbAdditionalOptionsBeforeInput);
+				this->groupAdditionalOptions->Controls->Add(this->lblAdditonalOptionAfterInput);
+				this->groupAdditionalOptions->Controls->Add(this->lblBeforeInputFile);
+				this->groupAdditionalOptions->Name = L"groupAdditionalOptions";
+				this->groupAdditionalOptions->TabStop = false;
+				// 
+				// cmbAdditionalOptionsAfterInput
+				// 
+				resources->ApplyResources(this->cmbAdditionalOptionsAfterInput, L"cmbAdditionalOptionsAfterInput");
+				this->cmbAdditionalOptionsAfterInput->FormattingEnabled = true;
+				this->cmbAdditionalOptionsAfterInput->Name = L"cmbAdditionalOptionsAfterInput";
+				// 
+				// cmbAdditionalOptionsBeforeInput
+				// 
+				resources->ApplyResources(this->cmbAdditionalOptionsBeforeInput, L"cmbAdditionalOptionsBeforeInput");
+				this->cmbAdditionalOptionsBeforeInput->FormattingEnabled = true;
+				this->cmbAdditionalOptionsBeforeInput->Name = L"cmbAdditionalOptionsBeforeInput";
+				// 
+				// lblAdditonalOptionAfterInput
+				// 
+				resources->ApplyResources(this->lblAdditonalOptionAfterInput, L"lblAdditonalOptionAfterInput");
+				this->lblAdditonalOptionAfterInput->Name = L"lblAdditonalOptionAfterInput";
+				// 
+				// lblBeforeInputFile
+				// 
+				resources->ApplyResources(this->lblBeforeInputFile, L"lblBeforeInputFile");
+				this->lblBeforeInputFile->Name = L"lblBeforeInputFile";
 				// 
 				// TargetCodecDialog
 				// 
@@ -408,6 +497,7 @@ private:
 				resources->ApplyResources(this, L"$this");
 				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 				this->CancelButton = this->btnCancel;
+				this->Controls->Add(this->groupAdditionalOptions);
 				this->Controls->Add(this->chkFileByFile);
 				this->Controls->Add(this->groupFilename);
 				this->Controls->Add(this->groupTargetDirectory);
@@ -431,6 +521,9 @@ private:
 				this->groupTargetDirectory->ResumeLayout(false);
 				this->groupTargetDirectory->PerformLayout();
 				this->groupFilename->ResumeLayout(false);
+				this->groupFilename->PerformLayout();
+				this->groupAdditionalOptions->ResumeLayout(false);
+				this->groupAdditionalOptions->PerformLayout();
 				this->ResumeLayout(false);
 				this->PerformLayout();
 

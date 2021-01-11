@@ -32,6 +32,7 @@ namespace Ambiesoft {
 			void AddJob(
 				bool bConcat,
 				bool bReEncode,
+				String^ addiopbi, String^ addiopai,
 				array<System::Windows::Forms::ListViewItem^>^ items,
 				array<String^>^ inputFiles,
 				array<String^>^ outputFiles,
@@ -51,6 +52,7 @@ namespace Ambiesoft {
 					DASSERT(fpses->Length == 1);
 					EncodeJob^ job = gcnew EncodeJob(
 						bReEncode,
+						addiopbi,addiopai,
 						items,
 						inputFiles,
 						outputFiles[0],
@@ -80,6 +82,7 @@ namespace Ambiesoft {
 					for (int i = 0; i < inputFiles->Length; ++i)
 					{
 						EncodeJob^ job = gcnew EncodeJob(
+							addiopbi, addiopai,
 							items[i],
 							inputFiles[i],
 							outputFiles[i],
