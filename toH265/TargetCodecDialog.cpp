@@ -68,15 +68,20 @@ namespace Ambiesoft {
 				Profile::GetBool(SECTION, KEY_FILE_BY_FILE, false, b, ini);
 				chkFileByFile->Checked = b;
 
-				Profile::GetStringArray(SECTION, KEY_FILENAME_BEFORE_ARRAY, a, ini);
-				cmbBeforeFilename->Items->AddRange(a);
-				Profile::GetString(SECTION, KEY_FILENAME_BEFORE, String::Empty, s, ini);
-				cmbBeforeFilename->Text = s;
+				AmbLib::LoadComboBox(cmbFilenameMacro, KEY_FILENAME_MACRO, FILENAME_MACRO_MAX, ini);
+
+				Profile::GetStringArray(SECTION, KEY_FILENAME_MACRO, a, ini);
+				cmbFilenameMacro->Items->AddRange(a);
+				if (cmbFilenameMacro->Items->Count == 0 &&
+					String::IsNullOrEmpty(cmbFilenameMacro->Text))
+				{
+					cmbFilenameMacro->Text = L"${basename}";
+				}
 				
-				Profile::GetStringArray(SECTION, KEY_FILENAME_AFTER_ARRAY, a, ini);
-				cmbAfterFilename->Items->AddRange(a);
-				Profile::GetString(SECTION, KEY_FILENAME_AFTER, String::Empty, s, ini);
-				cmbAfterFilename->Text = s;
+				//Profile::GetStringArray(SECTION, KEY_FILENAME_AFTER_ARRAY, a, ini);
+				//cmbAfterFilename->Items->AddRange(a);
+				//Profile::GetString(SECTION, KEY_FILENAME_AFTER, String::Empty, s, ini);
+				//cmbAfterFilename->Text = s;
 
 
 
@@ -128,6 +133,13 @@ namespace Ambiesoft {
 			if (v != -1)
 				VideoCodecInt = v;
 		}
+		System::Void TargetCodecDialog::btnFilenameMacroMenu_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			System::Drawing::Point p = btnFilenameMacroMenu->Location;
+			p.Y = p.Y + btnFilenameMacroMenu->Size.Width;
+			p = btnFilenameMacroMenu->Parent->PointToScreen(p);
+			cmFilenameMacro->Show(p.X, p.Y);
+		}
 
 		System::Void TargetCodecDialog::TargetCodecDialog_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
 		{
@@ -153,41 +165,44 @@ namespace Ambiesoft {
 			if (!CanSerialize)
 				return;
 			HashIni^ ini = Profile::ReadAll(IniPath);
-			Profile::WriteInt(SECTION, KEY_ENCODE_TYPE, cmbEncodeType->SelectedIndex, ini);
+			bool success = true;
+			success &= Profile::WriteInt(SECTION, KEY_ENCODE_TYPE, cmbEncodeType->SelectedIndex, ini);
 			if(AudioCodecIntEnabled)
-				Profile::WriteInt(SECTION, KEY_AUIDOCODEC, AudioCodecInt, ini);
+				success &= Profile::WriteInt(SECTION, KEY_AUIDOCODEC, AudioCodecInt, ini);
 			if(VideoCodecIntEnabled)
-				Profile::WriteInt(SECTION, KEY_VIDEOCODEC, VideoCodecInt, ini);
+				success &= Profile::WriteInt(SECTION, KEY_VIDEOCODEC, VideoCodecInt, ini);
 
-			Profile::WriteBool(SECTION, KEY_SAME_DIRECTORY, chkSameDirectory->Checked, ini);
-			Profile::WriteString(SECTION, KEY_OTHER_DIRECTORY, txtOtherDirectory->Text, ini);
-			Profile::WriteBool(SECTION, KEY_FILE_BY_FILE, chkFileByFile->Checked, ini);
+			success &= Profile::WriteBool(SECTION, KEY_SAME_DIRECTORY, chkSameDirectory->Checked, ini);
+			success &= Profile::WriteString(SECTION, KEY_OTHER_DIRECTORY, txtOtherDirectory->Text, ini);
+			success &= Profile::WriteBool(SECTION, KEY_FILE_BY_FILE, chkFileByFile->Checked, ini);
 
-			Profile::WriteStringArray(SECTION, KEY_FILENAME_BEFORE_ARRAY,
-				toStringArray(cmbBeforeFilename->Items), ini);
-			Profile::WriteString(SECTION, KEY_FILENAME_BEFORE,
-				cmbBeforeFilename->Text, ini);
+			success &= AmbLib::SaveComboBox(cmbFilenameMacro, KEY_FILENAME_MACRO, FILENAME_MACRO_MAX, ini);
+			//Profile::WriteStringArray(SECTION, KEY_FILENAME_MACRO_ARRAY,
+			//	toStringArray(cmbFilenameMacro->Items), ini);
+			//Profile::WriteString(SECTION, KEY_FILENAME_MACRO,
+			//	cmbFilenameMacro->Text, ini);
 			
-			Profile::WriteStringArray(SECTION, KEY_FILENAME_AFTER_ARRAY,
-				toStringArray(cmbAfterFilename->Items), ini);
-			Profile::WriteString(SECTION, KEY_FILENAME_AFTER,
-				cmbAfterFilename->Text, ini);
+			//Profile::WriteStringArray(SECTION, KEY_FILENAME_AFTER_ARRAY,
+			//	toStringArray(cmbAfterFilename->Items), ini);
+			//Profile::WriteString(SECTION, KEY_FILENAME_AFTER,
+			//	cmbAfterFilename->Text, ini);
 
 
 
 
 
-			Profile::WriteStringArray(SECTION, KEY_ADDITIONALOPTIONS_BEFOREINPUT_ARRAY, 
+			success &= Profile::WriteStringArray(SECTION, KEY_ADDITIONALOPTIONS_BEFOREINPUT_ARRAY,
 				toStringArray(cmbAdditionalOptionsBeforeInput->Items), ini);
-			Profile::WriteString(SECTION, KEY_ADDITIONALOPTIONS_BEFOREINPUT, 
+			success &= Profile::WriteString(SECTION, KEY_ADDITIONALOPTIONS_BEFOREINPUT,
 				cmbAdditionalOptionsBeforeInput->Text, ini);
 
-			Profile::WriteStringArray(SECTION, KEY_ADDITIONALOPTIONS_AFTERINPUT_ARRAY,
+			success &= Profile::WriteStringArray(SECTION, KEY_ADDITIONALOPTIONS_AFTERINPUT_ARRAY,
 				toStringArray(cmbAdditionalOptionsAfterInput->Items), ini);
-			Profile::WriteString(SECTION, KEY_ADDITIONALOPTIONS_AFTERINPUT, 
+			success &= Profile::WriteString(SECTION, KEY_ADDITIONALOPTIONS_AFTERINPUT,
 				cmbAdditionalOptionsAfterInput->Text, ini);
 
-			if (!Profile::WriteAll(ini, IniPath))
+			success &= Profile::WriteAll(ini, IniPath);
+			if(!success)
 			{
 				CppUtils::Alert(I18N(L"Failed to save ini"));
 			}
@@ -348,8 +363,8 @@ namespace Ambiesoft {
 				}
 			}
 
-			StoreComboItem(cmbBeforeFilename);
-			StoreComboItem(cmbAfterFilename);
+			StoreComboItem(cmbFilenameMacro);
+			// StoreComboItem(cmbAfterFilename);
 
 			StoreComboItem(cmbAdditionalOptionsBeforeInput);
 			StoreComboItem(cmbAdditionalOptionsAfterInput);
@@ -502,11 +517,15 @@ namespace Ambiesoft {
 						
 						MacroManager^ mm = gcnew MacroManager(%macros);
 
+						String^ deployedFilename = mm->Deploy(cmbFilenameMacro->Text);
+						if (String::IsNullOrEmpty(deployedFilename))
+						{
+							CppUtils::Alert(I18N(L"Filename is empty"));
+							return false;
+						}
 						fullName = Path::Combine(GetTargetDirectories()[i],
-							String::Format(L"{0}{1}{2}{3}",
-								mm->Deploy(cmbBeforeFilename->Text),
-								baseFileName,
-								mm->Deploy(cmbAfterFilename->Text),
+							String::Format(L"{0}{1}",
+								deployedFilename,
 								firstExt));
 					}
 					catch (Exception^ ex)

@@ -25,10 +25,11 @@ namespace Ambiesoft {
 			literal String^ KEY_OTHER_DIRECTORY = L"OtherDirectory";
 			literal String^ KEY_FILE_BY_FILE = L"FileByFile";
 
-			literal String^ KEY_FILENAME_BEFORE = L"FilenameBefore";
-			literal String^ KEY_FILENAME_BEFORE_ARRAY = L"FilenameBeforeArray";
-			literal String^ KEY_FILENAME_AFTER = L"FilenameAfter";
-			literal String^ KEY_FILENAME_AFTER_ARRAY = L"FilenameAfterArray";
+			literal String^ KEY_FILENAME_MACRO = L"FilenameMacro";
+			literal int FILENAME_MACRO_MAX = 64;
+			//literal String^ KEY_FILENAME_MACRO_ARRAY = L"FilenameMacroArray";
+			//literal String^ KEY_FILENAME_AFTER = L"FilenameAfter";
+			//literal String^ KEY_FILENAME_AFTER_ARRAY = L"FilenameAfterArray";
 
 			literal String^ KEY_ADDITIONALOPTIONS_BEFOREINPUT = L"AdditionalOptionsBeforeInput";
 			literal String^ KEY_ADDITIONALOPTIONS_BEFOREINPUT_ARRAY = L"AdditionalOptionsBeforeInputArray";
@@ -50,7 +51,9 @@ namespace Ambiesoft {
 			   initonly bool losslessable_;
 			   initonly array<String^>^ InputMovies;
 			   initonly AVCodec^ DefaultVideoCodec;
-		private: System::Windows::Forms::ComboBox^ cmbBeforeFilename;
+		private: System::Windows::Forms::ComboBox^ cmbFilenameMacro;
+
+
 		private: System::Windows::Forms::GroupBox^ groupAdditionalOptions;
 
 		private: System::Windows::Forms::Label^ lblAdditonalOptionAfterInput;
@@ -58,9 +61,15 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::Label^ lblBeforeInputFile;
 		private: System::Windows::Forms::ComboBox^ cmbAdditionalOptionsAfterInput;
 		private: System::Windows::Forms::ComboBox^ cmbAdditionalOptionsBeforeInput;
-		private: System::Windows::Forms::Label^ label1;
+
 		private: System::Windows::Forms::Label^ lblBeforeFilename;
-		private: System::Windows::Forms::ComboBox^ cmbAfterFilename;
+		private: System::Windows::Forms::Button^ btnFilenameMacroMenu;
+		private: System::Windows::Forms::ContextMenuStrip^ cmFilenameMacro;
+		private: System::Windows::Forms::ToolStripMenuItem^ basenameToolStripMenuItem;
+		private: System::Windows::Forms::ToolStripMenuItem^ basenamewithoutextToolStripMenuItem;
+		private: System::Windows::Forms::ToolStripMenuItem^ targetextToolStripMenuItem;
+		private: System::Windows::Forms::ToolStripMenuItem^ originalextToolStripMenuItem;
+
 			   initonly AVCodec^ DefaultAudioCodec;
 		public:
 			TargetCodecDialog(bool bLosslessable, 
@@ -232,6 +241,8 @@ namespace Ambiesoft {
 		internal: System::Windows::Forms::RadioButton^ rbVideoCopy;
 		private: System::Windows::Forms::ComboBox^ cmbEncodeType;
 internal: System::Windows::Forms::RadioButton^ rbVideoAV1;
+private: System::ComponentModel::IContainer^ components;
+internal:
 private:
 
 		internal:
@@ -249,7 +260,7 @@ private:
 			/// <summary>
 			/// Required designer variable.
 			/// </summary>
-			System::ComponentModel::Container^ components;
+
 
 #pragma region Windows Form Designer generated code
 			/// <summary>
@@ -258,6 +269,7 @@ private:
 			/// </summary>
 			void InitializeComponent(void)
 			{
+				this->components = (gcnew System::ComponentModel::Container());
 				System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(TargetCodecDialog::typeid));
 				this->groupVideoCodec = (gcnew System::Windows::Forms::GroupBox());
 				this->rbVideoAV1 = (gcnew System::Windows::Forms::RadioButton());
@@ -277,21 +289,26 @@ private:
 				this->txtOtherDirectory = (gcnew System::Windows::Forms::TextBox());
 				this->chkSameDirectory = (gcnew System::Windows::Forms::CheckBox());
 				this->groupFilename = (gcnew System::Windows::Forms::GroupBox());
-				this->label1 = (gcnew System::Windows::Forms::Label());
 				this->lblBeforeFilename = (gcnew System::Windows::Forms::Label());
-				this->cmbAfterFilename = (gcnew System::Windows::Forms::ComboBox());
-				this->cmbBeforeFilename = (gcnew System::Windows::Forms::ComboBox());
+				this->cmbFilenameMacro = (gcnew System::Windows::Forms::ComboBox());
 				this->chkFileByFile = (gcnew System::Windows::Forms::CheckBox());
 				this->groupAdditionalOptions = (gcnew System::Windows::Forms::GroupBox());
 				this->cmbAdditionalOptionsAfterInput = (gcnew System::Windows::Forms::ComboBox());
 				this->cmbAdditionalOptionsBeforeInput = (gcnew System::Windows::Forms::ComboBox());
 				this->lblAdditonalOptionAfterInput = (gcnew System::Windows::Forms::Label());
 				this->lblBeforeInputFile = (gcnew System::Windows::Forms::Label());
+				this->cmFilenameMacro = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+				this->basenameToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				this->basenamewithoutextToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				this->targetextToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				this->originalextToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				this->btnFilenameMacroMenu = (gcnew System::Windows::Forms::Button());
 				this->groupVideoCodec->SuspendLayout();
 				this->groupAudioCodec->SuspendLayout();
 				this->groupTargetDirectory->SuspendLayout();
 				this->groupFilename->SuspendLayout();
 				this->groupAdditionalOptions->SuspendLayout();
+				this->cmFilenameMacro->SuspendLayout();
 				this->SuspendLayout();
 				// 
 				// groupVideoCodec
@@ -426,32 +443,21 @@ private:
 				// groupFilename
 				// 
 				resources->ApplyResources(this->groupFilename, L"groupFilename");
-				this->groupFilename->Controls->Add(this->label1);
+				this->groupFilename->Controls->Add(this->btnFilenameMacroMenu);
 				this->groupFilename->Controls->Add(this->lblBeforeFilename);
-				this->groupFilename->Controls->Add(this->cmbAfterFilename);
-				this->groupFilename->Controls->Add(this->cmbBeforeFilename);
+				this->groupFilename->Controls->Add(this->cmbFilenameMacro);
 				this->groupFilename->Name = L"groupFilename";
 				this->groupFilename->TabStop = false;
-				// 
-				// label1
-				// 
-				resources->ApplyResources(this->label1, L"label1");
-				this->label1->Name = L"label1";
 				// 
 				// lblBeforeFilename
 				// 
 				resources->ApplyResources(this->lblBeforeFilename, L"lblBeforeFilename");
 				this->lblBeforeFilename->Name = L"lblBeforeFilename";
 				// 
-				// cmbAfterFilename
+				// cmbFilenameMacro
 				// 
-				resources->ApplyResources(this->cmbAfterFilename, L"cmbAfterFilename");
-				this->cmbAfterFilename->Name = L"cmbAfterFilename";
-				// 
-				// cmbBeforeFilename
-				// 
-				resources->ApplyResources(this->cmbBeforeFilename, L"cmbBeforeFilename");
-				this->cmbBeforeFilename->Name = L"cmbBeforeFilename";
+				resources->ApplyResources(this->cmbFilenameMacro, L"cmbFilenameMacro");
+				this->cmbFilenameMacro->Name = L"cmbFilenameMacro";
 				// 
 				// chkFileByFile
 				// 
@@ -491,6 +497,42 @@ private:
 				resources->ApplyResources(this->lblBeforeInputFile, L"lblBeforeInputFile");
 				this->lblBeforeInputFile->Name = L"lblBeforeInputFile";
 				// 
+				// cmFilenameMacro
+				// 
+				this->cmFilenameMacro->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+					this->basenameToolStripMenuItem,
+						this->basenamewithoutextToolStripMenuItem, this->targetextToolStripMenuItem, this->originalextToolStripMenuItem
+				});
+				this->cmFilenameMacro->Name = L"cmFilenameMacro";
+				resources->ApplyResources(this->cmFilenameMacro, L"cmFilenameMacro");
+				// 
+				// basenameToolStripMenuItem
+				// 
+				this->basenameToolStripMenuItem->Name = L"basenameToolStripMenuItem";
+				resources->ApplyResources(this->basenameToolStripMenuItem, L"basenameToolStripMenuItem");
+				// 
+				// basenamewithoutextToolStripMenuItem
+				// 
+				this->basenamewithoutextToolStripMenuItem->Name = L"basenamewithoutextToolStripMenuItem";
+				resources->ApplyResources(this->basenamewithoutextToolStripMenuItem, L"basenamewithoutextToolStripMenuItem");
+				// 
+				// targetextToolStripMenuItem
+				// 
+				this->targetextToolStripMenuItem->Name = L"targetextToolStripMenuItem";
+				resources->ApplyResources(this->targetextToolStripMenuItem, L"targetextToolStripMenuItem");
+				// 
+				// originalextToolStripMenuItem
+				// 
+				this->originalextToolStripMenuItem->Name = L"originalextToolStripMenuItem";
+				resources->ApplyResources(this->originalextToolStripMenuItem, L"originalextToolStripMenuItem");
+				// 
+				// btnFilenameMacroMenu
+				// 
+				resources->ApplyResources(this->btnFilenameMacroMenu, L"btnFilenameMacroMenu");
+				this->btnFilenameMacroMenu->Name = L"btnFilenameMacroMenu";
+				this->btnFilenameMacroMenu->UseVisualStyleBackColor = true;
+				this->btnFilenameMacroMenu->Click += gcnew System::EventHandler(this, &TargetCodecDialog::btnFilenameMacroMenu_Click);
+				// 
 				// TargetCodecDialog
 				// 
 				this->AcceptButton = this->btnOK;
@@ -524,6 +566,7 @@ private:
 				this->groupFilename->PerformLayout();
 				this->groupAdditionalOptions->ResumeLayout(false);
 				this->groupAdditionalOptions->PerformLayout();
+				this->cmFilenameMacro->ResumeLayout(false);
 				this->ResumeLayout(false);
 				this->PerformLayout();
 
@@ -544,6 +587,8 @@ private:
 			System::Void chkSameDirectory_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 				UpdateEnableState();
 			}
+			System::Void btnFilenameMacroMenu_Click(System::Object^ sender, System::EventArgs^ e);
+
 };
 	}
 }

@@ -1,3 +1,6 @@
+2021/01/20 ver1.0.70
+FilenameMacro
+
 2021/01/07 ver1.0.69
 Add file name and other options
 
