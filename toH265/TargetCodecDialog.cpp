@@ -370,65 +370,6 @@ namespace Ambiesoft {
 			return OutputFiles[0];
 		}
 
-		System::Char nextc(String^ s, int i)
-		{
-			if (i < 0)
-				return '\0';
-			if (s->Length <= (i+1))
-				return '\0';
-
-			return s[i + 1];
-		}
-		String^ deployFilenameMacro(String^ filename)
-		{
-			String^ ret = String::Empty;
-			for (int i = 0; i < filename->Length; ++i)
-			{
-				if(filename[i]=='$')
-				{
-					if (nextc(filename, i) == '$')
-					{
-						i+=1;
-						ret += L'$';
-						continue;
-					}
-					else if(nextc(filename,i)=='{')
-					{
-						// macro
-						int index = filename->IndexOf('}', i);
-						if (index >= 0)
-						{
-							// found '}'
-							String^ macro = filename->Substring(i + 2, index - i - 2);
-							if (macro == "vcodec")
-							{
-								ret += "VVV";
-								i = index;
-								continue;
-							}
-							else
-							{ 
-								// macro not found
-								throw gcnew Exception(String::Format(I18N("Macro '{0}' not found"),
-									macro));
-							}
-						}
-						else
-						{
-							// } not found
-							throw gcnew Exception(String::Format(I18N("Macro deploy error at {0}"), i));
-						}
-					}
-					else
-					{
-						// $ but not $ or {
-						throw gcnew Exception(String::Format(I18N("Macro deploy error at {0}"), i));
-					}
-				}
-				ret += filename[i];
-			}
-			return ret;
-		}
 		bool TargetCodecDialog::UpdateOutputFiles()
 		{
 			try {
@@ -555,11 +496,17 @@ namespace Ambiesoft {
 					String^ fullName = String::Empty;
 					try
 					{
+						System::Collections::Generic::Dictionary<String^, String^> macros;
+						macros.Add("inputext", Path::GetExtension(InputMovies[i]));
+						macros.Add("basename", baseFileName);
+						
+						MacroManager^ mm = gcnew MacroManager(%macros);
+
 						fullName = Path::Combine(GetTargetDirectories()[i],
 							String::Format(L"{0}{1}{2}{3}",
-								deployFilenameMacro(cmbBeforeFilename->Text),
+								mm->Deploy(cmbBeforeFilename->Text),
 								baseFileName,
-								deployFilenameMacro(cmbAfterFilename->Text),
+								mm->Deploy(cmbAfterFilename->Text),
 								firstExt));
 					}
 					catch (Exception^ ex)

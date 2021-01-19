@@ -23,6 +23,7 @@
     <ProjectGuid>{91D72104-485C-45DA-AE4B-1BFBFA67EFE1}</ProjectGuid>
     <RootNamespace>Ambiesoft.toH265</RootNamespace>
     <Keyword>ManagedCProj</Keyword>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -175,6 +176,9 @@
     </Reference>
     <Reference Include="Ambiesoft.AmbLibcpp">
       <HintPath>C:\Linkout\DNAssembly.NET4\Ambiesoft.AmbLibcpp.dll</HintPath>
+    </Reference>
+    <Reference Include="Ambiesoft.MacroManager">
+      <HintPath>..\..\..\..\..\..\..\Linkout\DNAssembly.Standard1.1\Ambiesoft.MacroManager.dll</HintPath>
     </Reference>
     <Reference Include="Ambiesoft.Profile">
       <HintPath>C:\Linkout\DNAssembly.NET4\Ambiesoft.Profile.dll</HintPath>
