@@ -135,10 +135,17 @@ namespace Ambiesoft {
 		}
 		System::Void TargetCodecDialog::btnFilenameMacroMenu_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			System::Drawing::Point p = btnFilenameMacroMenu->Location;
-			p.Y = p.Y + btnFilenameMacroMenu->Size.Width;
-			p = btnFilenameMacroMenu->Parent->PointToScreen(p);
-			cmFilenameMacro->Show(p.X, p.Y);
+			//System::Drawing::Point p = btnFilenameMacroMenu->Location;
+			//p.Y = p.Y + btnFilenameMacroMenu->Size.Width;
+			//p = btnFilenameMacroMenu->Parent->PointToScreen(p);
+			//cmFilenameMacro->Show(p.X, p.Y);
+
+			MacroManager mm(GetMacros(
+				InputMovies[0],
+				GetBaseName(0)));
+			if (System::Windows::Forms::DialogResult::OK != mm.ShowDialog())
+				return;
+			cmbFilenameMacro->Text = mm.InputString;
 		}
 
 		System::Void TargetCodecDialog::TargetCodecDialog_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
@@ -237,6 +244,25 @@ namespace Ambiesoft {
 						txtOtherDirectory->Text));
 			}
 			return dirs;
+		}
+		System::Collections::Generic::Dictionary<String^, String^>^ TargetCodecDialog::GetMacros(
+			String^ inputmovie,
+			String^ basename)
+		{
+			System::Collections::Generic::Dictionary<String^, String^>^ macros =
+				gcnew System::Collections::Generic::Dictionary<String^, String^>();
+			macros->Add("inputext", Path::GetExtension(inputmovie));
+			macros->Add("basename", basename);
+			return macros;
+		}
+		String^ TargetCodecDialog::GetBaseName(int i)
+		{
+			String^ baseFileName = IsConcat ?
+				Ambiesoft::toH265Helper::GetCommonFilename(InputMovies) :
+				Path::GetFileName(InputMovies[i]);
+			if (String::IsNullOrEmpty(baseFileName))
+				baseFileName = "output";
+			return baseFileName;
 		}
 		System::Void TargetCodecDialog::BtnOK_Click(System::Object^ sender, System::EventArgs^ e)
 		{
@@ -493,11 +519,7 @@ namespace Ambiesoft {
 				for (int i = 0; i < countOutput; ++i)
 				{
 					// set basename
-					String^ baseFileName = IsConcat ?
-						Ambiesoft::toH265Helper::GetCommonFilename(InputMovies) :
-						Path::GetFileName(InputMovies[i]);
-					if (String::IsNullOrEmpty(baseFileName))
-						baseFileName = "output";
+					String^ baseFileName = GetBaseName(i);
 
 					// set extension
 					String^ firstExt;
@@ -511,11 +533,10 @@ namespace Ambiesoft {
 					String^ fullName = String::Empty;
 					try
 					{
-						System::Collections::Generic::Dictionary<String^, String^> macros;
-						macros.Add("inputext", Path::GetExtension(InputMovies[i]));
-						macros.Add("basename", baseFileName);
 						
-						MacroManager^ mm = gcnew MacroManager(%macros);
+						MacroManager^ mm = gcnew MacroManager(GetMacros(
+							InputMovies[i],
+							baseFileName));
 
 						String^ deployedFilename = mm->Deploy(cmbFilenameMacro->Text);
 						if (String::IsNullOrEmpty(deployedFilename))

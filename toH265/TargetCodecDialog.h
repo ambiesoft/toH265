@@ -576,6 +576,10 @@ private:
 			bool UpdateOutputFiles();
 			void UpdateEnableState();
 			array<String^>^ GetTargetDirectories();
+			System::Collections::Generic::Dictionary<String^, String^>^ GetMacros(
+				String^ inputmovie,
+				String^ basename);
+			String^ GetBaseName(int i);
 
 		private:
 			System::Void CmbEncodeType_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
