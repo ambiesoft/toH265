@@ -178,7 +178,7 @@
       <HintPath>C:\Linkout\DNAssembly.NET4\Ambiesoft.AmbLibcpp.dll</HintPath>
     </Reference>
     <Reference Include="Ambiesoft.MacroManager">
-      <HintPath>..\..\..\..\..\..\..\Linkout\DNAssembly.Standard1.1\Ambiesoft.MacroManager.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Linkout\DNAssembly.NET4\Ambiesoft.MacroManager.dll</HintPath>
     </Reference>
     <Reference Include="Ambiesoft.Profile">
       <HintPath>C:\Linkout\DNAssembly.NET4\Ambiesoft.Profile.dll</HintPath>
