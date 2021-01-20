@@ -877,6 +877,19 @@ namespace Ambiesoft {
 						job->FinishedDateString);
 					// sbMessage.AppendLine();
 
+					if (!job->InputAudioCodec->IsEmpty && String::IsNullOrEmpty(outputtedAC))
+					{
+						sbMessage.AppendLine();
+						sbMessage.AppendLine(I18N("Be carefull. Audio codec not found."));
+						isWarning = true;
+					}
+					if (!job->InputVideoCodec->IsEmpty && String::IsNullOrEmpty(outputtedVC))
+					{
+						sbMessage.AppendLine();
+						sbMessage.AppendLine(I18N("Be carefull. Video codec not found."));
+						isWarning = true;
+					}
+
 					if (!AmbLib::IsAlmostSame(job->TotalInputDuration->TotalMilliseconds,
 						outputtedTS.TotalMilliseconds))
 					{

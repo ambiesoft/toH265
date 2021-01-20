@@ -26,6 +26,7 @@ namespace Ambiesoft {
 			literal String^ KEY_FILE_BY_FILE = L"FileByFile";
 
 			literal String^ KEY_FILENAME_MACRO = L"FilenameMacro";
+			literal String^ FILENAME_MACRO_DEFAULT = L"${basename}${targetext}";
 			literal int FILENAME_MACRO_MAX = 64;
 			//literal String^ KEY_FILENAME_MACRO_ARRAY = L"FilenameMacroArray";
 			//literal String^ KEY_FILENAME_AFTER = L"FilenameAfter";
@@ -572,11 +573,16 @@ private:
 
 			}
 #pragma endregion
-
+			String^ GetTargetExt();
 			bool UpdateOutputFiles();
 			void UpdateEnableState();
 			array<String^>^ GetTargetDirectories();
-
+			System::Collections::Generic::Dictionary<String^, String^>^ GetMacros(
+				String^ inputmovie,
+				String^ basename);
+			String^ GetBaseName(int i);
+			bool IsSameAsInputMovies(String^ path);
+			bool UpdateCodec();
 		private:
 			System::Void CmbEncodeType_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
 			System::Void BtnOK_Click(System::Object^ sender, System::EventArgs^ e);

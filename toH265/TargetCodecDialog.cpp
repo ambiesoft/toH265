@@ -72,10 +72,11 @@ namespace Ambiesoft {
 
 				Profile::GetStringArray(SECTION, KEY_FILENAME_MACRO, a, ini);
 				cmbFilenameMacro->Items->AddRange(a);
-				if (cmbFilenameMacro->Items->Count == 0 &&
-					String::IsNullOrEmpty(cmbFilenameMacro->Text))
+				if (!cmbFilenameMacro->Items->Contains(FILENAME_MACRO_DEFAULT))
+					cmbFilenameMacro->Items->Add(FILENAME_MACRO_DEFAULT);
+				if(String::IsNullOrEmpty(cmbFilenameMacro->Text))
 				{
-					cmbFilenameMacro->Text = L"${basename}";
+					cmbFilenameMacro->Text = FILENAME_MACRO_DEFAULT;
 				}
 				
 				//Profile::GetStringArray(SECTION, KEY_FILENAME_AFTER_ARRAY, a, ini);
@@ -135,10 +136,18 @@ namespace Ambiesoft {
 		}
 		System::Void TargetCodecDialog::btnFilenameMacroMenu_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			System::Drawing::Point p = btnFilenameMacroMenu->Location;
-			p.Y = p.Y + btnFilenameMacroMenu->Size.Width;
-			p = btnFilenameMacroMenu->Parent->PointToScreen(p);
-			cmFilenameMacro->Show(p.X, p.Y);
+			//System::Drawing::Point p = btnFilenameMacroMenu->Location;
+			//p.Y = p.Y + btnFilenameMacroMenu->Size.Width;
+			//p = btnFilenameMacroMenu->Parent->PointToScreen(p);
+			//cmFilenameMacro->Show(p.X, p.Y);
+
+			MacroManager mm(GetMacros(
+				InputMovies[0],
+				GetBaseName(0)));
+			mm.InputString = cmbFilenameMacro->Text;
+			if (System::Windows::Forms::DialogResult::OK != mm.ShowDialog())
+				return;
+			cmbFilenameMacro->Text = mm.InputString;
 		}
 
 		System::Void TargetCodecDialog::TargetCodecDialog_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
@@ -237,6 +246,29 @@ namespace Ambiesoft {
 						txtOtherDirectory->Text));
 			}
 			return dirs;
+		}
+		System::Collections::Generic::Dictionary<String^, String^>^ TargetCodecDialog::GetMacros(
+			String^ inputmovie,
+			String^ basename)
+		{
+			System::Collections::Generic::Dictionary<String^, String^>^ macros =
+				gcnew System::Collections::Generic::Dictionary<String^, String^>();
+			macros->Add("inputext", Path::GetExtension(inputmovie));
+			macros->Add("basename", basename);
+			macros->Add("targetext", GetTargetExt());
+			macros->Add("basenamewithoutexe", Path::GetFileNameWithoutExtension(basename));
+			macros->Add("parentdirname", Path::GetFileName(Path::GetDirectoryName(inputmovie)));
+			macros->Add("parentdirectory", Path::GetDirectoryName(inputmovie));
+			return macros;
+		}
+		String^ TargetCodecDialog::GetBaseName(int i)
+		{
+			String^ baseFileName = IsConcat ?
+				Ambiesoft::toH265Helper::GetCommonFilename(InputMovies) :
+				Path::GetFileName(InputMovies[i]);
+			if (String::IsNullOrEmpty(baseFileName))
+				baseFileName = "output";
+			return baseFileName;
 		}
 		System::Void TargetCodecDialog::BtnOK_Click(System::Object^ sender, System::EventArgs^ e)
 		{
@@ -385,107 +417,133 @@ namespace Ambiesoft {
 			return OutputFiles[0];
 		}
 
-		bool TargetCodecDialog::UpdateOutputFiles()
+		bool TargetCodecDialog::IsSameAsInputMovies(String^ path)
 		{
-			try {
-				List<String^>^ outExtsNormalPriority = gcnew List<String^>();
-				List<String^>^ outExtsHighPriority = gcnew List<String^>();
+			for each (String ^ file in InputMovies)
+			{
+				if (AmbLib::IsSameFile(file, path))
+					return true;
+			}
+			return false;
+		}
+		bool TargetCodecDialog::UpdateCodec()
+		{
+			return !String::IsNullOrEmpty(GetTargetExt());
+		}
+		String^ TargetCodecDialog::GetTargetExt()
+		{
+			List<String^>^ outExtsNormalPriority = gcnew List<String^>();
+			List<String^>^ outExtsHighPriority = gcnew List<String^>();
 
-				bool bReEncode = IsReEncode;
-				if (!bReEncode)
+			bool bReEncode = IsReEncode;
+			if (!bReEncode)
+			{
+				outExtsNormalPriority->Add(Path::GetExtension(InputMovies[0]));
+				OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
+				OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
+			}
+			else
+			{
+				// check if both codecs are 'copy'
+				if (rbVideoCopy->Checked && rbAudioCopy->Checked)
 				{
-					outExtsNormalPriority->Add(Path::GetExtension(InputMovies[0]));
-					OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
+					if (System::Windows::Forms::DialogResult::Yes != CppUtils::CenteredMessageBox(
+						this,
+						I18N("Both audio and video codes are 'copy'. Are you sure to continue?"),
+						Application::ProductName,
+						MessageBoxButtons::YesNo,
+						MessageBoxIcon::Question,
+						MessageBoxDefaultButton::Button2))
+					{
+						return nullptr;
+					}
+				}
+				if (rbVideoH265->Checked)
+				{
+					OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_H265);
+					outExtsNormalPriority->Add(".mp4");
+				}
+				else if (rbVideoVp9->Checked)
+				{
+					OutputVideoCodec = gcnew AVCodec("vp9");
+					outExtsNormalPriority->Add(".webm");
+				}
+				else if (rbVideoCopy->Checked)
+				{
+					if (DefaultVideoCodec->IsH264)
+					{
+						if (rbAudioOpus->Checked)
+							outExtsNormalPriority->Add(".mkv");
+						else
+							outExtsNormalPriority->Add(".mp4");
+					}
 					OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
+					outExtsNormalPriority->Add(Path::GetExtension(InputMovies[0]));
+				}
+				else if (rbVideoAV1->Checked)
+				{
+					OutputVideoCodec = gcnew AVCodec("av1");
+					outExtsNormalPriority->Add(".mkv");
 				}
 				else
 				{
-					// check if both codecs are 'copy'
-					if (rbVideoCopy->Checked && rbAudioCopy->Checked)
-					{
-						if (System::Windows::Forms::DialogResult::Yes != CppUtils::CenteredMessageBox(
-							this,
-							I18N("Both audio and video codes are 'copy'. Are you sure to continue?"),
-							Application::ProductName,
-							MessageBoxButtons::YesNo,
-							MessageBoxIcon::Question,
-							MessageBoxDefaultButton::Button2))
-						{
-							return false;
-						}
-					}
-					if (rbVideoH265->Checked)
-					{
-						OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_H265);
-						outExtsNormalPriority->Add(".mp4");
-					}
-					else if (rbVideoVp9->Checked)
-					{
-						OutputVideoCodec = gcnew AVCodec("vp9");
-						outExtsNormalPriority->Add(".webm");
-					}
-					else if (rbVideoCopy->Checked)
-					{
-						if (DefaultVideoCodec->IsH264)
-						{
-							if (rbAudioOpus->Checked)
-								outExtsNormalPriority->Add(".mkv");
-							else
-								outExtsNormalPriority->Add(".mp4");
-						}
-						OutputVideoCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
-						outExtsNormalPriority->Add(Path::GetExtension(InputMovies[0]));
-					}
-					else if (rbVideoAV1->Checked)
-					{
-						OutputVideoCodec = gcnew AVCodec("av1");
-						outExtsNormalPriority->Add(".mkv");
-					}
-					else
-					{
-						CppUtils::Alert(this, I18N(L"No video codec selected."));
-						return false;
-					}
-
-					if (rbAudioCopy->Checked)
-						OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
-					else if (rbAudioAac->Checked)
-						OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_AAC);
-					else if (rbAudioOpus->Checked)
-						OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_OPUS);
-					else
-					{
-						CppUtils::Alert(this, I18N(L"No audio codec selected."));
-						return false;
-					}
-
-
-					AVCodec^ targetVideoCodec = OutputVideoCodec->IsCopy ? DefaultVideoCodec : OutputVideoCodec;
-					AVCodec^ targetAudioCodec = OutputAudioCodec->IsCopy ? DefaultAudioCodec : OutputAudioCodec;
-
-					// vp9 can only hold audio of "vorbis" or "opus"
-					if (OutputVideoCodec->IsVp9)
-					{
-						if (!targetAudioCodec->IsVorbis && !targetAudioCodec->IsOpus)
-						{
-							outExtsNormalPriority->Add(".mkv");
-						}
-					}
-					if (outExtsNormalPriority->Contains(".mp4"))
-					{
-						if (targetVideoCodec->IsH265 && targetAudioCodec->IsOpus)
-						{
-							outExtsHighPriority->Add(".mkv");
-						}
-					}
-
-					outExtsNormalPriority->Add(".mkv");
+					CppUtils::Alert(this, I18N(L"No video codec selected."));
+					return nullptr;
 				}
 
-				outExtsHighPriority = MakeUnique(outExtsHighPriority);
-				outExtsNormalPriority->InsertRange(0, outExtsHighPriority);
-				outExtsNormalPriority = MakeUnique(outExtsNormalPriority);
+				if (rbAudioCopy->Checked)
+					OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_COPY);
+				else if (rbAudioAac->Checked)
+					OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_AAC);
+				else if (rbAudioOpus->Checked)
+					OutputAudioCodec = gcnew AVCodec(AVCodec::VC::VC_OPUS);
+				else
+				{
+					CppUtils::Alert(this, I18N(L"No audio codec selected."));
+					return nullptr;
+				}
 
+
+				AVCodec^ targetVideoCodec = OutputVideoCodec->IsCopy ? DefaultVideoCodec : OutputVideoCodec;
+				AVCodec^ targetAudioCodec = OutputAudioCodec->IsCopy ? DefaultAudioCodec : OutputAudioCodec;
+
+				// vp9 can only hold audio of "vorbis" or "opus"
+				if (OutputVideoCodec->IsVp9)
+				{
+					if (!targetAudioCodec->IsVorbis && !targetAudioCodec->IsOpus)
+					{
+						outExtsNormalPriority->Add(".mkv");
+					}
+				}
+				if (outExtsNormalPriority->Contains(".mp4"))
+				{
+					if (targetVideoCodec->IsH265 && targetAudioCodec->IsOpus)
+					{
+						outExtsHighPriority->Add(".mkv");
+					}
+				}
+
+				outExtsNormalPriority->Add(".mkv");
+			}
+
+			outExtsHighPriority = MakeUnique(outExtsHighPriority);
+			outExtsNormalPriority->InsertRange(0, outExtsHighPriority);
+			outExtsNormalPriority = MakeUnique(outExtsNormalPriority);
+
+			for each (String ^ s in outExtsNormalPriority)
+			{
+				return s;
+			}
+			DASSERT(false);
+			return nullptr;
+		}
+		bool TargetCodecDialog::UpdateOutputFiles()
+		{
+			try 
+			{
+
+				if (!UpdateCodec())
+					return false;
 
 				int countOutput = IsConcat ? 1 : InputMovies->Length;
 				outputFiles_ = gcnew array<String^>(countOutput);
@@ -493,29 +551,16 @@ namespace Ambiesoft {
 				for (int i = 0; i < countOutput; ++i)
 				{
 					// set basename
-					String^ baseFileName = IsConcat ?
-						Ambiesoft::toH265Helper::GetCommonFilename(InputMovies) :
-						Path::GetFileName(InputMovies[i]);
-					if (String::IsNullOrEmpty(baseFileName))
-						baseFileName = "output";
-
-					// set extension
-					String^ firstExt;
-					for each (String ^ s in outExtsNormalPriority)
-					{
-						firstExt = s;
-						break;
-					}
+					String^ baseFileName = GetBaseName(i);
 
 					DASSERT(!String::IsNullOrEmpty(OutputVideoCodec->ToString()));
 					String^ fullName = String::Empty;
 					try
 					{
-						System::Collections::Generic::Dictionary<String^, String^> macros;
-						macros.Add("inputext", Path::GetExtension(InputMovies[i]));
-						macros.Add("basename", baseFileName);
 						
-						MacroManager^ mm = gcnew MacroManager(%macros);
+						MacroManager^ mm = gcnew MacroManager(GetMacros(
+							InputMovies[i],
+							baseFileName));
 
 						String^ deployedFilename = mm->Deploy(cmbFilenameMacro->Text);
 						if (String::IsNullOrEmpty(deployedFilename))
@@ -523,10 +568,15 @@ namespace Ambiesoft {
 							CppUtils::Alert(I18N(L"Filename is empty"));
 							return false;
 						}
+						
 						fullName = Path::Combine(GetTargetDirectories()[i],
-							String::Format(L"{0}{1}",
-								deployedFilename,
-								firstExt));
+							deployedFilename);
+						if (IsSameAsInputMovies(fullName))
+						{
+							CppUtils::Alert(String::Format(I18N(L"Output file '{0}' is same path as one of input files."),
+								fullName));
+							return false;
+						}
 					}
 					catch (Exception^ ex)
 					{

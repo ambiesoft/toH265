@@ -1,3 +1,6 @@
+2021/01/21 ver1.0.71
+Change MacroManager
+
 2021/01/20 ver1.0.70
 FilenameMacro
 
