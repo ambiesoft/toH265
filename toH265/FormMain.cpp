@@ -854,66 +854,67 @@ namespace Ambiesoft {
 
 				StringBuilder sbMessage;
 				bool isWarning = false;
-
 				try
 				{
 					if (job->RetVal != 0)
 					{
 						isWarning = true;
 						sbMessage.AppendLine(String::Format(L"Process exited with {0}.", job->RetVal));
-						return;
 					}
-					DASSERT(!String::IsNullOrEmpty(job->OutputtedMovie));
-					GetStreamInfo(FFProbe, job->OutputtedMovie, outputtedFormat, outputtedAC, outputtedVC, outputtedAspect, outputtedTS, outputtedFps);
-					for each (String ^ infile in job->InputMovies)
-						inputSize += FileInfo(infile).Length;
-					outputtedSize = FileInfo(job->OutputtedMovie).Length;
-
-					DASSERT(!String::IsNullOrEmpty(outputtedAC));
-					DASSERT(!String::IsNullOrEmpty(outputtedVC));
-					DASSERT(outputtedTS.TotalMilliseconds != 0);
-
-					sbMessage.AppendFormat(I18N(L"Encoding successfully finished at {0}."),
-						job->FinishedDateString);
-					// sbMessage.AppendLine();
-
-					if (!job->InputAudioCodec->IsEmpty && String::IsNullOrEmpty(outputtedAC))
+					else
 					{
-						sbMessage.AppendLine();
-						sbMessage.AppendLine(I18N("Be carefull. Audio codec not found."));
-						isWarning = true;
-					}
-					if (!job->InputVideoCodec->IsEmpty && String::IsNullOrEmpty(outputtedVC))
-					{
-						sbMessage.AppendLine();
-						sbMessage.AppendLine(I18N("Be carefull. Video codec not found."));
-						isWarning = true;
-					}
+						DASSERT(!String::IsNullOrEmpty(job->OutputtedMovie));
+						GetStreamInfo(FFProbe, job->OutputtedMovie, outputtedFormat, outputtedAC, outputtedVC, outputtedAspect, outputtedTS, outputtedFps);
+						for each (String ^ infile in job->InputMovies)
+							inputSize += FileInfo(infile).Length;
+						outputtedSize = FileInfo(job->OutputtedMovie).Length;
 
-					if (!AmbLib::IsAlmostSame(job->TotalInputDuration->TotalMilliseconds,
-						outputtedTS.TotalMilliseconds))
-					{
+						DASSERT(!String::IsNullOrEmpty(outputtedAC));
+						DASSERT(!String::IsNullOrEmpty(outputtedVC));
+						DASSERT(outputtedTS.TotalMilliseconds != 0);
+
+						sbMessage.AppendFormat(I18N(L"Encoding successfully finished at {0}."),
+							job->FinishedDateString);
+						// sbMessage.AppendLine();
+
+						if (!job->InputAudioCodec->IsEmpty && String::IsNullOrEmpty(outputtedAC))
+						{
+							sbMessage.AppendLine();
+							sbMessage.AppendLine(I18N("Be carefull. Audio codec not found."));
+							isWarning = true;
+						}
+						if (!job->InputVideoCodec->IsEmpty && String::IsNullOrEmpty(outputtedVC))
+						{
+							sbMessage.AppendLine();
+							sbMessage.AppendLine(I18N("Be carefull. Video codec not found."));
+							isWarning = true;
+						}
+
+						if (!AmbLib::IsAlmostSame(job->TotalInputDuration->TotalMilliseconds,
+							outputtedTS.TotalMilliseconds))
+						{
+							sbMessage.AppendLine();
+							sbMessage.AppendLine(I18N("Be carefull. The durations differs."));
+							isWarning = true;
+						}
+						if (!AmbLib::IsAlmostSame(job->TotalInputFPS, outputtedFps))
+						{
+							sbMessage.AppendLine();
+							sbMessage.AppendLine(I18N("Be carefull. The FPSs differs."));
+							isWarning = true;
+						}
 						sbMessage.AppendLine();
-						sbMessage.AppendLine(I18N("Be carefull. The durations differs."));
-						isWarning = true;
+						job->PrintInputFiles(% sbMessage);
+						job->PrintOutputFile(% sbMessage);
+						sbMessage.AppendLine(String::Format(I18N(L"Format = {0}"), outputtedFormat));
+						sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), outputtedAC));
+						sbMessage.AppendLine(String::Format(I18N(L"Video codec = {0}"), outputtedVC));
+						sbMessage.AppendLine(String::Format(I18N(L"Duration = {0}"), outputtedTS.ToString()));
+						sbMessage.AppendLine(String::Format(I18N(L"FPS = {0}"), Ambiesoft::toH265Helper::FormatFPS(outputtedFps)));
+						sbMessage.AppendLine(String::Format(I18N(L"Original Size = {0}"), AmbLib::FormatSize(inputSize)));
+						sbMessage.AppendLine(String::Format(I18N(L"Output Size = {0}"), AmbLib::FormatSize(outputtedSize)));
+						sbMessage.AppendLine(String::Format(I18N(L"Compressed = {0}%"), AmbLib::GetRatioString(outputtedSize, inputSize)));
 					}
-					if (!AmbLib::IsAlmostSame(job->TotalInputFPS, outputtedFps))
-					{
-						sbMessage.AppendLine();
-						sbMessage.AppendLine(I18N("Be carefull. The FPSs differs."));
-						isWarning = true;
-					}
-					sbMessage.AppendLine();
-					job->PrintInputFiles(%sbMessage);
-					job->PrintOutputFile(%sbMessage);
-					sbMessage.AppendLine(String::Format(I18N(L"Format = {0}"), outputtedFormat));
-					sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), outputtedAC));
-					sbMessage.AppendLine(String::Format(I18N(L"Video codec = {0}"), outputtedVC));
-					sbMessage.AppendLine(String::Format(I18N(L"Duration = {0}"), outputtedTS.ToString()));
-					sbMessage.AppendLine(String::Format(I18N(L"FPS = {0}"), Ambiesoft::toH265Helper::FormatFPS(outputtedFps)));
-					sbMessage.AppendLine(String::Format(I18N(L"Original Size = {0}"), AmbLib::FormatSize(inputSize)));
-					sbMessage.AppendLine(String::Format(I18N(L"Output Size = {0}"), AmbLib::FormatSize(outputtedSize)));
-					sbMessage.AppendLine(String::Format(I18N(L"Compressed = {0}%"), AmbLib::GetRatioString(outputtedSize, inputSize)));
 				}
 				catch (Exception^ ex)
 				{

@@ -1,3 +1,6 @@
+2021/01/21 ver1.0.72
+Error Message
+
 2021/01/21 ver1.0.71
 Change MacroManager
 
