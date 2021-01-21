@@ -259,6 +259,7 @@ namespace Ambiesoft {
 			macros->Add("basenamewithoutexe", Path::GetFileNameWithoutExtension(basename));
 			macros->Add("parentdirname", Path::GetFileName(Path::GetDirectoryName(inputmovie)));
 			macros->Add("parentdirectory", Path::GetDirectoryName(inputmovie));
+
 			return macros;
 		}
 		String^ TargetCodecDialog::GetBaseName(int i)
@@ -552,6 +553,15 @@ namespace Ambiesoft {
 				{
 					// set basename
 					String^ baseFileName = GetBaseName(i);
+
+					// set extension
+					//String^ firstExt;
+					//for each (String ^ s in outExtsNormalPriority)
+					//{
+					//	firstExt = s;
+					//	break;
+					//}
+
 
 					DASSERT(!String::IsNullOrEmpty(OutputVideoCodec->ToString()));
 					String^ fullName = String::Empty;
