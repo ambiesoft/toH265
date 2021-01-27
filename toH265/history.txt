@@ -1,3 +1,7 @@
+2021/01/27 ver1.0.74
+Filename result changes with 'File by File'
+Update AfterRun
+
 2021/01/27 ver1.0.73
 Add Result of Filename macro
 

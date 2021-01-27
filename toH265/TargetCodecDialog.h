@@ -500,6 +500,7 @@ private:
 				resources->ApplyResources(this->chkFileByFile, L"chkFileByFile");
 				this->chkFileByFile->Name = L"chkFileByFile";
 				this->chkFileByFile->UseVisualStyleBackColor = true;
+				this->chkFileByFile->CheckedChanged += gcnew System::EventHandler(this, &TargetCodecDialog::chkFileByFile_CheckedChanged);
 				// 
 				// groupAdditionalOptions
 				// 
@@ -628,6 +629,9 @@ private:
 				UpdateFilename();
 			}
 			System::Void cmbFilenameMacro_TextUpdate(System::Object^ sender, System::EventArgs^ e) {
+				UpdateFilename();
+			}
+			System::Void chkFileByFile_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 				UpdateFilename();
 			}
 };
