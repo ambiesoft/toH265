@@ -107,6 +107,8 @@ namespace Ambiesoft {
 				cmbEncodeType->SelectedIndex = 1;
 				cmbEncodeType->Enabled = false;
 			}
+
+			UpdateFilename();
 		}
 		System::Void TargetCodecDialog::CmbEncodeType_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
 		{
@@ -141,13 +143,12 @@ namespace Ambiesoft {
 			//p = btnFilenameMacroMenu->Parent->PointToScreen(p);
 			//cmFilenameMacro->Show(p.X, p.Y);
 
-			MacroManager mm(GetMacros(
-				InputMovies[0],
-				GetBaseName(0)));
-			mm.InputString = cmbFilenameMacro->Text;
-			if (System::Windows::Forms::DialogResult::OK != mm.ShowDialog())
+			
+			mm_->InputString = cmbFilenameMacro->Text;
+			if (System::Windows::Forms::DialogResult::OK != mm_->ShowDialog())
 				return;
-			cmbFilenameMacro->Text = mm.InputString;
+			cmbFilenameMacro->Text = mm_->InputString;
+			txtResultFilename->Text = mm_->ResultString;
 		}
 
 		System::Void TargetCodecDialog::TargetCodecDialog_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
@@ -255,7 +256,7 @@ namespace Ambiesoft {
 				gcnew System::Collections::Generic::Dictionary<String^, String^>();
 			macros->Add("inputext", Path::GetExtension(inputmovie));
 			macros->Add("basename", basename);
-			macros->Add("targetext", GetTargetExt());
+			macros->Add("targetext", GetTargetExt(false));
 			macros->Add("basenamewithoutexe", Path::GetFileNameWithoutExtension(basename));
 			macros->Add("parentdirname", Path::GetFileName(Path::GetDirectoryName(inputmovie)));
 			macros->Add("parentdirectory", Path::GetDirectoryName(inputmovie));
@@ -433,6 +434,10 @@ namespace Ambiesoft {
 		}
 		String^ TargetCodecDialog::GetTargetExt()
 		{
+			return GetTargetExt(true);
+		}
+		String^ TargetCodecDialog::GetTargetExt(bool showWarning)
+		{
 			List<String^>^ outExtsNormalPriority = gcnew List<String^>();
 			List<String^>^ outExtsHighPriority = gcnew List<String^>();
 
@@ -446,7 +451,7 @@ namespace Ambiesoft {
 			else
 			{
 				// check if both codecs are 'copy'
-				if (rbVideoCopy->Checked && rbAudioCopy->Checked)
+				if (showWarning && rbVideoCopy->Checked && rbAudioCopy->Checked)
 				{
 					if (System::Windows::Forms::DialogResult::Yes != CppUtils::CenteredMessageBox(
 						this,
@@ -621,6 +626,19 @@ namespace Ambiesoft {
 				CppUtils::Alert(ex->Message);
 			}
 			return false;
+		}
+
+		void TargetCodecDialog::UpdateFilename()
+		{
+			mm_ = gcnew MacroManager(GetMacros(
+				InputMovies[0],
+				GetBaseName(0)));
+			mm_->InputString = cmbFilenameMacro->Text;
+			txtResultFilename->Text = mm_->ResultString;
+		}
+		System::Void TargetCodecDialog::codec_CheckedChangedCommon(System::Object^ sender, System::EventArgs^ e)
+		{
+			UpdateFilename();
 		}
 	}
 }

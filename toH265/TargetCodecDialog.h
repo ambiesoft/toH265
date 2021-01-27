@@ -52,6 +52,7 @@ namespace Ambiesoft {
 			   initonly bool losslessable_;
 			   initonly array<String^>^ InputMovies;
 			   initonly AVCodec^ DefaultVideoCodec;
+			   MacroManager^ mm_;
 		private: System::Windows::Forms::ComboBox^ cmbFilenameMacro;
 
 
@@ -70,6 +71,8 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::ToolStripMenuItem^ basenamewithoutextToolStripMenuItem;
 		private: System::Windows::Forms::ToolStripMenuItem^ targetextToolStripMenuItem;
 		private: System::Windows::Forms::ToolStripMenuItem^ originalextToolStripMenuItem;
+		private: System::Windows::Forms::TextBox^ txtResultFilename;
+		private: System::Windows::Forms::Label^ lblFilenameResult;
 
 			   initonly AVCodec^ DefaultAudioCodec;
 		public:
@@ -79,6 +82,7 @@ namespace Ambiesoft {
 				array<String^>^ inputMovies,
 				AVCodec^ defaultV, AVCodec^ defaultA);
 
+			void UpdateFilename();
 			property bool IsReEncode
 			{
 				bool get() {
@@ -290,6 +294,9 @@ private:
 				this->txtOtherDirectory = (gcnew System::Windows::Forms::TextBox());
 				this->chkSameDirectory = (gcnew System::Windows::Forms::CheckBox());
 				this->groupFilename = (gcnew System::Windows::Forms::GroupBox());
+				this->txtResultFilename = (gcnew System::Windows::Forms::TextBox());
+				this->btnFilenameMacroMenu = (gcnew System::Windows::Forms::Button());
+				this->lblFilenameResult = (gcnew System::Windows::Forms::Label());
 				this->lblBeforeFilename = (gcnew System::Windows::Forms::Label());
 				this->cmbFilenameMacro = (gcnew System::Windows::Forms::ComboBox());
 				this->chkFileByFile = (gcnew System::Windows::Forms::CheckBox());
@@ -303,7 +310,6 @@ private:
 				this->basenamewithoutextToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				this->targetextToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				this->originalextToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-				this->btnFilenameMacroMenu = (gcnew System::Windows::Forms::Button());
 				this->groupVideoCodec->SuspendLayout();
 				this->groupAudioCodec->SuspendLayout();
 				this->groupTargetDirectory->SuspendLayout();
@@ -328,6 +334,7 @@ private:
 				this->rbVideoAV1->Name = L"rbVideoAV1";
 				this->rbVideoAV1->TabStop = true;
 				this->rbVideoAV1->UseVisualStyleBackColor = true;
+				this->rbVideoAV1->CheckedChanged += gcnew System::EventHandler(this, &TargetCodecDialog::codec_CheckedChangedCommon);
 				// 
 				// rbVideoVp9
 				// 
@@ -335,6 +342,7 @@ private:
 				this->rbVideoVp9->Name = L"rbVideoVp9";
 				this->rbVideoVp9->TabStop = true;
 				this->rbVideoVp9->UseVisualStyleBackColor = true;
+				this->rbVideoVp9->CheckedChanged += gcnew System::EventHandler(this, &TargetCodecDialog::codec_CheckedChangedCommon);
 				// 
 				// rbVideoCopy
 				// 
@@ -343,6 +351,7 @@ private:
 				this->rbVideoCopy->Name = L"rbVideoCopy";
 				this->rbVideoCopy->TabStop = true;
 				this->rbVideoCopy->UseVisualStyleBackColor = true;
+				this->rbVideoCopy->CheckedChanged += gcnew System::EventHandler(this, &TargetCodecDialog::codec_CheckedChangedCommon);
 				// 
 				// rbVideoH265
 				// 
@@ -350,6 +359,7 @@ private:
 				this->rbVideoH265->Name = L"rbVideoH265";
 				this->rbVideoH265->TabStop = true;
 				this->rbVideoH265->UseVisualStyleBackColor = true;
+				this->rbVideoH265->CheckedChanged += gcnew System::EventHandler(this, &TargetCodecDialog::codec_CheckedChangedCommon);
 				// 
 				// groupAudioCodec
 				// 
@@ -366,6 +376,7 @@ private:
 				this->rbAudioOpus->Name = L"rbAudioOpus";
 				this->rbAudioOpus->TabStop = true;
 				this->rbAudioOpus->UseVisualStyleBackColor = true;
+				this->rbAudioOpus->CheckedChanged += gcnew System::EventHandler(this, &TargetCodecDialog::codec_CheckedChangedCommon);
 				// 
 				// rbAudioAac
 				// 
@@ -373,6 +384,7 @@ private:
 				this->rbAudioAac->Name = L"rbAudioAac";
 				this->rbAudioAac->TabStop = true;
 				this->rbAudioAac->UseVisualStyleBackColor = true;
+				this->rbAudioAac->CheckedChanged += gcnew System::EventHandler(this, &TargetCodecDialog::codec_CheckedChangedCommon);
 				// 
 				// rbAudioCopy
 				// 
@@ -381,6 +393,7 @@ private:
 				this->rbAudioCopy->Name = L"rbAudioCopy";
 				this->rbAudioCopy->TabStop = true;
 				this->rbAudioCopy->UseVisualStyleBackColor = true;
+				this->rbAudioCopy->CheckedChanged += gcnew System::EventHandler(this, &TargetCodecDialog::codec_CheckedChangedCommon);
 				// 
 				// btnOK
 				// 
@@ -444,11 +457,31 @@ private:
 				// groupFilename
 				// 
 				resources->ApplyResources(this->groupFilename, L"groupFilename");
+				this->groupFilename->Controls->Add(this->txtResultFilename);
 				this->groupFilename->Controls->Add(this->btnFilenameMacroMenu);
+				this->groupFilename->Controls->Add(this->lblFilenameResult);
 				this->groupFilename->Controls->Add(this->lblBeforeFilename);
 				this->groupFilename->Controls->Add(this->cmbFilenameMacro);
 				this->groupFilename->Name = L"groupFilename";
 				this->groupFilename->TabStop = false;
+				// 
+				// txtResultFilename
+				// 
+				resources->ApplyResources(this->txtResultFilename, L"txtResultFilename");
+				this->txtResultFilename->Name = L"txtResultFilename";
+				this->txtResultFilename->ReadOnly = true;
+				// 
+				// btnFilenameMacroMenu
+				// 
+				resources->ApplyResources(this->btnFilenameMacroMenu, L"btnFilenameMacroMenu");
+				this->btnFilenameMacroMenu->Name = L"btnFilenameMacroMenu";
+				this->btnFilenameMacroMenu->UseVisualStyleBackColor = true;
+				this->btnFilenameMacroMenu->Click += gcnew System::EventHandler(this, &TargetCodecDialog::btnFilenameMacroMenu_Click);
+				// 
+				// lblFilenameResult
+				// 
+				resources->ApplyResources(this->lblFilenameResult, L"lblFilenameResult");
+				this->lblFilenameResult->Name = L"lblFilenameResult";
 				// 
 				// lblBeforeFilename
 				// 
@@ -459,6 +492,8 @@ private:
 				// 
 				resources->ApplyResources(this->cmbFilenameMacro, L"cmbFilenameMacro");
 				this->cmbFilenameMacro->Name = L"cmbFilenameMacro";
+				this->cmbFilenameMacro->SelectedIndexChanged += gcnew System::EventHandler(this, &TargetCodecDialog::cmbFilenameMacro_SelectedIndexChanged);
+				this->cmbFilenameMacro->TextUpdate += gcnew System::EventHandler(this, &TargetCodecDialog::cmbFilenameMacro_TextUpdate);
 				// 
 				// chkFileByFile
 				// 
@@ -527,13 +562,6 @@ private:
 				this->originalextToolStripMenuItem->Name = L"originalextToolStripMenuItem";
 				resources->ApplyResources(this->originalextToolStripMenuItem, L"originalextToolStripMenuItem");
 				// 
-				// btnFilenameMacroMenu
-				// 
-				resources->ApplyResources(this->btnFilenameMacroMenu, L"btnFilenameMacroMenu");
-				this->btnFilenameMacroMenu->Name = L"btnFilenameMacroMenu";
-				this->btnFilenameMacroMenu->UseVisualStyleBackColor = true;
-				this->btnFilenameMacroMenu->Click += gcnew System::EventHandler(this, &TargetCodecDialog::btnFilenameMacroMenu_Click);
-				// 
 				// TargetCodecDialog
 				// 
 				this->AcceptButton = this->btnOK;
@@ -574,6 +602,7 @@ private:
 			}
 #pragma endregion
 			String^ GetTargetExt();
+			String^ GetTargetExt(bool showWarning);
 			bool UpdateOutputFiles();
 			void UpdateEnableState();
 			array<String^>^ GetTargetDirectories();
@@ -594,7 +623,13 @@ private:
 				UpdateEnableState();
 			}
 			System::Void btnFilenameMacroMenu_Click(System::Object^ sender, System::EventArgs^ e);
-
+			System::Void codec_CheckedChangedCommon(System::Object^ sender, System::EventArgs^ e);
+			System::Void cmbFilenameMacro_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+				UpdateFilename();
+			}
+			System::Void cmbFilenameMacro_TextUpdate(System::Object^ sender, System::EventArgs^ e) {
+				UpdateFilename();
+			}
 };
 	}
 }

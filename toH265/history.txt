@@ -1,3 +1,6 @@
+2021/01/27 ver1.0.73
+Add Result of Filename macro
+
 2021/01/21 ver1.0.72
 Error Message
 

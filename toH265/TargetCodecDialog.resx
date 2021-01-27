@@ -576,6 +576,27 @@
   <data name="groupFilename.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="txtResultFilename.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 79</value>
+  </data>
+  <data name="txtResultFilename.Size" type="System.Drawing.Size, System.Drawing">
+    <value>560, 20</value>
+  </data>
+  <data name="txtResultFilename.TabIndex" type="System.Int32, mscorlib">
+    <value>1775</value>
+  </data>
+  <data name="&gt;&gt;txtResultFilename.Name" xml:space="preserve">
+    <value>txtResultFilename</value>
+  </data>
+  <data name="&gt;&gt;txtResultFilename.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtResultFilename.Parent" xml:space="preserve">
+    <value>groupFilename</value>
+  </data>
+  <data name="&gt;&gt;txtResultFilename.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="btnFilenameMacroMenu.Location" type="System.Drawing.Point, System.Drawing">
     <value>572, 36</value>
   </data>
@@ -598,7 +619,40 @@
     <value>groupFilename</value>
   </data>
   <data name="&gt;&gt;btnFilenameMacroMenu.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="lblFilenameResult.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="lblFilenameResult.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFilenameResult.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblFilenameResult.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 62</value>
+  </data>
+  <data name="lblFilenameResult.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 13</value>
+  </data>
+  <data name="lblFilenameResult.TabIndex" type="System.Int32, mscorlib">
+    <value>1750</value>
+  </data>
+  <data name="lblFilenameResult.Text" xml:space="preserve">
+    <value>&amp;Ruslt Filename:</value>
+  </data>
+  <data name="&gt;&gt;lblFilenameResult.Name" xml:space="preserve">
+    <value>lblFilenameResult</value>
+  </data>
+  <data name="&gt;&gt;lblFilenameResult.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFilenameResult.Parent" xml:space="preserve">
+    <value>groupFilename</value>
+  </data>
+  <data name="&gt;&gt;lblFilenameResult.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="lblBeforeFilename.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -631,7 +685,7 @@
     <value>groupFilename</value>
   </data>
   <data name="&gt;&gt;lblBeforeFilename.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="cmbFilenameMacro.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -655,13 +709,13 @@
     <value>groupFilename</value>
   </data>
   <data name="&gt;&gt;cmbFilenameMacro.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="groupFilename.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 239</value>
   </data>
   <data name="groupFilename.Size" type="System.Drawing.Size, System.Drawing">
-    <value>606, 82</value>
+    <value>606, 115</value>
   </data>
   <data name="groupFilename.TabIndex" type="System.Int32, mscorlib">
     <value>1600</value>
@@ -685,7 +739,7 @@
     <value>True</value>
   </data>
   <data name="chkFileByFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 344</value>
+    <value>12, 360</value>
   </data>
   <data name="chkFileByFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 17</value>
@@ -850,31 +904,31 @@
     <value>17, 17</value>
   </metadata>
   <data name="basenameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
+    <value>199, 22</value>
   </data>
   <data name="basenameToolStripMenuItem.Text" xml:space="preserve">
     <value>${basename} : </value>
   </data>
   <data name="basenamewithoutextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
+    <value>199, 22</value>
   </data>
   <data name="basenamewithoutextToolStripMenuItem.Text" xml:space="preserve">
     <value>${basenamewithoutext}</value>
   </data>
   <data name="targetextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
+    <value>199, 22</value>
   </data>
   <data name="targetextToolStripMenuItem.Text" xml:space="preserve">
     <value>${targetext}</value>
   </data>
   <data name="originalextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
+    <value>199, 22</value>
   </data>
   <data name="originalextToolStripMenuItem.Text" xml:space="preserve">
     <value>${originalext}</value>
   </data>
   <data name="cmFilenameMacro.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 92</value>
+    <value>200, 92</value>
   </data>
   <data name="&gt;&gt;cmFilenameMacro.Name" xml:space="preserve">
     <value>cmFilenameMacro</value>
