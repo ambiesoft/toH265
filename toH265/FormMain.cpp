@@ -832,8 +832,6 @@ namespace Ambiesoft {
 
 			if (tsmiEnabledtsmiProcessAfterFinish->Checked)
 			{
-				HashIni^ ini = Profile::ReadAll(Program::IniFile);
-				DVERIFY(dlgAfterFinish_.LoadValues("AfterFinish", ini));
 				dlgAfterFinish_.DoNotify();
 			}
 
@@ -1320,6 +1318,22 @@ namespace Ambiesoft {
 			if (System::Windows::Forms::DialogResult::OK != codecDlg.ShowDialog())
 				return;
 
+			// check afterfinish's shutdown is enabled, and ask
+			if (tsmiEnabledtsmiProcessAfterFinish->Checked)
+			{
+				if (dlgAfterFinish_.chkShutdown->Checked)
+				{
+					if (System::Windows::Forms::DialogResult::Yes != CppUtils::CenteredMessageBox(
+						I18N(L"System Shutdown is enabled after the task finished. Do you want to keep it enabled?"),
+						Application::ProductName,
+						MessageBoxButtons::YesNo,
+						MessageBoxIcon::Question,
+						MessageBoxDefaultButton::Button2))
+					{
+						dlgAfterFinish_.chkShutdown->Checked = false;
+					}
+				}
+			}
 
 			// Create Task
 			DASSERT(!IsTaskActive);
@@ -1509,18 +1523,12 @@ namespace Ambiesoft {
 		}
 		System::Void FormMain::tsmiProcesstsmiProcessAfterFinish_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			HashIni^ ini = Profile::ReadAll(Program::IniFile);
-			DVERIFY(dlgAfterFinish_.LoadValues("AfterFinish", ini));
 			if (System::Windows::Forms::DialogResult::OK != dlgAfterFinish_.ShowDialog())
 			{
 				return;
 			}
 
-			//if (dlgAfterFinish_.chkPlaySound->Checked)
-			//{
-			//	CppUtils::Alert("playsound not yet implemented");
-			//}
-
+			HashIni^ ini = Profile::ReadAll(Program::IniFile);
 			if (!dlgAfterFinish_.SaveValues("AfterFinish", ini) || !Profile::WriteAll(ini, Program::IniFile))
 			{
 				CppUtils::Alert(I18N(L"Failed to save ini"));

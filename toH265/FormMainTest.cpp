@@ -50,10 +50,8 @@ namespace Ambiesoft {
 #ifdef _DEBUG
 		System::Void FormMain::FormMain_OnTest(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (!true)
+			if (true)
 			{
-				HashIni^ ini = Profile::ReadAll(Program::IniFile);
-				DVERIFY(dlgAfterFinish_.LoadValues("AfterFinish", ini));
 				this->dlgAfterFinish_.DoNotify();
 			}
 			if(true)

@@ -330,4 +330,7 @@
   <data name="There are items which are already encoded. Do you want to encode them again?" xml:space="preserve">
     <value>すでにエンコードが完了したアイテムがあります。これらを再びエンコードしますか？</value>
   </data>
+  <data name="System Shutdown is enabled after the task finished. Do you want to keep it enabled?" xml:space="preserve">
+    <value>タスク完了後のシャットダウンが有効になっています。このまま有効にしますか？</value>
+  </data>
 </root>

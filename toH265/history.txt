@@ -1,3 +1,6 @@
+2021/02/05 ver1.0.75
+Ensure user if Shutdown after the task finished is enabled.
+
 2021/01/27 ver1.0.74
 Filename result changes with 'File by File'
 Update AfterRun

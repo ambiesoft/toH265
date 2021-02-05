@@ -130,6 +130,8 @@ namespace Ambiesoft {
 				CppUtils::Alert(this, sbMessage.ToString());
 			}
 
+
+			DVERIFY(dlgAfterFinish_.LoadValues("AfterFinish", ini));
 		}
 
 		void FormMain::OnColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e)
