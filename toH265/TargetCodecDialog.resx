@@ -127,10 +127,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rbVideoAV1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 18</value>
+    <value>180, 20</value>
   </data>
   <data name="rbVideoAV1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 16</value>
+    <value>46, 19</value>
   </data>
   <data name="rbVideoAV1.TabIndex" type="System.Int32, mscorlib">
     <value>600</value>
@@ -154,10 +154,10 @@
     <value>True</value>
   </data>
   <data name="rbVideoVp9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 60</value>
+    <value>6, 65</value>
   </data>
   <data name="rbVideoVp9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 16</value>
+    <value>46, 19</value>
   </data>
   <data name="rbVideoVp9.TabIndex" type="System.Int32, mscorlib">
     <value>500</value>
@@ -181,10 +181,10 @@
     <value>True</value>
   </data>
   <data name="rbVideoCopy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
+    <value>6, 20</value>
   </data>
   <data name="rbVideoCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 16</value>
+    <value>52, 19</value>
   </data>
   <data name="rbVideoCopy.TabIndex" type="System.Int32, mscorlib">
     <value>300</value>
@@ -208,10 +208,10 @@
     <value>True</value>
   </data>
   <data name="rbVideoH265.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 39</value>
+    <value>6, 42</value>
   </data>
   <data name="rbVideoH265.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 16</value>
+    <value>94, 19</value>
   </data>
   <data name="rbVideoH265.TabIndex" type="System.Int32, mscorlib">
     <value>400</value>
@@ -232,10 +232,10 @@
     <value>3</value>
   </data>
   <data name="groupVideoCodec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 36</value>
+    <value>13, 39</value>
   </data>
   <data name="groupVideoCodec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 82</value>
+    <value>298, 89</value>
   </data>
   <data name="groupVideoCodec.TabIndex" type="System.Int32, mscorlib">
     <value>200</value>
@@ -262,10 +262,10 @@
     <value>True</value>
   </data>
   <data name="rbAudioOpus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 60</value>
+    <value>6, 65</value>
   </data>
   <data name="rbAudioOpus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 16</value>
+    <value>52, 19</value>
   </data>
   <data name="rbAudioOpus.TabIndex" type="System.Int32, mscorlib">
     <value>1000</value>
@@ -289,10 +289,10 @@
     <value>True</value>
   </data>
   <data name="rbAudioAac.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 39</value>
+    <value>6, 42</value>
   </data>
   <data name="rbAudioAac.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 16</value>
+    <value>45, 19</value>
   </data>
   <data name="rbAudioAac.TabIndex" type="System.Int32, mscorlib">
     <value>900</value>
@@ -316,10 +316,10 @@
     <value>True</value>
   </data>
   <data name="rbAudioCopy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
+    <value>6, 20</value>
   </data>
   <data name="rbAudioCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 16</value>
+    <value>52, 19</value>
   </data>
   <data name="rbAudioCopy.TabIndex" type="System.Int32, mscorlib">
     <value>800</value>
@@ -340,10 +340,10 @@
     <value>2</value>
   </data>
   <data name="groupAudioCodec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>320, 36</value>
+    <value>320, 39</value>
   </data>
   <data name="groupAudioCodec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 82</value>
+    <value>298, 89</value>
   </data>
   <data name="groupAudioCodec.TabIndex" type="System.Int32, mscorlib">
     <value>700</value>
@@ -367,10 +367,10 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>462, 464</value>
+    <value>462, 503</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 21</value>
+    <value>75, 23</value>
   </data>
   <data name="btnOK.TabIndex" type="System.Int32, mscorlib">
     <value>10000</value>
@@ -394,10 +394,10 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>543, 464</value>
+    <value>543, 503</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 21</value>
+    <value>75, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>20000</value>
@@ -421,10 +421,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="cmbEncodeType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 11</value>
+    <value>12, 12</value>
   </data>
   <data name="cmbEncodeType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>606, 20</value>
+    <value>606, 23</value>
   </data>
   <data name="cmbEncodeType.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
@@ -448,10 +448,10 @@
     <value>Top, Right</value>
   </data>
   <data name="btnBrowseOtherDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>572, 54</value>
+    <value>572, 59</value>
   </data>
   <data name="btnBrowseOtherDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 18</value>
+    <value>28, 20</value>
   </data>
   <data name="btnBrowseOtherDirectory.TabIndex" type="System.Int32, mscorlib">
     <value>1500</value>
@@ -475,10 +475,10 @@
     <value>True</value>
   </data>
   <data name="lblOtherDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 39</value>
+    <value>6, 42</value>
   </data>
   <data name="lblOtherDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 12</value>
+    <value>103, 15</value>
   </data>
   <data name="lblOtherDirectory.TabIndex" type="System.Int32, mscorlib">
     <value>1300</value>
@@ -502,10 +502,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="txtOtherDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 54</value>
+    <value>6, 59</value>
   </data>
   <data name="txtOtherDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>560, 19</value>
+    <value>560, 23</value>
   </data>
   <data name="txtOtherDirectory.TabIndex" type="System.Int32, mscorlib">
     <value>1400</value>
@@ -526,10 +526,10 @@
     <value>True</value>
   </data>
   <data name="chkSameDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
+    <value>6, 20</value>
   </data>
   <data name="chkSameDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 16</value>
+    <value>200, 19</value>
   </data>
   <data name="chkSameDirectory.TabIndex" type="System.Int32, mscorlib">
     <value>1200</value>
@@ -550,10 +550,10 @@
     <value>3</value>
   </data>
   <data name="groupTargetDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 124</value>
+    <value>12, 134</value>
   </data>
   <data name="groupTargetDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>606, 92</value>
+    <value>606, 100</value>
   </data>
   <data name="groupTargetDirectory.TabIndex" type="System.Int32, mscorlib">
     <value>1100</value>
@@ -577,10 +577,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="txtResultFilename.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 73</value>
+    <value>6, 79</value>
   </data>
   <data name="txtResultFilename.Size" type="System.Drawing.Size, System.Drawing">
-    <value>560, 19</value>
+    <value>560, 23</value>
   </data>
   <data name="txtResultFilename.TabIndex" type="System.Int32, mscorlib">
     <value>1775</value>
@@ -598,10 +598,10 @@
     <value>0</value>
   </data>
   <data name="btnFilenameMacroMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>572, 33</value>
+    <value>572, 36</value>
   </data>
   <data name="btnFilenameMacroMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 21</value>
+    <value>28, 23</value>
   </data>
   <data name="btnFilenameMacroMenu.TabIndex" type="System.Int32, mscorlib">
     <value>1701</value>
@@ -631,10 +631,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblFilenameResult.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 57</value>
+    <value>3, 62</value>
   </data>
   <data name="lblFilenameResult.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 12</value>
+    <value>98, 15</value>
   </data>
   <data name="lblFilenameResult.TabIndex" type="System.Int32, mscorlib">
     <value>1750</value>
@@ -664,10 +664,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblBeforeFilename.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 20</value>
+    <value>4, 22</value>
   </data>
   <data name="lblBeforeFilename.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 12</value>
+    <value>65, 15</value>
   </data>
   <data name="lblBeforeFilename.TabIndex" type="System.Int32, mscorlib">
     <value>1650</value>
@@ -691,10 +691,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="cmbFilenameMacro.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 35</value>
+    <value>6, 38</value>
   </data>
   <data name="cmbFilenameMacro.Size" type="System.Drawing.Size, System.Drawing">
-    <value>560, 20</value>
+    <value>560, 23</value>
   </data>
   <data name="cmbFilenameMacro.TabIndex" type="System.Int32, mscorlib">
     <value>1700</value>
@@ -712,10 +712,10 @@
     <value>4</value>
   </data>
   <data name="groupFilename.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 221</value>
+    <value>12, 239</value>
   </data>
   <data name="groupFilename.Size" type="System.Drawing.Size, System.Drawing">
-    <value>606, 106</value>
+    <value>606, 115</value>
   </data>
   <data name="groupFilename.TabIndex" type="System.Int32, mscorlib">
     <value>1600</value>
@@ -739,10 +739,10 @@
     <value>True</value>
   </data>
   <data name="chkFileByFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 332</value>
+    <value>12, 360</value>
   </data>
   <data name="chkFileByFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 16</value>
+    <value>133, 19</value>
   </data>
   <data name="chkFileByFile.TabIndex" type="System.Int32, mscorlib">
     <value>1800</value>
@@ -769,10 +769,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="cmbAdditionalOptionsAfterInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 70</value>
+    <value>7, 76</value>
   </data>
   <data name="cmbAdditionalOptionsAfterInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>593, 20</value>
+    <value>593, 23</value>
   </data>
   <data name="cmbAdditionalOptionsAfterInput.TabIndex" type="System.Int32, mscorlib">
     <value>2300</value>
@@ -793,10 +793,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="cmbAdditionalOptionsBeforeInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 33</value>
+    <value>7, 36</value>
   </data>
   <data name="cmbAdditionalOptionsBeforeInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>591, 20</value>
+    <value>591, 23</value>
   </data>
   <data name="cmbAdditionalOptionsBeforeInput.TabIndex" type="System.Int32, mscorlib">
     <value>2100</value>
@@ -823,10 +823,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblAdditonalOptionAfterInput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 55</value>
+    <value>3, 60</value>
   </data>
   <data name="lblAdditonalOptionAfterInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 12</value>
+    <value>116, 15</value>
   </data>
   <data name="lblAdditonalOptionAfterInput.TabIndex" type="System.Int32, mscorlib">
     <value>2200</value>
@@ -853,10 +853,10 @@
     <value>True</value>
   </data>
   <data name="lblBeforeInputFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 18</value>
+    <value>4, 20</value>
   </data>
   <data name="lblBeforeInputFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 12</value>
+    <value>125, 15</value>
   </data>
   <data name="lblBeforeInputFile.TabIndex" type="System.Int32, mscorlib">
     <value>2000</value>
@@ -877,10 +877,10 @@
     <value>3</value>
   </data>
   <data name="groupAdditionalOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 354</value>
+    <value>12, 384</value>
   </data>
   <data name="groupAdditionalOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>606, 101</value>
+    <value>606, 109</value>
   </data>
   <data name="groupAdditionalOptions.TabIndex" type="System.Int32, mscorlib">
     <value>1900</value>
@@ -904,31 +904,31 @@
     <value>17, 17</value>
   </metadata>
   <data name="basenameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 22</value>
+    <value>199, 22</value>
   </data>
   <data name="basenameToolStripMenuItem.Text" xml:space="preserve">
     <value>${basename} : </value>
   </data>
   <data name="basenamewithoutextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 22</value>
+    <value>199, 22</value>
   </data>
   <data name="basenamewithoutextToolStripMenuItem.Text" xml:space="preserve">
     <value>${basenamewithoutext}</value>
   </data>
   <data name="targetextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 22</value>
+    <value>199, 22</value>
   </data>
   <data name="targetextToolStripMenuItem.Text" xml:space="preserve">
     <value>${targetext}</value>
   </data>
   <data name="originalextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 22</value>
+    <value>199, 22</value>
   </data>
   <data name="originalextToolStripMenuItem.Text" xml:space="preserve">
     <value>${originalext}</value>
   </data>
   <data name="cmFilenameMacro.Size" type="System.Drawing.Size, System.Drawing">
-    <value>219, 92</value>
+    <value>200, 92</value>
   </data>
   <data name="&gt;&gt;cmFilenameMacro.Name" xml:space="preserve">
     <value>cmFilenameMacro</value>
@@ -940,13 +940,16 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 12</value>
+    <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>630, 493</value>
+    <value>630, 534</value>
+  </data>
+  <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Meiryo UI, 9pt</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>646, 531</value>
+    <value>646, 572</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

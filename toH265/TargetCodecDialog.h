@@ -567,7 +567,7 @@ private:
 				// 
 				this->AcceptButton = this->btnOK;
 				resources->ApplyResources(this, L"$this");
-				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 				this->CancelButton = this->btnCancel;
 				this->Controls->Add(this->groupAdditionalOptions);
 				this->Controls->Add(this->chkFileByFile);
