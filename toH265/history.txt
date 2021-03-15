@@ -1,3 +1,6 @@
+2021/03/15 ver1.0.78
+Fix: Control properties
+
 2021/03/15 ver1.0.77
 Fix: Size of the windows of error output
 

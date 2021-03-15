@@ -123,15 +123,18 @@
   <data name="groupAudioCodec.Text" xml:space="preserve">
     <value>音声コーデック</value>
   </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>キャンセル(&amp;C)</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblOtherDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 13</value>
+    <value>83, 15</value>
   </data>
   <data name="lblOtherDirectory.Text" xml:space="preserve">
     <value>他のフォルダ(&amp;O)</value>
   </data>
   <data name="chkSameDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 17</value>
+    <value>164, 19</value>
   </data>
   <data name="chkSameDirectory.Text" xml:space="preserve">
     <value>元のファイルと同じフォルダ(&amp;S)</value>
@@ -140,7 +143,7 @@
     <value>出力フォルダ</value>
   </data>
   <data name="lblBeforeFilename.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
+    <value>75, 15</value>
   </data>
   <data name="lblBeforeFilename.Text" xml:space="preserve">
     <value>ファイル名(&amp;F):</value>
@@ -149,19 +152,19 @@
     <value>ファイル名</value>
   </data>
   <data name="chkFileByFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 17</value>
+    <value>148, 19</value>
   </data>
   <data name="chkFileByFile.Text" xml:space="preserve">
     <value>ファイルごとにエンコード(&amp;B)</value>
   </data>
   <data name="lblAdditonalOptionAfterInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 13</value>
+    <value>153, 15</value>
   </data>
   <data name="lblAdditonalOptionAfterInput.Text" xml:space="preserve">
     <value>入力ファイルオプションの後(&amp;A):</value>
   </data>
   <data name="lblBeforeInputFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 13</value>
+    <value>153, 15</value>
   </data>
   <data name="lblBeforeInputFile.Text" xml:space="preserve">
     <value>入力ファイルオプションの前(&amp;B):</value>
