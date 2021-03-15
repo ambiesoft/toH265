@@ -32,11 +32,26 @@ namespace Ambiesoft {
 			//	AW_HIDE| AW_SLIDE);
 			notifyIconMain->Visible = true;
 		}
-		System::Void FormMain::FormMain_Resize(System::Object^ sender, System::EventArgs^ e)
+		System::Void FormMain::FormMain_Resize(System::Object^ sender, System::EventArgs^)
 		{
 			if (tsmiMinimizeToTray->Checked && this->WindowState == FormWindowState::Minimized)
 			{
 				IconizeToTray();
+			}
+
+			if (this->WindowState == FormWindowState::Normal)
+			{
+				System::Drawing::Point topLeft = lblTopLeft->Location;
+				System::Drawing::Size size(
+					// lblBottomRight->Location.X + lblBottomRight->Size.Width - lblTopLeft->Location.X,
+					txtFFMpegArg->Size.Width,
+					lblBottomRight->Location.Y + lblBottomRight->Size.Height - lblTopLeft->Location.Y
+				);
+				DASSERT(size.Width > 0);
+				DASSERT(size.Height > 0);
+
+				txtLogErr->Location = topLeft;
+				txtLogErr->Size = size;
 			}
 		}
 		System::Void FormMain::notifyIconMain_MouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)

@@ -1,3 +1,6 @@
+2021/03/15 ver1.0.77
+Fix: Size of the windows of error output
+
 2021/02/16 ver1.0.76
 HighDPI Form
 

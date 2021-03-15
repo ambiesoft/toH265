@@ -18,6 +18,8 @@ namespace Ambiesoft {
             this->tsmiShowOutputFileInExplorer = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->toolStripMenuItem8 = (gcnew System::Windows::Forms::ToolStripSeparator());
             this->tsmiRemoveFromList = (gcnew System::Windows::Forms::ToolStripMenuItem());
+            this->lblBottomRight = (gcnew System::Windows::Forms::Label());
+            this->lblTopLeft = (gcnew System::Windows::Forms::Label());
             this->txtFFMpegArg = (gcnew System::Windows::Forms::TextBox());
             this->btnStart = (gcnew System::Windows::Forms::Button());
             this->txtLogErr = (gcnew System::Windows::Forms::TextBox());
@@ -101,6 +103,8 @@ namespace Ambiesoft {
             // 
             // splitRoot.Panel2
             // 
+            this->splitRoot->Panel2->Controls->Add(this->lblBottomRight);
+            this->splitRoot->Panel2->Controls->Add(this->lblTopLeft);
             this->splitRoot->Panel2->Controls->Add(this->txtFFMpegArg);
             this->splitRoot->Panel2->Controls->Add(this->btnStart);
             this->splitRoot->Panel2->Controls->Add(this->txtLogErr);
@@ -151,6 +155,16 @@ namespace Ambiesoft {
             this->tsmiRemoveFromList->Name = L"tsmiRemoveFromList";
             resources->ApplyResources(this->tsmiRemoveFromList, L"tsmiRemoveFromList");
             this->tsmiRemoveFromList->Click += gcnew System::EventHandler(this, &FormMain::tsmiRemoveFromList_Click);
+            // 
+            // lblBottomRight
+            // 
+            resources->ApplyResources(this->lblBottomRight, L"lblBottomRight");
+            this->lblBottomRight->Name = L"lblBottomRight";
+            // 
+            // lblTopLeft
+            // 
+            resources->ApplyResources(this->lblTopLeft, L"lblTopLeft");
+            this->lblTopLeft->Name = L"lblTopLeft";
             // 
             // txtFFMpegArg
             // 

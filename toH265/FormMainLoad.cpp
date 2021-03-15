@@ -24,6 +24,12 @@ namespace Ambiesoft {
 
 			for each (String ^ file in Program::CmdMovieFiles)
 				CheckMovieAndSet(file, true, true);
+
+			lblTopLeft->Visible = false;
+			lblBottomRight->Visible = false;
+
+			FormMain_Resize(this, nullptr);
 		}
+
 	}
 }

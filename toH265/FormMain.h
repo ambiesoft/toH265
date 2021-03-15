@@ -141,7 +141,9 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiEdit;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiClearCompletedItems;
 		private: System::Windows::Forms::ImageList^ ilList;
-			   
+private: System::Windows::Forms::Label^ lblBottomRight;
+private: System::Windows::Forms::Label^ lblTopLeft;
+
 			EncodeTask^ encodeTask_;
 			property bool IsTaskActive
 			{
@@ -640,9 +642,6 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 
 			System::Void tsmiEdit_DropDownOpening(System::Object^ sender, System::EventArgs^ e);
 			System::Void cmList_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e);
-
-			
-
 };
 
 
