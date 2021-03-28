@@ -1,3 +1,6 @@
+2021/03/29 ver1.0.79
+Add Column 'Last Modified'
+
 2021/03/15 ver1.0.78
 Fix: Control properties
 

@@ -333,4 +333,7 @@
   <data name="System Shutdown is enabled after the task finished. Do you want to keep it enabled?" xml:space="preserve">
     <value>タスク完了後のシャットダウンが有効になっています。このまま有効にしますか？</value>
   </data>
+  <data name="Last Modified" xml:space="preserve">
+    <value>更新日時</value>
+  </data>
 </root>

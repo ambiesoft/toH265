@@ -201,6 +201,14 @@ namespace Ambiesoft {
 			lvi->SubItems["fps"]->Text = Ambiesoft::toH265Helper::FormatFPS(fps);
 			lvi->SubItems["fps"]->Tag = fps;
 
+			try
+			{
+				DateTime dt = File::GetLastWriteTime(movieFile);
+				lvi->SubItems["lastmodified"]->Text = dt.ToString();
+				lvi->SubItems["lastmodified"]->Tag = dt;
+			}
+			catch(Exception^){}
+
 			lvi->ImageKey = IMAGEKEY_NORMAL;
 
 			lvInputs->Items->Add(lvi);

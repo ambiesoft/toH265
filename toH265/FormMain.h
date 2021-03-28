@@ -43,6 +43,7 @@ namespace Ambiesoft {
 					SORT_LONGLONG,
 					SORT_SIZE,
 					SORT_DOUBLE,
+					SORT_DATE,
 				};
 			private:
 				String^ key_;
@@ -109,6 +110,15 @@ namespace Ambiesoft {
 						System::Drawing::Size^ s2 = (System::Drawing::Size^)y->Tag;
 						return (s1->Width * s1->Height) - (s2->Width * s2->Height);
 					}
+					case SORTTYPE::SORT_DATE:
+					{
+						DateTime dt1 = (DateTime)x->Tag;
+						DateTime dt2 = (DateTime)y->Tag;
+						TimeSpan span = dt1 - dt2;
+						double diff = span.TotalMilliseconds;
+						return diff == 0 ? 0 :
+							(diff < 0 ? -1 : 1);
+					}
 					default:
 						DASSERT(false);
 					}
@@ -127,6 +137,7 @@ namespace Ambiesoft {
 					gcnew ColumnItem{ "acodec", I18N("Audio"),50,ColumnItem::SORTTYPE::SORT_ISTRING },
 					gcnew ColumnItem{ "duration", I18N("Duration") ,50,ColumnItem::SORTTYPE::SORT_DOUBLE },
 					gcnew ColumnItem{ "fps", I18N("FPS") ,50,ColumnItem::SORTTYPE::SORT_DOUBLE },
+					gcnew ColumnItem{ "lastmodified", I18N("Last Modified") ,50,ColumnItem::SORTTYPE::SORT_DATE },
 			};
 
 			CpuAffinity cpuAffinity_;
