@@ -257,7 +257,7 @@ namespace Ambiesoft {
 			macros->Add("inputext", Path::GetExtension(inputmovie));
 			macros->Add("basename", basename);
 			macros->Add("targetext", GetTargetExt(false));
-			macros->Add("basenamewithoutexe", Path::GetFileNameWithoutExtension(basename));
+			macros->Add("basenamewithoutext", Path::GetFileNameWithoutExtension(basename));
 			macros->Add("parentdirname", Path::GetFileName(Path::GetDirectoryName(inputmovie)));
 			macros->Add("parentdirectory", Path::GetDirectoryName(inputmovie));
 
