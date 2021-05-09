@@ -142,6 +142,12 @@
   <data name="groupTargetDirectory.Text" xml:space="preserve">
     <value>出力フォルダ</value>
   </data>
+  <data name="lblFilenameResult.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 15</value>
+  </data>
+  <data name="lblFilenameResult.Text" xml:space="preserve">
+    <value>&amp;結果のファイル名(&amp;R):</value>
+  </data>
   <data name="lblBeforeFilename.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 15</value>
   </data>

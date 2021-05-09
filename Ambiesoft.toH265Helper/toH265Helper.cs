@@ -10,6 +10,9 @@ namespace Ambiesoft
     {
         public static string GetCommonFilename(string[] all)
         {
+            if (all.Length == 0)
+                return null;
+            string ext = Path.GetExtension(all[0]);
             string outfilename = null;
             foreach (string file in all)
             {
@@ -34,7 +37,7 @@ namespace Ambiesoft
                     outfilename = outfilename.Substring(0, isame);
                 }
             }
-            return outfilename;
+            return outfilename == null ? null : outfilename + ext;
         }
 
         public static string human_format(string format)
