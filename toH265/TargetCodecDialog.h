@@ -536,32 +536,32 @@ private:
 				// 
 				// cmFilenameMacro
 				// 
-				resources->ApplyResources(this->cmFilenameMacro, L"cmFilenameMacro");
 				this->cmFilenameMacro->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
 					this->basenameToolStripMenuItem,
 						this->basenamewithoutextToolStripMenuItem, this->targetextToolStripMenuItem, this->originalextToolStripMenuItem
 				});
 				this->cmFilenameMacro->Name = L"cmFilenameMacro";
+				resources->ApplyResources(this->cmFilenameMacro, L"cmFilenameMacro");
 				// 
 				// basenameToolStripMenuItem
 				// 
-				resources->ApplyResources(this->basenameToolStripMenuItem, L"basenameToolStripMenuItem");
 				this->basenameToolStripMenuItem->Name = L"basenameToolStripMenuItem";
+				resources->ApplyResources(this->basenameToolStripMenuItem, L"basenameToolStripMenuItem");
 				// 
 				// basenamewithoutextToolStripMenuItem
 				// 
-				resources->ApplyResources(this->basenamewithoutextToolStripMenuItem, L"basenamewithoutextToolStripMenuItem");
 				this->basenamewithoutextToolStripMenuItem->Name = L"basenamewithoutextToolStripMenuItem";
+				resources->ApplyResources(this->basenamewithoutextToolStripMenuItem, L"basenamewithoutextToolStripMenuItem");
 				// 
 				// targetextToolStripMenuItem
 				// 
-				resources->ApplyResources(this->targetextToolStripMenuItem, L"targetextToolStripMenuItem");
 				this->targetextToolStripMenuItem->Name = L"targetextToolStripMenuItem";
+				resources->ApplyResources(this->targetextToolStripMenuItem, L"targetextToolStripMenuItem");
 				// 
 				// originalextToolStripMenuItem
 				// 
-				resources->ApplyResources(this->originalextToolStripMenuItem, L"originalextToolStripMenuItem");
 				this->originalextToolStripMenuItem->Name = L"originalextToolStripMenuItem";
+				resources->ApplyResources(this->originalextToolStripMenuItem, L"originalextToolStripMenuItem");
 				// 
 				// TargetCodecDialog
 				// 
@@ -572,10 +572,10 @@ private:
 				this->Controls->Add(this->groupAdditionalOptions);
 				this->Controls->Add(this->chkFileByFile);
 				this->Controls->Add(this->groupFilename);
+				this->Controls->Add(this->btnOK);
 				this->Controls->Add(this->groupTargetDirectory);
 				this->Controls->Add(this->cmbEncodeType);
 				this->Controls->Add(this->btnCancel);
-				this->Controls->Add(this->btnOK);
 				this->Controls->Add(this->groupAudioCodec);
 				this->Controls->Add(this->groupVideoCodec);
 				this->MaximizeBox = false;
