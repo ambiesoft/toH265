@@ -572,12 +572,12 @@ namespace Ambiesoft {
 					String^ fullName = String::Empty;
 					try
 					{
-						
 						MacroManager^ mm = gcnew MacroManager(GetMacros(
 							InputMovies[i],
 							baseFileName));
 
-						String^ deployedFilename = mm->Deploy(cmbFilenameMacro->Text);
+						mm->InputString = cmbFilenameMacro->Text;
+						String^ deployedFilename = mm->ResultString;
 						if (String::IsNullOrEmpty(deployedFilename))
 						{
 							CppUtils::Alert(I18N(L"Filename is empty"));
