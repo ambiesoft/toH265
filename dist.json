@@ -29,6 +29,8 @@
 		"ja-JP\\Ambiesoft.AfterRunLib.resources.dll",
 		"Ambiesoft.AfterRunLib.pdb",
 		"Ambiesoft.AfterRunLib.dll",
+		"FlexibleMessageBox.dll",
+		"FlexibleMessageBox.pdb",
         "Copying.txt",
         "history.txt",
         "Newtonsoft.Json.dll",
