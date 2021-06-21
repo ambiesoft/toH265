@@ -183,6 +183,9 @@
     <Reference Include="Ambiesoft.Profile">
       <HintPath>C:\Linkout\DNAssembly.NET4\Ambiesoft.Profile.dll</HintPath>
     </Reference>
+    <Reference Include="FlexibleMessageBox">
+      <HintPath>..\..\..\..\..\..\..\Linkout\DNAssembly.NET4\FlexibleMessageBox.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>C:\Linkout\DNAssembly.NET4\Newtonsoft.Json.dll</HintPath>
     </Reference>
