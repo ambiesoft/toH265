@@ -16,6 +16,9 @@
     <Filter Include="4 Dist">
       <UniqueIdentifier>{f84315d1-1d34-487d-a75e-b09fa564c807}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2 Source Files\lsMisc">
+      <UniqueIdentifier>{160feced-da90-4073-9538-7bc3eaeba918}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -37,9 +40,6 @@
       <Filter>2 Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FormMainClose.cpp">
-      <Filter>2 Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lsMisc\HighDPI.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FormMainCtor.cpp">
@@ -78,15 +78,6 @@
     <ClCompile Include="AVDuration.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\lsMisc\IsFileOpen.cpp">
-      <Filter>2 Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lsMisc\getStdString.net.cpp">
-      <Filter>2 Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\lsMisc\OpenCommon.cpp">
-      <Filter>2 Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FormMainMisc.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
@@ -116,6 +107,18 @@
     </ClCompile>
     <ClCompile Include="ListViewItemData.cpp">
       <Filter>2 Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\OpenCommon.cpp">
+      <Filter>2 Source Files\lsMisc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\HighDPI.cpp">
+      <Filter>2 Source Files\lsMisc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\IsFileOpen.cpp">
+      <Filter>2 Source Files\lsMisc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\getStdString.net.cpp">
+      <Filter>2 Source Files\lsMisc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
