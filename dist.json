@@ -57,8 +57,8 @@
     ],
     "TotalFileCount": "exact",
     "archivedir": "C:\\Linkout",
-    "remotedir": "http://ambiesoft.mooo.com/ffdav/uploads/toH265/",
-    "remotesha1": "http://ambiesoft.mooo.com/ffdav/uploads/getSha1.php?file=toH265/{}",
+    "remotedir": "https://ambiesoft.com/ffdav/uploads/toH265/",
+    "remotesha1": "https://ambiesoft.com/ffdav/uploads/getSha1.php?file=toH265/{}",
     "ShouldNotBeFiles": [
     	"32\\toH265.ini",
     	"64\\toH265.ini"
