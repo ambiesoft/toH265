@@ -32,6 +32,20 @@ namespace Ambiesoft {
 			//	AW_HIDE| AW_SLIDE);
 			notifyIconMain->Visible = true;
 		}
+
+		void FormMain::resetLogErrorSize()
+		{
+			System::Drawing::Point topLeft = lblTopLeft->Location;
+			System::Drawing::Size size(
+				txtFFMpegArg->Size.Width,
+				lblBottomRight->Location.Y + lblBottomRight->Size.Height - lblTopLeft->Location.Y
+			);
+			DASSERT(size.Width > 0);
+			DASSERT(size.Height > 0);
+
+			txtLogErr->Location = topLeft;
+			txtLogErr->Size = size;
+		}
 		System::Void FormMain::FormMain_Resize(System::Object^ sender, System::EventArgs^)
 		{
 			if (tsmiMinimizeToTray->Checked && this->WindowState == FormWindowState::Minimized)
@@ -41,18 +55,12 @@ namespace Ambiesoft {
 
 			if (this->WindowState == FormWindowState::Normal)
 			{
-				System::Drawing::Point topLeft = lblTopLeft->Location;
-				System::Drawing::Size size(
-					// lblBottomRight->Location.X + lblBottomRight->Size.Width - lblTopLeft->Location.X,
-					txtFFMpegArg->Size.Width,
-					lblBottomRight->Location.Y + lblBottomRight->Size.Height - lblTopLeft->Location.Y
-				);
-				DASSERT(size.Width > 0);
-				DASSERT(size.Height > 0);
-
-				txtLogErr->Location = topLeft;
-				txtLogErr->Size = size;
+				resetLogErrorSize();
 			}
+		}
+		System::Void FormMain::splitRoot_SplitterMoved(System::Object^ sender, System::Windows::Forms::SplitterEventArgs^ e)
+		{
+			resetLogErrorSize();
 		}
 		System::Void FormMain::notifyIconMain_MouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 		{

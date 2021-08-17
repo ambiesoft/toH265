@@ -109,6 +109,7 @@ namespace Ambiesoft {
             this->splitRoot->Panel2->Controls->Add(this->btnStart);
             this->splitRoot->Panel2->Controls->Add(this->txtLogErr);
             this->splitRoot->Panel2->Controls->Add(this->txtLogOut);
+            this->splitRoot->SplitterMoved += gcnew System::Windows::Forms::SplitterEventHandler(this, &FormMain::splitRoot_SplitterMoved);
             // 
             // btnBrowseMovie
             // 

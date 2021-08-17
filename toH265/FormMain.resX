@@ -460,13 +460,13 @@
     <value>&amp;File</value>
   </data>
   <data name="tsmiClearCompletedItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>195, 22</value>
   </data>
   <data name="tsmiClearCompletedItems.Text" xml:space="preserve">
     <value>&amp;Clear Completed Items</value>
   </data>
   <data name="tsmiClearAllItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
+    <value>195, 22</value>
   </data>
   <data name="tsmiClearAllItems.Text" xml:space="preserve">
     <value>Clear &amp;All Items</value>
@@ -505,19 +505,19 @@
     <value>172, 6</value>
   </data>
   <data name="tsmiPriorityNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
+    <value>149, 22</value>
   </data>
   <data name="tsmiPriorityNormal.Text" xml:space="preserve">
     <value>&amp;Normal</value>
   </data>
   <data name="tsmiPriorityBelowNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
+    <value>149, 22</value>
   </data>
   <data name="tsmiPriorityBelowNormal.Text" xml:space="preserve">
     <value>B&amp;elow Normal</value>
   </data>
   <data name="tsmiPriorityBackground.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 22</value>
+    <value>149, 22</value>
   </data>
   <data name="tsmiPriorityBackground.Text" xml:space="preserve">
     <value>&amp;Background</value>
@@ -529,31 +529,31 @@
     <value>&amp;Priority</value>
   </data>
   <data name="tsmiCPUAffinityEnable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="tsmiCPUAffinityEnable.Text" xml:space="preserve">
     <value>&amp;Enable</value>
   </data>
   <data name="tsmsCpuAffinityBegin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 6</value>
+    <value>145, 6</value>
   </data>
   <data name="tsmsCpuAffinityEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 6</value>
+    <value>145, 6</value>
   </data>
   <data name="tsmiEnableAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="tsmiEnableAll.Text" xml:space="preserve">
     <value>Enable &amp;All</value>
   </data>
   <data name="tsmiToggleAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="tsmiToggleAll.Text" xml:space="preserve">
     <value>&amp;Toggle All</value>
   </data>
   <data name="tsmiClearAllButZero.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="tsmiClearAllButZero.Text" xml:space="preserve">
     <value>&amp;Clear All But 0</value>
@@ -2666,19 +2666,19 @@
     <value>361, 17</value>
   </metadata>
   <data name="slMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>450, 17</value>
+    <value>448, 17</value>
   </data>
   <data name="slMain.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
   <data name="slItemCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 17</value>
+    <value>45, 17</value>
   </data>
   <data name="slItemCount.Text" xml:space="preserve">
     <value>0 items</value>
   </data>
   <data name="slFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 17</value>
+    <value>43, 17</value>
   </data>
   <data name="slFormat.Text" xml:space="preserve">
     <value>format</value>
@@ -2730,7 +2730,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA8
-        CAAAAk1TRnQBSQFMAgEBAwEAAWwBAAFsAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAAXQBAAF0AQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA

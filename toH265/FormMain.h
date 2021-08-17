@@ -576,6 +576,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			System::Void btnStart_Click(System::Object^ sender, System::EventArgs^ e);
 			void outputHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
 			void errHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
+			void resetLogErrorSize();
 
 			System::Void FormMain_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
 			System::Void FormMain_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e);
@@ -653,6 +654,8 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 
 			System::Void tsmiEdit_DropDownOpening(System::Object^ sender, System::EventArgs^ e);
 			System::Void cmList_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e);
+			System::Void splitRoot_SplitterMoved(System::Object^ sender, System::Windows::Forms::SplitterEventArgs^ e);
+
 };
 
 
