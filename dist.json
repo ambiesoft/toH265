@@ -23,7 +23,7 @@
 	    	"../lsMisc",
 	    	"../distSolution"
 	    ],
-    	"outheader": "wcfind/gitrev.h",
+    	"outheader": "toH265/gitrev.h",
     	"char": "wchar"
     },    
     "ShouldBeFiles": [
