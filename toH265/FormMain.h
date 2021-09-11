@@ -576,7 +576,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			System::Void btnStart_Click(System::Object^ sender, System::EventArgs^ e);
 			void outputHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
 			void errHandler(Object^ sender, System::Diagnostics::DataReceivedEventArgs^ e);
-			void resetLogErrorSize();
+			void resetControlSize();
 
 			System::Void FormMain_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
 			System::Void FormMain_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e);

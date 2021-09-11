@@ -33,7 +33,7 @@ namespace Ambiesoft {
 			notifyIconMain->Visible = true;
 		}
 
-		void FormMain::resetLogErrorSize()
+		void FormMain::resetControlSize()
 		{
 			System::Drawing::Point topLeft = lblTopLeft->Location;
 			System::Drawing::Size size(
@@ -53,14 +53,15 @@ namespace Ambiesoft {
 				IconizeToTray();
 			}
 
-			if (this->WindowState == FormWindowState::Normal)
+			if (this->WindowState == FormWindowState::Normal ||
+				this->WindowState == FormWindowState::Maximized)
 			{
-				resetLogErrorSize();
+				resetControlSize();
 			}
 		}
 		System::Void FormMain::splitRoot_SplitterMoved(System::Object^ sender, System::Windows::Forms::SplitterEventArgs^ e)
 		{
-			resetLogErrorSize();
+			resetControlSize();
 		}
 		System::Void FormMain::notifyIconMain_MouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 		{
