@@ -2,7 +2,7 @@
 
 #include "toH265.h"
 #include "helper.h"
-
+#include "gitrev.h"
 #include "FormMain.h"
 
 
@@ -36,6 +36,12 @@ namespace Ambiesoft {
 			sbMessage.AppendFormat(I18N(L"ElapseTimeQueueLength:{0}"), elapses_.Size);
 			sbMessage.AppendLine();
 			sbMessage.AppendFormat("Is64BitProcess:{0}", Environment::Is64BitProcess);
+			sbMessage.AppendLine();
+
+			sbMessage.AppendLine();
+			sbMessage.AppendLine(L"Gitrev:");
+			sbMessage.Append((gcnew String(GITREV::GetHashMessage().c_str()))->Replace(L"\n", L"\r\n"));
+
 			CppUtils::Info(this, sbMessage.ToString());
 		}
 

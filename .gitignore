@@ -12,3 +12,5 @@ packages/
 *.user
 *.aps
 
+toH265/gitrev.h
+

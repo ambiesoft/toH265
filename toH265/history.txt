@@ -1,5 +1,6 @@
 2021/09/12 ver1.0.86
 Reset control size when Top form maximized
+Add Gitrev
 
 2021/08/17 ver1.0.85
 Reset the size of Log windows when the devider moves

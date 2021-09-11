@@ -285,6 +285,7 @@
     <ClInclude Include="FormMain.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="gitrev.h" />
     <ClInclude Include="helper.h" />
     <ClInclude Include="InputListView.h" />
     <ClInclude Include="ListViewItemData.h" />

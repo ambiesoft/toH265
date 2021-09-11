@@ -185,6 +185,9 @@
     <ClInclude Include="ListViewItemData.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gitrev.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico">
