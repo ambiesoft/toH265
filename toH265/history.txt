@@ -1,3 +1,6 @@
+2021/09/24 ver1.0.87
+position of Form and diveder will not saved when maximized
+
 2021/09/12 ver1.0.86
 Reset control size when Top form maximized
 Add Gitrev

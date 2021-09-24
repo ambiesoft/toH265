@@ -22,7 +22,7 @@ namespace Ambiesoft {
 		{
 			StringBuilder sbMessage;
 			sbMessage.Append(Application::ProductName);
-			sbMessage.Append(" ver");
+			sbMessage.Append(" v");
 			sbMessage.AppendLine(AmbLib::getAssemblyVersion(System::Reflection::Assembly::GetExecutingAssembly(), 3));
 
 			sbMessage.AppendLine();
