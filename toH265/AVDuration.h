@@ -14,9 +14,8 @@ namespace Ambiesoft {
 			AVDuration(double d):ts_(TimeSpan::FromMilliseconds(d))
 			{}
 
-			virtual String^ ToString() override {
-				return ts_->ToString("hh\\:mm\\:ss");
-			}
+			virtual String^ ToString() override;
+
 			// With this, status not updated becase set not called
 			//void Clear() {
 			//	ts_ = gcnew TimeSpan();
