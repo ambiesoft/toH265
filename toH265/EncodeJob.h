@@ -24,6 +24,7 @@ namespace Ambiesoft {
 			String^ AdditionalOptionsAfterInput;
 
 			array<String^>^ inputMovies_;
+			array<String^>^ endedinputMovies_;
 			array<System::Windows::Forms::ListViewItem^>^ items_;
 			bool IsSameSize;
 			System::Drawing::Size MaxSize;
@@ -35,12 +36,48 @@ namespace Ambiesoft {
 			AVCodec^ outputVideoCodec_ = gcnew AVCodec();
 			AVCodec^ outputAudioCodec_ = gcnew AVCodec();
 
+			bool bMoveFinishedInputMovies_;
+
 			void CreateTempFile();
 			void DeleteTempFile();
+
+			void PrintInputFilesCommon(System::Text::StringBuilder^ sb, bool ended) {
+				sb->AppendLine(I18N(L"Input Files:"));
+				array<String^>^ targets = ended && endedinputMovies_ ?
+					endedinputMovies_ : inputMovies_;
+				for each (String ^ file in targets)
+				{
+					sb->Append(L"  ");
+					sb->AppendLine(file);
+				}
+			}
 		public:
 			property array<String^>^ InputMovies
 			{
-				array<String^>^ get() { return inputMovies_; }
+				array<String^>^ get()
+				{
+					return inputMovies_;
+				}
+			}
+			property array<String^>^ EndedInputMovies
+			{
+				array<String^>^ get()
+				{
+					if (endedinputMovies_)
+					{
+						DASSERT(endedinputMovies_->Length == inputMovies_->Length);
+						return endedinputMovies_;
+					}
+					return inputMovies_;
+				}
+			}
+			void SetEndedInputMovies(array<String^>^ ended)
+			{
+				endedinputMovies_ = ended;
+			}
+			property bool IsMoveFinishedInputMovies
+			{
+				bool get() { return bMoveFinishedInputMovies_; }
 			}
 			property AVDuration^ TotalInputDuration
 			{
@@ -98,7 +135,8 @@ namespace Ambiesoft {
 				System::Drawing::Size maxSize,
 				AVDuration^ totalInputDuration,
 				double totalInputFPS,
-				double partPercent);
+				double partPercent,
+				bool bMoveFinishedInputMovies);
 
 			// each
 			EncodeJob(
@@ -111,7 +149,8 @@ namespace Ambiesoft {
 				System::Drawing::Size size,
 				AVDuration^ duration,
 				double fps,
-				double partPercent)
+				double partPercent,
+				bool bMoveFinishedInputMovies)
 			{
 				init(true,
 					addiopbi, addiopai,
@@ -124,7 +163,8 @@ namespace Ambiesoft {
 					size,
 					duration,
 					fps,
-					partPercent);
+					partPercent,
+					bMoveFinishedInputMovies);
 			}
 			// concat
 			EncodeJob(bool bReEncode,
@@ -138,7 +178,8 @@ namespace Ambiesoft {
 				System::Drawing::Size maxSize,
 				AVDuration^ totalInputDuration,
 				double totalInputFPS,
-				double partPercent)
+				double partPercent,
+				bool bMoveFinishedInputMovies)
 			{
 				init(bReEncode,
 					addiopbi, addiopai,
@@ -151,7 +192,8 @@ namespace Ambiesoft {
 					maxSize,
 					totalInputDuration,
 					totalInputFPS,
-					partPercent);
+					partPercent,
+					bMoveFinishedInputMovies);
 			}
 			property bool IsEnded
 			{
@@ -175,13 +217,12 @@ namespace Ambiesoft {
 					return String::Empty;
 				}
 			}
+			
 			void PrintInputFiles(System::Text::StringBuilder^ sb) {
-				sb->AppendLine(I18N(L"Input Files:"));
-				for each (String ^ file in inputMovies_)
-				{
-					sb->Append(L"  ");
-					sb->AppendLine(file);
-				}
+				PrintInputFilesCommon(sb, false);
+			}
+			void PrintEndedInputFiles(System::Text::StringBuilder^ sb) {
+				PrintInputFilesCommon(sb, true);
 			}
 			void PrintOutputFile(System::Text::StringBuilder^ sb) {
 				sb->AppendLine(I18N(L"Output File:"));

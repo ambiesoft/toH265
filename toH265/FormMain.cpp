@@ -788,8 +788,10 @@ namespace Ambiesoft {
 			if (processTerminatedDuetoAppClose_)
 				return;
 
-			if(encodeTask_)
+			if (encodeTask_)
+			{
 				encodeTask_->OnTaskEnded(retval);
+			}
 		}
 		
 			
@@ -871,7 +873,7 @@ namespace Ambiesoft {
 					{
 						DASSERT(!String::IsNullOrEmpty(job->OutputtedMovie));
 						GetStreamInfo(FFProbe, job->OutputtedMovie, outputtedFormat, outputtedAC, outputtedVC, outputtedAspect, outputtedTS, outputtedFps);
-						for each (String ^ infile in job->InputMovies)
+						for each (String ^ infile in job->EndedInputMovies)
 							inputSize += FileInfo(infile).Length;
 						outputtedSize = FileInfo(job->OutputtedMovie).Length;
 
@@ -910,7 +912,7 @@ namespace Ambiesoft {
 							isWarning = true;
 						}
 						sbMessage.AppendLine();
-						job->PrintInputFiles(% sbMessage);
+						job->PrintEndedInputFiles(% sbMessage);
 						job->PrintOutputFile(% sbMessage);
 						sbMessage.AppendLine(String::Format(I18N(L"Format = {0}"), outputtedFormat));
 						sbMessage.AppendLine(String::Format(I18N(L"Audio codec = {0}"), outputtedAC));
@@ -1363,7 +1365,8 @@ namespace Ambiesoft {
 				IsSameSizeVideos(itemSelection),
 				GetMaxVideoSize(itemSelection),
 				codecDlg.IsConcat ? gcnew array<AVDuration^>{ StatusTotalInputDuration } : inputdurations,
-				codecDlg.IsConcat ? gcnew array<double>{TotalInputFPS} : inputFpses);
+				codecDlg.IsConcat ? gcnew array<double>{TotalInputFPS} : inputFpses,
+				codecDlg.IsMoveFinishedInputFiles);
 			
 			
 

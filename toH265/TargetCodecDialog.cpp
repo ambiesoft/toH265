@@ -95,6 +95,9 @@ namespace Ambiesoft {
 				cmbAdditionalOptionsAfterInput->Items->AddRange(a);
 				Profile::GetString(SECTION, KEY_ADDITIONALOPTIONS_AFTERINPUT, String::Empty, s, ini);
 				cmbAdditionalOptionsAfterInput->Text = s;
+
+				Profile::GetBool(SECTION, KEY_ISMOVEENDEDINPUTFILES, false, b, ini);
+				chkMoveFinishedInputs->Checked = b;
 			}
 
 			if (losslessable_)
@@ -210,6 +213,9 @@ namespace Ambiesoft {
 				toStringArray(cmbAdditionalOptionsAfterInput->Items), ini);
 			success &= Profile::WriteString(SECTION, KEY_ADDITIONALOPTIONS_AFTERINPUT,
 				cmbAdditionalOptionsAfterInput->Text, ini);
+
+			success &= Profile::WriteBool(SECTION, KEY_ISMOVEENDEDINPUTFILES,
+				chkMoveFinishedInputs->Checked, ini);
 
 			success &= Profile::WriteAll(ini, IniPath);
 			if(!success)
@@ -639,6 +645,13 @@ namespace Ambiesoft {
 		System::Void TargetCodecDialog::codec_CheckedChangedCommon(System::Object^ sender, System::EventArgs^ e)
 		{
 			UpdateFilename();
+		}
+		System::Void TargetCodecDialog::chkMoveFinishedInputs_CheckedChanged(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (chkMoveFinishedInputs->Checked)
+				lblMoveFinishedInputFiles->Text = I18N("Finished Input Files will move to Folder 'old'.");
+			else
+				lblMoveFinishedInputFiles->Text = String::Empty;
 		}
 	}
 }

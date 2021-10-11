@@ -23,7 +23,8 @@ namespace Ambiesoft {
 			System::Drawing::Size maxSize,
 			AVDuration^ totalInputDuration,
 			double totalInputFPS,
-			double partPercent)
+			double partPercent,
+			bool bMoveFinishedInputMovies)
 		{
 			this->ReEncode = bReEncode;
 			this->AdditionalOptionsBeforeInput = addiopbi;
@@ -45,6 +46,8 @@ namespace Ambiesoft {
 				this->inputVideoCodec_ = FormMain::GetVCodecFromLvi(item);
 				this->inputAudioCodec_ = FormMain::GetACodecFromLvi(item);
 			}
+
+			bMoveFinishedInputMovies_ = bMoveFinishedInputMovies;
 		}
 		void EncodeJob::CreateTempFile()
 		{

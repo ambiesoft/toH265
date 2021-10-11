@@ -36,6 +36,56 @@ namespace Ambiesoft {
 		{
 			DASSERT(currentI_ >= 0);
 			CurrentJob->SetEnded(retval);
+
+			if (retval == 0 && CurrentJob->IsMoveFinishedInputMovies)
+			{
+				List<String^> inEnded;
+				for each (String ^ inputMovie in CurrentJob->InputMovies)
+				{
+					int maxTry = 256;
+					bool gaveup = false;
+					String^ movedFile = String::Empty;
+					for (int i = 0; ; ++i)
+					{
+						String^ movingFolder = L"old";
+						String^ folderForEncoded = Path::GetDirectoryName(inputMovie);
+						String^ filenameWE = Path::GetFileNameWithoutExtension(inputMovie);
+						String^ num = i == 0 ? String::Empty :
+							String::Format(L"({0})", i);
+						String^ ext = Path::GetExtension(inputMovie);
+
+						movedFile = Path::Combine(
+							folderForEncoded,
+							movingFolder,
+							filenameWE + num + ext);
+						if(i >= maxTry)
+						{
+							gaveup = true;
+							break;
+						}
+						if (File::Exists(movedFile) || Directory::Exists(movedFile))
+							continue;
+						break;
+					}
+					if (gaveup)
+					{
+						inEnded.Add(inputMovie);
+						continue;
+					}
+
+					try 
+					{
+						Directory::CreateDirectory(Path::GetDirectoryName(movedFile));
+						File::Move(inputMovie, movedFile);
+						inEnded.Add(movedFile);
+					}
+					catch(Exception^)
+					{
+						inEnded.Add(inputMovie);
+					}
+				}
+				CurrentJob->SetEndedInputMovies(inEnded.ToArray());
+			}
 		}
 
 	}

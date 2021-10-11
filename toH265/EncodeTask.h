@@ -40,7 +40,8 @@ namespace Ambiesoft {
 				bool bIsSameSize,
 				System::Drawing::Size maxsize,
 				array<AVDuration^>^ durations,
-				array<double>^ fpses)
+				array<double>^ fpses,
+				bool bMoveFinishedInputMovies)
 			{
 				DASSERT(currentI_ <= 0);
 				currentI_ = 0;
@@ -62,7 +63,8 @@ namespace Ambiesoft {
 						maxsize,
 						durations[0],
 						fpses[0],
-						1.0);
+						1.0,
+						bMoveFinishedInputMovies);
 					jobs_.Add(job);
 					
 					totalInputDuration_ = durations[0];
@@ -90,7 +92,8 @@ namespace Ambiesoft {
 							maxsize,
 							durations[i],
 							fpses[i],
-							durations[i]->TotalMilliseconds / totalDuration
+							durations[i]->TotalMilliseconds / totalDuration,
+							bMoveFinishedInputMovies
 						);
 						jobs_.Add(job);
 

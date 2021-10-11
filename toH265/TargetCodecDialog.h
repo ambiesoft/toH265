@@ -37,6 +37,8 @@ namespace Ambiesoft {
 			literal String^ KEY_ADDITIONALOPTIONS_AFTERINPUT = L"AdditionalOptionsAfterInput";
 			literal String^ KEY_ADDITIONALOPTIONS_AFTERINPUT_ARRAY = L"AdditionalOptionsAfterInputArray";
 
+			literal String^ KEY_ISMOVEENDEDINPUTFILES = L"MoveEndedInputFiles";
+
 			initonly String^ iniPath_;
 			initonly String^ section_;
 		private: System::Windows::Forms::GroupBox^ groupTargetDirectory;
@@ -73,6 +75,9 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::ToolStripMenuItem^ originalextToolStripMenuItem;
 		private: System::Windows::Forms::TextBox^ txtResultFilename;
 		private: System::Windows::Forms::Label^ lblFilenameResult;
+		private: System::Windows::Forms::GroupBox^ groupMoveFinishedInput;
+		private: System::Windows::Forms::Label^ lblMoveFinishedInputFiles;
+		private: System::Windows::Forms::CheckBox^ chkMoveFinishedInputs;
 
 			   initonly AVCodec^ DefaultAudioCodec;
 		public:
@@ -220,6 +225,10 @@ namespace Ambiesoft {
 			{
 				String^ get() { return cmbAdditionalOptionsAfterInput->Text; }
 			}
+			property bool IsMoveFinishedInputFiles
+			{
+				bool get() { return chkMoveFinishedInputs->Checked; }
+			}
 		protected:
 			/// <summary>
 			/// Clean up any resources being used.
@@ -310,12 +319,16 @@ private:
 				this->basenamewithoutextToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				this->targetextToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 				this->originalextToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+				this->groupMoveFinishedInput = (gcnew System::Windows::Forms::GroupBox());
+				this->lblMoveFinishedInputFiles = (gcnew System::Windows::Forms::Label());
+				this->chkMoveFinishedInputs = (gcnew System::Windows::Forms::CheckBox());
 				this->groupVideoCodec->SuspendLayout();
 				this->groupAudioCodec->SuspendLayout();
 				this->groupTargetDirectory->SuspendLayout();
 				this->groupFilename->SuspendLayout();
 				this->groupAdditionalOptions->SuspendLayout();
 				this->cmFilenameMacro->SuspendLayout();
+				this->groupMoveFinishedInput->SuspendLayout();
 				this->SuspendLayout();
 				// 
 				// groupVideoCodec
@@ -563,12 +576,33 @@ private:
 				this->originalextToolStripMenuItem->Name = L"originalextToolStripMenuItem";
 				resources->ApplyResources(this->originalextToolStripMenuItem, L"originalextToolStripMenuItem");
 				// 
+				// groupMoveFinishedInput
+				// 
+				resources->ApplyResources(this->groupMoveFinishedInput, L"groupMoveFinishedInput");
+				this->groupMoveFinishedInput->Controls->Add(this->lblMoveFinishedInputFiles);
+				this->groupMoveFinishedInput->Controls->Add(this->chkMoveFinishedInputs);
+				this->groupMoveFinishedInput->Name = L"groupMoveFinishedInput";
+				this->groupMoveFinishedInput->TabStop = false;
+				// 
+				// lblMoveFinishedInputFiles
+				// 
+				resources->ApplyResources(this->lblMoveFinishedInputFiles, L"lblMoveFinishedInputFiles");
+				this->lblMoveFinishedInputFiles->Name = L"lblMoveFinishedInputFiles";
+				// 
+				// chkMoveFinishedInputs
+				// 
+				resources->ApplyResources(this->chkMoveFinishedInputs, L"chkMoveFinishedInputs");
+				this->chkMoveFinishedInputs->Name = L"chkMoveFinishedInputs";
+				this->chkMoveFinishedInputs->UseVisualStyleBackColor = true;
+				this->chkMoveFinishedInputs->CheckedChanged += gcnew System::EventHandler(this, &TargetCodecDialog::chkMoveFinishedInputs_CheckedChanged);
+				// 
 				// TargetCodecDialog
 				// 
 				this->AcceptButton = this->btnOK;
 				resources->ApplyResources(this, L"$this");
 				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 				this->CancelButton = this->btnCancel;
+				this->Controls->Add(this->groupMoveFinishedInput);
 				this->Controls->Add(this->groupAdditionalOptions);
 				this->Controls->Add(this->chkFileByFile);
 				this->Controls->Add(this->groupFilename);
@@ -597,6 +631,8 @@ private:
 				this->groupAdditionalOptions->ResumeLayout(false);
 				this->groupAdditionalOptions->PerformLayout();
 				this->cmFilenameMacro->ResumeLayout(false);
+				this->groupMoveFinishedInput->ResumeLayout(false);
+				this->groupMoveFinishedInput->PerformLayout();
 				this->ResumeLayout(false);
 				this->PerformLayout();
 
@@ -634,6 +670,8 @@ private:
 			System::Void chkFileByFile_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
 				UpdateFilename();
 			}
+			System::Void chkMoveFinishedInputs_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
+
 };
 	}
 }
