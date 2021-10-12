@@ -232,7 +232,7 @@
     <value>3</value>
   </data>
   <data name="groupVideoCodec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 39</value>
+    <value>9, 39</value>
   </data>
   <data name="groupVideoCodec.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 89</value>
@@ -257,66 +257,6 @@
   </data>
   <data name="groupAudioCodec.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top</value>
-  </data>
-  <data name="&gt;&gt;rbAudioOpus.Name" xml:space="preserve">
-    <value>rbAudioOpus</value>
-  </data>
-  <data name="&gt;&gt;rbAudioOpus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rbAudioOpus.Parent" xml:space="preserve">
-    <value>groupAudioCodec</value>
-  </data>
-  <data name="&gt;&gt;rbAudioOpus.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rbAudioAac.Name" xml:space="preserve">
-    <value>rbAudioAac</value>
-  </data>
-  <data name="&gt;&gt;rbAudioAac.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rbAudioAac.Parent" xml:space="preserve">
-    <value>groupAudioCodec</value>
-  </data>
-  <data name="&gt;&gt;rbAudioAac.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;rbAudioCopy.Name" xml:space="preserve">
-    <value>rbAudioCopy</value>
-  </data>
-  <data name="&gt;&gt;rbAudioCopy.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rbAudioCopy.Parent" xml:space="preserve">
-    <value>groupAudioCodec</value>
-  </data>
-  <data name="&gt;&gt;rbAudioCopy.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="groupAudioCodec.Location" type="System.Drawing.Point, System.Drawing">
-    <value>320, 39</value>
-  </data>
-  <data name="groupAudioCodec.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 89</value>
-  </data>
-  <data name="groupAudioCodec.TabIndex" type="System.Int32, mscorlib">
-    <value>700</value>
-  </data>
-  <data name="groupAudioCodec.Text" xml:space="preserve">
-    <value>Audio Codec</value>
-  </data>
-  <data name="&gt;&gt;groupAudioCodec.Name" xml:space="preserve">
-    <value>groupAudioCodec</value>
-  </data>
-  <data name="&gt;&gt;groupAudioCodec.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupAudioCodec.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupAudioCodec.ZOrder" xml:space="preserve">
-    <value>9</value>
   </data>
   <data name="rbAudioOpus.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -399,11 +339,35 @@
   <data name="&gt;&gt;rbAudioCopy.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="groupAudioCodec.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 39</value>
+  </data>
+  <data name="groupAudioCodec.Size" type="System.Drawing.Size, System.Drawing">
+    <value>298, 89</value>
+  </data>
+  <data name="groupAudioCodec.TabIndex" type="System.Int32, mscorlib">
+    <value>700</value>
+  </data>
+  <data name="groupAudioCodec.Text" xml:space="preserve">
+    <value>Audio Codec</value>
+  </data>
+  <data name="&gt;&gt;groupAudioCodec.Name" xml:space="preserve">
+    <value>groupAudioCodec</value>
+  </data>
+  <data name="&gt;&gt;groupAudioCodec.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupAudioCodec.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupAudioCodec.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="btnOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="btnOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>361, 601</value>
+    <value>357, 588</value>
   </data>
   <data name="btnOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 26</value>
@@ -430,7 +394,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>493, 601</value>
+    <value>489, 588</value>
   </data>
   <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 26</value>
@@ -460,7 +424,7 @@
     <value>11, 12</value>
   </data>
   <data name="cmbEncodeType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>608, 23</value>
+    <value>604, 23</value>
   </data>
   <data name="cmbEncodeType.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>
@@ -480,83 +444,11 @@
   <data name="groupTargetDirectory.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="&gt;&gt;btnBrowseOtherDirectory.Name" xml:space="preserve">
-    <value>btnBrowseOtherDirectory</value>
-  </data>
-  <data name="&gt;&gt;btnBrowseOtherDirectory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnBrowseOtherDirectory.Parent" xml:space="preserve">
-    <value>groupTargetDirectory</value>
-  </data>
-  <data name="&gt;&gt;btnBrowseOtherDirectory.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblOtherDirectory.Name" xml:space="preserve">
-    <value>lblOtherDirectory</value>
-  </data>
-  <data name="&gt;&gt;lblOtherDirectory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblOtherDirectory.Parent" xml:space="preserve">
-    <value>groupTargetDirectory</value>
-  </data>
-  <data name="&gt;&gt;lblOtherDirectory.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;txtOtherDirectory.Name" xml:space="preserve">
-    <value>txtOtherDirectory</value>
-  </data>
-  <data name="&gt;&gt;txtOtherDirectory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtOtherDirectory.Parent" xml:space="preserve">
-    <value>groupTargetDirectory</value>
-  </data>
-  <data name="&gt;&gt;txtOtherDirectory.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;chkSameDirectory.Name" xml:space="preserve">
-    <value>chkSameDirectory</value>
-  </data>
-  <data name="&gt;&gt;chkSameDirectory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkSameDirectory.Parent" xml:space="preserve">
-    <value>groupTargetDirectory</value>
-  </data>
-  <data name="&gt;&gt;chkSameDirectory.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="groupTargetDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 134</value>
-  </data>
-  <data name="groupTargetDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 100</value>
-  </data>
-  <data name="groupTargetDirectory.TabIndex" type="System.Int32, mscorlib">
-    <value>1100</value>
-  </data>
-  <data name="groupTargetDirectory.Text" xml:space="preserve">
-    <value>Target Directory</value>
-  </data>
-  <data name="&gt;&gt;groupTargetDirectory.Name" xml:space="preserve">
-    <value>groupTargetDirectory</value>
-  </data>
-  <data name="&gt;&gt;groupTargetDirectory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupTargetDirectory.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;groupTargetDirectory.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="btnBrowseOtherDirectory.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="btnBrowseOtherDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>573, 59</value>
+    <value>569, 59</value>
   </data>
   <data name="btnBrowseOtherDirectory.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 23</value>
@@ -613,7 +505,7 @@
     <value>6, 59</value>
   </data>
   <data name="txtOtherDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>561, 23</value>
+    <value>557, 23</value>
   </data>
   <data name="txtOtherDirectory.TabIndex" type="System.Int32, mscorlib">
     <value>1400</value>
@@ -657,6 +549,30 @@
   <data name="&gt;&gt;chkSameDirectory.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="groupTargetDirectory.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 134</value>
+  </data>
+  <data name="groupTargetDirectory.Size" type="System.Drawing.Size, System.Drawing">
+    <value>603, 100</value>
+  </data>
+  <data name="groupTargetDirectory.TabIndex" type="System.Int32, mscorlib">
+    <value>1100</value>
+  </data>
+  <data name="groupTargetDirectory.Text" xml:space="preserve">
+    <value>Target Directory</value>
+  </data>
+  <data name="&gt;&gt;groupTargetDirectory.Name" xml:space="preserve">
+    <value>groupTargetDirectory</value>
+  </data>
+  <data name="&gt;&gt;groupTargetDirectory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupTargetDirectory.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;groupTargetDirectory.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="groupFilename.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -667,7 +583,7 @@
     <value>6, 79</value>
   </data>
   <data name="txtResultFilename.Size" type="System.Drawing.Size, System.Drawing">
-    <value>561, 23</value>
+    <value>557, 23</value>
   </data>
   <data name="txtResultFilename.TabIndex" type="System.Int32, mscorlib">
     <value>1775</value>
@@ -688,7 +604,7 @@
     <value>Top, Right</value>
   </data>
   <data name="btnFilenameMacroMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>573, 38</value>
+    <value>569, 38</value>
   </data>
   <data name="btnFilenameMacroMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 23</value>
@@ -784,7 +700,7 @@
     <value>6, 38</value>
   </data>
   <data name="cmbFilenameMacro.Size" type="System.Drawing.Size, System.Drawing">
-    <value>561, 23</value>
+    <value>557, 23</value>
   </data>
   <data name="cmbFilenameMacro.TabIndex" type="System.Int32, mscorlib">
     <value>1700</value>
@@ -805,7 +721,7 @@
     <value>11, 318</value>
   </data>
   <data name="groupFilename.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 115</value>
+    <value>603, 115</value>
   </data>
   <data name="groupFilename.TabIndex" type="System.Int32, mscorlib">
     <value>1600</value>
@@ -862,7 +778,7 @@
     <value>7, 76</value>
   </data>
   <data name="cmbAdditionalOptionsAfterInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>594, 23</value>
+    <value>590, 23</value>
   </data>
   <data name="cmbAdditionalOptionsAfterInput.TabIndex" type="System.Int32, mscorlib">
     <value>2300</value>
@@ -886,7 +802,7 @@
     <value>7, 36</value>
   </data>
   <data name="cmbAdditionalOptionsBeforeInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>592, 23</value>
+    <value>588, 23</value>
   </data>
   <data name="cmbAdditionalOptionsBeforeInput.TabIndex" type="System.Int32, mscorlib">
     <value>2100</value>
@@ -970,7 +886,7 @@
     <value>11, 464</value>
   </data>
   <data name="groupAdditionalOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 109</value>
+    <value>603, 109</value>
   </data>
   <data name="groupAdditionalOptions.TabIndex" type="System.Int32, mscorlib">
     <value>1900</value>
@@ -993,38 +909,38 @@
   <metadata name="cmFilenameMacro.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="basenameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
+  </data>
+  <data name="basenameToolStripMenuItem.Text" xml:space="preserve">
+    <value>${basename} : </value>
+  </data>
+  <data name="basenamewithoutextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
+  </data>
+  <data name="basenamewithoutextToolStripMenuItem.Text" xml:space="preserve">
+    <value>${basenamewithoutext}</value>
+  </data>
+  <data name="targetextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
+  </data>
+  <data name="targetextToolStripMenuItem.Text" xml:space="preserve">
+    <value>${targetext}</value>
+  </data>
+  <data name="originalextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
+  </data>
+  <data name="originalextToolStripMenuItem.Text" xml:space="preserve">
+    <value>${originalext}</value>
+  </data>
   <data name="cmFilenameMacro.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 92</value>
+    <value>192, 92</value>
   </data>
   <data name="&gt;&gt;cmFilenameMacro.Name" xml:space="preserve">
     <value>cmFilenameMacro</value>
   </data>
   <data name="&gt;&gt;cmFilenameMacro.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="basenameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 22</value>
-  </data>
-  <data name="basenameToolStripMenuItem.Text" xml:space="preserve">
-    <value>${basename} : </value>
-  </data>
-  <data name="basenamewithoutextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 22</value>
-  </data>
-  <data name="basenamewithoutextToolStripMenuItem.Text" xml:space="preserve">
-    <value>${basenamewithoutext}</value>
-  </data>
-  <data name="targetextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 22</value>
-  </data>
-  <data name="targetextToolStripMenuItem.Text" xml:space="preserve">
-    <value>${targetext}</value>
-  </data>
-  <data name="originalextToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 22</value>
-  </data>
-  <data name="originalextToolStripMenuItem.Text" xml:space="preserve">
-    <value>${originalext}</value>
   </data>
   <data name="groupMoveFinishedInput.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1084,7 +1000,7 @@
     <value>11, 240</value>
   </data>
   <data name="groupMoveFinishedInput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 72</value>
+    <value>603, 72</value>
   </data>
   <data name="groupMoveFinishedInput.TabIndex" type="System.Int32, mscorlib">
     <value>1510</value>
@@ -1111,13 +1027,13 @@
     <value>96, 96</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>631, 639</value>
+    <value>634, 626</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>Meiryo UI, 9pt</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>646, 572</value>
+    <value>642, 653</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

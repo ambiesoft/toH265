@@ -336,4 +336,10 @@
   <data name="Last Modified" xml:space="preserve">
     <value>更新日時</value>
   </data>
+  <data name="Finished Input Files will move to Folder 'old'." xml:space="preserve">
+    <value>処理が終わった入力ファイルを'old'フォルダに移動します。</value>
+  </data>
+  <data name="item" xml:space="preserve">
+    <value>アイテム</value>
+  </data>
 </root>

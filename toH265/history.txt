@@ -1,3 +1,6 @@
+2021/10/12 ver1.0.89
+I18Ned
+
 2021/10/11 ver1.0.88
 Added: Move Ended Input Movies to 'old' folder
 
