@@ -1324,23 +1324,67 @@ namespace Ambiesoft {
 				codecDlg.rbAudioCopy->Checked = false;
 			}
 
+			// check afterfinish
+			if (tsmiEnabledtsmiProcessAfterFinish->Checked)
+			{
+				if (dlgAfterFinish_.chkPlaySound->Checked)
+				{
+					String^ templ = I18N(L"It is set to play wav after task is finished. {0} Please check '[Option] -> [Process after Finish]' settings.");
+					if (String::IsNullOrEmpty(dlgAfterFinish_.txtWav->Text))
+					{
+						CppUtils::Alert(String::Format(templ,I18N(L"But wav is empty.")));
+						return;
+					}
+					if (!File::Exists(dlgAfterFinish_.txtWav->Text))
+					{
+						CppUtils::Alert(String::Format(templ, I18N(L"But wav does not exist.")));
+						return;
+					}
+				}
+
+				if (dlgAfterFinish_.chkLaunchApp->Checked)
+				{
+					String^ templ = I18N(L"It is set to launch app after task is finished. {0} Please check '[Option] -> [Process after Finish]' settings.");
+					if (String::IsNullOrEmpty(dlgAfterFinish_.txtApp->Text) && 
+						String::IsNullOrEmpty(dlgAfterFinish_.txtArg->Text))
+					{
+						CppUtils::Alert(String::Format(templ, I18N(L"But both 'Application' and 'Arguments' are empty.")));
+						return;
+					}
+
+					// maybe in path
+					//if (!String::IsNullOrEmpty(dlgAfterFinish_.txtApp->Text) &&
+					//	!File::Exists(dlgAfterFinish_.txtApp->Text))
+					//{
+					//	CppUtils::Alert(String::Format(templ, I18N(L"But 'Application' does not exist.")));
+					//	return;
+					//}
+				}
+			}
+
 			// show the dialog
 			if (System::Windows::Forms::DialogResult::OK != codecDlg.ShowDialog())
 				return;
 
-			// check afterfinish's shutdown is enabled, and ask
+			// confirms shutdown
 			if (tsmiEnabledtsmiProcessAfterFinish->Checked)
 			{
 				if (dlgAfterFinish_.chkShutdown->Checked)
 				{
-					if (System::Windows::Forms::DialogResult::Yes != CppUtils::CenteredMessageBox(
+					switch (CppUtils::CenteredMessageBox(
 						I18N(L"System Shutdown is enabled after the task finished. Do you want to keep it enabled?"),
 						Application::ProductName,
-						MessageBoxButtons::YesNo,
+						MessageBoxButtons::YesNoCancel,
 						MessageBoxIcon::Question,
 						MessageBoxDefaultButton::Button2))
 					{
+					case System::Windows::Forms::DialogResult::Yes:
+						break;
+					case System::Windows::Forms::DialogResult::No:
 						dlgAfterFinish_.chkShutdown->Checked = false;
+						break;
+					case System::Windows::Forms::DialogResult::Cancel:
+						return;
 					}
 				}
 			}

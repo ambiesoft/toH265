@@ -342,4 +342,16 @@
   <data name="item" xml:space="preserve">
     <value>アイテム</value>
   </data>
+  <data name="But wav does not exist." xml:space="preserve">
+    <value>サウンドファイルが存在しません。</value>
+  </data>
+  <data name="But wav is empty." xml:space="preserve">
+    <value>サウンドファイルが設定されていません。</value>
+  </data>
+  <data name="It is set to play wav after task is finished. {0} Please check '[Option] -&gt; [Process after Finish]' settings." xml:space="preserve">
+    <value>タスク終了時にサウンドが再生される設定がされていますが、{0} 「オプション」 →「終了後の処理」を確認してください。</value>
+  </data>
+  <data name="It is set to launch app after task is finished. {0} Please check '[Option] -&gt; [Process after Finish]' settings." xml:space="preserve">
+    <value>タスク終了時にアプリケーションを起動するように設定がされていますが、{0} 「オプション」 →「終了後の処理」を確認してください。</value>
+  </data>
 </root>

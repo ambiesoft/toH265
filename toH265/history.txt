@@ -1,3 +1,6 @@
+2021/10/19 ver1.0.90
+Check settings of 'AfterFinish' before starting the task
+
 2021/10/12 ver1.0.89
 I18Ned
 
