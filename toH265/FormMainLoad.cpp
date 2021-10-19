@@ -28,8 +28,11 @@ namespace Ambiesoft {
 			lblTopLeft->Visible = false;
 			lblBottomRight->Visible = false;
 
+
 			FormMain_Resize(this, nullptr);
 		}
 
 	}
 }
+
+

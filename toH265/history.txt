@@ -1,3 +1,6 @@
+2021/10/20 ver1.0.91
+Show ToolTip
+
 2021/10/19 ver1.0.90
 Check settings of 'AfterFinish' before starting the task
 

@@ -331,6 +331,9 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 
 			// ListViewCustomReorder::ListViewEx^ lvInputs = gcnew ListViewCustomReorder::ListViewEx();
 			InputListView^ lvInputs = gcnew InputListView();
+			ToolTip^ listTip_ = gcnew ToolTip();
+			System::Drawing::Point lastTPPos_;
+			bool bDragging_;
 
 			bool CheckMovieAndSet(String^ file, bool bSet, bool bShowCodecAlert);
 
@@ -584,6 +587,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			System::Void ListInputs_DragOver(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
 			System::Void ListInputs_DragEnter(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
 			System::Void ListInputs_DragDrop(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e);
+			System::Void ListInputs_DragLeave(System::Object^ sender, System::EventArgs^ e);
 
 			System::Void tsmiSetFFProbe_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiSetFFMpeg_Click(System::Object^ sender, System::EventArgs^ e);
@@ -656,6 +660,11 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			System::Void cmList_Opening(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e);
 			System::Void splitRoot_SplitterMoved(System::Object^ sender, System::Windows::Forms::SplitterEventArgs^ e);
 
+
+
+			void OnListViewMouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
+			void OnListViewMouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
+			void OnListViewMouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 };
 
 

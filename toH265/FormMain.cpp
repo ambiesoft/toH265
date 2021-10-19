@@ -210,6 +210,7 @@ namespace Ambiesoft {
 			catch(Exception^){}
 
 			lvi->ImageKey = IMAGEKEY_NORMAL;
+			// lvi->ToolTipText = movieFile;
 
 			lvInputs->Items->Add(lvi);
 		}

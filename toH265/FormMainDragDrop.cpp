@@ -57,7 +57,10 @@ namespace Ambiesoft {
 					gcnew array<Object^>{ss});
 			}
 		}
+		System::Void FormMain::ListInputs_DragLeave(System::Object^ sender, System::EventArgs^ e)
+		{
 
+		}
 	
 	}
 }

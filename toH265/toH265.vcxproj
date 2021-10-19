@@ -255,6 +255,7 @@
     <ClCompile Include="FormMainMisc.cpp" />
     <ClCompile Include="FormMainPriority.cpp" />
     <ClCompile Include="FormMainTest.cpp" />
+    <ClCompile Include="FormMainToolTip.cpp" />
     <ClCompile Include="FormMainTray.cpp" />
     <ClCompile Include="helper.cpp" />
     <ClCompile Include="InputListView.cpp" />

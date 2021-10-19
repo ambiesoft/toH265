@@ -31,10 +31,17 @@ namespace Ambiesoft {
 			lvInputs->HideSelection = false;
 			lvInputs->MultiSelect = true;
 			lvInputs->SmallImageList = ilList;
+			// lvInputs->ShowItemToolTips = true;
 			lvInputs->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragDrop);
 			lvInputs->DragEnter += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragEnter);
 			lvInputs->DragOver += gcnew System::Windows::Forms::DragEventHandler(this, &FormMain::ListInputs_DragOver);
+			lvInputs->DragLeave += gcnew System::EventHandler(this, &FormMain::ListInputs_DragLeave);
 			lvInputs->AllowDrop = true;
+
+			lvInputs->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &Ambiesoft::toH265::FormMain::OnListViewMouseMove);
+			lvInputs->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Ambiesoft::toH265::FormMain::OnListViewMouseDown);
+			lvInputs->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &Ambiesoft::toH265::FormMain::OnListViewMouseUp);
+
 			lvInputs->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &FormMain::OnColumnClick);
 			lvInputs->ItemCountChanged += gcnew Ambiesoft::toH265::InputListView::ItemCountChangedHandler(this, &Ambiesoft::toH265::FormMain::OnItemCountChanged);
 			lvInputs->ItemSelectionChanged += gcnew System::Windows::Forms::ListViewItemSelectionChangedEventHandler(this, &Ambiesoft::toH265::FormMain::OnItemSelectionChanged);
@@ -170,6 +177,8 @@ namespace Ambiesoft {
 
 	}
 }
+
+
 
 
 
