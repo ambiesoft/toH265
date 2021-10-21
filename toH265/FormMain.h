@@ -665,6 +665,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			void OnListViewMouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 			void OnListViewMouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 			void OnListViewMouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
+			void OnBtnBrowseMouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 };
 
 

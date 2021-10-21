@@ -41,7 +41,7 @@ namespace Ambiesoft {
 			lvInputs->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &Ambiesoft::toH265::FormMain::OnListViewMouseMove);
 			lvInputs->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Ambiesoft::toH265::FormMain::OnListViewMouseDown);
 			lvInputs->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &Ambiesoft::toH265::FormMain::OnListViewMouseUp);
-
+			btnBrowseMovie->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &Ambiesoft::toH265::FormMain::OnBtnBrowseMouseMove);
 			lvInputs->ColumnClick += gcnew System::Windows::Forms::ColumnClickEventHandler(this, &FormMain::OnColumnClick);
 			lvInputs->ItemCountChanged += gcnew Ambiesoft::toH265::InputListView::ItemCountChangedHandler(this, &Ambiesoft::toH265::FormMain::OnItemCountChanged);
 			lvInputs->ItemSelectionChanged += gcnew System::Windows::Forms::ListViewItemSelectionChangedEventHandler(this, &Ambiesoft::toH265::FormMain::OnItemSelectionChanged);
@@ -177,6 +177,8 @@ namespace Ambiesoft {
 
 	}
 }
+
+
 
 
 

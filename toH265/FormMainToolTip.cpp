@@ -7,6 +7,10 @@
 namespace Ambiesoft {
 	namespace toH265 {
 
+		void FormMain::OnBtnBrowseMouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
+		{
+			listTip_->Hide(lvInputs);
+		}
 		void FormMain::OnListViewMouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 		{
 			if (bDragging_)
