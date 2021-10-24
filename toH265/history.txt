@@ -1,3 +1,5 @@
+2021/10/20 ver1.0.92
+ToolTip position
 Hide ToolTop in mousemove on btnBrowse
 
 2021/10/20 ver1.0.91

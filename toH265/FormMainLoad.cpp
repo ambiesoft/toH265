@@ -28,6 +28,8 @@ namespace Ambiesoft {
 			lblTopLeft->Visible = false;
 			lblBottomRight->Visible = false;
 
+			// TODO: not good
+			// toH265Helper::setupToolTip(listTip_, lvInputs->Font);
 
 			FormMain_Resize(this, nullptr);
 		}
