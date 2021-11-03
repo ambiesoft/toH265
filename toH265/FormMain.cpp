@@ -1679,6 +1679,17 @@ namespace Ambiesoft {
 			cpuAffinity_.ToggleAll();
 			tsmiCPUAffinityEnable_Click(nullptr, nullptr);
 		}
+		System::Void FormMain::tsmiEnableHalfUpper_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			cpuAffinity_.EnableUpperHalf();
+			tsmiCPUAffinityEnable_Click(nullptr, nullptr);
+		}
+		System::Void FormMain::tsmiEnableHalfEven_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			cpuAffinity_.EnableEvenHalf();
+			tsmiCPUAffinityEnable_Click(nullptr, nullptr);
+		}
+
 		void FormMain::OnToggleCPU(System::Object^ sender, System::EventArgs^ e)
 		{
 			ToolStripMenuItem^ item = (ToolStripMenuItem^)sender;

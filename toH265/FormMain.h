@@ -154,6 +154,8 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::ImageList^ ilList;
 private: System::Windows::Forms::Label^ lblBottomRight;
 private: System::Windows::Forms::Label^ lblTopLeft;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnableHalfUpper;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnableHalfEven;
 
 			EncodeTask^ encodeTask_;
 			property bool IsTaskActive
@@ -647,6 +649,8 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			System::Void tsmiEnableAll_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiToggleAll_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiShowLastResult_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiEnableHalfUpper_Click(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiEnableHalfEven_Click(System::Object^ sender, System::EventArgs^ e);
 
 			void OnItemCountChanged();
 			void OnItemSelectionChanged(System::Object^ sender, System::Windows::Forms::ListViewItemSelectionChangedEventArgs^ e);
@@ -666,6 +670,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			void OnListViewMouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 			void OnListViewMouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 			void OnBtnBrowseMouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
+
 };
 
 

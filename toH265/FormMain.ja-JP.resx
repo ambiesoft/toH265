@@ -251,31 +251,43 @@
     <value>優先度(&amp;P)</value>
   </data>
   <data name="tsmiCPUAffinityEnable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="tsmiCPUAffinityEnable.Text" xml:space="preserve">
     <value>有効(&amp;E)</value>
   </data>
   <data name="tsmsCpuAffinityBegin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="tsmsCpuAffinityEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="tsmiEnableAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="tsmiEnableAll.Text" xml:space="preserve">
     <value>すべて有効(&amp;A)</value>
   </data>
   <data name="tsmiToggleAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="tsmiToggleAll.Text" xml:space="preserve">
     <value>すべて反転(&amp;T)</value>
   </data>
+  <data name="tsmiEnableHalfUpper.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="tsmiEnableHalfUpper.Text" xml:space="preserve">
+    <value>上位半分を有効(&amp;H)</value>
+  </data>
+  <data name="tsmiEnableHalfEven.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="tsmiEnableHalfEven.Text" xml:space="preserve">
+    <value>偶数番目を有効(&amp;E)</value>
+  </data>
   <data name="tsmiClearAllButZero.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="tsmiClearAllButZero.Text" xml:space="preserve">
     <value>0以外をクリア(&amp;C)</value>
@@ -2353,7 +2365,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA8
-        CAAAAk1TRnQBSQFMAgEBAwEAATgBAAE4AQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAAUgBAAFIAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA

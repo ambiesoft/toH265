@@ -82,7 +82,26 @@ namespace Ambiesoft {
 			{
 				init();
 			}
-			System::UInt64 Value() 
+			void EnableUpperHalf()
+			{
+				UINT64 ret = 0;
+				for (int i = 0; i < (CpuCount / 2); ++i)
+				{
+					ret |= (1LL << i);
+				}
+				cpuAffinity_ = ret;
+			}
+			void EnableEvenHalf()
+			{
+				UINT64 ret = 0;
+				for (int i = 0; i < CpuCount; ++i)
+				{
+					if( (i%2)==0)
+						ret |= (1LL << i);
+				}
+				cpuAffinity_ = ret;
+			}
+			System::UInt64 Value()
 			{
 				return cpuAffinity_;
 			}
