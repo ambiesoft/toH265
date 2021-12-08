@@ -79,8 +79,12 @@ namespace Ambiesoft {
 						File::Move(inputMovie, movedFile);
 						inEnded.Add(movedFile);
 					}
-					catch(Exception^)
+					catch(Exception^ ex)
 					{
+						CurrentJob->AddMoveFailed(
+							String::Format(
+								I18N(L"Failed to move '{0}' to '{1}'. ({2})"),
+								inputMovie, movedFile, ex->Message));
 						inEnded.Add(inputMovie);
 					}
 				}

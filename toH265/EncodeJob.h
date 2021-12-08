@@ -37,6 +37,7 @@ namespace Ambiesoft {
 			AVCodec^ outputAudioCodec_ = gcnew AVCodec();
 
 			bool bMoveFinishedInputMovies_;
+			System::Collections::Generic::List<String^> moveFailed_;
 
 			void CreateTempFile();
 			void DeleteTempFile();
@@ -228,6 +229,18 @@ namespace Ambiesoft {
 				sb->AppendLine(I18N(L"Output File:"));
 				sb->Append(L"  ");
 				sb->AppendLine(OutputtedMovie);
+			}
+
+			void AddMoveFailed(String^ failMessage) {
+				moveFailed_.Add(failMessage);
+			}
+			property bool IsMoveFailed
+			{
+				bool get() { return moveFailed_.Count != 0; }
+			}
+			property String^ ErrorFailedMove
+			{
+				String^ get() { return String::Join(Environment::NewLine, moveFailed_.ToArray()); }
 			}
 		};
 	}

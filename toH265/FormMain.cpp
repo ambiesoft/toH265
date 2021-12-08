@@ -884,18 +884,23 @@ namespace Ambiesoft {
 
 						sbMessage.AppendFormat(I18N(L"Encoding successfully finished at {0}."),
 							job->FinishedDateString);
-						// sbMessage.AppendLine();
 
 						if (!job->InputAudioCodec->IsEmpty && String::IsNullOrEmpty(outputtedAC))
 						{
 							sbMessage.AppendLine();
-							sbMessage.AppendLine(I18N("Be carefull. Audio codec not found."));
+							sbMessage.AppendLine(
+								String::Format(L"{0} {1}",
+									I18N(L"Be carefull."),
+									I18N(L"Audio codec not found.")));
 							isWarning = true;
 						}
 						if (!job->InputVideoCodec->IsEmpty && String::IsNullOrEmpty(outputtedVC))
 						{
 							sbMessage.AppendLine();
-							sbMessage.AppendLine(I18N("Be carefull. Video codec not found."));
+							sbMessage.AppendLine(
+								String::Format(L"{0} {1}",
+									I18N(L"Be carefull."),
+									I18N(L"Video codec not found.")));
 							isWarning = true;
 						}
 
@@ -903,13 +908,29 @@ namespace Ambiesoft {
 							outputtedTS.TotalMilliseconds))
 						{
 							sbMessage.AppendLine();
-							sbMessage.AppendLine(I18N("Be carefull. The durations differs."));
+							sbMessage.AppendLine(
+								String::Format(L"{0} {1}",
+									I18N(L"Be carefull."),
+									I18N(L"The durations differs.")));
 							isWarning = true;
 						}
 						if (!AmbLib::IsAlmostSame(job->TotalInputFPS, outputtedFps))
 						{
 							sbMessage.AppendLine();
-							sbMessage.AppendLine(I18N("Be carefull. The FPSs differs."));
+							sbMessage.AppendLine(
+								String::Format(L"{0} {1}",
+									I18N(L"Be carefull."),
+									I18N(L"The FPSs differs.")));
+							isWarning = true;
+						}
+						if (job->IsMoveFailed)
+						{
+							sbMessage.AppendLine();
+							sbMessage.AppendLine(
+								String::Format(L"{0} {1}",
+									I18N(L"Be carefull."),
+									I18N("Failed to move some files.")));
+							sbMessage.AppendLine(job->ErrorFailedMove);
 							isWarning = true;
 						}
 						sbMessage.AppendLine();

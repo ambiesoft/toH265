@@ -303,11 +303,11 @@
   <data name="No last message" xml:space="preserve">
     <value>メッセージはありません</value>
   </data>
-  <data name="Be carefull. The durations differs." xml:space="preserve">
-    <value>ご注意ください。プレイ時間が異なります。</value>
+  <data name="The durations differs." xml:space="preserve">
+    <value>プレイ時間が異なります。</value>
   </data>
-  <data name="Be carefull. The FPSs differs." xml:space="preserve">
-    <value>ご注意ください。FPSが異なります。</value>
+  <data name="The FPSs differs." xml:space="preserve">
+    <value>FPSが異なります。</value>
   </data>
   <data name="Are you sure to clear all items?" xml:space="preserve">
     <value>すべてのアイテムをクリアしますか？</value>
@@ -353,5 +353,20 @@
   </data>
   <data name="It is set to launch app after task is finished. {0} Please check '[Option] -&gt; [Process after Finish]' settings." xml:space="preserve">
     <value>タスク終了時にアプリケーションを起動するように設定がされていますが、{0} 「オプション」 →「終了後の処理」を確認してください。</value>
+  </data>
+  <data name="Audio codec not found." xml:space="preserve">
+    <value>音声コーデックが見つかりません。</value>
+  </data>
+  <data name="Be carefull." xml:space="preserve">
+    <value>ご注意ください。</value>
+  </data>
+  <data name="Failed to move '{0}' to '{1}'. ({2})" xml:space="preserve">
+    <value>ファイルを '{0}' から '{1}' へ移動できませんでした。 ({2})</value>
+  </data>
+  <data name="Failed to move some files." xml:space="preserve">
+    <value>いくつかのファイルの移動に失敗しました。</value>
+  </data>
+  <data name="Video codec not found." xml:space="preserve">
+    <value>映像コーデックが見つかりません。</value>
   </data>
 </root>
