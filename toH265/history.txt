@@ -1,3 +1,5 @@
+Migrated to VS2022 and .NET4.8
+
 2021/12/08 ver1.0.94
 Added Error Message when file-move failed
 Tweak dialog
