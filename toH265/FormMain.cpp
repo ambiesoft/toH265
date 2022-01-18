@@ -933,6 +933,15 @@ namespace Ambiesoft {
 							sbMessage.AppendLine(job->ErrorFailedMove);
 							isWarning = true;
 						}
+						if (outputtedSize > inputSize)
+						{
+							sbMessage.AppendLine();
+							sbMessage.AppendLine(
+								String::Format(L"{0} {1}",
+									I18N(L"Be carefull."),
+									I18N("The size of the output file is larger than the size of the input file.")));
+							isWarning = true;
+						}
 						sbMessage.AppendLine();
 						job->PrintEndedInputFiles(% sbMessage);
 						job->PrintOutputFile(% sbMessage);

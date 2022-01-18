@@ -1,3 +1,5 @@
+2022/01/18 ver1.1.1
+Added a warning when the size of the output file is larger than the size of the input file.
 Migrated to VS2022 and .NET4.8
 
 2021/12/08 ver1.0.94

@@ -369,4 +369,7 @@
   <data name="Video codec not found." xml:space="preserve">
     <value>映像コーデックが見つかりません。</value>
   </data>
+  <data name="The size of the output file is larger than the size of the input file." xml:space="preserve">
+    <value>出力ファイルのサイズが入力ファイルのサイズよりも大きいです。</value>
+  </data>
 </root>
