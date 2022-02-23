@@ -78,11 +78,14 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::GroupBox^ groupMoveFinishedInput;
 		private: System::Windows::Forms::Label^ lblMoveFinishedInputFiles;
 		private: System::Windows::Forms::CheckBox^ chkMoveFinishedInputs;
+		private: System::Windows::Forms::Button^ btnSaveAsDefault;
+		private: System::Windows::Forms::Label^ lblSaved;
+		private: System::Windows::Forms::Timer^ timerSaved;
 
 			   initonly AVCodec^ DefaultAudioCodec;
 		public:
-			TargetCodecDialog(bool bLosslessable, 
-				String^ iniPath, 
+			TargetCodecDialog(bool bLosslessable,
+				String^ iniPath,
 				String^ section,
 				array<String^>^ inputMovies,
 				AVCodec^ defaultV, AVCodec^ defaultA);
@@ -254,10 +257,10 @@ namespace Ambiesoft {
 		private: System::Windows::Forms::Button^ btnCancel;
 		internal: System::Windows::Forms::RadioButton^ rbVideoCopy;
 		private: System::Windows::Forms::ComboBox^ cmbEncodeType;
-internal: System::Windows::Forms::RadioButton^ rbVideoAV1;
-private: System::ComponentModel::IContainer^ components;
-internal:
-private:
+		internal: System::Windows::Forms::RadioButton^ rbVideoAV1;
+		private: System::ComponentModel::IContainer^ components;
+		internal:
+		private:
 
 		internal:
 		private:
@@ -322,6 +325,9 @@ private:
 				this->groupMoveFinishedInput = (gcnew System::Windows::Forms::GroupBox());
 				this->lblMoveFinishedInputFiles = (gcnew System::Windows::Forms::Label());
 				this->chkMoveFinishedInputs = (gcnew System::Windows::Forms::CheckBox());
+				this->btnSaveAsDefault = (gcnew System::Windows::Forms::Button());
+				this->lblSaved = (gcnew System::Windows::Forms::Label());
+				this->timerSaved = (gcnew System::Windows::Forms::Timer(this->components));
 				this->groupVideoCodec->SuspendLayout();
 				this->groupAudioCodec->SuspendLayout();
 				this->groupTargetDirectory->SuspendLayout();
@@ -549,32 +555,32 @@ private:
 				// 
 				// cmFilenameMacro
 				// 
+				resources->ApplyResources(this->cmFilenameMacro, L"cmFilenameMacro");
 				this->cmFilenameMacro->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
 					this->basenameToolStripMenuItem,
 						this->basenamewithoutextToolStripMenuItem, this->targetextToolStripMenuItem, this->originalextToolStripMenuItem
 				});
 				this->cmFilenameMacro->Name = L"cmFilenameMacro";
-				resources->ApplyResources(this->cmFilenameMacro, L"cmFilenameMacro");
 				// 
 				// basenameToolStripMenuItem
 				// 
-				this->basenameToolStripMenuItem->Name = L"basenameToolStripMenuItem";
 				resources->ApplyResources(this->basenameToolStripMenuItem, L"basenameToolStripMenuItem");
+				this->basenameToolStripMenuItem->Name = L"basenameToolStripMenuItem";
 				// 
 				// basenamewithoutextToolStripMenuItem
 				// 
-				this->basenamewithoutextToolStripMenuItem->Name = L"basenamewithoutextToolStripMenuItem";
 				resources->ApplyResources(this->basenamewithoutextToolStripMenuItem, L"basenamewithoutextToolStripMenuItem");
+				this->basenamewithoutextToolStripMenuItem->Name = L"basenamewithoutextToolStripMenuItem";
 				// 
 				// targetextToolStripMenuItem
 				// 
-				this->targetextToolStripMenuItem->Name = L"targetextToolStripMenuItem";
 				resources->ApplyResources(this->targetextToolStripMenuItem, L"targetextToolStripMenuItem");
+				this->targetextToolStripMenuItem->Name = L"targetextToolStripMenuItem";
 				// 
 				// originalextToolStripMenuItem
 				// 
-				this->originalextToolStripMenuItem->Name = L"originalextToolStripMenuItem";
 				resources->ApplyResources(this->originalextToolStripMenuItem, L"originalextToolStripMenuItem");
+				this->originalextToolStripMenuItem->Name = L"originalextToolStripMenuItem";
 				// 
 				// groupMoveFinishedInput
 				// 
@@ -596,17 +602,36 @@ private:
 				this->chkMoveFinishedInputs->UseVisualStyleBackColor = true;
 				this->chkMoveFinishedInputs->CheckedChanged += gcnew System::EventHandler(this, &TargetCodecDialog::chkMoveFinishedInputs_CheckedChanged);
 				// 
+				// btnSaveAsDefault
+				// 
+				resources->ApplyResources(this->btnSaveAsDefault, L"btnSaveAsDefault");
+				this->btnSaveAsDefault->Name = L"btnSaveAsDefault";
+				this->btnSaveAsDefault->UseVisualStyleBackColor = true;
+				this->btnSaveAsDefault->Click += gcnew System::EventHandler(this, &TargetCodecDialog::btnSaveAsDefault_Click);
+				// 
+				// lblSaved
+				// 
+				resources->ApplyResources(this->lblSaved, L"lblSaved");
+				this->lblSaved->Name = L"lblSaved";
+				// 
+				// timerSaved
+				// 
+				this->timerSaved->Interval = 1000;
+				this->timerSaved->Tick += gcnew System::EventHandler(this, &TargetCodecDialog::timerSaved_Tick);
+				// 
 				// TargetCodecDialog
 				// 
 				this->AcceptButton = this->btnOK;
 				resources->ApplyResources(this, L"$this");
 				this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
 				this->CancelButton = this->btnCancel;
+				this->Controls->Add(this->lblSaved);
+				this->Controls->Add(this->btnSaveAsDefault);
 				this->Controls->Add(this->groupMoveFinishedInput);
 				this->Controls->Add(this->groupAdditionalOptions);
+				this->Controls->Add(this->btnOK);
 				this->Controls->Add(this->chkFileByFile);
 				this->Controls->Add(this->groupFilename);
-				this->Controls->Add(this->btnOK);
 				this->Controls->Add(this->groupTargetDirectory);
 				this->Controls->Add(this->cmbEncodeType);
 				this->Controls->Add(this->btnCancel);
@@ -653,7 +678,6 @@ private:
 			System::Void CmbEncodeType_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
 			System::Void BtnOK_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void TargetCodecDialog_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
-			System::Void TargetCodecDialog_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e);
 			System::Void TargetCodecDialog_Load(System::Object^ sender, System::EventArgs^ e);
 			System::Void btnBrowseOtherDirectory_Click(System::Object^ sender, System::EventArgs^ e);
 			System::Void chkSameDirectory_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -672,6 +696,12 @@ private:
 			}
 			System::Void chkMoveFinishedInputs_CheckedChanged(System::Object^ sender, System::EventArgs^ e);
 
-};
+			System::Void btnSaveAsDefault_Click(System::Object^ sender, System::EventArgs^ e);
+
+			System::Void TargetCodecDialog_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e);
+
+			System::Void timerSaved_Tick(System::Object^ sender, System::EventArgs^ e);
+
+		};
 	}
 }

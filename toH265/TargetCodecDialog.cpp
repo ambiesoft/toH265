@@ -178,12 +178,13 @@ namespace Ambiesoft {
 					ret.Add(o->ToString());
 			return ret.ToArray();
 		}
-		System::Void TargetCodecDialog::TargetCodecDialog_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e)
+		System::Void TargetCodecDialog::btnSaveAsDefault_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (this->DialogResult != System::Windows::Forms::DialogResult::OK)
-				return;
 			if (!CanSerialize)
+			{
+				CppUtils::Alert(I18N(L"Can not serialize"));
 				return;
+			}
 			HashIni^ ini = Profile::ReadAll(IniPath);
 			bool success = true;
 			success &= Profile::WriteInt(SECTION, KEY_ENCODE_TYPE, cmbEncodeType->SelectedIndex, ini);
@@ -197,19 +198,6 @@ namespace Ambiesoft {
 			success &= Profile::WriteBool(SECTION, KEY_FILE_BY_FILE, chkFileByFile->Checked, ini);
 
 			success &= AmbLib::SaveComboBox(cmbFilenameMacro, KEY_FILENAME_MACRO, FILENAME_MACRO_MAX, ini);
-			//Profile::WriteStringArray(SECTION, KEY_FILENAME_MACRO_ARRAY,
-			//	toStringArray(cmbFilenameMacro->Items), ini);
-			//Profile::WriteString(SECTION, KEY_FILENAME_MACRO,
-			//	cmbFilenameMacro->Text, ini);
-			
-			//Profile::WriteStringArray(SECTION, KEY_FILENAME_AFTER_ARRAY,
-			//	toStringArray(cmbAfterFilename->Items), ini);
-			//Profile::WriteString(SECTION, KEY_FILENAME_AFTER,
-			//	cmbAfterFilename->Text, ini);
-
-
-
-
 
 			success &= Profile::WriteStringArray(SECTION, KEY_ADDITIONALOPTIONS_BEFOREINPUT_ARRAY,
 				toStringArray(cmbAdditionalOptionsBeforeInput->Items), ini);
@@ -226,6 +214,38 @@ namespace Ambiesoft {
 
 			success &= Profile::WriteAll(ini, IniPath);
 			if(!success)
+			{
+				CppUtils::Alert(I18N(L"Failed to save ini"));
+				return;
+			}
+
+			lblSaved->Visible = true;
+			timerSaved->Enabled = true;
+		}
+		System::Void TargetCodecDialog::timerSaved_Tick(System::Object^ sender, System::EventArgs^ e)
+		{
+			lblSaved->Visible = false;
+			timerSaved->Enabled = false;
+		}
+		System::Void TargetCodecDialog::TargetCodecDialog_FormClosed(System::Object^ sender, System::Windows::Forms::FormClosedEventArgs^ e)
+		{
+			if (this->DialogResult != System::Windows::Forms::DialogResult::OK)
+				return;
+			if (!CanSerialize)
+				return;
+
+			HashIni^ ini = Profile::ReadAll(IniPath);
+			bool success = true;
+
+			// Save combobox items but not current text
+			success &= Profile::WriteStringArray(SECTION, KEY_ADDITIONALOPTIONS_BEFOREINPUT_ARRAY,
+				toStringArray(cmbAdditionalOptionsBeforeInput->Items), ini);
+
+			success &= Profile::WriteStringArray(SECTION, KEY_ADDITIONALOPTIONS_AFTERINPUT_ARRAY,
+				toStringArray(cmbAdditionalOptionsAfterInput->Items), ini);
+
+			success &= Profile::WriteAll(ini, IniPath);
+			if (!success)
 			{
 				CppUtils::Alert(I18N(L"Failed to save ini"));
 			}
