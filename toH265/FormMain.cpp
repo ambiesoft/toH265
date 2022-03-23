@@ -613,6 +613,21 @@ namespace Ambiesoft {
 		}
 
 
+		System::Void FormMain::timerLogError_Tick(System::Object^ sender, System::EventArgs^ e)
+		{
+			if (sbLogErrBuffer_.Length != 0)
+			{
+				txtLogErr->AppendText(sbLogErrBuffer_.ToString());
+				sbLogErrBuffer_.Clear();
+			}
+			timerLogError->Enabled = false;
+		}
+		void FormMain::AddToErrBuffered(String^ text)
+		{
+			sbLogErrBuffer_.AppendLine(text);
+			timerLogError->Enabled = true;
+		}
+		
 		void FormMain::AddToErr(String^ text)
 		{
 			try
@@ -630,14 +645,17 @@ namespace Ambiesoft {
 				}
 				else
 				{
-					txtLogErr->AppendText(text);
-					txtLogErr->AppendText(L"\r\n");
+					//txtLogErr->AppendText(text);
+					//txtLogErr->AppendText(L"\r\n");
+					AddToErrBuffered(text);
 				}
 			}
 			catch (Exception ^ ex)
 			{
-				txtLogErr->AppendText(ex->Message);
-				txtLogErr->AppendText(L"\r\n");
+				//txtLogErr->AppendText(ex->Message);
+				//txtLogErr->AppendText(L"\r\n");
+
+				AddToErrBuffered(ex->Message);
 			}
 		}
 
@@ -813,7 +831,9 @@ namespace Ambiesoft {
 			String^ report;
 			String^ arg = encodeTask_->GetArg(report);
 
-			txtLogErr->AppendText(report);
+			// txtLogErr->AppendText(report);
+			if(!String::IsNullOrEmpty(report))
+				AddToErrBuffered(report);
 
 			txtFFMpegArg->Text = String::Format(L"{0} {1}",
 				AmbLib::doubleQuoteIfSpace(FFMpeg), arg);

@@ -50,7 +50,6 @@ namespace Ambiesoft {
 				String^ text_;
 				int width_;
 				SORTTYPE sorttype_;
-
 			public:
 				ColumnItem(String^ key, String^ text, int width, SORTTYPE sorttype) :
 					key_(key),
@@ -156,6 +155,7 @@ private: System::Windows::Forms::Label^ lblBottomRight;
 private: System::Windows::Forms::Label^ lblTopLeft;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnableHalfUpper;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnableHalfEven;
+private: System::Windows::Forms::Timer^ timerLogError;
 
 			EncodeTask^ encodeTask_;
 			property bool IsTaskActive
@@ -163,6 +163,10 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnableHalfEven;
 				bool get() { return encodeTask_ && !encodeTask_->IsAllEnded(); }
 			}
 			void SetItemCountStatus();
+
+
+			System::Text::StringBuilder sbLogErrBuffer_;
+
 		public:
 			// static initonly cli::array<wchar_t>^ char1x = gcnew cli::array<wchar_t>{L'x'};
 
@@ -376,6 +380,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			delegate void AddToLog(String^ text);
 			void AddToOutput(String^ text);
 			void AddToErr(String^ text);
+			void AddToErrBuffered(String^ text);
 			void AfterDrop(array<String^>^ files);
 
 			System::Threading::Thread^ thFFMpeg_;
@@ -670,6 +675,8 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			void OnListViewMouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 			void OnListViewMouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 			void OnBtnBrowseMouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
+
+			System::Void timerLogError_Tick(System::Object^ sender, System::EventArgs^ e);
 
 };
 
