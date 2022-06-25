@@ -10,5 +10,6 @@ namespace Ambiesoft {
 
 		String^ sToString(System::Drawing::Size size);
 		System::Collections::Generic::List<System::String^>^ MakeUnique(System::Collections::Generic::List<System::String^>^ inList);
+		String^ ToCommonDurationString(System::TimeSpan ts);
 	}
 }

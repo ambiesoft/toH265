@@ -37,9 +37,11 @@ namespace Ambiesoft {
 		};
 		public ref class Summary
 		{
+			String^ overallResult_ = String::Empty;
 			System::Collections::Generic::List<Paper^> papers_;
 
 		public:
+			void AddOverallResult(EncodeTask^ encodeTask);
 			void AddPaper(bool hasWarning, String^ text, EncodeJob^ job)
 			{
 				papers_.Add(gcnew Paper(hasWarning, text, job));

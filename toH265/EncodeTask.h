@@ -13,6 +13,7 @@ namespace Ambiesoft {
 		{
 			int currentI_ = -1;
 			System::Collections::Generic::List<EncodeJob^> jobs_;
+			System::DateTime startTime_ = System::DateTime::Now;
 
 			property EncodeJob^ CurrentJob
 			{
@@ -192,7 +193,18 @@ namespace Ambiesoft {
 					return ret;
 				}
 			}
-
+			property System::DateTime StartTime
+			{
+				System::DateTime get() {
+					return startTime_;
+				}
+			}
+			property System::TimeSpan ElapsedTime
+			{
+				System::TimeSpan get() {
+					return System::DateTime::Now - startTime_;
+				}
+			}
 			void Cancel() {
 				if (IsCurrentValid)
 					CurrentJob->Cancel();

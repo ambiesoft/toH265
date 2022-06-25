@@ -120,5 +120,13 @@ namespace Ambiesoft {
 			}
 			return result;
 		}
+
+		String^ ToCommonDurationString(System::TimeSpan ts)
+		{
+			return String::Format(L"{0:00}:{1:00}:{2:00}",
+				(ts.Days * 24) + ts.Hours,
+				ts.Minutes,
+				ts.Seconds);
+		}
 	}
 }

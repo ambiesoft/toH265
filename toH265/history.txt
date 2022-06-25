@@ -1,3 +1,6 @@
+2022/06/25 ver1.1.4
+Modified: The finish report has head text
+
 2022/03/23 ver1.1.3
 Modified: Log texts will be inserted using a buffer and timer.
 

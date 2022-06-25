@@ -867,6 +867,7 @@ namespace Ambiesoft {
 			}
 
 			Summary^ summary = gcnew Summary();
+			summary->AddOverallResult(encodeTask_);
 
 			// default process after finish
 			for each (EncodeJob ^ job in encodeTask_->GetResults())
