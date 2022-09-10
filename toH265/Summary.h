@@ -47,7 +47,7 @@ namespace Ambiesoft {
 				papers_.Add(gcnew Paper(hasWarning, text, job));
 			}
 
-			void Show(System::Windows::Forms::IWin32Window^ win);
+			void Show(System::Windows::Forms::Form^ form);
 
 			property String^ LastOutputMovie
 			{

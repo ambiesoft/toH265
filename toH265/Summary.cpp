@@ -22,7 +22,7 @@ namespace Ambiesoft {
 			overallResult_ = sb.ToString();
 		}
 
-		void Summary::Show(IWin32Window^ win)
+		void Summary::Show(Form^ form)
 		{
 			bool isWarning = false;
 			StringBuilder sb;
@@ -35,7 +35,8 @@ namespace Ambiesoft {
 				sb.AppendLine("==============================");
 			}
 
-			JR::Utils::GUI::Forms::FlexibleMessageBox::Show(win,
+			JR::Utils::GUI::Forms::FlexibleMessageBox::Show(
+				form->Visible && form->WindowState != FormWindowState::Minimized ? form : nullptr,
 				sb.ToString(),
 				Application::ProductName,
 				MessageBoxButtons::OK,

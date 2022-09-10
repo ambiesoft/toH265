@@ -1,3 +1,6 @@
+2022/09/10 ver1.1.5
+Fixed the position of the report messagebox
+
 2022/06/25 ver1.1.4
 Modified: The finish report has head text
 
