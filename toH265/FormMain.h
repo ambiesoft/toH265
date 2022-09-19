@@ -7,7 +7,6 @@
 #include "EncodeTask.h"
 #include "Summary.h"
 #include "InputListView.h"
-#include "CTaskBarProgress.h"
 
 #include "toH265.h"
 

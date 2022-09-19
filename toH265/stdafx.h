@@ -4,17 +4,14 @@
 #pragma once
 
 #include <Windows.h>
-#include <comip.h>
-#include <comdef.h>
-#include <shlobj.h>
-#include <shellapi.h>
-_COM_SMARTPTR_TYPEDEF(ITaskbarList3, __uuidof(ITaskbarList3));
+
 
 #include "DebugMacro.h"
 
 #include "../../lsMisc/IsFileOpen.h"
 #include "../../lsMisc/getStdString.net.h"
 #include "../../lsMisc/OpenCommon.h"
+#include "../../lsMisc/CTaskBarProgress.h"
 
 enum ERROR_RETURN
 {

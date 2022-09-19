@@ -211,6 +211,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\lsMisc\CTaskBarProgress.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\..\lsMisc\getStdString.net.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -239,7 +245,6 @@
     <ClCompile Include="AVDuration.cpp" />
     <ClCompile Include="ContinueException.cpp" />
     <ClCompile Include="CpuAffinity.cpp" />
-    <ClCompile Include="CTaskBarProgress.cpp" />
     <ClCompile Include="ElapseInfo.cpp" />
     <ClCompile Include="EncodeJob.cpp" />
     <ClCompile Include="EncodeTask.cpp" />
@@ -273,6 +278,7 @@
     <ClCompile Include="AVCodec.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\lsMisc\CTaskBarProgress.h" />
     <ClInclude Include="..\..\lsMisc\getStdString.net.h" />
     <ClInclude Include="..\..\lsMisc\HighDPI.h" />
     <ClInclude Include="..\..\lsMisc\IsFileOpen.h" />
@@ -280,7 +286,6 @@
     <ClInclude Include="AVDuration.h" />
     <ClInclude Include="ContinueException.h" />
     <ClInclude Include="CpuAffinity.h" />
-    <ClInclude Include="CTaskBarProgress.h" />
     <ClInclude Include="DebugMacro.h" />
     <ClInclude Include="ElapseInfo.h" />
     <ClInclude Include="EncodeJob.h" />

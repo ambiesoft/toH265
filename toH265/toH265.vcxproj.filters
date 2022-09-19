@@ -123,7 +123,7 @@
     <ClCompile Include="FormMainToolTip.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CTaskBarProgress.cpp">
+    <ClCompile Include="..\..\lsMisc\CTaskBarProgress.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -194,7 +194,7 @@
     <ClInclude Include="gitrev.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CTaskBarProgress.h">
+    <ClInclude Include="..\..\lsMisc\CTaskBarProgress.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
   </ItemGroup>
