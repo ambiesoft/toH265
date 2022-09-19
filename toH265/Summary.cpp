@@ -36,7 +36,7 @@ namespace Ambiesoft {
 			}
 
 			JR::Utils::GUI::Forms::FlexibleMessageBox::Show(
-				form->Visible && form->WindowState != FormWindowState::Minimized ? form : nullptr,
+				form,
 				sb.ToString(),
 				Application::ProductName,
 				MessageBoxButtons::OK,
