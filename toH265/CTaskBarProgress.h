@@ -8,5 +8,8 @@ public:
 	virtual ~CTaskBarProgress();
 	void Init(HWND h);
 	void SetProgress(int percent);
+	void SetProgressPaused();
+	void SetProgressUnpaused();
+	void SetProgressEnded();
 };
 

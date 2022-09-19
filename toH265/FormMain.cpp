@@ -519,6 +519,9 @@ namespace Ambiesoft {
 		void FormMain::UpdateTitleComplete()
 		{
 			UpdateTitle(100);
+
+			if (m_pTaskbarProgress)
+				m_pTaskbarProgress->SetProgressEnded();
 		}
 
 		String^ FormMain::tsToString(TimeSpan ts)
@@ -1254,6 +1257,8 @@ namespace Ambiesoft {
 				processSuspeded_ = false;
 				this->Icon = iconRed_;
 				notifyIconMain->Icon = iconRed_;
+				if (m_pTaskbarProgress)
+					m_pTaskbarProgress->SetProgressUnpaused();
 				return;
 			case FFMpegState::ProcessLaunching:
 				CppUtils::Alert(this, I18N(L"Intermidiate state. Wait a while and do it again."));
@@ -1269,6 +1274,8 @@ namespace Ambiesoft {
 				this->Icon = iconYellow_;
 				notifyIconMain->Icon = iconYellow_;
 				elapses_.Clear();
+				if (m_pTaskbarProgress)
+					m_pTaskbarProgress->SetProgressPaused();
 				return;
 			case FFMpegState::Unknown:
 				CppUtils::Alert(this, I18N(L"Unknow Error."));

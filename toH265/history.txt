@@ -1,6 +1,7 @@
 2022/09/19 ver1.1.6
 Revert the position of the report messagebox for it became modeless
 Added functionality to display progress on the taskbar
+Changed the progress indicator on the taskbar depending on the state of the progress
 
 2022/09/10 ver1.1.5
 Fixed the position of the report messagebox

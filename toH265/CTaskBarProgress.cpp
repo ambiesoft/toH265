@@ -17,6 +17,30 @@ CTaskBarProgress::~CTaskBarProgress()
 
 void CTaskBarProgress::SetProgress(int percent)
 {
-	if(m_pTaskBarlist)
+	if (m_pTaskBarlist)
+	{
 		m_pTaskBarlist->SetProgressValue(m_hWnd, percent, 100);
+		m_pTaskBarlist->SetProgressState(m_hWnd, TBPF_NORMAL);
+	}
+}
+void CTaskBarProgress::SetProgressPaused()
+{
+	if (m_pTaskBarlist)
+	{
+		m_pTaskBarlist->SetProgressState(m_hWnd, TBPF_PAUSED);
+	}
+}
+void CTaskBarProgress::SetProgressUnpaused()
+{
+	if (m_pTaskBarlist)
+	{
+		m_pTaskBarlist->SetProgressState(m_hWnd, TBPF_NORMAL);
+	}
+}
+void CTaskBarProgress::SetProgressEnded()
+{
+	if (m_pTaskBarlist)
+	{
+		m_pTaskBarlist->SetProgressState(m_hWnd, TBPF_NOPROGRESS);
+	}
 }
