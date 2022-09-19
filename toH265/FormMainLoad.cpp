@@ -31,6 +31,9 @@ namespace Ambiesoft {
 			// TODO: not good
 			// toH265Helper::setupToolTip(listTip_, lvInputs->Font);
 
+			m_pTaskbarProgress = new CTaskBarProgress();
+			m_pTaskbarProgress->Init((HWND)this->Handle.ToPointer());
+
 			FormMain_Resize(this, nullptr);
 		}
 

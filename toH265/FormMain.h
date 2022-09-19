@@ -7,6 +7,7 @@
 #include "EncodeTask.h"
 #include "Summary.h"
 #include "InputListView.h"
+#include "CTaskBarProgress.h"
 
 #include "toH265.h"
 
@@ -144,6 +145,9 @@ namespace Ambiesoft {
 
 			// System::Windows::Forms::Timer^ timerSetAffinity_;
 			bool bCloseFromMenu_;
+
+			CTaskBarProgress* m_pTaskbarProgress = nullptr;
+
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiClearAllItems;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowInputFileInExplorer;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiShowOutputFileInExplorer;
@@ -289,6 +293,9 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			/// </summary>
 			~FormMain()
 			{
+				delete m_pTaskbarProgress;
+				m_pTaskbarProgress = nullptr;
+
 				if (components)
 				{
 					delete components;

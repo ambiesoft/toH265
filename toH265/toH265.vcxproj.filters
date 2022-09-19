@@ -123,6 +123,9 @@
     <ClCompile Include="FormMainToolTip.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CTaskBarProgress.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -189,6 +192,9 @@
       <Filter>1 Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gitrev.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CTaskBarProgress.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
   </ItemGroup>

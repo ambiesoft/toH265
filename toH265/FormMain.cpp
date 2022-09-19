@@ -579,6 +579,9 @@ namespace Ambiesoft {
 			double percent = (totalProgress) / encodeTask_->TotalInputDuration->TotalMilliseconds;
 			UpdateTitle((int)(percent * 100));
 
+			if (m_pTaskbarProgress)
+				m_pTaskbarProgress->SetProgress((int)(percent * 100));
+
 			if (this->WindowState == FormWindowState::Minimized)
 				return;
 

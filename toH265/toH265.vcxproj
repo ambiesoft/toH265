@@ -239,6 +239,7 @@
     <ClCompile Include="AVDuration.cpp" />
     <ClCompile Include="ContinueException.cpp" />
     <ClCompile Include="CpuAffinity.cpp" />
+    <ClCompile Include="CTaskBarProgress.cpp" />
     <ClCompile Include="ElapseInfo.cpp" />
     <ClCompile Include="EncodeJob.cpp" />
     <ClCompile Include="EncodeTask.cpp" />
@@ -279,6 +280,7 @@
     <ClInclude Include="AVDuration.h" />
     <ClInclude Include="ContinueException.h" />
     <ClInclude Include="CpuAffinity.h" />
+    <ClInclude Include="CTaskBarProgress.h" />
     <ClInclude Include="DebugMacro.h" />
     <ClInclude Include="ElapseInfo.h" />
     <ClInclude Include="EncodeJob.h" />
