@@ -1,3 +1,6 @@
+2022/10/15 ver1.1.7
+Fixed: When the duration of the video is exceeded 24 hours, it failed.
+
 2022/09/19 ver1.1.6
 Revert the position of the report messagebox for it became modeless
 Added functionality to display progress on the taskbar

@@ -8,6 +8,7 @@
 #include "ListViewItemData.h"
 
 #include "FormMain.h"
+using namespace System::Globalization;
 
 #pragma comment(lib, "shell32.lib")
 
@@ -335,7 +336,7 @@ namespace Ambiesoft {
 				totalInputAudioCodec->Merge(gcnew AVCodec(lvi->SubItems["acodec"]->Text));
 				totalInputVideoCodec->Merge(gcnew AVCodec(lvi->SubItems["vcodec"]->Text));
 
-				TimeSpan ts = TimeSpan::Parse(lvi->SubItems["duration"]->Text);
+				TimeSpan ts = toH265Helper::GetTSFromHMS(lvi->SubItems["duration"]->Text);
 				mDuration += ts.TotalMilliseconds;
 
 				double d;

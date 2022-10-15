@@ -59,6 +59,7 @@
     <Compile Include="UnitTestAmbLib.cs" />
     <Compile Include="UnitTestFFMpegRegex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
