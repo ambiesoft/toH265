@@ -1083,7 +1083,7 @@ namespace Ambiesoft {
 		}
 		AVDuration^ FormMain::GetDurationFromLvi(ListViewItem^ lvi)
 		{
-			return gcnew AVDuration(TimeSpan::Parse(lvi->SubItems["duration"]->Text));
+			return gcnew AVDuration(toH265Helper::GetTSFromHMS(lvi->SubItems["duration"]->Text));
 		}
 		AVCodec^ FormMain::GetVCodecFromLvi(ListViewItem^ lvi)
 		{

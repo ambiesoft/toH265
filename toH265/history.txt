@@ -1,3 +1,6 @@
+2022/10/15 ver1.1.8
+ReFixed: When the duration of the video is exceeded 24 hours, it failed.
+
 2022/10/15 ver1.1.7
 Fixed: When the duration of the video is exceeded 24 hours, it failed.
 

@@ -141,13 +141,29 @@ namespace Ambiesoft
             newArgs.DrawText(TextFormatFlags.TextBoxControl);
         }
 
-        public static TimeSpan GetTSFromHMS(string strHMS)
+        public static TimeSpan GetTSFromHMS(string strHMSM)
         {
-            string[] arrayHMS = strHMS.Split(':');
+            int millisec = 0;
+            string[] arrayHMSM = strHMSM.Split('.');
+            if (arrayHMSM.Length > 1)
+            {
+                string strMillisec = arrayHMSM[1];
+                if (strMillisec.Length > 3)
+                    strMillisec = strMillisec.Substring(0, 3);
+                else if(strMillisec.Length < 3)
+                {
+                    while(strMillisec.Length < 3)
+                        strMillisec += "0";
+                }
+                millisec = Convert.ToInt32(strMillisec);
+            }
+            string[] arrayHMS = arrayHMSM[0].Split(':');
             return new TimeSpan(
+                0,
                 int.Parse(arrayHMS[0]),
                 int.Parse(arrayHMS[1]),
-                int.Parse(arrayHMS[2]));
+                int.Parse(arrayHMS[2]),
+                millisec);
         }
     }
 }

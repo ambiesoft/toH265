@@ -28,7 +28,7 @@ namespace Ambiesoft
                 //	System::Globalization::CultureInfo::InvariantCulture);
                 //tsTime = dtTime - dtTime.Date;
 
-                tsTime = TimeSpan.Parse(timeValue);
+                tsTime = toH265Helper.GetTSFromHMS(timeValue);
 
                 string speedValue = match.Groups["speed"].Value;
                 if (speedValue == "N/A")
@@ -47,15 +47,6 @@ namespace Ambiesoft
             tsTime = TimeSpan.Zero;
             dblSpeed = 0;
             return false;
-        }
-
-        public static TimeSpan GetTSFromHMS(string strHMS)
-        {
-            string[] arrayHMS = strHMS.Split(':');
-            return new TimeSpan(
-                int.Parse(arrayHMS[0]),
-                int.Parse(arrayHMS[1]),
-                int.Parse(arrayHMS[2]));
         }
     };
 }
