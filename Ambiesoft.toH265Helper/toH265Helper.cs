@@ -165,5 +165,10 @@ namespace Ambiesoft
                 int.Parse(arrayHMS[2]),
                 millisec);
         }
+
+        public static bool IsAllSame<T>(T[] sizes)
+        {
+            return sizes.Distinct().ToArray().Length == 1;
+        }
     }
 }

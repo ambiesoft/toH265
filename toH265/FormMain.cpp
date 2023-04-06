@@ -1195,6 +1195,12 @@ namespace Ambiesoft {
 					rets->Add(fps);
 				}
 				break;
+				case ItemToGet::Aspect:
+				{
+					System::Drawing::Size aspect = GetVideoSize(lvi);
+					rets->Add(aspect);
+				}
+				break;
 				default:
 					DASSERT(false);
 				}
@@ -1230,6 +1236,10 @@ namespace Ambiesoft {
 			//	inputFpses.Add(duration);
 			//}
 			//return inputFpses.ToArray();
+		}
+		array<System::Drawing::Size>^ FormMain::GetInputAspects(ItemSelection sel)
+		{
+			return (array<System::Drawing::Size>^)GetItemsCommon(ItemToGet::Aspect, sel)->ToArray(System::Drawing::Size::typeid);
 		}
 		bool FormMain::HasCompleteItems::get()
 		{
@@ -1345,6 +1355,7 @@ namespace Ambiesoft {
 			array<String^>^ inputmovies = GetInputMovies(itemSelection);
 			array<AVDuration^>^ inputdurations = GetInputDurations(itemSelection);
 			array<double>^ inputFpses = GetInputFPSes(itemSelection);
+			array<System::Drawing::Size>^ inputAspects = GetInputAspects(itemSelection);
 
 			if (inputmovies->Length == 0)
 			{
@@ -1428,6 +1439,33 @@ namespace Ambiesoft {
 			// show the dialog
 			if (System::Windows::Forms::DialogResult::OK != codecDlg.ShowDialog())
 				return;
+
+			// check resolutions and fpses are same if combine
+			if (codecDlg.IsConcat)
+			{
+				bool bSameAspect = toH265Helper::IsAllSame(inputAspects);
+				bool bSameFps = toH265Helper::IsAllSame(inputFpses);
+
+				if (!bSameAspect || !bSameFps)
+				{
+					StringBuilder sb;
+					sb.AppendLine(I18N(L"The following attribute values are not the same. Do you want to continue?"));
+					sb.AppendLine();
+					if (!bSameAspect)
+						sb.AppendLine(I18N(L"Aspect Ratio"));
+					if (!bSameFps)
+						sb.AppendLine(I18N(L"FPS"));
+					if (System::Windows::Forms::DialogResult::Yes != CppUtils::CenteredMessageBox(
+						sb.ToString(),
+						Application::ProductName,
+						MessageBoxButtons::YesNo,
+						MessageBoxIcon::Question,
+						MessageBoxDefaultButton::Button2))
+					{
+						return;
+					}
+				}
+			}
 
 			// confirms shutdown
 			if (tsmiEnabledtsmiProcessAfterFinish->Checked)

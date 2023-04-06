@@ -423,12 +423,14 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 				Name,
 				Duration,
 				Fps,
+				Aspect,
 			};
 			System::Collections::ArrayList^ GetItemsCommon(ItemToGet toGet, ItemSelection sel);
 			array<ListViewItem^>^ GetItems(ItemSelection sel);
 			array<String^>^ GetInputMovies(ItemSelection sel);
 			array<AVDuration^>^ GetInputDurations(ItemSelection sel);
 			array<double>^ GetInputFPSes(ItemSelection sel);
+			array<System::Drawing::Size>^ GetInputAspects(ItemSelection sel);
 			property bool HasCompleteItems
 			{
 				bool get();
