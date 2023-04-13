@@ -271,8 +271,10 @@ namespace Ambiesoft {
 			if (duration.TotalMilliseconds == 0)
 			{
 				CppUtils::Alert(this, String::Format(I18N(L"'{0}' does not have duration."), moviefile));
-				ReturnValue = RETURN_DURATIONNOTFOUND;
-				return false;
+
+				// It maybe OK to not have duration
+				//ReturnValue = RETURN_DURATIONNOTFOUND;
+				//return false;
 			}
 
 			// Check if the encoding is already h265 or vp9
@@ -483,7 +485,10 @@ namespace Ambiesoft {
 		String^ FormMain::buildTitleText(int percent, bool bFilenameOnly)
 		{
 			StringBuilder sbTitle;
-			sbTitle.Append(percent);
+			if (percent < 0)
+				sbTitle.Append(L"???");
+			else
+				sbTitle.Append(percent);
 			sbTitle.Append("% - ");
 
 			if (!String::IsNullOrEmpty(CurrentEncodingOutputtingFile))
@@ -551,17 +556,17 @@ namespace Ambiesoft {
 				double progress = (lastElapse->Progress - firstElapse->Progress) / 1000.0;
 				if (!progress)
 					break;
+
+				if (total == 0) {
+					return I18N(L"Unknown");
+				}
 				double interval = (lastElapse->TimeStamp - firstElapse->TimeStamp) / (1000.0);
 
 				try
 				{
-
 					double progressPerSec = progress / interval;
-
 					double remainSec = total / 1000.0 - lastElapse->Progress / 1000.0;
-
 					double result = remainSec / progressPerSec;
-
 					return tsToString(TimeSpan::FromSeconds(result));
 				}
 				catch (Exception^)
@@ -580,18 +585,27 @@ namespace Ambiesoft {
 			ElapseInfo^ lastElapse = gcnew ElapseInfo(totalProgress);
 			ElapseInfo^ firstElapse = elapses_.Enqueue(lastElapse);
 
-			double percent = (totalProgress) / encodeTask_->TotalInputDuration->TotalMilliseconds;
-			UpdateTitle((int)(percent * 100));
+			if (encodeTask_->TotalInputDuration->TotalMilliseconds == 0)
+			{ 
+				// No duration
+				UpdateTitle(-1);
+				SetStatusText(STATUSTEXT::REMAINING,
+					GetRemainingTimeText(firstElapse, lastElapse, encodeTask_->TotalInputDuration->TotalMilliseconds));
+			}
+			else
+			{
+				double percent = (totalProgress) / encodeTask_->TotalInputDuration->TotalMilliseconds;
+				UpdateTitle((int)(percent * 100));
 
-			if (m_pTaskbarProgress)
-				m_pTaskbarProgress->SetProgress((int)(percent * 100));
+				if (m_pTaskbarProgress)
+					m_pTaskbarProgress->SetProgress((int)(percent * 100));
 
-			if (this->WindowState == FormWindowState::Minimized)
-				return;
+				if (this->WindowState == FormWindowState::Minimized)
+					return;
 
-			SetStatusText(STATUSTEXT::REMAINING,
-				GetRemainingTimeText(firstElapse, lastElapse, encodeTask_->TotalInputDuration->TotalMilliseconds));
-
+				SetStatusText(STATUSTEXT::REMAINING,
+					GetRemainingTimeText(firstElapse, lastElapse, encodeTask_->TotalInputDuration->TotalMilliseconds));
+			}
 			StatusOutputDuration = gcnew AVDuration(totalProgress);
 		}
 
