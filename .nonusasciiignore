@@ -1,0 +1,14 @@
+toH265/randomText.txt
+toH265/Copying.txt
+toH265Test/UnitTestAmbLib.cs
+
+*.rc
+*.rc2
+*.resx
+*.ico
+*.png
+*.jpg
+*.Designer.cs
+*jpn.txt
+*jp.md
+*__
