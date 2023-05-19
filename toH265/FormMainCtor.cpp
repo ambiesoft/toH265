@@ -22,6 +22,8 @@ namespace Ambiesoft {
 		{
 			InitializeComponent();
 
+			// UpdateMacros(nullptr);
+			
 			DefaultStatusColor = statusMain->BackColor;
 
 			lvInputs->Name = L"lvInputs";

@@ -1627,7 +1627,6 @@ namespace Ambiesoft {
 		{
 			List<String^>^ results = gcnew List<String^>();
 
-
 			for each (ListViewItem ^ item in lvInputs->Items)
 			{
 				if (bSelectedOnly && !item->Selected)
@@ -1656,47 +1655,61 @@ namespace Ambiesoft {
 		}
 		System::Void FormMain::tsmiOpenOutput_ClickCommon(System::Object^ sender, System::EventArgs^ e)
 		{
-			//String^ outputMovie;
-			//do
-			//{
-			//	if (!encodeTask_)
-			//	{
-			//		if (!lastSummary_)
-			//		{
-			//			break;
-			//		}
-			//		outputMovie = lastSummary_->LastOutputMovie;
-			//	}
-			//	else if (encodeTask_->IsAllEnded())
-			//	{
-			//		outputMovie = lastSummary_->LastOutputMovie;
-			//	}
-			//	else
-			//	{
-			//		outputMovie = encodeTask_->CurrentOutputtingMovieFile;
-			//	}
-			//} while (false);
-
-
-			//if (String::IsNullOrEmpty(outputMovie))
-			//{
-			//	CppUtils::Alert(this, I18N(STR_NO_OUTPUT_MOVIE));
-			//	return;
-			//}
-
-			//OpenFolder((HWND)this->Handle.ToPointer(),
-			//	getStdWstring(outputMovie).c_str());
-
 			for each (String ^ file in GetOutputtedMoviesFromList(false))
 				CppUtils::OpenFolder(this, file);
-
 		}
+
+		void FormMain::UpdateMacros_notyet(ListViewItem^ item)
+		{
+			String^ input;
+			String^ output;
+			if (item)
+			{
+				input = GetMovieFileFromLvi(item);
+				output = ListViewItemData::Get(item)->OutputtingFile;
+			}
+
+			if (String::IsNullOrEmpty(input))
+			{
+				input = Path::Combine(
+					Path::GetDirectoryName(Application::ExecutablePath),
+					L"input.mp4");
+			}
+			if (String::IsNullOrEmpty(output))
+			{
+				output = Path::Combine(
+					Path::GetDirectoryName(Application::ExecutablePath),
+					L"output.mp4");
+			}
+			
+			UpdateMacrosFromString_notyet(input, output);
+		}
+		void FormMain::UpdateMacrosFromString_notyet(String^ input, String^ output)
+		{
+			dlgAfterFinish_.SetArgMacro("InputMovieFull", input);
+			dlgAfterFinish_.SetArgMacro("InputMovie", Path::GetFileName(input));
+			dlgAfterFinish_.SetArgMacro("InputMovieFolder", Path::GetDirectoryName(input));
+			dlgAfterFinish_.SetArgMacro("InputMovieExtension", Path::GetExtension(input));
+			dlgAfterFinish_.SetArgMacro("InputMovieWithoutExtension", Path::GetFileNameWithoutExtension(input));
+
+			dlgAfterFinish_.SetArgMacro("OutputMovieFull", output);
+			dlgAfterFinish_.SetArgMacro("OutputMovie", Path::GetFileName(output));
+			dlgAfterFinish_.SetArgMacro("OutputMovieFolder", Path::GetDirectoryName(output));
+			dlgAfterFinish_.SetArgMacro("OutputMovieExtension", Path::GetExtension(output));
+			dlgAfterFinish_.SetArgMacro("OutputMovieWithoutExtension", Path::GetFileNameWithoutExtension(output));
+		}
+
+
 		System::Void FormMain::tsmiProcesstsmiProcessAfterFinish_Click(System::Object^ sender, System::EventArgs^ e)
 		{
+			// UpdateMacros(lvInputs->Items->Count == 0 ? nullptr : lvInputs->Items[0]);
+			// dlgAfterFinish_.ExpandMacro();
 			if (System::Windows::Forms::DialogResult::OK != dlgAfterFinish_.ShowDialog())
 			{
 				return;
 			}
+			
+			// dlgAfterFinish_.ExpandMacro();
 
 			HashIni^ ini = Profile::ReadAll(Program::IniFile);
 			if (!dlgAfterFinish_.SaveValues("AfterFinish", ini) || !Profile::WriteAll(ini, Program::IniFile))

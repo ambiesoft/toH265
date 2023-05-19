@@ -585,6 +585,8 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			void IconizeToTray();
 			array<String^>^ GetOutputtedMoviesFromList(bool bSelectedOnly);
 
+			void UpdateMacros_notyet(ListViewItem^ item);
+			void UpdateMacrosFromString_notyet(String^ input, String^ output);
 			AfterFinish::OptionDialog dlgAfterFinish_;
 
 			System::Void FormMain_Load(System::Object^ sender, System::EventArgs^ e);
