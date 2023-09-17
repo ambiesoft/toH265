@@ -154,7 +154,7 @@ namespace Ambiesoft {
 						for (int i = 0; i < InputMovies->Length; ++i)
 						{
 							sb.AppendFormat("[{0}:v:0]", i);
-							sb.AppendFormat("scale={1}:{2}:force_original_aspect_ratio=decrease,pad={1}:{2}:(ow-iw)/2:(oh-ih)/2[v{0}];",
+							sb.AppendFormat("scale={1}:{2}:force_original_aspect_ratio=decrease,setsar=1,pad={1}:{2}:(ow-iw)/2:(oh-ih)/2[v{0}];",
 								i, size.Width, size.Height);
 						}
 						for (int i = 0; i < InputMovies->Length; ++i)
