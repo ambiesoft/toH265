@@ -31,6 +31,8 @@ namespace Ambiesoft {
 				AmbLib::getAssemblyVersion(Ambiesoft::AfterFinish::OptionDialog::typeid->Assembly, 3)));
 			sbMessage.AppendLine(String::Format("AfterRunLib ver {0}",
 				AmbLib::getAssemblyVersion(Ambiesoft::AfterRunLib::FormMain::typeid->Assembly, 3)));
+			sbMessage.AppendLine(String::Format("FlexibleMessageBox ver {0}",
+				AmbLib::getAssemblyVersion(JR::Utils::GUI::Forms::FlexibleMessageBox::typeid->Assembly, 3)));
 
 			sbMessage.AppendLine();
 			sbMessage.AppendFormat(I18N(L"ElapseTimeQueueLength:{0}"), elapses_.Size);
