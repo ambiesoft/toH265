@@ -274,6 +274,7 @@
     </ClCompile>
     <ClCompile Include="Summary.cpp" />
     <ClCompile Include="TargetCodecDialog.cpp" />
+    <ClCompile Include="TimerMouseMoveData.cpp" />
     <ClCompile Include="toH265.cpp" />
     <ClCompile Include="AVCodec.cpp" />
   </ItemGroup>
@@ -301,6 +302,7 @@
     <ClInclude Include="TargetCodecDialog.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="TimerMouseMoveData.h" />
     <ClInclude Include="toH265.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />

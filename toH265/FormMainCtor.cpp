@@ -2,7 +2,7 @@
 
 #include "toH265.h"
 #include "helper.h"
-
+#include "TimerMouseMoveData.h"
 #include "FormMain.h"
 
 
@@ -25,6 +25,8 @@ namespace Ambiesoft {
 			// UpdateMacros(nullptr);
 			
 			DefaultStatusColor = statusMain->BackColor;
+
+			timerMouseMove->Tag = gcnew TimerMouseMoveData();
 
 			lvInputs->Name = L"lvInputs";
 			lvInputs->UseCompatibleStateImageBehavior = false;

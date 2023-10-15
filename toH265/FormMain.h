@@ -159,6 +159,7 @@ private: System::Windows::Forms::Label^ lblTopLeft;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnableHalfUpper;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnableHalfEven;
 private: System::Windows::Forms::Timer^ timerLogError;
+private: System::Windows::Forms::Timer^ timerMouseMove;
 
 			EncodeTask^ encodeTask_;
 			property bool IsTaskActive
@@ -687,6 +688,8 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			void OnBtnBrowseMouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 
 			System::Void timerLogError_Tick(System::Object^ sender, System::EventArgs^ e);
+
+			System::Void timerMouseMove_Tick(System::Object^ sender, System::EventArgs^ e);
 
 };
 

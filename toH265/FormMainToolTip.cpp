@@ -1,6 +1,7 @@
 #include "stdafx.h"
 
 #include "toH265.h"
+#include "TimerMouseMoveData.h"
 #include "FormMain.h"
 
 
@@ -11,6 +12,27 @@ namespace Ambiesoft {
 		{
 			listTip_->Hide(lvInputs);
 			lastTPPos_ = System::Drawing::Point(0, 0);
+		}
+
+		System::Void FormMain::timerMouseMove_Tick(System::Object^ sender, System::EventArgs^ e)
+		{
+			DTRACE(timerMouseMove->Enabled);
+			TimerMouseMoveData^ timerData = (TimerMouseMoveData^)timerMouseMove->Tag;
+			DASSERT_IS_CLASS(timerData, TimerMouseMoveData);
+			
+			if (toH265Helper::FindControlAtCursor(this)==lvInputs)
+			{
+				listTip_->Show(timerData->WillShowText, lvInputs,
+					timerData->X,
+					timerData->Y,
+					TimerMouseMoveData::SHOW_DURATION);
+			}
+			else 
+				DTRACE("Not in list view");
+
+			timerMouseMove->Enabled = false;
+			timerData->SetLastShowTick(System::Environment::TickCount);
+			timerData->SetMousePos(System::Windows::Forms::Cursor::Position);
 		}
 		void FormMain::OnListViewMouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 		{
@@ -43,19 +65,44 @@ namespace Ambiesoft {
 					subItemIndex,
 					order.ToArray());
 				System::Drawing::Point pt(subItemRect.Left, subItemRect.Top);
+
+				DASSERT(timerMouseMove->Tag);
+				TimerMouseMoveData^ timerData = (TimerMouseMoveData^)timerMouseMove->Tag;
+				if (timerData->IsWillShowData(subItem->Text))
+				{
+					DTRACE("IsWillShowData");
+					if (!timerMouseMove->Enabled)
+					{
+						DTRACE("timer not enabled");
+						if (timerData->HasShowPeriodPassed)
+						{
+							DTRACE("HasShowPeriodPassed");
+							if (!timerData->IsDataSame(subItem->Text, System::Windows::Forms::Cursor::Position))
+							{
+								DTRACE("!timerData->IsDataSame");
+								timerData->SetWillShowText(subItem->Text, System::Windows::Forms::Cursor::Position, pt);
+								timerMouseMove->Enabled = false;
+								timerMouseMove->Interval = 500;
+								timerMouseMove->Enabled = true;
+							}
+						}
+					}
+				}
+				else
+				{
+					DTRACE("NOT timerData->IsWillShowData");
+					timerData->SetWillShowText(subItem->Text, System::Windows::Forms::Cursor::Position, pt);
+					timerMouseMove->Enabled = false;
+					timerMouseMove->Interval = 500;
+					timerMouseMove->Enabled = true;
+				}
+
 				if (lastTPPos_.X == pt.X && lastTPPos_.Y == pt.Y)
 					return;
+
 				lastTPPos_.X = pt.X;
 				lastTPPos_.Y = pt.Y;
-				//if (lastTPPos_.X == e->X && lastTPPos_.Y == e->Y)
-				//	return;
-				//lastTPPos_.X = e->X;
-				//lastTPPos_.Y = e->Y;
-				// listTip_->ToolTipTitle = subItem->Text;
-				listTip_->Show(subItem->Text, lvInputs,
-					lastTPPos_.X,
-					lastTPPos_.Y,
-					5000);
+			
 #ifndef NDEBUG
 				static int count;
 				DTRACE(String::Format(L"{3}, X={0},Y={1},Index={2}", e->X, e->Y, item->Index, ++count));

@@ -84,6 +84,7 @@ namespace Ambiesoft {
             this->slDuration = (gcnew System::Windows::Forms::ToolStripStatusLabel());
             this->ilList = (gcnew System::Windows::Forms::ImageList(this->components));
             this->timerLogError = (gcnew System::Windows::Forms::Timer(this->components));
+            this->timerMouseMove = (gcnew System::Windows::Forms::Timer(this->components));
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->splitRoot))->BeginInit();
             this->splitRoot->Panel1->SuspendLayout();
             this->splitRoot->Panel2->SuspendLayout();
@@ -583,6 +584,11 @@ namespace Ambiesoft {
             // timerLogError
             // 
             this->timerLogError->Tick += gcnew System::EventHandler(this, &FormMain::timerLogError_Tick);
+            // 
+            // timerMouseMove
+            // 
+            this->timerMouseMove->Interval = 500;
+            this->timerMouseMove->Tick += gcnew System::EventHandler(this, &FormMain::timerMouseMove_Tick);
             // 
             // FormMain
             // 
