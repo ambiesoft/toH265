@@ -1,3 +1,6 @@
+2024/11/21 ver1.1.13
+Update library amblibcpp
+
 2023/09/18 ver1.1.12
 Add setsar=1 to the ffmpeg command line when merging and encoding 
 videos with different aspect ratios 

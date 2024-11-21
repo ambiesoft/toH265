@@ -27,9 +27,11 @@ namespace Ambiesoft {
 
 			sbMessage.AppendLine();
 
-			sbMessage.AppendLine(String::Format("AfterFinish ver {0}",
+			sbMessage.AppendLine(String::Format("amblibcpp v{0}",
+				AmbLib::getAssemblyVersion(Ambiesoft::CppUtils::typeid->Assembly, 3)));
+			sbMessage.AppendLine(String::Format("AfterFinish v{0}",
 				AmbLib::getAssemblyVersion(Ambiesoft::AfterFinish::OptionDialog::typeid->Assembly, 3)));
-			sbMessage.AppendLine(String::Format("AfterRunLib ver {0}",
+			sbMessage.AppendLine(String::Format("AfterRunLib v{0}",
 				AmbLib::getAssemblyVersion(Ambiesoft::AfterRunLib::FormMain::typeid->Assembly, 3)));
 			sbMessage.AppendLine(String::Format("FlexibleMessageBox ver {0}",
 				AmbLib::getAssemblyVersion(JR::Utils::GUI::Forms::FlexibleMessageBox::typeid->Assembly, 3)));
