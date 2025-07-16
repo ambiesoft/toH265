@@ -1,9 +1,5 @@
 #include "stdafx.h"
 
-// not IDE support (not copy these files to output folder)
-//#using "C:/Linkout/DNAssembly.NET4/Ambiesoft.AmbLib.dll"
-//#using "C:/Linkout/DNAssembly.NET4/Ambiesoft.AmbLibcpp.dll"
-
 #include "../../lsMisc/HighDPI.h"
 #include "FormMain.h"
 #include "toH265.h"
