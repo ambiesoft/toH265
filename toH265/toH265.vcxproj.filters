@@ -129,6 +129,9 @@
     <ClCompile Include="TimerMouseMoveData.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ListTip.cpp">
+      <Filter>2 Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -201,6 +204,9 @@
       <Filter>1 Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TimerMouseMoveData.h">
+      <Filter>1 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListTip.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,6 +8,13 @@
 namespace Ambiesoft {
 	namespace toH265 {
 
+		void FormMain::OnListTipHided(System::Object^ sender, System::EventArgs^ e)
+		{
+			DASSERT(timerMouseMove->Tag);
+			TimerMouseMoveData^ timerData = (TimerMouseMoveData^)timerMouseMove->Tag;
+			timerData->SetWillShowText(L"", System::Windows::Forms::Cursor::Position, System::Drawing::Point(0, 0));
+		}
+
 		void FormMain::OnBtnBrowseMouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 		{
 			listTip_->Hide(lvInputs);
@@ -36,6 +43,9 @@ namespace Ambiesoft {
 		}
 		void FormMain::OnListViewMouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 		{
+			DASSERT(timerMouseMove->Tag);
+			TimerMouseMoveData^ timerData = (TimerMouseMoveData^)timerMouseMove->Tag;
+
 			do {
 				if (bDragging_)
 					break;
@@ -66,8 +76,6 @@ namespace Ambiesoft {
 					order.ToArray());
 				System::Drawing::Point pt(subItemRect.Left, subItemRect.Top);
 
-				DASSERT(timerMouseMove->Tag);
-				TimerMouseMoveData^ timerData = (TimerMouseMoveData^)timerMouseMove->Tag;
 				if (timerData->IsWillShowData(subItem->Text))
 				{
 					DTRACE("IsWillShowData");

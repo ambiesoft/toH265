@@ -7,7 +7,7 @@ namespace Ambiesoft {
 		ref class TimerMouseMoveData
 		{
 		public:
-			literal int SHOW_DURATION = 5000;
+			literal int SHOW_DURATION = 5000*100;
 		private:
 			System::Drawing::Point mousePos_;
 			System::Drawing::Point showPos_;

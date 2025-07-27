@@ -7,7 +7,7 @@
 #include "EncodeTask.h"
 #include "Summary.h"
 #include "InputListView.h"
-
+#include "ListTip.h"
 #include "toH265.h"
 
 namespace Ambiesoft {
@@ -235,7 +235,6 @@ private: System::Windows::Forms::Timer^ timerMouseMove;
 
 
 		private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem3;
-		public:
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguage;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageOSDefault;
 		private: System::Windows::Forms::ToolStripMenuItem^ tsmiLanguageEnglish;
@@ -344,7 +343,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 
 			// ListViewCustomReorder::ListViewEx^ lvInputs = gcnew ListViewCustomReorder::ListViewEx();
 			InputListView^ lvInputs = gcnew InputListView();
-			ToolTip^ listTip_ = gcnew ToolTip();
+			ListTip^ listTip_ = gcnew ListTip();
 			System::Drawing::Point lastTPPos_;
 			bool bDragging_;
 
@@ -690,7 +689,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			System::Void timerLogError_Tick(System::Object^ sender, System::EventArgs^ e);
 
 			System::Void timerMouseMove_Tick(System::Object^ sender, System::EventArgs^ e);
-
+			void OnListTipHided(System::Object^ sender, System::EventArgs^ e);
 };
 
 

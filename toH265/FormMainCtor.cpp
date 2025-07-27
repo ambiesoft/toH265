@@ -4,7 +4,7 @@
 #include "helper.h"
 #include "TimerMouseMoveData.h"
 #include "FormMain.h"
-
+#include "ListTip.h"
 
 namespace Ambiesoft {
 	namespace toH265 {
@@ -143,6 +143,8 @@ namespace Ambiesoft {
 
 
 			DVERIFY(dlgAfterFinish_.LoadValues("AfterFinish", ini));
+
+			listTip_->Hided += gcnew System::EventHandler(this, &FormMain::OnListTipHided);
 		}
 
 		void FormMain::OnColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e)
@@ -181,13 +183,4 @@ namespace Ambiesoft {
 
 	}
 }
-
-
-
-
-
-
-
-
-
 

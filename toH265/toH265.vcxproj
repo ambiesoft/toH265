@@ -265,6 +265,7 @@
     <ClCompile Include="FormMainTray.cpp" />
     <ClCompile Include="helper.cpp" />
     <ClCompile Include="InputListView.cpp" />
+    <ClCompile Include="ListTip.cpp" />
     <ClCompile Include="ListViewItemData.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -297,6 +298,7 @@
     <ClInclude Include="gitrev.h" />
     <ClInclude Include="helper.h" />
     <ClInclude Include="InputListView.h" />
+    <ClInclude Include="ListTip.h" />
     <ClInclude Include="ListViewItemData.h" />
     <ClInclude Include="Summary.h" />
     <ClInclude Include="TargetCodecDialog.h">
