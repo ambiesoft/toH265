@@ -47,6 +47,17 @@ namespace Ambiesoft {
 			lvInputs->Items->Clear();
 		}
 		
+		System::Void FormMain::tsmiPreventSleep_Click(System::Object^ sender, System::EventArgs^ e)
+		{
+			bool newval = !tsmiPreventSleep->Checked;
+			tsmiPreventSleep->Checked = newval;
+
+			if (!Profile::WriteBool(SECTION_OPTION, KEY_PREVENT_SLEEP, newval, Program::IniFile))
+			{
+				CppUtils::Alert(this, I18N(STR_FAILED_TO_SAVE_SETTING));
+			}
+		}
+
 #ifdef _DEBUG
 		System::Void FormMain::FormMain_OnTest(System::Object^ sender, System::EventArgs^ e)
 		{

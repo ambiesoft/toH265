@@ -98,6 +98,9 @@ namespace Ambiesoft {
 			Profile::GetBool(SECTION_OPTION, KEY_MINIMIZETOTRAY, false, boolval, ini);
 			tsmiMinimizeToTray->Checked = boolval;
 
+			Profile::GetBool(SECTION_OPTION, KEY_PREVENT_SLEEP, false, boolval, ini);
+			tsmiPreventSleep->Checked = boolval;
+
 
 			AmbLib::LoadFormXYWH(this, SECTION_LOCATION, ini);
 			

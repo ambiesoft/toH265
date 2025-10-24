@@ -1,3 +1,6 @@
+2025/10/24 ver1.2.3
+Added option to prevent sleep during encoding
+
 2025/07/27 ver1.2.2
 Fix: Tooltip was hidden too early when the previous tooltip was still displayed.
 

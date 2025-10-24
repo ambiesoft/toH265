@@ -160,6 +160,8 @@ private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnableHalfUpper;
 private: System::Windows::Forms::ToolStripMenuItem^ tsmiEnableHalfEven;
 private: System::Windows::Forms::Timer^ timerLogError;
 private: System::Windows::Forms::Timer^ timerMouseMove;
+private: System::Windows::Forms::ToolStripMenuItem^ tsmiPreventSleep;
+
 
 			EncodeTask^ encodeTask_;
 			property bool IsTaskActive
@@ -190,6 +192,7 @@ private: System::Windows::Forms::Timer^ timerMouseMove;
 			literal String^ KEY_AFTERPROCESS_ENABLED = L"afterprocessenabled";
 			literal String^ KEY_CPUAFFINITY_ENABLED = L"cpuaffinityenabled";
 			literal String^ KEY_ELAPSEDTIME_QUEUE_LENGTH = L"ElapsedTimeQueueLength";
+			literal String^ KEY_PREVENT_SLEEP = L"PreventSleep";
 
 			literal String^ STR_BUTTONTEXT_PAUSE = L"&Pause";
 			literal String^ STR_BUTTONTEXT_START = L"&Start";
@@ -690,6 +693,8 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 
 			System::Void timerMouseMove_Tick(System::Object^ sender, System::EventArgs^ e);
 			void OnListTipHided(System::Object^ sender, System::EventArgs^ e);
+			System::Void tsmiPreventSleep_Click(System::Object^ sender, System::EventArgs^ e);
+
 };
 
 

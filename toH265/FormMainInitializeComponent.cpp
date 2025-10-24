@@ -60,6 +60,7 @@ namespace Ambiesoft {
             this->tsmiProcesstsmiProcessAfterFinish = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->toolStripMenuItem2 = (gcnew System::Windows::Forms::ToolStripSeparator());
             this->tsmiMinimizeToTray = (gcnew System::Windows::Forms::ToolStripMenuItem());
+            this->tsmiPreventSleep = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->toolStripMenuItem3 = (gcnew System::Windows::Forms::ToolStripSeparator());
             this->tsmiLanguage = (gcnew System::Windows::Forms::ToolStripMenuItem());
             this->tsmiLanguageOSDefault = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -283,10 +284,10 @@ namespace Ambiesoft {
             // 
             // tsmiOption
             // 
-            this->tsmiOption->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(11) {
+            this->tsmiOption->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(12) {
                 this->tsmiSetFFProbe,
                     this->tsmiSetFFMpeg, this->toolStripMenuItem1, this->tsmiPriority, this->tsmiCPUAffinity, this->toolStripMenuItem6, this->tsmiProcessAfterFinish,
-                    this->toolStripMenuItem2, this->tsmiMinimizeToTray, this->toolStripMenuItem3, this->tsmiLanguage
+                    this->toolStripMenuItem2, this->tsmiMinimizeToTray, this->tsmiPreventSleep, this->toolStripMenuItem3, this->tsmiLanguage
             });
             this->tsmiOption->Name = L"tsmiOption";
             resources->ApplyResources(this->tsmiOption, L"tsmiOption");
@@ -432,6 +433,12 @@ namespace Ambiesoft {
             this->tsmiMinimizeToTray->Name = L"tsmiMinimizeToTray";
             resources->ApplyResources(this->tsmiMinimizeToTray, L"tsmiMinimizeToTray");
             this->tsmiMinimizeToTray->Click += gcnew System::EventHandler(this, &FormMain::tsmiMinimizeToTray_Click);
+            // 
+            // tsmiPreventSleep
+            // 
+            this->tsmiPreventSleep->Name = L"tsmiPreventSleep";
+            resources->ApplyResources(this->tsmiPreventSleep, L"tsmiPreventSleep");
+            this->tsmiPreventSleep->Click += gcnew System::EventHandler(this, &FormMain::tsmiPreventSleep_Click);
             // 
             // toolStripMenuItem3
             // 

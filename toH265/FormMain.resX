@@ -460,13 +460,13 @@
     <value>&amp;File</value>
   </data>
   <data name="tsmiClearCompletedItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>191, 22</value>
   </data>
   <data name="tsmiClearCompletedItems.Text" xml:space="preserve">
     <value>&amp;Clear Completed Items</value>
   </data>
   <data name="tsmiClearAllItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 22</value>
+    <value>191, 22</value>
   </data>
   <data name="tsmiClearAllItems.Text" xml:space="preserve">
     <value>Clear &amp;All Items</value>
@@ -490,94 +490,94 @@
     <value>&amp;View</value>
   </data>
   <data name="tsmiSetFFProbe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="tsmiSetFFProbe.Text" xml:space="preserve">
     <value>&amp;Set FFProbe...</value>
   </data>
   <data name="tsmiSetFFMpeg.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="tsmiSetFFMpeg.Text" xml:space="preserve">
     <value>Set FF&amp;Mpeg...</value>
   </data>
   <data name="toolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 6</value>
+    <value>244, 6</value>
   </data>
   <data name="tsmiPriorityNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="tsmiPriorityNormal.Text" xml:space="preserve">
     <value>&amp;Normal</value>
   </data>
   <data name="tsmiPriorityBelowNormal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="tsmiPriorityBelowNormal.Text" xml:space="preserve">
     <value>B&amp;elow Normal</value>
   </data>
   <data name="tsmiPriorityBackground.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
+    <value>148, 22</value>
   </data>
   <data name="tsmiPriorityBackground.Text" xml:space="preserve">
     <value>&amp;Background</value>
   </data>
   <data name="tsmiPriority.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="tsmiPriority.Text" xml:space="preserve">
     <value>&amp;Priority</value>
   </data>
   <data name="tsmiCPUAffinityEnable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 22</value>
+    <value>260, 22</value>
   </data>
   <data name="tsmiCPUAffinityEnable.Text" xml:space="preserve">
     <value>&amp;Enable</value>
   </data>
   <data name="tsmsCpuAffinityBegin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 6</value>
+    <value>257, 6</value>
   </data>
   <data name="tsmsCpuAffinityEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 6</value>
+    <value>257, 6</value>
   </data>
   <data name="tsmiEnableAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 22</value>
+    <value>260, 22</value>
   </data>
   <data name="tsmiEnableAll.Text" xml:space="preserve">
     <value>Enable &amp;All</value>
   </data>
   <data name="tsmiToggleAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 22</value>
+    <value>260, 22</value>
   </data>
   <data name="tsmiToggleAll.Text" xml:space="preserve">
     <value>&amp;Toggle All</value>
   </data>
   <data name="tsmiEnableHalfUpper.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 22</value>
+    <value>260, 22</value>
   </data>
   <data name="tsmiEnableHalfUpper.Text" xml:space="preserve">
     <value>Enable &amp;Half (Upper)</value>
   </data>
   <data name="tsmiEnableHalfEven.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 22</value>
+    <value>260, 22</value>
   </data>
   <data name="tsmiEnableHalfEven.Text" xml:space="preserve">
     <value>Enable Half (Cores of &amp;even number)</value>
   </data>
   <data name="tsmiClearAllButZero.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 22</value>
+    <value>260, 22</value>
   </data>
   <data name="tsmiClearAllButZero.Text" xml:space="preserve">
     <value>&amp;Clear All But 0</value>
   </data>
   <data name="tsmiCPUAffinity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="tsmiCPUAffinity.Text" xml:space="preserve">
     <value>&amp;CPU Affinity</value>
   </data>
   <data name="toolStripMenuItem6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 6</value>
+    <value>244, 6</value>
   </data>
   <data name="tsmiEnabledtsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
     <value>123, 22</value>
@@ -592,22 +592,28 @@
     <value>&amp;Process...</value>
   </data>
   <data name="tsmiProcessAfterFinish.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="tsmiProcessAfterFinish.Text" xml:space="preserve">
     <value>&amp;Process after Finish</value>
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 6</value>
+    <value>244, 6</value>
   </data>
   <data name="tsmiMinimizeToTray.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="tsmiMinimizeToTray.Text" xml:space="preserve">
     <value>&amp;Minimize to Tray</value>
   </data>
+  <data name="tsmiPreventSleep.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 22</value>
+  </data>
+  <data name="tsmiPreventSleep.Text" xml:space="preserve">
+    <value>Prevent OS &amp;Sleep while encoding</value>
+  </data>
   <data name="toolStripMenuItem3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 6</value>
+    <value>244, 6</value>
   </data>
   <data name="tsmiLanguageOSDefault.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 22</value>
@@ -628,7 +634,7 @@
     <value>&amp;Japanese</value>
   </data>
   <data name="tsmiLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 22</value>
+    <value>247, 22</value>
   </data>
   <data name="tsmiLanguage.Text" xml:space="preserve">
     <value>&amp;Language</value>
@@ -2678,19 +2684,19 @@
     <value>361, 17</value>
   </metadata>
   <data name="slMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>448, 17</value>
+    <value>450, 17</value>
   </data>
   <data name="slMain.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
   <data name="slItemCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 17</value>
+    <value>44, 17</value>
   </data>
   <data name="slItemCount.Text" xml:space="preserve">
     <value>0 items</value>
   </data>
   <data name="slFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 17</value>
+    <value>42, 17</value>
   </data>
   <data name="slFormat.Text" xml:space="preserve">
     <value>format</value>
@@ -2742,7 +2748,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAA8
-        CAAAAk1TRnQBSQFMAgEBAwEAAawBAAGsAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBAwEAAcwBAAHMAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -4990,6 +4996,12 @@
     <value>tsmiMinimizeToTray</value>
   </data>
   <data name="&gt;&gt;tsmiMinimizeToTray.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiPreventSleep.Name" xml:space="preserve">
+    <value>tsmiPreventSleep</value>
+  </data>
+  <data name="&gt;&gt;tsmiPreventSleep.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuItem3.Name" xml:space="preserve">

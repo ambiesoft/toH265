@@ -28,8 +28,8 @@ namespace Ambiesoft {
 				}
 			}
 			AVDuration^ totalInputDuration_ = gcnew AVDuration();
-		public:
 
+		public:
 			void AddJob(
 				bool bConcat,
 				bool bReEncode,

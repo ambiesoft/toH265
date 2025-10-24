@@ -653,7 +653,9 @@ namespace Ambiesoft {
 		{
 			try
 			{
-				// DASSERT(regFFMpeg_);
+				if (tsmiPreventSleep->Checked)
+					DVERIFY_IS(ES_CONTINUOUS, SetThreadExecutionState(ES_SYSTEM_REQUIRED));
+
 				TimeSpan tsTime;
 				double dblSpeed;
 				if (FFMpegHelper::GetInfoFromFFMpegoutput(text, tsTime, dblSpeed))
@@ -666,16 +668,11 @@ namespace Ambiesoft {
 				}
 				else
 				{
-					//txtLogErr->AppendText(text);
-					//txtLogErr->AppendText(L"\r\n");
 					AddToErrBuffered(text);
 				}
 			}
 			catch (Exception ^ ex)
 			{
-				//txtLogErr->AppendText(ex->Message);
-				//txtLogErr->AppendText(L"\r\n");
-
 				AddToErrBuffered(ex->Message);
 			}
 		}
@@ -877,7 +874,6 @@ namespace Ambiesoft {
 		}
 		void FormMain::OnAllTaskEnded()
 		{
-			// Succeeded
 			UpdateTitleComplete();
 
 			CurrentTaskState = TaskState::Ready;
@@ -1506,7 +1502,7 @@ namespace Ambiesoft {
 
 			// Create Task
 			DASSERT(!IsTaskActive);
-			encodeTask_ = gcnew EncodeTask();
+			encodeTask_ = gcnew EncodeTask;
 
 			array<ListViewItem^>^ items = GetItems(itemSelection);
 			DASSERT(items->Length == inputmovies->Length);
