@@ -32,7 +32,7 @@ namespace Ambiesoft {
 			}
 			property String^ Message
 			{
-				String^ get() { return text_; }
+				String^ get() { return (IsWarning ? I18N(L"WARNING_EMOJI") : I18N(L"OK_EMOJI")) + L"\r\n"+  text_; }
 			}
 		};
 		public ref class Summary
