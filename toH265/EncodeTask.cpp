@@ -16,12 +16,6 @@ namespace Ambiesoft {
 			List<EncodeJob^> ret;
 			for each (EncodeJob ^ job in jobs_)
 			{
-				//EncodeResult^ result = gcnew EncodeResult(
-				//	job->OutputtingMove,
-				//	job->InputMovies,
-				//	job->TotalInputDuration,
-				//	job->TotalInputFPS);
-
 				ret.Add(job);
 			}
 			return ret.ToArray();

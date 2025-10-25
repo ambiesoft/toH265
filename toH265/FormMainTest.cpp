@@ -49,8 +49,20 @@ namespace Ambiesoft {
 		
 		System::Void FormMain::tsmiPreventSleep_Click(System::Object^ sender, System::EventArgs^ e)
 		{
-			bool newval = !tsmiPreventSleep->Checked;
+			const bool newval = !tsmiPreventSleep->Checked;
 			tsmiPreventSleep->Checked = newval;
+
+			if (TaskState::Encoding == this->CurrentTaskState)
+			{
+				if (newval)
+				{
+					SetThreadExecutionState(ES_SYSTEM_REQUIRED | ES_CONTINUOUS);
+				}
+				else
+				{
+					SetThreadExecutionState(ES_CONTINUOUS);
+				}
+			}
 
 			if (!Profile::WriteBool(SECTION_OPTION, KEY_PREVENT_SLEEP, newval, Program::IniFile))
 			{

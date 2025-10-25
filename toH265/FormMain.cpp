@@ -653,9 +653,6 @@ namespace Ambiesoft {
 		{
 			try
 			{
-				if (tsmiPreventSleep->Checked)
-					DVERIFY_IS(SetThreadExecutionState(ES_SYSTEM_REQUIRED), ES_CONTINUOUS);
-
 				TimeSpan tsTime;
 				double dblSpeed;
 				if (FFMpegHelper::GetInfoFromFFMpegoutput(text, tsTime, dblSpeed))
@@ -780,6 +777,7 @@ namespace Ambiesoft {
 			switch (taskState_)
 			{
 			case TaskState::Ready:
+
 				btnStart->Enabled = true;
 				ChangeStartButtonText(StartButtonText::Start);
 
@@ -794,7 +792,9 @@ namespace Ambiesoft {
 				// TODO(does not go normal): statusMain->BackColor = DefaultStatusColor;
 
 				SetStatusText(STATUSTEXT::READY);
-				
+
+				SetThreadExecutionState(ES_CONTINUOUS);
+
 				break;
 
 			case TaskState::Intermediate:
@@ -816,6 +816,10 @@ namespace Ambiesoft {
 				this->Icon = iconRed_;
 				notifyIconMain->Icon = iconRed_;
 				// TODO(does not go normal): statusMain->BackColor = Color::Red;
+
+				if (tsmiPreventSleep->Checked)
+					SetThreadExecutionState(ES_SYSTEM_REQUIRED | ES_CONTINUOUS);
+
 				break;
 			}
 		}

@@ -12,19 +12,6 @@ namespace Ambiesoft {
 
 		using namespace System::IO;
 
-		//bool FormMain::IsEncoding()
-		//{
-		//	switch (FFMpegState)
-		//	{
-		//	case TaskState::Pausing:
-		//	case TaskState::ProcessLaunching:
-		//	case TaskState::Running:
-		//		return true;
-		//	}
-		//	
-		//	return false;
-		//}
-
 		bool FormMain::ConfirmAndStopEncode()
 		{
 			switch (CurrentFFMpegState)
@@ -100,6 +87,8 @@ namespace Ambiesoft {
 
 		System::Void FormMain::FormMain_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e)
 		{
+			SetThreadExecutionState(ES_CONTINUOUS);
+
 			DTRACE(L"INI=" + Program::IniFile);
 			HashIni^ ini = Profile::ReadAll(Program::IniFile);
 

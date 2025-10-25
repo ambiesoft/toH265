@@ -1,3 +1,6 @@
+2025/10/25 ver1.2.5
+Fixed an issue where the sleep prevention option was not functioning properly.
+
 2025/10/25 ver1.2.4
 Fixed an issue where the sleep prevention option was not functioning properly.
 Added a clear success/failure indicator to the post-encoding completion message.
