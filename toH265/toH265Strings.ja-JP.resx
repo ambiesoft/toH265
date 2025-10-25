@@ -387,4 +387,10 @@
   <data name="The following attribute values are not the same. Do you want to continue?" xml:space="preserve">
     <value>以下の属性値が同じではありません。処理を続けますか？</value>
   </data>
+  <data name="WARNING_EMOJI" xml:space="preserve">
+    <value>❌</value>
+  </data>
+  <data name="OK_EMOJI" xml:space="preserve">
+    <value>⭕</value>
+  </data>
 </root>

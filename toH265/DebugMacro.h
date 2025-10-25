@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #if defined(_DEBUG) || defined(_RELEASE)
 #define DASSERT(s) System::Diagnostics::Debug::Assert(!!(s))

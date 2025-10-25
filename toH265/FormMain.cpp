@@ -654,7 +654,7 @@ namespace Ambiesoft {
 			try
 			{
 				if (tsmiPreventSleep->Checked)
-					DVERIFY_IS(ES_CONTINUOUS, SetThreadExecutionState(ES_SYSTEM_REQUIRED));
+					DVERIFY_IS(SetThreadExecutionState(ES_SYSTEM_REQUIRED), ES_CONTINUOUS);
 
 				TimeSpan tsTime;
 				double dblSpeed;
