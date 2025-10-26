@@ -23,7 +23,7 @@
     <ProjectGuid>{91D72104-485C-45DA-AE4B-1BFBFA67EFE1}</ProjectGuid>
     <RootNamespace>Ambiesoft.toH265</RootNamespace>
     <Keyword>ManagedCProj</Keyword>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -169,7 +169,7 @@
       <HintPath>C:\Linkout\DNAssembly.NET4.5.2\Ambiesoft.AfterFinish.dll</HintPath>
     </Reference>
     <Reference Include="Ambiesoft.AfterRunLib">
-      <HintPath>C:\Linkout\DNAssembly.NET4.5.2\Ambiesoft.AfterRunLib.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Linkout\DNAssembly.NET4.8.1\Ambiesoft.AfterRunLib.dll</HintPath>
     </Reference>
     <Reference Include="Ambiesoft.AmbLib">
       <HintPath>C:\Linkout\DNAssembly.NET4.6.2\Ambiesoft.AmbLib.dll</HintPath>

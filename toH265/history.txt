@@ -1,3 +1,7 @@
+2025/10/26 ver1.3.1
+Updated library AfterRun
+Upgrade .NET to 4.8.1
+
 2025/10/25 ver1.2.5
 Fixed an issue where the sleep prevention option was not functioning properly.
 
