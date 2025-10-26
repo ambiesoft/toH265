@@ -74,7 +74,11 @@
 		"System.Numerics.Vectors.dll",
 		"System.Numerics.Vectors.xml",
 		"System.Runtime.CompilerServices.Unsafe.dll",
-		"System.Runtime.CompilerServices.Unsafe.xml"
+		"System.Runtime.CompilerServices.Unsafe.xml",
+		"Microsoft.WindowsAPICodePack.Shell.dll",
+		"Microsoft.WindowsAPICodePack.Shell.xml",
+		"Microsoft.WindowsAPICodePack.dll",
+		"Microsoft.WindowsAPICodePack.xml"
     ],
     "TotalFileCount": "exact",
     "archivedir": "C:\\Linkout",
