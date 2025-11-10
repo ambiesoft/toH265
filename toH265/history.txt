@@ -1,3 +1,6 @@
+2025/11/10 ver1.3.3
+Update library AfterRun which fixes a bug when using the shutdown option
+
 2025/10/27 ver1.3.2
 Update library AfterRun
 

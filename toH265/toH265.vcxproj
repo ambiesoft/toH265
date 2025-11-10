@@ -169,7 +169,7 @@
       <HintPath>C:\Linkout\DNAssembly.NET4.5.2\Ambiesoft.AfterFinish.dll</HintPath>
     </Reference>
     <Reference Include="Ambiesoft.AfterRunLib">
-      <HintPath>..\..\..\..\..\..\..\Linkout\DNAssembly.NET4.8.1\Ambiesoft.AfterRunLib.dll</HintPath>
+      <HintPath>C:\Linkout\\DNAssembly.NET4.8\Ambiesoft.AfterRunLib.dll</HintPath>
     </Reference>
     <Reference Include="Ambiesoft.AmbLib">
       <HintPath>C:\Linkout\DNAssembly.NET4.6.2\Ambiesoft.AmbLib.dll</HintPath>
