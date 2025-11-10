@@ -73,6 +73,7 @@
     "archivedir": "C:\\Linkout",
     "remotedir": "https://ambiesoft.com/ffdav/uploads/toH265/",
     "remotesha1": "https://ambiesoft.com/ffdav/uploads/getSha1.php?file=toH265/{}",
+    "remoteonedrivedir":"https://1drv.ms/f/c/f0d9ddc561f5cf32/Evn6umNMHmtMo4blIjcZGaMBDy5HUImeXVhBx2dLaWJ2Vg?e=9kNC9F",
     "ShouldNotBeFiles": [
     	"32\\toH265.ini",
     	"64\\toH265.ini"
