@@ -19,6 +19,9 @@
     <Filter Include="2 Source Files\lsMisc">
       <UniqueIdentifier>{160feced-da90-4073-9538-7bc3eaeba918}</UniqueIdentifier>
     </Filter>
+    <Filter Include="1 Header Files\lsMisc">
+      <UniqueIdentifier>{c5304f8f-8de1-40fc-92ba-36095e0f3c35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp">
@@ -132,6 +135,15 @@
     <ClCompile Include="ListTip.cpp">
       <Filter>2 Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\lsMisc\CommandLineParser.cpp">
+      <Filter>2 Source Files\lsMisc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\UrlEncode.cpp">
+      <Filter>2 Source Files\lsMisc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lsMisc\UTF16toUTF8.cpp">
+      <Filter>2 Source Files\lsMisc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -149,9 +161,6 @@
     <ClInclude Include="helper.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\lsMisc\HighDPI.h">
-      <Filter>1 Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DebugMacro.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
@@ -164,13 +173,7 @@
     <ClInclude Include="AVDuration.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\lsMisc\IsFileOpen.h">
-      <Filter>1 Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\lsMisc\getStdString.net.h">
-      <Filter>1 Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\lsMisc\OpenCommon.h">
       <Filter>1 Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ElapseInfo.h">
@@ -208,6 +211,24 @@
     </ClInclude>
     <ClInclude Include="ListTip.h">
       <Filter>1 Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\CommandLineParser.h">
+      <Filter>1 Header Files\lsMisc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\UrlEncode.h">
+      <Filter>1 Header Files\lsMisc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\UTF16toUTF8.h">
+      <Filter>1 Header Files\lsMisc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\IsFileOpen.h">
+      <Filter>1 Header Files\lsMisc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\HighDPI.h">
+      <Filter>1 Header Files\lsMisc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lsMisc\OpenCommon.h">
+      <Filter>1 Header Files\lsMisc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

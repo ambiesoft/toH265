@@ -73,11 +73,15 @@ namespace Ambiesoft {
 #ifdef _DEBUG
 		System::Void FormMain::FormMain_OnTest(System::Object^ sender, System::EventArgs^ e)
 		{
-			if (true)
+			if(true)
+			{
+				CreateShutdownedSummary();
+			}
+			if (false)
 			{
 				this->dlgAfterFinish_.DoNotify();
 			}
-			if(true)
+			if(false)
 			{
 				String^ text = File::ReadAllText("randomText.txt");
 				MessageBoxIcon icon = MessageBoxIcon::Question;

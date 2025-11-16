@@ -10,6 +10,16 @@ namespace Ambiesoft {
 
 		using namespace System::Windows::Forms;
 
+		void SummaryText::Show(System::Windows::Forms::Form^ form)
+		{
+			JR::Utils::GUI::Forms::FlexibleMessageBox::Show(
+				form,
+				Text,
+				Application::ProductName,
+				MessageBoxButtons::OK,
+				IsWarning ? MessageBoxIcon::Warning : MessageBoxIcon::Information);
+		}
+
 		void Summary::AddOverallResult(EncodeTask^ encodeTask)
 		{
 			System::Text::StringBuilder sb;
@@ -22,7 +32,7 @@ namespace Ambiesoft {
 			overallResult_ = sb.ToString();
 		}
 
-		void Summary::Show(Form^ form)
+		SummaryText^ Summary::GetSummaryText()
 		{
 			bool isWarning = false;
 			StringBuilder sb;
@@ -34,13 +44,12 @@ namespace Ambiesoft {
 				sb.Append(paper->Message);
 				sb.AppendLine("==============================");
 			}
-
-			JR::Utils::GUI::Forms::FlexibleMessageBox::Show(
-				form,
-				sb.ToString(),
-				Application::ProductName,
-				MessageBoxButtons::OK,
-				isWarning ? MessageBoxIcon::Warning : MessageBoxIcon::Information);
+			return gcnew SummaryText(sb.ToString(), isWarning);
+		}
+		void Summary::Show(Form^ form)
+		{
+			SummaryText^ st = GetSummaryText();
+			st->Show(form);
 		}
 	}
 }

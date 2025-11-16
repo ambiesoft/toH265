@@ -65,6 +65,82 @@ namespace Ambiesoft {
 			Close();
 		}
 
+		void FormMain::CreateShutdownedSummary()
+		{
+			// Save summary to a temp file and create a startup shortcut that launches
+			// this app with: --after-shutdown "<tempFile>"
+			String^ tempFile = Path::GetTempFileName();
+			DASSERT(lastSummary_);
+			if (lastSummary_)
+			{
+				lastSummary_->GetSummaryText()->SaveToFile(tempFile);
+
+				try
+				{
+					// Prepare paths and arguments
+					String^ startupFolder = Environment::GetFolderPath(Environment::SpecialFolder::Startup);
+					String^ exePath = System::Windows::Forms::Application::ExecutablePath;
+					String^ exeNameNoExt = Path::GetFileNameWithoutExtension(exePath);
+					String^ shortcutPath = Path::Combine(startupFolder, exeNameNoExt + "_aftershutdown.lnk");
+					String^ args = "--after-shutdown \"" + tempFile + "\"";
+					String^ workDir = Path::GetDirectoryName(exePath);
+
+					// Marshal managed strings to native wide strings
+					System::IntPtr pExe = System::Runtime::InteropServices::Marshal::StringToHGlobalUni(exePath);
+					System::IntPtr pArgs = System::Runtime::InteropServices::Marshal::StringToHGlobalUni(args);
+					System::IntPtr pShortcut = System::Runtime::InteropServices::Marshal::StringToHGlobalUni(shortcutPath);
+					System::IntPtr pWorkDir = System::Runtime::InteropServices::Marshal::StringToHGlobalUni(workDir);
+
+					// Convert to native pointers
+					LPCOLESTR wszExe = static_cast<LPCOLESTR>(pExe.ToPointer());
+					LPCOLESTR wszArgs = static_cast<LPCOLESTR>(pArgs.ToPointer());
+					LPCOLESTR wszShortcut = static_cast<LPCOLESTR>(pShortcut.ToPointer());
+					LPCOLESTR wszWorkDir = static_cast<LPCOLESTR>(pWorkDir.ToPointer());
+
+					HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED);
+					IShellLinkW* psl = nullptr;
+					IPersistFile* ppf = nullptr;
+
+					if (SUCCEEDED(hr))
+					{
+						hr = CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_IShellLinkW, (void**)&psl);
+						if (SUCCEEDED(hr) && psl)
+						{
+							// Set executable, arguments and working directory
+							psl->SetPath(wszExe);
+							psl->SetArguments(wszArgs);
+							psl->SetWorkingDirectory(wszWorkDir);
+
+							hr = psl->QueryInterface(IID_IPersistFile, (void**)&ppf);
+							if (SUCCEEDED(hr) && ppf)
+							{
+								hr = ppf->Save(wszShortcut, TRUE);
+								ppf->Release();
+								ppf = nullptr;
+							}
+							psl->Release();
+							psl = nullptr;
+						}
+						CoUninitialize();
+					}
+
+					// Free unmanaged memory
+					System::Runtime::InteropServices::Marshal::FreeHGlobal(pExe);
+					System::Runtime::InteropServices::Marshal::FreeHGlobal(pArgs);
+					System::Runtime::InteropServices::Marshal::FreeHGlobal(pShortcut);
+					System::Runtime::InteropServices::Marshal::FreeHGlobal(pWorkDir);
+
+					if (FAILED(hr))
+					{
+						CppUtils::Alert(this, I18N(L"Failed to create startup shortcut."));
+					}
+				}
+				catch (Exception^)
+				{
+					CppUtils::Alert(this, I18N(L"Failed to create startup shortcut."));
+				}
+			}
+		}
 		System::Void FormMain::FormMain_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 		{
 			if (e->CloseReason != CloseReason::WindowsShutDown &&
@@ -81,6 +157,11 @@ namespace Ambiesoft {
 			{
 				e->Cancel = true;
 				return;
+			}
+
+			if (e->CloseReason == CloseReason::WindowsShutDown)
+			{
+				CreateShutdownedSummary();
 			}
 			closed_ = true;
 		}

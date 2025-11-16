@@ -834,8 +834,8 @@ namespace Ambiesoft {
 				encodeTask_->OnTaskEnded(retval);
 			}
 		}
-		
-			
+
+
 		void FormMain::DoNextEncodeTask()
 		{
 			if (processTerminatedDuetoAppClose_)
@@ -854,7 +854,7 @@ namespace Ambiesoft {
 			String^ arg = encodeTask_->GetArg(report);
 
 			// txtLogErr->AppendText(report);
-			if(!String::IsNullOrEmpty(report))
+			if (!String::IsNullOrEmpty(report))
 				AddToErrBuffered(report);
 
 			txtFFMpegArg->Text = String::Format(L"{0} {1}",
@@ -874,6 +874,7 @@ namespace Ambiesoft {
 
 		void FormMain::OnTaskStarted()
 		{
+			shutdownStarted_ = false;
 			DoNextEncodeTask();
 		}
 		void FormMain::OnAllTaskEnded()
@@ -884,6 +885,10 @@ namespace Ambiesoft {
 
 			if (tsmiEnabledtsmiProcessAfterFinish->Checked)
 			{
+				if (dlgAfterFinish_.chkShutdown->Checked)
+				{
+					shutdownStarted_ = true;
+				}
 				dlgAfterFinish_.DoNotify();
 			}
 
@@ -1007,7 +1012,6 @@ namespace Ambiesoft {
 				summary->AddPaper(isWarning, sbMessage.ToString(), job);
 			}
 			lastSummary_ = summary;
-
 			lastSummary_->Show(this);
 
 			StatusOutputDuration = gcnew AVDuration();

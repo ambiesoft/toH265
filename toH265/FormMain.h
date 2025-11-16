@@ -141,6 +141,8 @@ namespace Ambiesoft {
 
 			CpuAffinity cpuAffinity_;
 			bool closed_ = false;
+			bool shutdownStarted_ = false;
+			void CreateShutdownedSummary();
 
 			// System::Windows::Forms::Timer^ timerSetAffinity_;
 			bool bCloseFromMenu_;
