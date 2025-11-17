@@ -141,6 +141,12 @@ namespace Ambiesoft {
 				}
 			}
 		}
+
+		void FormMain::OnLaunch(System::Object^ sender, Ambiesoft::AfterFinish::LaunchEventArgs^ e)
+		{
+			shutdownStarted_ = true;
+		}
+
 		System::Void FormMain::FormMain_FormClosing(System::Object^  sender, System::Windows::Forms::FormClosingEventArgs^  e)
 		{
 			if (e->CloseReason != CloseReason::WindowsShutDown &&
@@ -159,7 +165,7 @@ namespace Ambiesoft {
 				return;
 			}
 
-			if (e->CloseReason == CloseReason::WindowsShutDown)
+			if (shutdownStarted_ && e->CloseReason == CloseReason::WindowsShutDown)
 			{
 				CreateShutdownedSummary();
 			}

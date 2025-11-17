@@ -697,6 +697,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			void OnListTipHided(System::Object^ sender, System::EventArgs^ e);
 			System::Void tsmiPreventSleep_Click(System::Object^ sender, System::EventArgs^ e);
 
+			void OnLaunch(System::Object^ sender, Ambiesoft::AfterFinish::LaunchEventArgs^ e);
 };
 
 

@@ -1,3 +1,6 @@
+2025/11/17 ver1.3.5
+Fixed an issue if the "shutdown after encoding" option was selected
+
 2025/11/16 ver1.3.4
 After encoding completes, if the system shuts down, display a message during OS startup
 

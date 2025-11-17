@@ -166,7 +166,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="Ambiesoft.AfterFinish">
-      <HintPath>C:\Linkout\DNAssembly.NET4.5.2\Ambiesoft.AfterFinish.dll</HintPath>
+      <HintPath>C:\Linkout\DNAssembly.NET4.8\Ambiesoft.AfterFinish.dll</HintPath>
     </Reference>
     <Reference Include="Ambiesoft.AfterRunLib">
       <HintPath>C:\Linkout\\DNAssembly.NET4.8\Ambiesoft.AfterRunLib.dll</HintPath>

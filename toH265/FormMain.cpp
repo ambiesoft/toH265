@@ -887,7 +887,7 @@ namespace Ambiesoft {
 			{
 				if (dlgAfterFinish_.chkShutdown->Checked)
 				{
-					shutdownStarted_ = true;
+					// shutdownStarted_ = true;
 				}
 				dlgAfterFinish_.DoNotify();
 			}

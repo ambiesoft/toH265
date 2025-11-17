@@ -148,6 +148,7 @@ namespace Ambiesoft {
 			DVERIFY(dlgAfterFinish_.LoadValues("AfterFinish", ini));
 
 			listTip_->Hided += gcnew System::EventHandler(this, &FormMain::OnListTipHided);
+			dlgAfterFinish_.OnLaunch += gcnew System::EventHandler<Ambiesoft::AfterFinish::LaunchEventArgs^>(this, &FormMain::OnLaunch);
 		}
 
 		void FormMain::OnColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e)
@@ -186,4 +187,5 @@ namespace Ambiesoft {
 
 	}
 }
+
 
