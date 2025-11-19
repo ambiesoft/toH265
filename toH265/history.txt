@@ -1,3 +1,6 @@
+2025/11/19 ver1.3.7
+Updated in accordance with the library update
+
 2025/11/19 ver1.3.6
 Updated in accordance with the library update
 
