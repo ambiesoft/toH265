@@ -343,6 +343,10 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 
 
 		protected:
+			void PreventSleep(bool bPrevent);
+			Timer timerPreventSleepStopper_;
+			System::Void FormMain::timerPreventSleepStopper_tick(System::Object^ sender, System::EventArgs^ e);
+
 			Summary^ lastSummary_;
 			initonly System::Drawing::Color DefaultStatusColor;
 

@@ -174,7 +174,7 @@ namespace Ambiesoft {
 
 		System::Void FormMain::FormMain_FormClosed(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e)
 		{
-			SetThreadExecutionState(ES_CONTINUOUS);
+			PreventSleep(false);
 
 			DTRACE(L"INI=" + Program::IniFile);
 			HashIni^ ini = Profile::ReadAll(Program::IniFile);

@@ -149,6 +149,9 @@ namespace Ambiesoft {
 
 			listTip_->Hided += gcnew System::EventHandler(this, &FormMain::OnListTipHided);
 			dlgAfterFinish_.OnLaunch += gcnew System::EventHandler<Ambiesoft::AfterFinish::LaunchEventArgs^>(this, &FormMain::OnLaunch);
+
+			timerPreventSleepStopper_.Enabled = false;
+			timerPreventSleepStopper_.Tick += gcnew System::EventHandler(this, &FormMain::timerPreventSleepStopper_tick);
 		}
 
 		void FormMain::OnColumnClick(System::Object^ sender, System::Windows::Forms::ColumnClickEventArgs^ e)

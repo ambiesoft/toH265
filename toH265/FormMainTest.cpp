@@ -54,14 +54,7 @@ namespace Ambiesoft {
 
 			if (TaskState::Encoding == this->CurrentTaskState)
 			{
-				if (newval)
-				{
-					SetThreadExecutionState(ES_SYSTEM_REQUIRED | ES_CONTINUOUS);
-				}
-				else
-				{
-					SetThreadExecutionState(ES_CONTINUOUS);
-				}
+				PreventSleep(newval);
 			}
 
 			if (!Profile::WriteBool(SECTION_OPTION, KEY_PREVENT_SLEEP, newval, Program::IniFile))

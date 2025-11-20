@@ -770,7 +770,25 @@ namespace Ambiesoft {
 			}
 		}
 
-		
+		void FormMain::PreventSleep(bool bPrevent)
+		{
+			if (bPrevent)
+			{
+				timerPreventSleepStopper_.Enabled = false;
+				SetThreadExecutionState(ES_SYSTEM_REQUIRED | ES_CONTINUOUS);
+			}
+			else
+			{
+				// Prevent later
+				timerPreventSleepStopper_.Interval = 5 * 60 * 1000; // 5 min
+				timerPreventSleepStopper_.Enabled = true;
+			}
+		}
+		System::Void FormMain::timerPreventSleepStopper_tick(System::Object^ sender, System::EventArgs^ e)
+		{
+			SetThreadExecutionState(ES_CONTINUOUS);
+			timerPreventSleepStopper_.Enabled = false;
+		}
 		void FormMain::CurrentTaskState::set(TaskState state)
 		{
 			taskState_ = state;
@@ -793,7 +811,7 @@ namespace Ambiesoft {
 
 				SetStatusText(STATUSTEXT::READY);
 
-				SetThreadExecutionState(ES_CONTINUOUS);
+				PreventSleep(false);
 
 				break;
 
@@ -818,7 +836,7 @@ namespace Ambiesoft {
 				// TODO(does not go normal): statusMain->BackColor = Color::Red;
 
 				if (tsmiPreventSleep->Checked)
-					SetThreadExecutionState(ES_SYSTEM_REQUIRED | ES_CONTINUOUS);
+					PreventSleep(true);
 
 				break;
 			}
