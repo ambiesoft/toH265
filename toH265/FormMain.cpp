@@ -149,6 +149,8 @@ namespace Ambiesoft {
 			AVDuration^ duration,
 			double fps)
 		{
+			movieFile = Path::GetFullPath(movieFile);
+
 			ListViewItem^ lvi = gcnew ListViewItem();
 
 			for each (ColumnItem ^ ci in ColumnItems)

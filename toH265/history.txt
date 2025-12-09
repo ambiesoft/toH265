@@ -1,3 +1,6 @@
+2025/12/09 ver1.3.9
+Modified to treat filenames passed from the command line as full paths so directories are displayed correctly.
+
 2025/11/20 ver1.3.8
 Changed the way to prevent sleep
 
