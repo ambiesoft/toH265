@@ -48,6 +48,13 @@ namespace Ambiesoft {
 			}
 
 			bMoveFinishedInputMovies_ = bMoveFinishedInputMovies;
+
+			totalPixels_ = 0;
+			for each (System::Windows::Forms::ListViewItem ^ item in items_)
+			{
+				Size size = FormMain::GetVideoSizeFromLvi(item);
+				totalPixels_ += (size.Width * size.Height) * (int)FormMain::GetFPSFromLvi(item);
+			}
 		}
 		void EncodeJob::CreateTempFile()
 		{

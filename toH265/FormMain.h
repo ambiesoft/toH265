@@ -340,7 +340,13 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			}
 			static AVCodec^ GetVCodecFromLvi(ListViewItem^ lvi);
 			static AVCodec^ GetACodecFromLvi(ListViewItem^ lvi);
-
+			static System::Drawing::Size GetVideoSizeFromLvi(ListViewItem^ lvi);
+			static double GetFPSFromLvi(ListViewItem^ lvi)
+			{
+				double d;
+				double::TryParse(lvi->SubItems["fps"]->Text, d);
+				return d;
+			}
 
 		protected:
 			void PreventSleep(bool bPrevent);
@@ -540,9 +546,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 
 			String^ GetMovieFileFromLvi(ListViewItem^ lvi);
 			AVDuration^ GetDurationFromLvi(ListViewItem^ lvi);
-			double GetFPSFromLvi(ListViewItem^ lvi);
 
-			System::Drawing::Size GetVideoSize(ListViewItem^ lvi);
 			double GetVideoArea(ListViewItem^ lvi);
 			System::Drawing::Size GetMaxVideoSize(ItemSelection sel);
 			bool IsSameSizeVideos(ItemSelection sel);

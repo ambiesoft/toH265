@@ -31,6 +31,7 @@ namespace Ambiesoft {
 			AVDuration^ totalInputDuration_;
 			double totalInputFPS_;
 			double partPercent_;
+			System::UInt64 totalPixels_;
 			AVCodec^ inputVideoCodec_ = gcnew AVCodec();
 			AVCodec^ inputAudioCodec_ = gcnew AVCodec();
 			AVCodec^ outputVideoCodec_ = gcnew AVCodec();
@@ -241,6 +242,10 @@ namespace Ambiesoft {
 			property String^ ErrorFailedMove
 			{
 				String^ get() { return String::Join(Environment::NewLine, moveFailed_.ToArray()); }
+			}
+			property System::UInt64 TotalPixels
+			{
+				System::UInt64 get() { return totalPixels_; }
 			}
 		};
 	}

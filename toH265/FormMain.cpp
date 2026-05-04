@@ -582,6 +582,9 @@ namespace Ambiesoft {
 			if (!IsTaskActive)
 				return;
 
+			// TODO: TotalPixes has been added.
+			// Now calculate progressPixels and percent
+			
 			// for culculating eta
 			double totalProgress = encodeTask_->EndedDurations + tsProgress.TotalMilliseconds;
 			ElapseInfo^ lastElapse = gcnew ElapseInfo(totalProgress);
@@ -1131,20 +1134,15 @@ namespace Ambiesoft {
 		{
 			return gcnew AVCodec(lvi->SubItems["acodec"]->Text);
 		}
-		double FormMain::GetFPSFromLvi(ListViewItem^ lvi)
-		{
-			double d;
-			double::TryParse(lvi->SubItems["fps"]->Text, d);
-			return d;
-		}
-		Size FormMain::GetVideoSize(ListViewItem^ lvi)
+
+		Size FormMain::GetVideoSizeFromLvi(ListViewItem^ lvi)
 		{
 			DASSERT(lvi->SubItems["aspect"]->Tag);
 			return (System::Drawing::Size)(lvi->SubItems["aspect"]->Tag);
 		}
 		double FormMain::GetVideoArea(ListViewItem^ lvi)
 		{
-			System::Drawing::Size size = GetVideoSize(lvi);
+			System::Drawing::Size size = GetVideoSizeFromLvi(lvi);
 			return size.Width * size.Height;
 		}
 		Size FormMain::GetMaxVideoSize(ItemSelection sel)
@@ -1161,7 +1159,7 @@ namespace Ambiesoft {
 				}
 			}
 			DASSERT(lviMax);
-			return GetVideoSize(lviMax);
+			return GetVideoSizeFromLvi(lviMax);
 		}
 		bool FormMain::IsSameSizeVideos(ItemSelection sel)
 		{
@@ -1172,11 +1170,11 @@ namespace Ambiesoft {
 			{
 				if (!first)
 				{
-					size = GetVideoSize(lvi);
+					size = GetVideoSizeFromLvi(lvi);
 					first = true;
 					continue;
 				}
-				if (size != GetVideoSize(lvi))
+				if (size != GetVideoSizeFromLvi(lvi))
 					return false;
 			}
 			return true;
@@ -1235,7 +1233,7 @@ namespace Ambiesoft {
 				break;
 				case ItemToGet::Aspect:
 				{
-					System::Drawing::Size aspect = GetVideoSize(lvi);
+					System::Drawing::Size aspect = GetVideoSizeFromLvi(lvi);
 					rets->Add(aspect);
 				}
 				break;
