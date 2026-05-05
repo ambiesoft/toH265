@@ -29,6 +29,12 @@ namespace Ambiesoft {
 					return ts_->TotalMilliseconds;
 				}
 			}
+			property double TotalSeconds
+			{
+				double get() {
+					return ts_->TotalSeconds;
+				}
+			}
 		};
 
 

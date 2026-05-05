@@ -23,7 +23,6 @@ namespace Ambiesoft {
 			System::Drawing::Size maxSize,
 			AVDuration^ totalInputDuration,
 			double totalInputFPS,
-			double partPercent,
 			bool bMoveFinishedInputMovies)
 		{
 			this->ReEncode = bReEncode;
@@ -38,7 +37,6 @@ namespace Ambiesoft {
 			this->MaxSize = maxSize;
 			this->totalInputDuration_ = totalInputDuration;
 			this->totalInputFPS_ = totalInputFPS;
-			this->partPercent_ = partPercent;
 
 			for each (System::Windows::Forms::ListViewItem ^ item in items_)
 			{
@@ -53,8 +51,19 @@ namespace Ambiesoft {
 			for each (System::Windows::Forms::ListViewItem ^ item in items_)
 			{
 				Size size = FormMain::GetVideoSizeFromLvi(item);
-				totalPixels_ += (size.Width * size.Height) * (int)FormMain::GetFPSFromLvi(item);
+				double fps = FormMain::GetFPSFromLvi(item);
+				AVDuration^ dur = FormMain::GetDurationFromLvi(item);
+				totalPixels_ += (UInt64)(fps * dur->TotalSeconds * (double)(size.Width * size.Height));
 			}
+
+			area_ = 0;
+			UInt64 allArea = 0;
+			for each (System::Windows::Forms::ListViewItem ^ item in items_)
+			{
+				Size size = FormMain::GetVideoSizeFromLvi(item);
+				allArea += size.Width * size.Height;
+			}
+			area_ = allArea / items_->Length;
 		}
 		void EncodeJob::CreateTempFile()
 		{

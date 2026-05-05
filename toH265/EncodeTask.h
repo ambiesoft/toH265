@@ -64,7 +64,6 @@ namespace Ambiesoft {
 						maxsize,
 						durations[0],
 						fpses[0],
-						1.0,
 						bMoveFinishedInputMovies);
 					jobs_.Add(job);
 					
@@ -93,7 +92,6 @@ namespace Ambiesoft {
 							maxsize,
 							durations[i],
 							fpses[i],
-							durations[i]->TotalMilliseconds / totalDuration,
 							bMoveFinishedInputMovies
 						);
 						jobs_.Add(job);
@@ -162,33 +160,30 @@ namespace Ambiesoft {
 			{
 				double get() { return CurrentJob->TotalInputDuration->TotalMilliseconds; }
 			}
-			property double CurrentPartPercent
+			property UInt64 CurrentArea
 			{
-				double get() { return CurrentJob->PartPercent; }
+				UInt64 get() {
+					return CurrentJob->Area;
+				}
 			}
-			property double EndedPartPercent
+			property UInt64 TotalPixels
 			{
-				double get() {
-					double ret = 0;
+				UInt64 get() {
+					UInt64 ret = 0;
 					for each (EncodeJob ^ job in jobs_)
-					{
-						if (!job->IsEnded)
-							return ret;
-						ret += job->PartPercent;
-					}
-					DASSERT(0 <= ret && ret <= 1.0);
+						ret += job->TotalPixels;
 					return ret;
 				}
 			}
-			property double EndedDurations
+			property UInt64 EncodedPixels
 			{
-				double get() {
-					double ret = 0;
+				UInt64 get() {
+					UInt64 ret = 0;
 					for each (EncodeJob ^ job in jobs_)
 					{
 						if (!job->IsEnded)
 							return ret;
-						ret += job->TotalInputDuration->TotalMilliseconds;
+						ret += job->TotalPixels;
 					}
 					return ret;
 				}

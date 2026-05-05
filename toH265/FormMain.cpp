@@ -540,7 +540,7 @@ namespace Ambiesoft {
 			// return ts.ToString(I18N(L"h'h 'm'm'"));
 			return ts.ToString(I18N(L"h'h 'm'm 's's'"));
 		}
-		String^ FormMain::GetRemainingTimeText(ElapseInfo^ firstElapse, ElapseInfo^ lastElapse, double total)
+		String^ FormMain::GetRemainingTimeText(ElapseInfo^ firstElapse, ElapseInfo^ lastElapse, UInt64 total)
 		{
 			do
 			{
@@ -552,23 +552,26 @@ namespace Ambiesoft {
 					firstElapse = elapses_.Peek();
 				}
 
-				DASSERT(firstElapse->Progress <= lastElapse->Progress);
+				DASSERT(firstElapse->ProgressPixels <= lastElapse->ProgressPixels);
 				DASSERT(firstElapse->TimeStamp <= lastElapse->TimeStamp);
-
-				double progress = (lastElapse->Progress - firstElapse->Progress) / 1000.0;
-				if (!progress)
-					break;
+				UInt64 progress;
+				{
+					progress = lastElapse->ProgressPixels - firstElapse->ProgressPixels;
+					if (progress == 0)
+						break;
+				}
 
 				if (total == 0) {
 					return I18N(L"Unknown");
 				}
+
 				double interval = (lastElapse->TimeStamp - firstElapse->TimeStamp) / (1000.0);
 
 				try
 				{
 					double progressPerSec = progress / interval;
-					double remainSec = total / 1000.0 - lastElapse->Progress / 1000.0;
-					double result = remainSec / progressPerSec;
+					UInt64 remainPixcels = total - lastElapse->ProgressPixels;
+					double result = remainPixcels / progressPerSec;
 					return tsToString(TimeSpan::FromSeconds(result));
 				}
 				catch (Exception^)
@@ -577,29 +580,29 @@ namespace Ambiesoft {
 			} while (false);
 			return I18N("Unknown");
 		}
-		void FormMain::UpdateTitleTS(TimeSpan tsProgress)
+		void FormMain::UpdateTitleTS(UInt64 frame, TimeSpan tsProgress)
 		{
 			if (!IsTaskActive)
 				return;
 
 			// TODO: TotalPixes has been added.
 			// Now calculate progressPixels and percent
-			
-			// for culculating eta
-			double totalProgress = encodeTask_->EndedDurations + tsProgress.TotalMilliseconds;
-			ElapseInfo^ lastElapse = gcnew ElapseInfo(totalProgress);
+
+			UInt64 progressPixels = encodeTask_->EncodedPixels +
+				(frame * encodeTask_->CurrentArea);
+			ElapseInfo^ lastElapse = gcnew ElapseInfo(progressPixels);
 			ElapseInfo^ firstElapse = elapses_.Enqueue(lastElapse);
 
-			if (encodeTask_->TotalInputDuration->TotalMilliseconds == 0)
-			{ 
-				// No duration
+			if (encodeTask_->TotalPixels == 0)
+			{
+				// No pixels
 				UpdateTitle(-1);
 				SetStatusText(STATUSTEXT::REMAINING,
-					GetRemainingTimeText(firstElapse, lastElapse, encodeTask_->TotalInputDuration->TotalMilliseconds));
+					GetRemainingTimeText(firstElapse, lastElapse, 0));
 			}
 			else
 			{
-				double percent = (totalProgress) / encodeTask_->TotalInputDuration->TotalMilliseconds;
+				double percent = ((double)progressPixels) / encodeTask_->TotalPixels;
 				UpdateTitle((int)(percent * 100));
 
 				if (m_pTaskbarProgress)
@@ -609,9 +612,8 @@ namespace Ambiesoft {
 					return;
 
 				SetStatusText(STATUSTEXT::REMAINING,
-					GetRemainingTimeText(firstElapse, lastElapse, encodeTask_->TotalInputDuration->TotalMilliseconds));
+					GetRemainingTimeText(firstElapse, lastElapse, encodeTask_->TotalPixels));
 			}
-			StatusOutputDuration = gcnew AVDuration(totalProgress);
 		}
 
 		void FormMain::SetStatusText(STATUSTEXT ss)
@@ -660,9 +662,10 @@ namespace Ambiesoft {
 			{
 				TimeSpan tsTime;
 				double dblSpeed;
-				if (FFMpegHelper::GetInfoFromFFMpegoutput(text, tsTime, dblSpeed))
+				UInt64 frame;
+				if (FFMpegHelper::GetInfoFromFFMpegoutput(text, frame, tsTime, dblSpeed))
 				{
-					UpdateTitleTS(tsTime);
+					UpdateTitleTS(frame, tsTime);
 					if (this->WindowState != FormWindowState::Minimized)
 					{
 						txtLogOut->Text = text;

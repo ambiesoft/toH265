@@ -12,10 +12,10 @@ namespace Ambiesoft
     {
         static System.Text.RegularExpressions.Regex regFFMpeg_ = new System.Text.RegularExpressions.Regex(
 				// "frame=.*fps=.*size=.*time=(?<time>.*)\\.\\d\\d.*speed=\\s*(?<speed>.*)"
-				"frame=.*fps=.*size=.*time=(?<time>.*)\\s+bitrate=.*speed=\\s*(?<speed>.*)"
+				"frame=(?<frame>.*)fps=.*size=.*time=(?<time>.*)\\s+bitrate=.*speed=\\s*(?<speed>.*)"
 			);
 
-        public static bool GetInfoFromFFMpegoutput(string text, out TimeSpan tsTime, out double dblSpeed)
+        public static bool GetInfoFromFFMpegoutput(string text, out UInt64 frame, out TimeSpan tsTime, out double dblSpeed)
         {
             if (regFFMpeg_.IsMatch(text))
             {
@@ -24,10 +24,8 @@ namespace Ambiesoft
                 if (!string.IsNullOrEmpty(timeValue) && timeValue[0] == '-')
                     timeValue = "00:00:00.00";
 
-                //DateTime dtTime = DateTime::ParseExact(timeValue, L"hh:mm:ss.ff",
-                //	System::Globalization::CultureInfo::InvariantCulture);
-                //tsTime = dtTime - dtTime.Date;
-
+                string frameValue = match.Groups["frame"].Value.Trim();
+                frame = UInt64.TryParse(frameValue, out UInt64 frameValueParsed) ? frameValueParsed : 0;
                 tsTime = toH265Helper.GetTSFromHMS(timeValue);
 
                 string speedValue = match.Groups["speed"].Value;
@@ -44,6 +42,7 @@ namespace Ambiesoft
                 //UpdateTitleTS(tsTime, dblSpeed);
                 return true;
             }
+            frame = 0;
             tsTime = TimeSpan.Zero;
             dblSpeed = 0;
             return false;

@@ -20,7 +20,7 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyTrademarkAttribute("")];
 [assembly:AssemblyCultureAttribute("")];
 
-[assembly:AssemblyVersionAttribute("1.3.9.*")];
+[assembly:AssemblyVersionAttribute("1.3.10.*")];
 
 [assembly:ComVisible(false)];
 

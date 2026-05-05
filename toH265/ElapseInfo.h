@@ -6,19 +6,20 @@ namespace Ambiesoft {
 		using namespace System;
 		public ref class ElapseInfo
 		{
-			double progress_;
+			UInt64 progressPixels_;
 			LONGLONG timestamp_;
 		public:
-			ElapseInfo(double progress) : progress_(progress) {
+			ElapseInfo(UInt64 progressPixels) : progressPixels_(progressPixels) {
 				// timestamp_ = System::Diagnostics::Stopwatch::GetTimestamp();
 				timestamp_ = DateTime::Now.Ticks / TimeSpan::TicksPerMillisecond;
 			}
-			ElapseInfo(double progress, LONGLONG ts) : progress_(progress), timestamp_(ts) {}
-			property double Progress
+			// ElapseInfo(UInt64 progressPixels, LONGLONG ts) : progressPixels_(progressPixels), timestamp_(ts) {}
+
+			property UInt64 ProgressPixels
 			{
-				double get()
+				UInt64 get()
 				{
-					return progress_;
+					return progressPixels_;
 				}
 			}
 			property LONGLONG TimeStamp

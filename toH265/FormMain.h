@@ -347,6 +347,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 				double::TryParse(lvi->SubItems["fps"]->Text, d);
 				return d;
 			}
+			static AVDuration^ GetDurationFromLvi(ListViewItem^ lvi);
 
 		protected:
 			void PreventSleep(bool bPrevent);
@@ -532,7 +533,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 
 			static initonly int ELAPSESIZE = 50;
 			Ambiesoft::FixSizedQueue<ElapseInfo^> elapses_{ ELAPSESIZE };
-			String^ GetRemainingTimeText(ElapseInfo^ firstElapse, ElapseInfo^ lastElapse, double total);
+			String^ GetRemainingTimeText(ElapseInfo^ firstElapse, ElapseInfo^ lastElapse, UInt64 total);
 
 			void InsertMovieItem(
 				String^ movieFile,
@@ -545,7 +546,6 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 				double fps);
 
 			String^ GetMovieFileFromLvi(ListViewItem^ lvi);
-			AVDuration^ GetDurationFromLvi(ListViewItem^ lvi);
 
 			double GetVideoArea(ListViewItem^ lvi);
 			System::Drawing::Size GetMaxVideoSize(ItemSelection sel);
@@ -556,7 +556,7 @@ private: System::Windows::Forms::ToolStripStatusLabel^ slItemCount;
 			void SetStatusText(STATUSTEXT ss, String^ supplement);
 
 			// bool GetInfoFromFFMpegoutput(String^ text, TimeSpan% tsTime, double% dblSpeed);
-			void UpdateTitleTS(TimeSpan ts);
+			void UpdateTitleTS(UInt64 frame, TimeSpan ts);
 			void UpdateTitleComplete();
 			property String^ CurrentEncodingOutputtingFile
 			{

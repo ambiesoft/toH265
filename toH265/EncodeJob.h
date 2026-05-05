@@ -30,8 +30,8 @@ namespace Ambiesoft {
 			System::Drawing::Size MaxSize;
 			AVDuration^ totalInputDuration_;
 			double totalInputFPS_;
-			double partPercent_;
-			System::UInt64 totalPixels_;
+			UInt64 totalPixels_;
+			UInt64 area_;
 			AVCodec^ inputVideoCodec_ = gcnew AVCodec();
 			AVCodec^ inputAudioCodec_ = gcnew AVCodec();
 			AVCodec^ outputVideoCodec_ = gcnew AVCodec();
@@ -122,10 +122,6 @@ namespace Ambiesoft {
 					// SetCodecStatusText();
 				}
 			}
-			property double PartPercent
-			{
-				double get() { return partPercent_; }
-			}
 			void init(bool bReEncode,
 				String^ addiopbi, String^ addiopai,
 				array<System::Windows::Forms::ListViewItem^>^ items,
@@ -137,7 +133,6 @@ namespace Ambiesoft {
 				System::Drawing::Size maxSize,
 				AVDuration^ totalInputDuration,
 				double totalInputFPS,
-				double partPercent,
 				bool bMoveFinishedInputMovies);
 
 			// each
@@ -151,7 +146,6 @@ namespace Ambiesoft {
 				System::Drawing::Size size,
 				AVDuration^ duration,
 				double fps,
-				double partPercent,
 				bool bMoveFinishedInputMovies)
 			{
 				init(true,
@@ -165,7 +159,6 @@ namespace Ambiesoft {
 					size,
 					duration,
 					fps,
-					partPercent,
 					bMoveFinishedInputMovies);
 			}
 			// concat
@@ -180,7 +173,6 @@ namespace Ambiesoft {
 				System::Drawing::Size maxSize,
 				AVDuration^ totalInputDuration,
 				double totalInputFPS,
-				double partPercent,
 				bool bMoveFinishedInputMovies)
 			{
 				init(bReEncode,
@@ -194,7 +186,6 @@ namespace Ambiesoft {
 					maxSize,
 					totalInputDuration,
 					totalInputFPS,
-					partPercent,
 					bMoveFinishedInputMovies);
 			}
 			property bool IsEnded
@@ -243,9 +234,13 @@ namespace Ambiesoft {
 			{
 				String^ get() { return String::Join(Environment::NewLine, moveFailed_.ToArray()); }
 			}
-			property System::UInt64 TotalPixels
+			property UInt64 TotalPixels
 			{
-				System::UInt64 get() { return totalPixels_; }
+				UInt64 get() { return totalPixels_; }
+			}
+			property UInt64 Area
+			{
+				UInt64 get() { return area_; }
 			}
 		};
 	}
