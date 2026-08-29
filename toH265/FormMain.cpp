@@ -120,7 +120,8 @@ namespace Ambiesoft {
 					{
 						if (nAudios > 1 || nVideos > 1)
 						{
-							throw gcnew ContinueException(I18N("This video contains more than 1 audio or video streams."));
+							throw gcnew ContinueException(
+								String::Format(I18N("'{0}' contains more than 1 audio or video streams."), moviefile));
 							return;
 						}
 					}

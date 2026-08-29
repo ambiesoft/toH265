@@ -1,3 +1,6 @@
+2026/08/30 ver1.3.11
+Fixed a messagebox text
+
 2026/05/05 ver1.3.10
 Mofified: Changed the method for calculating the remaining time to make it more accurate
 

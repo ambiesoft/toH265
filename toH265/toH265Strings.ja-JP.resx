@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="WARNING_EMOJI" xml:space="preserve">
+    <value>❌</value>
+  </data>
+  <data name="OK_EMOJI" xml:space="preserve">
+    <value>⭕</value>
+  </data>
   <data name="&amp;Start" xml:space="preserve">
     <value>スタート(&amp;S)</value>
   </data>
@@ -282,8 +288,8 @@
   <data name="Video" xml:space="preserve">
     <value>映像</value>
   </data>
-  <data name="This video contains more than 1 audio or video streams." xml:space="preserve">
-    <value>このビデオには1つ以上の映像または音声が含まれています。</value>
+  <data name="'{0}' contains more than 1 audio or video streams." xml:space="preserve">
+    <value>'{0}' には1つ以上の映像または音声が含まれています。</value>
   </data>
   <data name="Encoding successfully finished at {0}." xml:space="preserve">
     <value>エンコーディングが成功しました。終了時刻={0}</value>
@@ -386,11 +392,5 @@
   </data>
   <data name="The following attribute values are not the same. Do you want to continue?" xml:space="preserve">
     <value>以下の属性値が同じではありません。処理を続けますか？</value>
-  </data>
-  <data name="WARNING_EMOJI" xml:space="preserve">
-    <value>❌</value>
-  </data>
-  <data name="OK_EMOJI" xml:space="preserve">
-    <value>⭕</value>
   </data>
 </root>
